@@ -1,0 +1,18 @@
+# Ignorar modelos
+models/
+
+#Ignorar llamas 3.2 en raiz
+llama-3.2-3B-Instruct/
+
+# Ignorar videos descargados
+downloads/
+
+# Ignorar .env
+.env
+
+# Ignorar __pycache__
+__pycache__/
+
+# Ignorar virtual environment
+venv_llm/
+venv_smolvlm/

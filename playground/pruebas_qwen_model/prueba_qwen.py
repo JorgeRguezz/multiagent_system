@@ -1,0 +1,40 @@
+from vllm import LLM, SamplingParams
+
+# Sample prompts.
+prompts = [
+    "Hello, my name is",
+    "The president of the United States is",
+    "The capital of France is",
+    "The future of AI is",
+]
+
+# Create a sampling params object.
+sampling_params = SamplingParams(
+    temperature=0,
+    top_p=0.95
+)
+
+def main():
+    # Create an LLM.
+    llm = LLM(
+        model="./Qwen3-30B-A3B-Instruct-2507-gptq-4bit",
+        quantization="gptq",
+        max_model_len=4096, 
+        gpu_memory_utilization=0.90  
+    )
+
+    # Generate texts from the prompts.
+    outputs = llm.generate(prompts, sampling_params)
+
+    # Print the outputs.
+    print("\nGenerated Outputs:\n" + "-" * 60)
+    for output in outputs:
+        prompt = output.prompt
+        generated_text = output.outputs[0].text
+        print(f"Prompt:    {prompt!r}")
+        print(f"Output:    {generated_text!r}")
+        print("-" * 60)
+
+
+if __name__ == "__main__":
+    main()

@@ -1,0 +1,8 @@
+{
+    "mcpServers": {
+      "videogame": {
+        "command": "python3",
+        "args": ["videogame_search_tool.py"]
+      }
+    }
+  }
