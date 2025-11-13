@@ -23,7 +23,7 @@ def run_inference(model, processor, messages, current_device):
         return_tensors="pt",
     ).to(model.device, dtype=torch.bfloat16)
 
-    generated_ids = model.generate(**inputs, do_sample=False, max_new_tokens=64)
+    generated_ids = model.generate(**inputs, do_sample=False, max_new_tokens=2048)
     generated_texts = processor.batch_decode(
         generated_ids,
         skip_special_tokens=True,
@@ -32,29 +32,29 @@ def run_inference(model, processor, messages, current_device):
     return generated_texts[0]
 
 
-# 2. Image Test
-print("--- Image Test ---")
-image_path = "pokemon_gameplay.jpeg"
-image = Image.open(image_path).convert("RGB")
+# # 2. Image Test
+# print("--- Image Test ---")
+# image_path = "pokemon_gameplay.jpeg"
+# image = Image.open(image_path).convert("RGB")
 
-messages_image = [
-    {
+# messages_image = [
+#     {
 
-        "role": "user",
-        "content": [
-            {"type": "image", "image": image},
-            {"type": "text", "text": "What is in the image?"}
-        ]
-    },
-]
+#         "role": "user",
+#         "content": [
+#             {"type": "image", "image": image},
+#             {"type": "text", "text": "What is in the image?"}
+#         ]
+#     },
+# ]
 
-decoded_text_image = run_inference(model, processor, messages_image, current_device)
-print(decoded_text_image)
+# decoded_text_image = run_inference(model, processor, messages_image, current_device)
+# print(decoded_text_image)
 
 
 # 3. Video Test
 print("\n--- Video Test ---")
-video_path = "/home/gatv-projects/Desktop/project/downloads/zelda_gameplay_720p_10min.mp4"
+video_path = "/home/gatv-projects/Desktop/project/chatbot_system/downloads/My Nintendo Switch 2 Review.mp4"
 
 messages_video = [
     {
@@ -67,4 +67,7 @@ messages_video = [
 ]
 
 decoded_text_video = run_inference(model, processor, messages_video, current_device)
-print(decoded_text_video)
+vlm_response_parts = decoded_text_video.split("Assistant:")
+vlm_response_clean = vlm_response_parts[1].strip()
+print(">>> VLM response:")
+print(vlm_response_clean)

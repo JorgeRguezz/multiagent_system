@@ -4,8 +4,6 @@ from PIL import Image
 import torch
 import io
 import base64
-import os
-import json
 
 # =====================================================
 # Configuración inicial

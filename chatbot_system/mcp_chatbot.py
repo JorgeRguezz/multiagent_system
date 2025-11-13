@@ -198,15 +198,10 @@ class MCP_ChatBot:
 
                 session = self.sessions.get("analyze_media")
 
-                print("------> sessions response:", session)
-                print("------> sessions type:", type(session))
-
                 if not session:
                     return "Error: VLM tool 'analyze_media' not found."
 
                 result = await session.call_tool("analyze_media", arguments={"payload": payload})
-
-                print("Llega hasta result. Result:", result)
                 
                 if not isinstance(result.content, list) or not result.content:
                     raise Exception(f"Unexpected response format from VLM tool: {result.content}")
@@ -221,17 +216,13 @@ class MCP_ChatBot:
                     raise Exception(response_dict["error"])
 
                 vlm_response = response_dict.get("generated_text", "Sorry, I could not get a response from the VLM.")
-                
-                print("------> VLM response:", vlm_response)
-                print("------> VLM response type:", type(vlm_response))
 
-                print("-"*20)
-                print(f"[DEBUG] VLM response: {vlm_response}")
-                print("-"*20)
+                vlm_response_parts = vlm_response.split("Assistant:")
+                vlm_response_clean = vlm_response_parts[1].strip()
                 
-                self.history.append(f"Assistant: {vlm_response}")
+                self.history.append(f"Assistant: {vlm_response_clean}")
                 print(f"[DEBUG] VLM analysis complete.")
-                return vlm_response
+                return vlm_response_clean
             except Exception as e:
                 print(f"An error occurred during video analysis: {e}")
                 return f"Sorry, an error occurred while analyzing the video: {e}"

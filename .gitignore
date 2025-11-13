@@ -17,3 +17,9 @@ __pycache__/
 venv_llm/
 venv_smolvlm/
 venv_mixed/
+venv_vlm_asr/
+
+# Ignorar VideoRAG
+VideoRAG
+videorag_cache*
+_cache

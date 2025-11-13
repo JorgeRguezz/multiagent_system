@@ -1,4 +1,3 @@
-import asyncio
 import json
 import httpx
 import os
@@ -11,9 +10,6 @@ load_dotenv()
 # Initialize FastMCP server
 mcp = FastMCP("videogame_server")
 
-# --- IMPORTANT ---
-# Get your free API key from https://rawg.io/signup
-# and set it as an environment variable named RAWG_API_KEY in your .env file
 RAWG_API_KEY = os.environ.get("RAWG_API_KEY")
 
 @mcp.tool()
