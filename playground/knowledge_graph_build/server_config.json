@@ -1,0 +1,9 @@
+{
+  "mcpServers": {
+    "vlm_server": {
+      "command": "/home/gatv-projects/Desktop/project/venv_smolvlm/bin/python3",
+      "args": ["-m", "playground.knowledge_graph_build.media_processing_tool"],
+      "cwd": "/home/gatv-projects/Desktop/project"
+    }
+  }
+}

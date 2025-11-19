@@ -23,3 +23,11 @@ venv_vlm_asr/
 VideoRAG
 videorag_cache*
 _cache
+server_cache_*
+test_data_build_cache_*
+
+#ImageBind
+ImageBind
+
+#Gemini
+GEMINI.md

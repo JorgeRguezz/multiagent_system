@@ -5,9 +5,15 @@ import numpy as np
 from tqdm import tqdm
 from moviepy.video import fx as vfx
 from moviepy.video.io.VideoFileClip import VideoFileClip
+from .._utils import logger
 
-
-def split_video(video_path, working_dir, segment_length, num_frames_per_segment, audio_output_format='mp3'):  
+def split_video(
+    video_path,
+    working_dir,
+    segment_length,
+    num_frames_per_segment,
+    audio_output_format='mp3',
+):  
     unique_timestamp = str(int(time.time() * 1000))
     video_name = os.path.basename(video_path).split('.')[0]
     video_segment_cache_path = os.path.join(working_dir, '_cache', video_name)
@@ -42,15 +48,25 @@ def split_video(video_path, working_dir, segment_length, num_frames_per_segment,
             # save audio
             audio_file_base_name = segment_index2name[f"{segment_index}"]
             audio_file = f'{audio_file_base_name}.{audio_output_format}'
-            subaudio = subvideo.audio
-            subaudio.write_audiofile(os.path.join(video_segment_cache_path, audio_file), codec='mp3', verbose=False, logger=None)
-
+            try:
+                subaudio = subvideo.audio
+                subaudio.write_audiofile(os.path.join(video_segment_cache_path, audio_file), codec='mp3', verbose=False, logger=None)
+            except Exception as e:
+                logger.warning(f"Warning: Failed to extract audio for video {video_name} ({start}-{end}). Probably due to lack of audio track.")
 
             segment_index += 1
 
     return segment_index2name, segment_times_info
 
-def saving_video_segments(video_name, video_path, working_dir, segment_index2name, segment_times_info, error_queue, video_output_format='mp4'):
+def saving_video_segments(
+    video_name,
+    video_path,
+    working_dir,
+    segment_index2name,
+    segment_times_info,
+    error_queue,
+    video_output_format='mp4',
+):
     try:
         with VideoFileClip(video_path) as video:
             video_segment_cache_path = os.path.join(working_dir, '_cache', video_name)
