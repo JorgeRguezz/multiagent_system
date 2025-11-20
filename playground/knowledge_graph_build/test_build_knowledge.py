@@ -21,7 +21,7 @@ from ._storage import NanoVectorDBVideoSegmentStorage, JsonKVStorage, NanoVector
 from .base import BaseVectorStorage, StorageNameSpace, BaseKVStorage, BaseGraphStorage
 from ._utils import logger, always_get_an_event_loop, limit_async_func_call, wrap_embedding_func_with_attrs
 from ._op import chunking_by_video_segments, extract_entities, get_chunks
-from ._llm import LLMConfig, local_llm_config # Use local_llm_config
+from ._llm import LLMConfig, local_llm_config, shutdown_local_llm # Use local_llm_config
 
 
 @dataclass
@@ -254,57 +254,60 @@ async def main():
     """Main function to set up MCP client and run the extraction."""
     VIDEO_FILE = "/home/gatv-projects/Desktop/project/chatbot_system/downloads/My_Nintendo_Switch_2_Review.mp4"
     
-    async with AsyncExitStack() as exit_stack:
-        sessions = {}
-        
-        try:
-            with open(Path(__file__).parent/"server_config.json", "r") as file:
-                data = json.load(file)
-            servers = data.get("mcpServers", {})
-        except FileNotFoundError:
-            print("Error: `server_config.json` not found. Please create it.")
-            return
-        except Exception as e:
-            print(f"Error loading server_config.json: {e}")
-            return
-
-        vlm_server_config = servers.get('vlm_server')
-        if not vlm_server_config:
-            print("Error: 'vlm_server' not found in server_config.json. Please add it to connect to your media processing server.")
-            return
-
-        try:
-            print("Connecting to Media Processing server via MCP...")
-            server_params = StdioServerParameters(**vlm_server_config)
-            stdio_transport = await exit_stack.enter_async_context(
-                stdio_client(server_params)
-            )
-            read, write = stdio_transport
-            session = await exit_stack.enter_async_context(
-                ClientSession(read, write)
-            )
-            await session.initialize()
+    try:
+        async with AsyncExitStack() as exit_stack:
+            sessions = {}
             
-            response = await session.list_tools()
-            if not response.tools:
-                raise RuntimeError("No tools found on the connected MCP server.")
+            try:
+                with open(Path(__file__).parent/"server_config.json", "r") as file:
+                    data = json.load(file)
+                servers = data.get("mcpServers", {})
+            except FileNotFoundError:
+                print("Error: `server_config.json` not found. Please create it.")
+                return
+            except Exception as e:
+                print(f"Error loading server_config.json: {e}")
+                return
 
-            for tool in response.tools:
-                print(f"[DIAGNOSTIC] Found tool: {tool.name}")
-                sessions[tool.name] = session
-            
-            if 'extract_video_knowledge' not in sessions:
-                raise RuntimeError("Required tool 'extract_video_knowledge' not found on the server.")
+            vlm_server_config = servers.get('vlm_server')
+            if not vlm_server_config:
+                print("Error: 'vlm_server' not found in server_config.json. Please add it to connect to your media processing server.")
+                return
 
-            print("Successfully connected to Media Processing server.")
+            try:
+                print("Connecting to Media Processing server via MCP...")
+                server_params = StdioServerParameters(**vlm_server_config)
+                stdio_transport = await exit_stack.enter_async_context(
+                    stdio_client(server_params)
+                )
+                read, write = stdio_transport
+                session = await exit_stack.enter_async_context(
+                    ClientSession(read, write)
+                )
+                await session.initialize()
+                
+                response = await session.list_tools()
+                if not response.tools:
+                    raise RuntimeError("No tools found on the connected MCP server.")
 
-        except Exception as e:
-            print(f"Error connecting to Media Processing server: {e}")
-            return
+                for tool in response.tools:
+                    print(f"[DIAGNOSTIC] Found tool: {tool.name}")
+                    sessions[tool.name] = session
+                
+                if 'extract_video_knowledge' not in sessions:
+                    raise RuntimeError("Required tool 'extract_video_knowledge' not found on the server.")
 
-        # Initialize and run the extractor
-        extractor = VideoKnowledgeExtractor(video_path=VIDEO_FILE, mcp_sessions=sessions)
-        await extractor.run_extraction_pipeline()
+                print("Successfully connected to Media Processing server.")
+
+            except Exception as e:
+                print(f"Error connecting to Media Processing server: {e}")
+                return
+
+            # Initialize and run the extractor
+            extractor = VideoKnowledgeExtractor(video_path=VIDEO_FILE, mcp_sessions=sessions)
+            await extractor.run_extraction_pipeline()
+    finally:
+        shutdown_local_llm()
 
 
 if __name__ == '__main__':
