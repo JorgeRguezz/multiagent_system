@@ -22,12 +22,16 @@ venv_vlm_asr/
 # Ignorar VideoRAG
 VideoRAG
 videorag_cache*
-_cache
-server_cache_*
-test_data_build_cache_*
 
 #ImageBind
 ImageBind
 
 #Gemini
 GEMINI.md
+
+# Ignore knowledge graph build outputs
+playground/knowledge_graph_build/lib**
+playground/knowledge_graph_build/graph_legend.html
+_cache
+server_cache_*
+test_data_build_cache_*

@@ -123,6 +123,7 @@ async def _handle_entity_relation_summary(
     use_llm_func: callable = global_config["llm"]["cheap_model_func"]
     llm_max_tokens = global_config["llm"]["cheap_model_max_token_size"]
     summary_max_tokens = global_config["entity_summary_to_max_tokens"]
+    llm_response_cache = global_config.get("llm_response_cache")
 
     # Use character count as an approximation for token count (1 token ~ 4 chars)
     # This removes the dependency on tiktoken for this function.
@@ -139,7 +140,7 @@ async def _handle_entity_relation_summary(
     )
     use_prompt = prompt_template.format(**context_base)
     logger.debug(f"Trigger summary: {entity_or_relation_name}")
-    summary = await use_llm_func(use_prompt, max_tokens=summary_max_tokens)
+    summary = await use_llm_func(use_prompt, max_tokens=summary_max_tokens, hashing_kv=llm_response_cache)
     return summary
 
 
@@ -168,16 +169,21 @@ async def _handle_single_relationship_extraction(
     record_attributes: list[str],
     chunk_key: str,
 ):
-    if len(record_attributes) < 5 or record_attributes[0] != '"relationship"':
+    # Ensure it's a relationship record and has at least the first 4 essential fields
+    if record_attributes[0] != '"relationship"' or len(record_attributes) < 4:
         return None
-    # add this record as edge
+
+    # Extract required fields
     source = clean_str(record_attributes[1].upper())
     target = clean_str(record_attributes[2].upper())
     edge_description = clean_str(record_attributes[3])
     edge_source_id = chunk_key
-    weight = (
-        float(record_attributes[-1]) if is_float_regex(record_attributes[-1]) else 1.0
-    )
+    
+    # relationship_strength is optional, default to 1.0 if not provided or not a float
+    weight = 1.0
+    if len(record_attributes) >= 5 and is_float_regex(record_attributes[4]):
+        weight = float(record_attributes[4])
+        
     return dict(
         src_id=source,
         tgt_id=target,
@@ -294,12 +300,7 @@ async def _merge_edges_then_upsert(
 from ._llm import local_llm_batch_generate
 
 
-async def extract_entities(
-    chunks: dict[str, TextChunkSchema],
-    knowledge_graph_inst: BaseGraphStorage,
-    entity_vdb: BaseVectorStorage,
-    global_config: dict,
-) -> Union[BaseGraphStorage, None]:
+async def extract_entities(chunks: dict[str, TextChunkSchema], knowledge_graph_inst: BaseGraphStorage, entity_vdb: BaseVectorStorage, global_config: dict) -> Union[BaseGraphStorage, None]:
     """
     Extracts entities and relationships from text chunks using a batched approach.
     This function is refactored to collect all prompts and send them to the LLM
@@ -333,6 +334,7 @@ async def extract_entities(
     maybe_edges = defaultdict(list)
 
     for (chunk_key, _), final_result in zip(ordered_chunks, all_llm_results):
+        logger.info(f"LLM Output for chunk {chunk_key}:\n{final_result}\n---")
         records = split_string_by_multi_markers(
             final_result,
             [context_base["record_delimiter"], context_base["completion_delimiter"]],
@@ -463,9 +465,10 @@ async def _refine_entity_retrieval_query(
     global_config: dict,
 ):
     use_llm_func: callable = global_config["llm"]["cheap_model_func"]
+    llm_response_cache = global_config.get("llm_response_cache")
     query_rewrite_prompt = PROMPTS["query_rewrite_for_entity_retrieval"]
     query_rewrite_prompt = query_rewrite_prompt.format(input_text=query)
-    final_result = await use_llm_func(query_rewrite_prompt)
+    final_result = await use_llm_func(query_rewrite_prompt, hashing_kv=llm_response_cache)
     return final_result
 
 async def _refine_visual_retrieval_query(
@@ -474,9 +477,10 @@ async def _refine_visual_retrieval_query(
     global_config: dict,
 ):
     use_llm_func: callable = global_config["llm"]["cheap_model_func"]
+    llm_response_cache = global_config.get("llm_response_cache")
     query_rewrite_prompt = PROMPTS["query_rewrite_for_visual_retrieval"]
     query_rewrite_prompt = query_rewrite_prompt.format(input_text=query)
-    final_result = await use_llm_func(query_rewrite_prompt)
+    final_result = await use_llm_func(query_rewrite_prompt, hashing_kv=llm_response_cache)
     return final_result
 
 async def _extract_keywords_query(
@@ -485,10 +489,12 @@ async def _extract_keywords_query(
     global_config: dict,
 ):
     use_llm_func: callable = global_config["llm"]["cheap_model_func"]
+    llm_response_cache = global_config.get("llm_response_cache")
     keywords_prompt = PROMPTS["keywords_extraction"]
     keywords_prompt = keywords_prompt.format(input_text=query)
-    final_result = await use_llm_func(keywords_prompt)
+    final_result = await use_llm_func(keywords_prompt, hashing_kv=llm_response_cache)
     return final_result
+
 
 async def videorag_query(
     query,

@@ -151,6 +151,10 @@ class VideoKnowledgeExtractor:
             finally:
                 self.mcp_sessions = sessions
 
+            # Pass the cache instance to the underlying functions
+            if self.llm_response_cache:
+                config_dict['llm_response_cache'] = self.llm_response_cache
+
             maybe_new_kg, _, _ = await self.entity_extraction_func(
                 inserting_chunks,
                 knowledge_graph_inst=self.chunk_entity_relation_graph,

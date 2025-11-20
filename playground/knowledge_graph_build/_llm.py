@@ -1,5 +1,6 @@
 import numpy as np
-
+import torch
+import torch.distributed
 from dataclasses import asdict, dataclass, field
 
 import os
@@ -169,7 +170,7 @@ async def local_llm_batch_generate(model_path: str, prompts: list[str]) -> list[
     """
     llm = get_local_llm_instance(model_path)
     # Using low temperature for deterministic, repeatable entity extraction.
-    sampling_params = SamplingParams(temperature=0.0, max_tokens=2048) 
+    sampling_params = SamplingParams(temperature=0.0, max_tokens=4096) 
 
     loop = asyncio.get_running_loop()
 
@@ -183,3 +184,34 @@ async def local_llm_batch_generate(model_path: str, prompts: list[str]) -> list[
     response_texts = await loop.run_in_executor(None, generate)
     
     return response_texts
+
+def shutdown_local_llm():
+    """
+    Shuts down the global vLLM instance and PyTorch distributed process group to release resources.
+    """
+    global global_local_llm
+    if global_local_llm is not None:
+        print("Attempting to shut down local LLM and distributed process group...")
+        
+        # Try vllm's own shutdown first
+        if hasattr(global_local_llm, 'llm_engine') and hasattr(global_local_llm.llm_engine, 'shutdown'):
+            print("Shutting down the vLLM engine via engine.shutdown()...")
+            global_local_llm.llm_engine.shutdown()
+        elif hasattr(global_local_llm, 'shutdown'):
+            print("Shutting down the vLLM engine via llm.shutdown()...")
+            global_local_llm.shutdown()
+        else:
+            print("vLLM shutdown method not found.")
+
+        # Explicitly destroy the process group as a fallback/cleanup
+        if torch.distributed.is_initialized():
+            print("PyTorch distributed is initialized. Destroying process group...")
+            torch.distributed.destroy_process_group()
+            print("Process group destroyed.")
+        else:
+            print("PyTorch distributed was not initialized, no need to destroy process group.")
+
+        global_local_llm = None
+        print("Local LLM resources have been released.")
+    else:
+        print("No local LLM instance to shut down.")
