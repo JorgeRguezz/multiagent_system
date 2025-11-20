@@ -2,7 +2,6 @@ import re
 import json
 import openai
 import asyncio
-import tiktoken
 from typing import Union
 from collections import Counter, defaultdict
 from ._splitter import SeparatorSplitter
@@ -10,8 +9,6 @@ from ._utils import (
     logger,
     clean_str,
     compute_mdhash_id,
-    decode_tokens_by_tiktoken,
-    encode_string_by_tiktoken,
     is_float_regex,
     list_of_list_to_csv,
     pack_user_ass_to_openai_messages,
@@ -32,126 +29,66 @@ from ._videoutil import (
     retrieved_segment_caption,
 )
 
-def chunking_by_token_size(
-    tokens_list: list[list[int]],
-    doc_keys,
-    tiktoken_model,
-    overlap_token_size=128,
-    max_token_size=1024,
-):
-
-    results = []
-    for index, tokens in enumerate(tokens_list):
-        chunk_token = []
-        lengths = []
-        for start in range(0, len(tokens), max_token_size - overlap_token_size):
-
-            chunk_token.append(tokens[start : start + max_token_size])
-            lengths.append(min(max_token_size, len(tokens) - start))
-
-        # here somehow tricky, since the whole chunk tokens is list[list[list[int]]] for corpus(doc(chunk)),so it can't be decode entirely
-        chunk_token = tiktoken_model.decode_batch(chunk_token)
-        for i, chunk in enumerate(chunk_token):
-
-            results.append(
-                {
-                    "tokens": lengths[i],
-                    "content": chunk.strip(),
-                    "chunk_order_index": i,
-                    "full_doc_id": doc_keys[index],
-                }
-            )
-
-    return results
-
+# TODO: The following two chunking functions are not used in the default pipeline
+# and have been commented out as they relied on the tiktoken library.
+# They need to be refactored to work with a supplied tokenizer or string-based approximations
+# if they are to be used in the future.
+# def chunking_by_token_size(...):
+# def chunking_by_seperators(...):
 
 def chunking_by_video_segments(
-    tokens_list: list[list[int]],
+    docs_list: list[str],
     doc_keys,
-    tiktoken_model,
     max_token_size=1024,
 ):
-    # make sure each segment is not larger than max_token_size
-    for index in range(len(tokens_list)):
-        if len(tokens_list[index]) > max_token_size:
-            tokens_list[index] = tokens_list[index][:max_token_size]
-    
+    # This function now works with strings and character counts instead of tokens.
+    # The `max_token_size` is approximated as 4 characters per token.
+    max_char_size = max_token_size * 4
+
+    # make sure each segment is not larger than max_char_size
+    processed_docs = []
+    for doc in docs_list:
+        if len(doc) > max_char_size:
+            processed_docs.append(doc[:max_char_size])
+        else:
+            processed_docs.append(doc)
+
     results = []
-    chunk_token = []
+    chunk_content = ""
     chunk_segment_ids = []
     chunk_order_index = 0
-    for index, tokens in enumerate(tokens_list):
+    for index, doc in enumerate(processed_docs):
         
-        if len(chunk_token) + len(tokens) <= max_token_size:
+        if len(chunk_content) + len(doc) <= max_char_size:
             # add new segment
-            chunk_token += tokens.copy()
+            chunk_content += " " + doc
             chunk_segment_ids.append(doc_keys[index])
         else:
             # save the current chunk
-            chunk = tiktoken_model.decode(chunk_token)
             results.append(
                 {
-                    "tokens": len(chunk_token),
-                    "content": chunk.strip(),
+                    "tokens": len(chunk_content) // 4, # Approximation
+                    "content": chunk_content.strip(),
                     "chunk_order_index": chunk_order_index,
                     "video_segment_id": chunk_segment_ids,
                 }
             )
             # new chunk with current segment as begin
-            chunk_token = []
-            chunk_segment_ids = []
-            chunk_token += tokens.copy()
-            chunk_segment_ids.append(doc_keys[index])
+            chunk_content = doc
+            chunk_segment_ids = [doc_keys[index]]
             chunk_order_index += 1
     
     # save the last chunk
-    if len(chunk_token) > 0:
-        chunk = tiktoken_model.decode(chunk_token)
+    if len(chunk_content) > 0:
         results.append(
             {
-                "tokens": len(chunk_token),
-                "content": chunk.strip(),
+                "tokens": len(chunk_content) // 4,
+                "content": chunk_content.strip(),
                 "chunk_order_index": chunk_order_index,
                 "video_segment_id": chunk_segment_ids,
             }
         )
     
-    return results
-    
-    
-def chunking_by_seperators(
-    tokens_list: list[list[int]],
-    doc_keys,
-    tiktoken_model,
-    overlap_token_size=128,
-    max_token_size=1024,
-):
-
-    splitter = SeparatorSplitter(
-        separators=[
-            tiktoken_model.encode(s) for s in PROMPTS["default_text_separator"]
-        ],
-        chunk_size=max_token_size,
-        chunk_overlap=overlap_token_size,
-    )
-    results = []
-    for index, tokens in enumerate(tokens_list):
-        chunk_token = splitter.split_tokens(tokens)
-        lengths = [len(c) for c in chunk_token]
-
-        # here somehow tricky, since the whole chunk tokens is list[list[list[int]]] for corpus(doc(chunk)),so it can't be decode entirely
-        chunk_token = tiktoken_model.decode_batch(chunk_token)
-        for i, chunk in enumerate(chunk_token):
-
-            results.append(
-                {
-                    "tokens": lengths[i],
-                    "content": chunk.strip(),
-                    "chunk_order_index": i,
-                    "full_doc_id": doc_keys[index],
-                }
-            )
-
     return results
 
 
@@ -164,10 +101,10 @@ def get_chunks(new_videos, chunk_func=chunking_by_video_segments, **chunk_func_p
         docs = [new_videos[video_name][index]["content"] for index in segment_id_list]
         doc_keys = [f'{video_name}_{index}' for index in segment_id_list]
 
-        ENCODER = tiktoken.encoding_for_model("gpt-4o")
-        tokens = ENCODER.encode_batch(docs, num_threads=16)
+        # REPLACED TIKTOKEN with direct string processing.
+        # The chunking function now receives raw documents instead of tokens.
         chunks = chunk_func(
-            tokens, doc_keys=doc_keys, tiktoken_model=ENCODER, **chunk_func_params
+            docs, doc_keys=doc_keys, **chunk_func_params
         )
 
         for chunk in chunks:
@@ -185,16 +122,17 @@ async def _handle_entity_relation_summary(
 ) -> str:
     use_llm_func: callable = global_config["llm"]["cheap_model_func"]
     llm_max_tokens = global_config["llm"]["cheap_model_max_token_size"]
-    tiktoken_model_name = global_config["tiktoken_model_name"]
     summary_max_tokens = global_config["entity_summary_to_max_tokens"]
 
-    tokens = encode_string_by_tiktoken(description, model_name=tiktoken_model_name)
-    if len(tokens) < summary_max_tokens:  # No need for summary
+    # Use character count as an approximation for token count (1 token ~ 4 chars)
+    # This removes the dependency on tiktoken for this function.
+    if len(description) < summary_max_tokens * 4:  # No need for summary
         return description
     prompt_template = PROMPTS["summarize_entity_descriptions"]
-    use_description = decode_tokens_by_tiktoken(
-        tokens[:llm_max_tokens], model_name=tiktoken_model_name
-    )
+    
+    # Truncate based on character count approximation
+    use_description = description[:llm_max_tokens * 4]
+    
     context_base = dict(
         entity_name=entity_or_relation_name,
         description_list=use_description.split(GRAPH_FIELD_SEP),
@@ -353,70 +291,63 @@ async def _merge_edges_then_upsert(
     return return_edge_data
 
 
+from ._llm import local_llm_batch_generate
+
+
 async def extract_entities(
     chunks: dict[str, TextChunkSchema],
     knowledge_graph_inst: BaseGraphStorage,
     entity_vdb: BaseVectorStorage,
     global_config: dict,
 ) -> Union[BaseGraphStorage, None]:
-    use_llm_func: callable = global_config["llm"]["best_model_func"]
-    entity_extract_max_gleaning = global_config["entity_extract_max_gleaning"]
+    """
+    Extracts entities and relationships from text chunks using a batched approach.
+    This function is refactored to collect all prompts and send them to the LLM
+    in a single, efficient batch call, avoiding concurrency issues with local models.
+    """
+    model_name = global_config["llm"]["best_model_name"]
     
     ordered_chunks = list(chunks.items())
 
-    entity_extract_prompt = PROMPTS["entity_extraction"]
+    # 1. Prepare prompts for all chunks
+    entity_extract_prompt_template = PROMPTS["entity_extraction"]
     context_base = dict(
         tuple_delimiter=PROMPTS["DEFAULT_TUPLE_DELIMITER"],
         record_delimiter=PROMPTS["DEFAULT_RECORD_DELIMITER"],
         completion_delimiter=PROMPTS["DEFAULT_COMPLETION_DELIMITER"],
         entity_types=",".join(PROMPTS["DEFAULT_ENTITY_TYPES"]),
     )
-    continue_prompt = PROMPTS["entiti_continue_extraction"]
-    if_loop_prompt = PROMPTS["entiti_if_loop_extraction"]
+    
+    all_prompts = [
+        entity_extract_prompt_template.format(**context_base, input_text=chunk_dp["content"])
+        for _, chunk_dp in ordered_chunks
+    ]
 
-    already_processed = 0
-    already_entities = 0
-    already_relations = 0
+    # 2. Make a single batched call to the LLM
+    logger.info(f"Sending a batch of {len(all_prompts)} prompts to the LLM for entity extraction...")
+    all_llm_results = await local_llm_batch_generate(model_name, all_prompts)
+    logger.info("Batch processing complete.")
 
-    async def _process_single_content(chunk_key_dp: tuple[str, TextChunkSchema]):
-        nonlocal already_processed, already_entities, already_relations
-        chunk_key = chunk_key_dp[0]
-        chunk_dp = chunk_key_dp[1]
-        content = chunk_dp["content"]
-        hint_prompt = entity_extract_prompt.format(**context_base, input_text=content)
-        final_result = await use_llm_func(hint_prompt)
+    # 3. Process the results
+    maybe_nodes = defaultdict(list)
+    maybe_edges = defaultdict(list)
 
-        history = pack_user_ass_to_openai_messages(hint_prompt, final_result)
-        for now_glean_index in range(entity_extract_max_gleaning):
-            glean_result = await use_llm_func(continue_prompt, history_messages=history)
-
-            history += pack_user_ass_to_openai_messages(continue_prompt, glean_result)
-            final_result += glean_result
-            if now_glean_index == entity_extract_max_gleaning - 1:
-                break
-
-            if_loop_result: str = await use_llm_func(
-                if_loop_prompt, history_messages=history
-            )
-            if_loop_result = if_loop_result.strip().strip('"').strip("'").lower()
-            if if_loop_result != "yes":
-                break
-
+    for (chunk_key, _), final_result in zip(ordered_chunks, all_llm_results):
         records = split_string_by_multi_markers(
             final_result,
             [context_base["record_delimiter"], context_base["completion_delimiter"]],
         )
 
-        maybe_nodes = defaultdict(list)
-        maybe_edges = defaultdict(list)
         for record in records:
-            record = re.search(r"\((.*)\)", record)
-            if record is None:
+            record_match = re.search(r"\((.*)\)", record)
+            if record_match is None:
                 continue
-            record = record.group(1)
+            
+            record_content = record_match.group(1)
             record_attributes = split_string_by_multi_markers(
-                record, [context_base["tuple_delimiter"]]
+                record_content, [context_base["tuple_delimiter"]]
             )
+
             if_entities = await _handle_single_entity_extraction(
                 record_attributes, chunk_key
             )
@@ -428,35 +359,14 @@ async def extract_entities(
                 record_attributes, chunk_key
             )
             if if_relation is not None:
-                maybe_edges[(if_relation["src_id"], if_relation["tgt_id"])].append(
+                # Ensure undirected graph by sorting the tuple
+                maybe_edges[tuple(sorted((if_relation["src_id"], if_relation["tgt_id"])))].append(
                     if_relation
                 )
-        already_processed += 1
-        already_entities += len(maybe_nodes)
-        already_relations += len(maybe_edges)
-        now_ticks = PROMPTS["process_tickers"][
-            already_processed % len(PROMPTS["process_tickers"])
-        ]
-        print(
-            f"{now_ticks} Processed {already_processed} chunks, {already_entities} entities(duplicated), {already_relations} relations(duplicated)\r",
-            end="",
-            flush=True,
-        )
-        return dict(maybe_nodes), dict(maybe_edges)
 
-    # use_llm_func is wrapped in ascynio.Semaphore, limiting max_async callings
-    results = await asyncio.gather(
-        *[_process_single_content(c) for c in ordered_chunks]
-    )
-    print()  # clear the progress bar
-    maybe_nodes = defaultdict(list)
-    maybe_edges = defaultdict(list)
-    for m_nodes, m_edges in results:
-        for k, v in m_nodes.items():
-            maybe_nodes[k].extend(v)
-        for k, v in m_edges.items():
-            # it's undirected graph
-            maybe_edges[tuple(sorted(k))].extend(v)
+    # 4. Merge and upsert nodes and edges (same as before)
+    logger.info(f"Extracted {len(maybe_nodes)} unique entities and {len(maybe_edges)} unique relationships.")
+    
     all_entities_data = await asyncio.gather(
         *[
             _merge_nodes_then_upsert(k, v, knowledge_graph_inst, global_config)
@@ -469,9 +379,11 @@ async def extract_entities(
             for k, v in maybe_edges.items()
         ]
     )
+
     if not len(all_entities_data):
-        logger.warning("Didn't extract any entities, maybe your LLM is not working")
-        return None
+        logger.warning("Didn't extract any entities, maybe your LLM is not working as expected.")
+        return None, None, None
+
     if entity_vdb is not None:
         data_for_vdb = {
             compute_mdhash_id(dp["entity_name"], prefix="ent-"): {
@@ -481,6 +393,7 @@ async def extract_entities(
             for dp in all_entities_data
         }
         await entity_vdb.upsert(data_for_vdb)
+        
     return knowledge_graph_inst, all_entities_data, all_edges_data
 
 

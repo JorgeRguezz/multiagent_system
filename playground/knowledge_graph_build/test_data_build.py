@@ -222,37 +222,37 @@ async def main():
     # Step 3: Verify the results
     print("\n--- Verification ---")
 
-    # Check the graph
-    if extractor.chunk_entity_relation_graph:
-        graph_data = extractor.chunk_entity_relation_graph.get_graph_data()
-        print(f"\nGraph contains {len(graph_data['nodes'])} nodes and {len(graph_data['links'])} edges.")
-        print("Graph Nodes:")
-        for node in graph_data['nodes']:
-            print(f"  - {node['id']} (type: {node.get('type', 'N/A')})")
-        print("Graph Edges:")
-        for link in graph_data['links']:
-            print(f"  - {link['source']} -> {link['target']}")
+    # # Check the graph
+    # if extractor.chunk_entity_relation_graph:
+    #     graph_data = extractor.chunk_entity_relation_graph.get_graph_data()
+    #     print(f"\nGraph contains {len(graph_data['nodes'])} nodes and {len(graph_data['links'])} edges.")
+    #     print("Graph Nodes:")
+    #     for node in graph_data['nodes']:
+    #         print(f"  - {node['id']} (type: {node.get('type', 'N/A')})")
+    #     print("Graph Edges:")
+    #     for link in graph_data['links']:
+    #         print(f"  - {link['source']} -> {link['target']}")
 
-    # Check the entity VDB
-    if extractor.entities_vdb:
-        try:
-            num_entities = len(extractor.entities_vdb._db.index.get_uris())
-            print(f"\nEntities VDB contains {num_entities} entities.")
-            labels = extractor.entities_vdb._db.index.get_labels()
-            print("Entities found:", labels)
-        except Exception as e:
-            print(f"Could not get entity count from VDB: {e}")
+    # # Check the entity VDB
+    # if extractor.entities_vdb:
+    #     try:
+    #         num_entities = len(extractor.entities_vdb._db.index.get_uris())
+    #         print(f"\nEntities VDB contains {num_entities} entities.")
+    #         labels = extractor.entities_vdb._db.index.get_labels()
+    #         print("Entities found:", labels)
+    #     except Exception as e:
+    #         print(f"Could not get entity count from VDB: {e}")
 
 
-    # Check the chunks VDB
-    if extractor.chunks_vdb:
-        try:
-            num_chunks = len(extractor.chunks_vdb._db.index.get_uris())
-            print(f"\nChunks VDB contains {num_chunks} chunks.")
-        except Exception as e:
-            print(f"Could not get chunk count from VDB: {e}")
+    # # Check the chunks VDB
+    # if extractor.chunks_vdb:
+    #     try:
+    #         num_chunks = len(extractor.chunks_vdb._db.index.get_uris())
+    #         print(f"\nChunks VDB contains {num_chunks} chunks.")
+    #     except Exception as e:
+    #         print(f"Could not get chunk count from VDB: {e}")
 
-    print("\n✅ Test finished successfully!")
+    # print("\n✅ Test finished successfully!")
 
 
 if __name__ == '__main__':

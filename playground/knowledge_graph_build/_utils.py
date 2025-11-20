@@ -11,10 +11,8 @@ from hashlib import md5
 from typing import Any, Union
 
 import numpy as np
-import tiktoken
 
 logger = logging.getLogger("nano-graphrag")
-ENCODER = None
 
 
 def always_get_an_event_loop() -> asyncio.AbstractEventLoop:
@@ -49,30 +47,19 @@ def convert_response_to_json(response: str) -> dict:
         raise e from None
 
 
-def encode_string_by_tiktoken(content: str, model_name: str = "gpt-4o"):
-    global ENCODER
-    if ENCODER is None:
-        ENCODER = tiktoken.encoding_for_model(model_name)
-    tokens = ENCODER.encode(content)
-    return tokens
-
-
-def decode_tokens_by_tiktoken(tokens: list[int], model_name: str = "gpt-4o"):
-    global ENCODER
-    if ENCODER is None:
-        ENCODER = tiktoken.encoding_for_model(model_name)
-    content = ENCODER.decode(tokens)
-    return content
-
-
 def truncate_list_by_token_size(list_data: list, key: callable, max_token_size: int):
-    """Truncate a list of data by token size"""
+    """
+    Truncate a list of data by an approximate token size, using character count.
+    (1 token ~ 4 characters)
+    """
     if max_token_size <= 0:
         return []
-    tokens = 0
+
+    max_chars = max_token_size * 4
+    current_chars = 0
     for i, data in enumerate(list_data):
-        tokens += len(encode_string_by_tiktoken(key(data)))
-        if tokens > max_token_size:
+        current_chars += len(key(data))
+        if current_chars > max_chars:
             return list_data[:i]
     return list_data
 

@@ -156,8 +156,30 @@ local_llm_config = LLMConfig(
     best_model_max_token_size = 4096, # Adjust to your model's context window
     best_model_max_async  = 1,
     
-    cheap_model_func_raw = local_llm_complete,
-    cheap_model_name = "/home/gatv-projects/Desktop/project/llama-3.2-3B-Instruct", 
-    cheap_model_max_token_size = 4096, # Adjust to your model's context window
-    cheap_model_max_async = 1
-)
+        cheap_model_func_raw = local_llm_complete,
+        cheap_model_name = "/home/gatv-projects/Desktop/project/llama-3.2-3B-Instruct", 
+        cheap_model_max_token_size = 4096, # Adjust to your model's context window
+        cheap_model_max_async = 1
+    )
+
+async def local_llm_batch_generate(model_path: str, prompts: list[str]) -> list[str]:
+    """
+    Generates responses for a batch of prompts using a single, efficient call to vLLM.
+    This is the recommended approach for local inference to maximize throughput.
+    """
+    llm = get_local_llm_instance(model_path)
+    # Using low temperature for deterministic, repeatable entity extraction.
+    sampling_params = SamplingParams(temperature=0.0, max_tokens=2048) 
+
+    loop = asyncio.get_running_loop()
+
+    def generate():
+        # vLLM's generate method is optimized for processing a list of prompts.
+        outputs = llm.generate(prompts, sampling_params)
+        return [output.outputs[0].text for output in outputs]
+
+    # Run the single, batched generation call in an executor to be async-friendly.
+    # This is safe because it's one call, not many concurrent ones.
+    response_texts = await loop.run_in_executor(None, generate)
+    
+    return response_texts
