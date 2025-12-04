@@ -1,42 +1,158 @@
-# Chatbot System Documentation
+# Multi-Modal MCP Chatbot System
 
-This document provides an overview of the different components of the chatbot system.
+This project is a sophisticated, multi-component chatbot system designed to integrate local Large Language Models (LLMs) with Vision-Language Models (VLMs) and external tools using the **Model Context Protocol (MCP)**.
 
-## Set-up
+The system features a modular architecture where the main chatbot acts as a client connecting to various "servers" (tools) to perform complex tasks like video knowledge extraction, internet searches, and more. It includes a custom implementation of a Knowledge Graph RAG (Retrieval-Augmented Generation) pipeline for video content.
 
-Currently running the system in two different environments. One is for the LLM and its dependecies, the other one is for the VLM. In the future the goal is to find an environment that works for both. Right now, the set up should be one environment to run the main script with the LLM and another environment to run the smolvlm2_api.py. The reason of this is an incompatibility between the transformers library used by the VLM and the vLLM library used by the LLM.
+## 📂 Project Structure
 
-## Components
+The project is divided into two main directories to distinguish between the core production system and experimental code.
 
-### `chatbot_system/gpu_manager.py`
+### 1. `chatbot_system/` (Core System)
+This directory contains the stable, production-ready code for the chatbot and its tools.
 
-This module is responsible for managing the allocation of models on the GPU. The `GPUModelManager` class handles the loading of both the Large Language Model (LLM) and the Vision-Language Model (VLM) into the GPU's memory. It is designed to load models sequentially and includes cleanup mechanisms to free up GPU memory if an out-of-memory error occurs or when the application shuts down.
+*   **`mcp_chatbot.py`**: The main entry point. It initializes the LLM, manages conversation history, and orchestrates connections to MCP servers defined in `server_config.json`.
+*   **`server_config.json`**: Configuration file defining the available MCP servers and their execution commands.
+*   **`knowledge_graph/`**: A comprehensive package for building and querying knowledge graphs from video content.
+    *   **`extractor.py`**: Coordinates the extraction pipeline, sending video processing requests to the media tool and building the local graph/vector databases.
+    *   **`_storage/`**: Drivers for different storage backends (NetworkX, Neo4j, NanoVectorDB, JSON KV).
+    *   **`_videoutil/`**: Client-side utilities for video chunking and feature extraction.
+    *   **`_op.py`** & **`_llm.py`**: Operations for entity extraction and LLM interactions.
+*   **`media_processing_tool.py`**: A dedicated MCP server responsible for heavy media processing (ASR via Whisper, Captioning via SmolVLM2). It runs in a separate environment.
+*   **`videogame_search_tool.py`**: An MCP server that provides video game data via the RAWG API.
+*   **`gpu_manager.py`**: Utility for managing GPU memory and model loading.
 
-### `chatbot_system/mcp_chatbot.py`
+### 2. `playground/` (Labs & Tests)
+This directory is for research, prototyping, and testing. **Do not use code here for production.**
 
-This is the core of the chatbot application. It orchestrates the entire system, from model loading to user interaction. Key functionalities include:
-- **Model Initialization**: Uses `GPUModelManager` to load the LLM and VLM.
-- **MCP Server Connection**: Connects to external tools (like the video game search) defined in `server_config.json` using the Multi-Context Protocol (MCP).
-- **Query Processing**: Handles user input, which can be a text query or a URL to a YouTube video.
-- **Tool Integration**: Detects and calls external tools (e.g., `@search_video_games(...)`) when the user's query or the LLM's response requires it.
-- **VLM Integration**: If a YouTube URL is provided, it uses `VLMProcessor` to download and analyze the video content.
-- **Interactive Loop**: Provides a command-line interface for continuous user interaction.
+#### General Tests & Diagnostics
+Scripts to verify hardware, libraries, and basic model connections.
 
-### `chatbot_system/server_config.json`
+*   **`ars_test.py`**: Tests Automatic Speech Recognition (ASR). Runs OpenAI's `whisper` and `faster-whisper` on a specific video file to verify that audio transcription works.
+*   **`check_device.py`**: A simple diagnostic to verify if `llama_cpp` can successfully load a GGUF model on the current hardware.
+*   **`diagnose_mcp.py`**: Debugs the `mcp` library installation, checking for key classes to ensure the correct version is installed.
+*   **`diagnose_torch.py`**: System health check. Prints Python/PyTorch versions, CUDA availability, and detailed GPU memory statistics.
+*   **`mcp_chatbot_improved.py`**: An experimental variation of the chatbot using `llama_cpp` (GGUF models) instead of `vllm`, useful for testing on lower VRAM hardware.
+*   **`test_api.py`**: Tests the standalone Flask VLM server (`smolvlm2_api.py`) by sending a Python HTTP POST request.
+*   **`test_api.sh`**: Shell script containing `curl` commands to test the Flask VLM server endpoints.
+*   **`test_smolvlm2.py`**: Direct, interactive test of the `SmolVLM2` model locally (no API), allowing chat with a video file.
+*   **`test_smolvlm2_desc.py`**: Single-shot inference script for `SmolVLM2` to generate a detailed video description.
+*   **`prueba.py`**: Basic sanity check for the `vllm` library, generating text from simple prompts.
+*   **`run_qwen3_gguf.py`**: Downloads and runs a quantized Qwen model using `llama_cpp`.
 
-This JSON file configures the MCP servers that the chatbot can connect to. It maps a server name to the command required to start it. For example, it tells the main chatbot application how to launch the `videogame_search_tool.py` script.
+#### `playground/knowledge_graph_build/` (The "GraphRAG" Engine)
+Contains the logic for converting video content into a queryable Knowledge Graph. It mirrors the production structure but includes experimental backends.
 
-### `chatbot_system/smolvlm2_api.py`
+**Core Logic (Variants):**
+*   **`_llm.py`**: Standard implementation using local `vllm` and `sentence-transformers`.
+*   **`_llm_gemini_api.py`**: Variant using Google's **Gemini API** for embeddings/generation.
+*   **`_llm_openai_api.py`**: Variant using **OpenAI/Azure/DeepSeek APIs**.
+*   **`_op.py` / `_op_api.py`**: Operations for graph construction (chunking, entity extraction). `_op_api.py` is optimized for API-based calls.
 
-This script creates a standalone Flask-based web API for the `SmolVLM2` model. It exposes a `/generate` endpoint that accepts a conversation history (including text and images) and returns a generated text response from the model. It also provides a `/health` endpoint to check the status of the service. This allows other applications to interact with the VLM over HTTP.
+**Pipelines & Integration Tests:**
+*   **`test_build_knowledge.py`**: **The Main End-to-End Test.** Takes a raw video, calls the local MCP tool for processing, and builds the full Knowledge Graph locally.
+*   **`test_build_knowledge_graph_gemini.py`**: End-to-end test utilizing the Gemini API.
+*   **`test_data_build.py`**: Faster test that skips video processing by loading pre-computed JSON data (`kv_store_video_segments_*.json`) to focus on graph construction.
+*   **`test_data_build_gemini.py`**: Same as above, but using Gemini API.
+*   **`test_knowledge_extraction.py`**: Runs ASR and VLM logic locally in a standalone script (bypassing MCP) to debug inference issues.
+*   **`test_mcp_knowledge.py`**: Tests the MCP connection, verifying the `extract_video_knowledge` tool returns correct JSON paths.
 
-### `chatbot_system/videogame_search_tool.py`
+**Visualization & Data:**
+*   **`visualize_graph.ipynb`**: Jupyter Notebook that reads `graph_*.graphml` files and renders interactive PyVis networks.
+*   **`kv_store_video_segments_*.json`**: Sample output data used for testing without running heavy models.
 
-This is an external tool that runs as an MCP server. It provides a `search_video_games` function that the main chatbot can call. The tool takes a game title as input, queries the RAWG.io API for game details, and returns the information in a structured JSON format. This allows the chatbot to answer questions about video games.
+#### `playground/rag_implementation/` (Retrieval Logic)
+Scripts testing how to retrieve answers from the constructed graph.
 
-### `chatbot_system/vlm_processor.py`
+*   **`video_content_embedding.py`**: Summarizes and embeds video content to facilitate finding the relevant video for a query.
+*   **`query_video_match.py`**: Core retrieval logic:
+    1.  Matches query to the best video.
+    2.  Extracts keywords/entities.
+    3.  Performs **Vector Search** (Standard RAG).
+    4.  Performs **Graph Search** (Graph RAG).
+*   **`full_qa.py`**: Simulates a full Q&A flow ("Who is Ahri...?") by running the pipeline and generating an answer.
 
-This module encapsulates the logic for the Vision-Language Model (VLM). The `VLMProcessor` class is responsible for:
-- Loading the `SmolVLM2` model and processor.
-- Downloading videos from YouTube using `yt-dlp`.
-- Analyzing a local video file based on a user's text query and generating a relevant textual description of the video's content.
+#### `playground/pruebas_qwen_model/`
+*   **`download_qwen.py`**: Utility to download the Qwen model snapshot.
+*   **`prueba_qwen.py`**: Inference test for the Qwen GPTQ model.
+
+---
+
+## 🛠️ Installation & Setup
+
+Due to conflicting dependencies between `vllm` (used by the main chatbot) and `transformers`/`torch` versions required by the VLM, this project **requires two separate Python virtual environments**.
+
+### Environment 1: LLM & Main Chatbot (`venv_llm`)
+This environment hosts the main application, the Knowledge Graph logic, and the Game Search tool.
+
+1.  **Create and activate:**
+    ```bash
+    python3 -m venv venv_llm
+    source venv_llm/bin/activate
+    ```
+2.  **Install dependencies:**
+    ```bash
+    pip install -r chatbot_system/requirements.txt
+    ```
+    *Note: Ensure `vllm` and `mcp` are properly installed.*
+
+### Environment 2: Media Processing (`venv_smolvlm`)
+This environment hosts the `media_processing_tool.py` which runs the Vision-Language Model and ASR.
+
+1.  **Create and activate:**
+    ```bash
+    python3 -m venv venv_smolvlm
+    source venv_smolvlm/bin/activate
+    ```
+2.  **Install dependencies:**
+    ```bash
+    pip install -r chatbot_system/smolvlm2_api_requirements.txt
+    # You also need 'mcp' and 'moviepy' here if not in the txt
+    pip install mcp moviepy openai-whisper
+    ```
+
+---
+
+## 🚀 Usage
+
+1.  **Configure API Keys:**
+    Create a `.env` file in the root directory:
+    ```env
+    RAWG_API_KEY="your_rawg_api_key"
+    # Any other required keys
+    ```
+
+2.  **Configure Servers:**
+    Ensure `chatbot_system/server_config.json` points to the correct python interpreters for your environments.
+    ```json
+    {
+      "mcpServers": {
+        "videogame": {
+          "command": "python3",
+          "args": ["-m", "chatbot_system.videogame_search_tool"]
+        },
+        "vlm_server": {
+          "command": "/absolute/path/to/project/venv_smolvlm/bin/python3",
+          "args": ["-m", "chatbot_system.media_processing_tool"],
+          "cwd": "/absolute/path/to/project"
+        }
+      }
+    }
+    ```
+
+3.  **Run the System:**
+    Activate the **LLM environment** and run the main script:
+    ```bash
+    source venv_llm/bin/activate
+    python -m chatbot_system.mcp_chatbot
+    ```
+
+## 🧠 Features
+
+*   **Interactive CLI**: A command-line interface that supports natural language queries.
+*   **Tool Use**: The LLM can autonomously decide to call tools (e.g., `@search_video_games`) based on user input.
+*   **Video Analysis**:
+    *   Paste a YouTube URL to download and process it.
+    *   The system splits the video, transcribes audio (Whisper), and captions frames (SmolVLM2).
+    *   It builds a Knowledge Graph and Vector Index locally to answer complex questions about the video content.
+*   **Modular Design**: Easily add new tools by creating a script and adding it to `server_config.json`.
