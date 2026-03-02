@@ -1,74 +1,68 @@
-# Project Overview
+# GEMINI.md - Project Context & Agent Guide
 
-This project is a sophisticated, multi-component chatbot system built with Python. It's designed to be modular and extensible, leveraging local Large Language Models (LLMs) and Vision-Language Models (VLMs) to provide intelligent and context-aware responses.
+This file provides the comprehensive context required for an AI agent to understand, maintain, and extend this specific codebase. **Read this first.**
 
-The core architecture consists of:
-- A **Main Chatbot Application** (`mcp_chatbot.py`): This is the central orchestrator. It handles user interaction, manages conversation history, and connects to various tools and services using the Multi-Context Protocol (MCP).
-- A **Vision-Language Model (VLM) API** (`smolvlm2_api.py`): A standalone Flask server that provides access to the `SmolVLM2` model for image and video analysis. The main chatbot communicates with this API via HTTP requests.
-- **External Tools** (e.g., `videogame_search_tool.py`): These are independent Python scripts that run as MCP servers, offering specialized functionalities that the main chatbot can call upon.
-- **GPU Management** (`gpu_manager.py`): A utility to efficiently load and manage the AI models on the GPU, handling potential memory issues.
+## 1. Project Identity: Multi-Modal MCP Chatbot
 
-The system is designed to run in separate, isolated environments to handle conflicting dependencies between the LLM (`vllm`) and VLM (`transformers`) libraries.
+This is a sophisticated chatbot system designed to integrate local Large Language Models (LLMs) with specialized tools (Vision-Language Models, Web Search, Knowledge Graphs) using the **Model Context Protocol (MCP)**.
 
-# Building and Running
+**Core Mission:** To enable a central LLM to "see" video content, "hear" audio, and "remember" complex relationships by delegating heavy processing tasks to specialized, isolated server processes.
 
-The system requires at least two separate Python virtual environments due to library incompatibilities.
+## 2. System Architecture
 
-### Environment 1: Main Chatbot (LLM)
+The project utilizes a distributed, multi-process architecture to solve the "Dependency Hell" problem common in AI development (specifically, conflicting `torch` and `transformers` versions between LLMs and VLMs).
 
-This environment runs the main chatbot application.
+### The MCP Pattern (Model Context Protocol)
+*   **Client (`mcp_chatbot.py`):** The main brain. It runs the conversation loop, manages history, and decides when to call tools. It connects to servers via standard I/O (`stdin`/`stdout`).
+*   **Servers (`media_processing_tool.py`, etc.):** Standalone scripts running in their own processes (and often their own virtual environments). They expose functions via the `@mcp.tool()` decorator.
+*   **Communication:** The Client launches Servers as subprocesses. JSON-RPC messages are exchanged over stdio.
 
-1.  **Create and activate a virtual environment:**
-    ```bash
-    python3 -m venv venv_llm
-    source venv_llm/bin/activate
-    ```
+### The Dual-Environment Strategy
+**CRITICAL:** The system *cannot* run in a single Python environment.
+1.  **`venv_llm` (The "Brain" Env):**
+    *   **Role:** Runs the Main Chatbot Client, Knowledge Graph logic, and lightweight tools.
+    *   **Key Libs:** `vllm` (for LLM inference), `mcp`, `networkx`, `sentence-transformers`.
+    *   **Path:** `venv_llm/`
+2.  **`venv_smolvlm` (The "Eyes & Ears" Env):**
+    *   **Role:** Runs the `media_processing_tool.py` server. Handles heavy GPU tasks like ASR and Image Captioning.
+    *   **Key Libs:** `transformers` (specific version for SmolVLM2), `torch`, `openai-whisper`, `moviepy`.
+    *   **Path:** `venv_smolvlm/`
 
-2.  **Install dependencies:**
-    ```bash
-    pip install -r chatbot_system/requirements.txt
-    ```
+## 3. Key File Map
 
-3.  **Set up environment variables:**
-    Create a `.env` file in the project root and add any required API keys. For the video game search tool, you'll need a RAWG.io API key.
-    ```
-    RAWG_API_KEY="your_rawg_api_key_here"
-    ```
+### `chatbot_system/` (Production Core)
+*   **`mcp_chatbot.py`**: **Entry Point.** The specific implementation of the MCP Client.
+*   **`server_config.json`**: **Registry.** Defines available tools and, crucially, the *specific python interpreter path* to use for each tool (mapping tools to environments).
+*   **`media_processing_tool.py`**: **The VLM Server.** An MCP server that accepts video URLs/files, performs Whisper ASR and SmolVLM2 captioning, saves the result to JSON, and returns the file path.
+*   **`videogame_search_tool.py`**: An example of a lightweight MCP tool (RAWG API) running in the main env.
 
-4.  **Run the main chatbot:**
-    This script will also launch the MCP tools defined in `server_config.json`.
-    ```bash
-    cd chatbot_system
-    python mcp_chatbot.py
-    ```
+### `playground/` (Labs & Research)
+*   **`knowledge_graph_build/`**: The engine room for the RAG pipeline.
+    *   **`test_build_knowledge.py`**: The "Main" script for testing extraction. It acts as a client to the media tool and builds the graph locally.
+*   **`rag_implementation/`**: The retrieval logic.
+    *   **`query_video_match.py`**: Implements the Hybrid Search (Vector + Graph) logic to answer questions.
 
-### Environment 2: SmolVLM2 API
+## 4. The Data Flow: Video to Answer
 
-This environment runs the Flask API for the vision-language model.
+1.  **Ingestion:** User provides a YouTube URL.
+2.  **Processing (Remote MCP Call):**
+    *   `mcp_chatbot` calls `extract_video_knowledge` on `media_processing_tool`.
+    *   Server (in `venv_smolvlm`) downloads video -> Splits -> ASR (Whisper) -> Caption (SmolVLM2).
+    *   Server writes raw data to `downloads/<id>_data.json`.
+3.  **Graph Construction (Local):**
+    *   Chatbot reads the JSON.
+    *   Uses `knowledge_graph/extractor.py` to chunk text and extract entities (People, Locations, Concepts) using a local LLM.
+    *   Builds:
+        *   **Vector DB:** Embeddings of text chunks.
+        *   **NetworkX Graph:** Links entities to chunks.
+4.  **Retrieval (Hybrid RAG):**
+    *   User asks a question.
+    *   System performs **Vector Search** (finding semantic matches).
+    *   System performs **Graph Traversal** (finding chunks linked to key entities in the query).
+    *   Context is combined and fed to the LLM for the final answer.
 
-1.  **Create and activate a separate virtual environment:**
-    ```bash
-    python3 -m venv venv_smolvlm
-    source venv_smolvlm/bin/activate
-    ```
+## 5. Developer Guidelines
 
-2.  **Install dependencies:**
-    ```bash
-    pip install -r chatbot_system/smolvlm2_api_requirements.txt
-    ```
-
-3.  **Run the API server:**
-    ```bash
-    cd chatbot_system
-    python smolvlm2_api.py
-    ```
-    The API will be available at `http://localhost:5000`.
-
-# Development Conventions
-
-*   **Modular Architecture:** The project is split into distinct components that communicate over well-defined protocols (MCP and HTTP). This is the primary architectural pattern.
-*   **Dependency Management:** Separate `requirements.txt` files are used for components with conflicting dependencies. Virtual environments are essential for development and execution.
-*   **Configuration:** Server configurations are externalized into `server_config.json`. API keys and other secrets are managed via a `.env` file.
-*   **Tool Integration:** New functionalities are added by creating standalone MCP server tools. The main chatbot discovers and integrates with them through the `server_config.json` file.
-*   **Code Style:** The code is generally well-structured with classes and functions. It includes inline comments and diagnostic print statements for debugging.
-*   **Experimentation:** The `playground/` directory is used for testing, debugging, and experimenting with new features before integrating them into the main application.
+*   **Never mix dependencies:** When adding a new library, verify which environment it belongs to. If it conflicts with `vllm`, it goes in `venv_smolvlm` (or a new env) and must be wrapped as an MCP tool.
+*   **Test in Playground:** Use `playground/` scripts to test model inference or graph logic *before* integrating into `mcp_chatbot.py`.
+*   **Configuration:** Always check `server_config.json` when debugging "tool not found" or environment errors. Ensure paths are absolute or correctly relative.

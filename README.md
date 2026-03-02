@@ -50,8 +50,8 @@ Contains the logic for converting video content into a queryable Knowledge Graph
 *   **`_op.py` / `_op_api.py`**: Operations for graph construction (chunking, entity extraction). `_op_api.py` is optimized for API-based calls.
 
 **Pipelines & Integration Tests:**
-*   **`test_build_knowledge.py`**: **The Main End-to-End Test.** Takes a raw video, calls the local MCP tool for processing, and builds the full Knowledge Graph locally.
-*   **`test_build_knowledge_graph_gemini.py`**: End-to-end test utilizing the Gemini API.
+*   **`test_end_to_end.py`**: **The Main End-to-End Test.** Takes a raw video, calls the local MCP tool for processing, and builds the full Knowledge Graph locally.
+*   **`test_end_to_end.py`**: End-to-end test utilizing the Gemini API.
 *   **`test_data_build.py`**: Faster test that skips video processing by loading pre-computed JSON data (`kv_store_video_segments_*.json`) to focus on graph construction.
 *   **`test_data_build_gemini.py`**: Same as above, but using Gemini API.
 *   **`test_knowledge_extraction.py`**: Runs ASR and VLM logic locally in a standalone script (bypassing MCP) to debug inference issues.

@@ -1,0 +1,342 @@
+"""
+The main orchestration script that manages the video processing pipeline, 
+coordinating video splitting and tool calls to the MCP servers.
+"""
+import asyncio
+import os
+import sys
+import json
+import shutil
+import time
+from contextlib import AsyncExitStack
+from PIL import Image
+from moviepy.video.io.VideoFileClip import VideoFileClip
+from tqdm import tqdm
+
+# Add project root and playground to path
+current_dir = os.path.dirname(os.path.abspath(__file__))
+project_root = os.path.dirname(current_dir)
+sys.path.append(project_root)
+sys.path.append(os.path.join(project_root, "playground"))
+
+from knowledge_extraction.config import *
+from knowledge_graph_build._videoutil.split import split_video
+
+from mcp import ClientSession, StdioServerParameters
+from mcp.client.stdio import stdio_client
+
+async def run_pipeline():
+    start_total = time.time()
+    # 1. Setup workspace
+    if os.path.exists(WORKING_DIR):
+        shutil.rmtree(WORKING_DIR)
+    os.makedirs(WORKING_DIR, exist_ok=True)
+
+    # 2. Split Video
+    print("\n[Step 1] Splitting Video...")
+    start_split = time.time()
+    segment_index2name, segment_times_info = split_video(
+        video_path=VIDEO_PATH,
+        working_dir=WORKING_DIR,
+        segment_length=SEGMENT_LENGTH,
+        num_frames_per_segment=FRAMES_PER_SEGMENT,
+        audio_output_format='mp3'
+    )
+    end_split = time.time()
+    print(f" >> Split complete in {end_split - start_split:.2f}s")
+
+    # Server parameters
+    env = os.environ.copy()
+    # env["HF_HOME"] = HF_HOME
+    env["PYTORCH_ALLOC_CONF"] = "expandable_segments:True"
+    env["OMP_NUM_THREADS"] = "1"
+    env["MKL_NUM_THREADS"] = "1"
+
+    # -----------------------
+
+    entity_params = StdioServerParameters(
+        command=VENV_SMOLVLM_PYTHON,
+        args=["-m", "knowledge_extraction.entity_server"],
+        env=env
+    )
+    
+    vlm_params = StdioServerParameters(
+        command=VENV_VLM_ASR_PYTHON,
+        args=["-m", "knowledge_extraction.vlm_asr_server"],
+        env=env
+    )
+
+    context_data = []
+
+    # 3. Entity Extraction Phase
+    print(f"\n[Step 2] Phase 1: Entity Extraction (SAM3 + DINOv2) using {NUM_ENTITY_WORKERS} workers")
+    start_entities = time.time()
+    
+    # 3.1 Pre-extract frames to avoid moviepy contention
+    tasks = []
+    with VideoFileClip(VIDEO_PATH) as video:
+        sorted_indices = sorted(segment_index2name.keys(), key=lambda x: int(x))
+        for index in sorted_indices:
+            if int(index) >= MAX_SEGMENTS: break
+            
+            segment_name = segment_index2name[index]
+            timestamps = segment_times_info[index]["frame_times"]
+            
+            for i, t in enumerate(timestamps):
+                frame_array = video.get_frame(t)
+                frame_path = os.path.join(WORKING_DIR, f"frame_s{index}_i{i}.png")
+                Image.fromarray(frame_array.astype('uint8')).save(frame_path)
+                
+                tasks.append({
+                    "frame_path": frame_path,
+                    "index": index,
+                    "segment_name": segment_name,
+                    "frame_idx": i
+                })
+    
+    results = [None] * len(tasks)
+    task_queue = asyncio.Queue()
+    for i, task in enumerate(tasks):
+        task_queue.put_nowait((i, task))
+
+    async def entity_worker(worker_id, session):
+        while not task_queue.empty():
+            try:
+                task_idx, task = await task_queue.get()
+            except asyncio.QueueEmpty:
+                break
+            
+            frame_path = task["frame_path"]
+            
+            try:
+                # Call MCP Tool for multiple regions at once
+                regions_config = [
+                    {"name": "middle", "region": MIDDLE_HUD},
+                    {"name": "partners", "region": BOTTOM_RIGHT_HUD}
+                ]
+                
+                res = await session.call_tool("detect_and_match_regions", arguments={
+                    "image_path": frame_path,
+                    "regions_config": regions_config,
+                    "db_path": DB_PATH,
+                    "threshold": 0.0
+                })
+
+                # Helper to parse dictionary response
+                def parse_content(content_list):
+                    if not content_list: return {}
+                    try:
+                        return json.loads(content_list[0].text)
+                    except: return {}
+
+
+                # print(f"    [Worker {worker_id}] Frame s{task['index']}i{task['frame_idx']} - Raw MCP Output: {res.content}")
+                batch_results = parse_content(res.content)
+                
+                main_champ = "Unknown"
+                partners = []
+
+                # Process Middle HUD
+                parsed_main = batch_results.get("middle", [])
+                # print(f"    [Worker {worker_id}] Frame s{task['index']}i{task['frame_idx']} - Middle HUD Matches: {parsed_main}")
+                if parsed_main:
+                    parsed_main.sort(key=lambda x: x["score"], reverse=True)
+                    main_champ = parsed_main[0]["name"]
+
+                # Process Partners
+                parsed_partners = batch_results.get("partners", [])
+                if parsed_partners:
+                    parsed_partners.sort(key=lambda x: x["score"], reverse=True)
+                    seen = set()
+                    for p in parsed_partners:
+                        if p["name"] not in seen:
+                            partners.append(p["name"])
+                            seen.add(p["name"])
+                        if len(partners) >= 4: break
+                
+                results[task_idx] = {
+                    "frame_path": frame_path,
+                    "main_champ": main_champ,
+                    "partners": partners,
+                    "segment_idx": task["index"],
+                    "segment_name": task["segment_name"],
+                    "frame_idx": task["frame_idx"],
+                }
+                print(f"    [Worker {worker_id}] Frame s{task['index']}i{task['frame_idx']} Done: main_champ -> {main_champ} | partners -> {partners}")
+                
+            except Exception as e:
+                print(f"    [Worker {worker_id}] ERROR on {frame_path}: {e}")
+            finally:
+                task_queue.task_done()
+
+    # Launch workers
+    async with AsyncExitStack() as stack:
+        sessions = []
+        print(f" >> Launching {NUM_ENTITY_WORKERS} entity server instances...")
+        for i in range(NUM_ENTITY_WORKERS):
+            if i > 0:
+                print(f"    Waiting 3s to stagger startup...")
+                await asyncio.sleep(3)
+                
+            client = await stack.enter_async_context(stdio_client(entity_params))
+            read, write = client
+            session = await stack.enter_async_context(ClientSession(read, write))
+            await session.initialize()
+            print(f"    [Worker {i}] Initializing models...")
+            await session.call_tool("warmup", arguments={"db_path": DB_PATH})
+            sessions.append(session)
+            print(f"    [Worker {i}] Ready! ✅")
+        
+        worker_tasks = [entity_worker(i, sessions[i]) for i in range(NUM_ENTITY_WORKERS)]
+        await asyncio.gather(*worker_tasks)
+
+    context_data = [r for r in results if r is not None]
+    end_entities = time.time()
+
+    # 4. VLM & ASR Phase
+    print("\n[Step 3] Phase 2: VLM Inference & ASR")
+    start_vlm_asr = time.time()
+    asr_times = []
+    vlm_times = []
+    frames_data = {}
+    segments_captions = {}
+    async with stdio_client(vlm_params) as (read, write):
+        async with ClientSession(read, write) as session:
+            await session.initialize()
+            
+            # Transcribe segments
+            transcripts = {}
+            video_basename = os.path.basename(VIDEO_PATH).split('.')[0]
+            cache_path = os.path.join(WORKING_DIR, '_cache', video_basename)
+            
+            print(" >> Running ASR...")
+            for index in segment_index2name:
+                if int(index) >= MAX_SEGMENTS: break
+                audio_path = os.path.join(cache_path, f"{segment_index2name[index]}.mp3")
+                if os.path.exists(audio_path):
+                    s_asr = time.time()
+                    res = await session.call_tool("transcribe_audio", arguments={"audio_path": audio_path})
+                    transcripts[index] = res.content[0].text
+                    asr_times.append(time.time() - s_asr)
+
+            # Run VLM
+            last_description = "This is the first frame of the video."
+            print(" >> Running VLM Inference...")
+            for entry in context_data:
+                s_vlm = time.time()
+                transcript = transcripts.get(entry['segment_idx'], "")
+                
+                context = {
+                    "champion": entry['main_champ'],
+                    "teammates": entry['partners'],
+                    "transcript": transcript
+                }
+                
+                # # 2x faster; lower quality
+                # description = await session.call_tool("run_qwen_description", arguments={
+                #     "image_path": entry['frame_path'],
+                #     "context": context,
+                #     "last_description": last_description
+                # })
+
+                # Slower, higher quality
+                description = await session.call_tool("run_internvl_description", arguments={
+                    "image_path": entry['frame_path'],
+                    "context": context,
+                    "last_description": last_description
+                })
+
+                vlm_times.append(time.time() - s_vlm)
+                print(f" >> VLM Output for {os.path.basename(entry['frame_path'])} (took {vlm_times[-1]:.2f}s)")
+                print(f"    {description.content[0].text}")
+                last_description = description.content[0].text
+                
+                # Collect per-frame outputs
+                if video_basename not in frames_data:
+                    frames_data[video_basename] = {}
+                frame_key = f"{entry['segment_idx']}_{entry['frame_idx']}"
+                frames_data[video_basename][frame_key] = {
+                    "frame_path": entry["frame_path"],
+                    "segment_idx": str(entry["segment_idx"]),
+                    "segment_name": entry["segment_name"],
+                    "frame_idx": entry["frame_idx"],
+                    "main_champ": entry["main_champ"],
+                    "partners": entry["partners"],
+                    "transcript": transcript,
+                    "vlm_output": description.content[0].text,
+                }
+                segments_captions.setdefault(entry["segment_idx"], []).append(description.content[0].text)
+            # Unload VLM/ASR before starting GPT-OSS to reduce GPU memory pressure
+            try:
+                await session.call_tool("unload_vlm_asr", arguments={})
+            except Exception as e:
+                print(f" >> Warning: failed to unload VLM/ASR models: {e}")
+    end_vlm_asr = time.time()
+
+    # 5. Merge and persist artifacts for knowledge_build
+    print("\n[Step 4] Saving extraction artifacts...")
+    gpt_params = StdioServerParameters(
+        command=os.path.join(project_root, "venv_gpt/bin/python3"),
+        args=["-m", "knowledge_extraction.gpt_oss_server"],
+    )
+    gpt_session = None
+    gpt_times = []
+    gpt_total_start = time.time()
+    async with stdio_client(gpt_params) as (gpt_read, gpt_write):
+        async with ClientSession(gpt_read, gpt_write) as gpt_session:
+            await gpt_session.initialize()
+            segments_information = {}
+            for index in segment_index2name:
+                if int(index) >= MAX_SEGMENTS:
+                    break
+                segment_name = segment_index2name[index]
+                captions = segments_captions.get(index, [])
+                llm_start_time = time.time()
+                res = await gpt_session.call_tool(
+                    "summarize_segment_captions", arguments={"captions": captions}
+                )
+                llm_end_time = time.time()
+                gpt_times.append(llm_end_time - llm_start_time)
+                print(
+                    f" >> Segment {index} LLM summary time: {llm_end_time - llm_start_time:.2f}s"
+                )
+                segment_caption = res.content[0].text if res.content else ""
+                segments_information[index] = {
+                    "time": "-".join(segment_name.split('-')[-2:]),
+                    "content": f"Caption:\n{segment_caption}\nTranscript:\n{transcripts.get(index, '')}\n\n",
+                    "transcript": transcripts.get(index, ''),
+                    "frame_times": segment_times_info[index]["frame_times"].tolist(),
+                }
+    gpt_total_end = time.time()
+    gpt_total_time = gpt_total_end - gpt_total_start
+
+    segments_data = {video_basename: segments_information}
+    paths_data = {video_basename: VIDEO_PATH}
+
+    with open(os.path.join(WORKING_DIR, "kv_store_video_segments.json"), "w", encoding="utf-8") as f:
+        json.dump(segments_data, f, indent=2, ensure_ascii=False)
+    with open(os.path.join(WORKING_DIR, "kv_store_video_frames.json"), "w", encoding="utf-8") as f:
+        json.dump(frames_data, f, indent=2, ensure_ascii=False)
+    with open(os.path.join(WORKING_DIR, "kv_store_video_path.json"), "w", encoding="utf-8") as f:
+        json.dump(paths_data, f, indent=2, ensure_ascii=False)
+
+    # Summary
+    end_total = time.time()
+    print("\n" + "="*50)
+    print("PIPELINE EXECUTION SUMMARY")
+    print("="*50)
+    print(f"Total Time:           {end_total - start_total:.2f}s")
+    print(f"1. Video Splitting:   {end_split - start_split:.2f}s")
+    print(f"2. Entity Extraction: {end_entities - start_entities:.2f}s")
+    print(f"3. ASR & VLM Phase:   {end_vlm_asr - start_vlm_asr:.2f}s")
+    print(f"4. GPT-OSS Summary:   {gpt_total_time:.2f}s")
+    if asr_times:
+        print(f"   - Avg ASR/segment: {sum(asr_times)/len(asr_times):.2f}s")
+    if vlm_times:
+        print(f"   - Avg VLM/frame:   {sum(vlm_times)/len(vlm_times):.2f}s")
+    if gpt_times:
+        print(f"   - Avg GPT/segment: {sum(gpt_times)/len(gpt_times):.2f}s")
+    print("="*50)
+
+if __name__ == "__main__":
+    asyncio.run(run_pipeline())

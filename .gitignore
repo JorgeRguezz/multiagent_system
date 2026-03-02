@@ -14,10 +14,7 @@ downloads/
 __pycache__/
 
 # Ignorar virtual environment
-venv_llm/
-venv_smolvlm/
-venv_mixed/
-venv_vlm_asr/
+venv_*
 
 # Ignorar VideoRAG
 VideoRAG
@@ -27,7 +24,7 @@ videorag_cache*
 ImageBind
 
 #Gemini
-GEMINI.md
+# GEMINI.md@gem
 
 # Ignore knowledge graph build outputs
 playground/knowledge_graph_build/lib**
@@ -43,3 +40,22 @@ error.txt
 lol_test_cache
 
 .checkpoints
+
+# sam3/
+# dinov2/
+*.gguf
+*.md
+*.sh
+frame_*.png
+
+=0.46.1
+=4.45.0
+
+/playground/lol_images_extraction/assets/*
+
+*.safetensors
+
+/playground/qwen2.5-vl-7b
+
+
+vlm_context_test_cache

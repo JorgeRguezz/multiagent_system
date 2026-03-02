@@ -3,6 +3,7 @@ import os
 import json
 import shutil
 import sys
+import gc
 from datetime import datetime
 from dataclasses import dataclass, field, asdict
 from typing import Type
@@ -28,36 +29,67 @@ mcp = FastMCP("media_processing_server")
 current_device = "cuda" if torch.cuda.is_available() else "cpu"
 print(f"--> Media Processing Server: Initializing on device: {current_device}", file=sys.stderr)
 
-# --- ASR Model ---
-print("--> Media Server: Loading ASR model (Whisper)...", file=sys.stderr)
+# Global variables for models
 asr_model = None
-try:
-    import whisper
-    asr_model = whisper.load_model("base", device=current_device)
-    print("--> Media Server: ASR model loaded successfully ✅", file=sys.stderr)
-except ImportError:
-    print("--> Media Server: `whisper` not installed, ASR will not be available.", file=sys.stderr)
-except Exception as e:
-    print(f"--> Media Server: Error loading ASR model: {e}", file=sys.stderr)
-
-
-# --- VLM Model ---
-print("--> Media Server: Loading VLM model (SmolVLM2-Video)...", file=sys.stderr)
 vlm_processor = None
 vlm_model = None
-try:
-    from transformers import AutoProcessor, AutoModelForImageTextToText
-    vlm_model_path = "HuggingFaceTB/SmolVLM2-256M-Video-Instruct"
-    vlm_processor = AutoProcessor.from_pretrained(vlm_model_path)
-    vlm_model = AutoModelForImageTextToText.from_pretrained(
-        vlm_model_path,
-        torch_dtype=torch.bfloat16 if (current_device == "cuda" and torch.cuda.is_bf16_supported()) else torch.float32,
-    ).to(current_device)
-    print("--> Media Server: VLM model loaded successfully ✅", file=sys.stderr)
-except ImportError:
-    print("--> Media Server: `transformers` not installed, VLM will not be available.", file=sys.stderr)
-except Exception as e:
-    print(f"--> Media Server: Error loading VLM model: {e}", file=sys.stderr)
+
+def load_models():
+    """Loads ASR and VLM models into GPU memory if not already loaded."""
+    global asr_model, vlm_processor, vlm_model, current_device
+    
+    # --- ASR Model ---
+    if asr_model is None:
+        print("--> Media Server: Loading ASR model (Whisper)...", file=sys.stderr)
+        try:
+            import whisper
+            asr_model = whisper.load_model("base", device=current_device)
+            print("--> Media Server: ASR model loaded successfully ✅", file=sys.stderr)
+        except ImportError:
+            print("--> Media Server: `whisper` not installed, ASR will not be available.", file=sys.stderr)
+        except Exception as e:
+            print(f"--> Media Server: Error loading ASR model: {e}", file=sys.stderr)
+
+    # --- VLM Model ---
+    if vlm_model is None:
+        print("--> Media Server: Loading VLM model (SmolVLM2-Video)...", file=sys.stderr)
+        try:
+            from transformers import AutoProcessor, AutoModelForImageTextToText
+            vlm_model_path = "HuggingFaceTB/SmolVLM2-2.2B-Instruct"
+            vlm_processor = AutoProcessor.from_pretrained(vlm_model_path)
+            vlm_model = AutoModelForImageTextToText.from_pretrained(
+                vlm_model_path,
+                torch_dtype=torch.bfloat16 if (current_device == "cuda" and torch.cuda.is_bf16_supported()) else torch.float32,
+            ).to(current_device)
+            print("--> Media Server: VLM model loaded successfully ✅", file=sys.stderr)
+        except ImportError:
+            print("--> Media Server: `transformers` not installed, VLM will not be available.", file=sys.stderr)
+        except Exception as e:
+            print(f"--> Media Server: Error loading VLM model: {e}", file=sys.stderr)
+
+def unload_models():
+    """Offloads ASR and VLM models from GPU memory."""
+    global asr_model, vlm_processor, vlm_model
+    
+    print("--> Media Server: Unloading models to free GPU...", file=sys.stderr)
+    
+    if asr_model is not None:
+        del asr_model
+        asr_model = None
+        
+    if vlm_model is not None:
+        del vlm_model
+        vlm_model = None
+        
+    if vlm_processor is not None:
+        del vlm_processor
+        vlm_processor = None
+        
+    gc.collect()
+    if torch.cuda.is_available():
+        torch.cuda.empty_cache()
+    
+    print("--> Media Server: GPU memory cleared ✅", file=sys.stderr)
 
 
 # =====================================================
@@ -91,7 +123,11 @@ class ServerSideProcessor:
 
     def speech_to_text(self, video_name, segment_index2name):
         if not asr_model:
-            raise RuntimeError("ASR model is not loaded.")
+             # Fallback: ensure models are loaded
+             load_models()
+             if not asr_model:
+                raise RuntimeError("ASR model could not be loaded.")
+        
         cache_path = os.path.join(self.working_dir, '_cache', video_name)
         transcripts = {}
         for index in tqdm(segment_index2name, desc=f"Speech Recognition for {video_name}"):
@@ -106,7 +142,10 @@ class ServerSideProcessor:
 
     def segment_caption(self, video_name, transcripts, segment_times_info):
         if not vlm_model or not vlm_processor:
-            raise RuntimeError("VLM model is not loaded.")
+             # Fallback: ensure models are loaded
+             load_models()
+             if not vlm_model or not vlm_processor:
+                raise RuntimeError("VLM model could not be loaded.")
         
         local_captions = {}
         with VideoFileClip(self.video_path) as video:
@@ -198,6 +237,9 @@ async def extract_video_knowledge(video_path: str) -> str:
         return json.dumps({"error": f"Video file not found at: {video_path}"})
 
     try:
+        # 1. Load models explicitly before processing
+        load_models()
+        
         processor = ServerSideProcessor(video_path=video_path)
         result_paths = await processor.run_pipeline()
         return json.dumps(result_paths)
@@ -206,6 +248,9 @@ async def extract_video_knowledge(video_path: str) -> str:
         import traceback
         traceback.print_exc(file=sys.stderr)
         return json.dumps({"error": str(e)})
+    finally:
+        # 2. Unload models to free GPU resources for other tasks (e.g. LLM)
+        unload_models()
 
 # =====================================================
 #  Server Execution

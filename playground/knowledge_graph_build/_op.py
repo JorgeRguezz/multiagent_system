@@ -300,73 +300,313 @@ async def _merge_edges_then_upsert(
 from ._llm import local_llm_batch_generate
 
 
-async def extract_entities(chunks: dict[str, TextChunkSchema], knowledge_graph_inst: BaseGraphStorage, entity_vdb: BaseVectorStorage, global_config: dict) -> Union[BaseGraphStorage, None]:
+async def extract_entities(chunks: dict[str, TextChunkSchema], knowledge_graph_inst: BaseGraphStorage, entity_vdb: BaseVectorStorage, global_config: dict, video_game_name: str= "League of Legends") -> Union[BaseGraphStorage, None]:
     """
-    Extracts entities and relationships from text chunks using a batched approach.
-    This function is refactored to collect all prompts and send them to the LLM
-    in a single, efficient batch call, avoiding concurrency issues with local models.
+    Extracts entities and relationships using a 3-stage Context-Aware Pipeline:
+    1. Global Game Context Analysis (Summary of the game).
+    2. Entity Extraction (conditioned on Game Context).
+    3. Relationship Extraction (conditioned on Game Context + Found Entities).
     """
     model_name = global_config["llm"]["best_model_name"]
-    
     ordered_chunks = list(chunks.items())
+    
+    # --- Step 1: Generate Global Game Context ---
+    logger.info("--- Step 1: Analyzing Game Context ---")
+    
+    
+    game_context_prompt = f"""### INSTRUCTION
+    You are a Context Generator for an Entity Extraction AI.
+    Your goal is to provide a **concise, keyword-focused summary** of the video game "{video_game_name}".
 
-    # 1. Prepare prompts for all chunks
-    entity_extract_prompt_template = PROMPTS["entity_extraction"]
+    The output will be used to help an AI understand proper nouns and specific terminology in text.
+    You must IGNORE release dates, developers, sales history, reviews, or graphical fidelity.
+
+    ### CONTENT REQUIREMENTS
+    Focus ONLY on these three categories:
+    1.  **Setting & Premise:** The fictional world, time period, and main conflict.
+    2.  **Key Factions & Figures:** Major protagonists, antagonists, and groups (e.g., "The Empire", "Mario", "Ganon").
+    3.  **Unique Vocabulary:** Specific names for currency, magic, items, or mechanics (e.g., "Rupees", "Mana", "Drifting", "Fatality").
+
+    ### FORMATTING RULES
+    - Keep the total output under 150 words.
+    - Use dense, informative sentences.
+    - Do not use bullet points; write as a cohesive summary paragraph.
+
+    ### EXAMPLE (Pac-Man)
+    Pac-Man is an arcade maze game set in a neon labyrinth. The protagonist, Pac-Man, must navigate the maze to eat dots and "Power Pellets" while avoiding four ghosts: Blinky, Pinky, Inky, and Clyde. Consuming a Power Pellet turns the ghosts blue, allowing Pac-Man to eat them for points. Fruit items occasionally appear as bonuses.
+
+    ### INPUT
+    Target Game: {video_game_name}
+
+    ### OUTPUT
+    """
+    
+    # Single call for context
+    game_context = await local_llm_batch_generate(model_name, [game_context_prompt])
+    game_context = game_context[0]
+    logger.info(f"Game Context Generated:\n{game_context[:200]}...")
+
+    # --- DEBUG PRINT 1: Game Context ---
+    print("\n" + "="*40)
+    print("DEBUG: LLM Response - Game Context")
+    print("="*40)
+    print(game_context)
+    print("="*40 + "\n")
+
+    # --- Step 2: Context-Aware Entity Extraction ---
+    logger.info("--- Step 2: Extracting Entities with Context ---")
+    
     context_base = dict(
         tuple_delimiter=PROMPTS["DEFAULT_TUPLE_DELIMITER"],
         record_delimiter=PROMPTS["DEFAULT_RECORD_DELIMITER"],
         completion_delimiter=PROMPTS["DEFAULT_COMPLETION_DELIMITER"],
         entity_types=",".join(PROMPTS["DEFAULT_ENTITY_TYPES"]),
     )
+
+    entity_prompt_template = """
+    ### INSTRUCTION
+    You are an expert entity extraction system for video games.
+    Your task is to identify entities in the input text that match specific types and the provided game context.
+
+    ### GAME CONTEXT
+    {game_context}
+
+    ### ENTITY TYPES
+    Only extract entities that fit into these categories:
+    [{entity_types}]
+
+    ### FORMATTING RULES
+    1. **Extraction:** For each entity, determine the Name, Type, and a brief Description based on the text and Game Context.
+    2. **Capitalization:** Always capitalize the Entity Name.
+    3. **Strict Constraints:**
+    - Do NOT output lists, bullet points, or numbering.
+    - Do NOT output the same entity twice.
+    - Output ONLY the formatted string.
+    4. **Structure:** Format every entity exactly like this:
+    ("entity"{tuple_delimiter}<Name>{tuple_delimiter}<Type>{tuple_delimiter}<Description>)
+    5. **Separation:** Separate every entity with: {record_delimiter}
+    6. **Completion:** When finished, output: {completion_delimiter}
+
+    ### EXAMPLES
+
+    --- Example 1: Mario Kart 8 Deluxe ---
+
+    **Game Context:**
+    Mario Kart 8 Deluxe is a kart racing game set in the whimsical Mushroom Kingdom. Key characters include Mario (balanced), Bowser (heavyweight), and Toad (lightweight). The gameplay focuses on chaotic racing on gravity-defying tracks. Mechanics include "Drifting" to gain speed boosts, using "Items" (like Shells and Bananas) found in Item Boxes to hinder opponents, and "Gliding" sections.
+
+    **Input Text:**
+    Yoshi was drifting tight around the corner of Toad Harbor, sparks flying from his tires. He was in second place, just behind Donkey Kong. Suddenly, Yoshi picked up a Red Shell from an item box. He threw it forward, hitting Donkey Kong and spinning him out, allowing Yoshi to take the lead just before the glide ramp.
+
+    **Output:**
+    ("entity"{tuple_delimiter}"Yoshi"{tuple_delimiter}"character"{tuple_delimiter}"Yoshi is a playable racer who utilizes drifting mechanics to maintain speed."){record_delimiter}
+    ("entity"{tuple_delimiter}"Toad Harbor"{tuple_delimiter}"location"{tuple_delimiter}"Toad Harbor is a race track setting within the Mushroom Kingdom."){record_delimiter}
+    ("entity"{tuple_delimiter}"Donkey Kong"{tuple_delimiter}"character"{tuple_delimiter}"Donkey Kong is a rival racer who is hit by an item and loses first place."){record_delimiter}
+    ("entity"{tuple_delimiter}"Red Shell"{tuple_delimiter}"item"{tuple_delimiter}"A Red Shell is an offensive item used to target and hit the racer in front."){record_delimiter}
+    ("entity"{tuple_delimiter}"Drifting"{tuple_delimiter}"mechanic"{tuple_delimiter}"Drifting is a driving technique used to navigate corners and generate sparks for speed."){record_delimiter}
+    ("entity"{tuple_delimiter}"Glide Ramp"{tuple_delimiter}"mechanic"{tuple_delimiter}"A Glide Ramp is a track feature that allows racers to fly through the air."){completion_delimiter}
+
+    --- Example 2: The Legend of Zelda: Breath of the Wild ---
+
+    **Game Context:**
+    An open-world action-adventure game set in a post-apocalyptic Hyrule. The protagonist, Link, wakes after 100 years to defeat Calamity Ganon. The world is vast, containing "Shrines" (puzzle rooms), "Towers," and dangerous wilderness. Key mechanics include climbing surfaces, cooking food for buffs, and using the "Sheikah Slate," a tablet that provides magical runes like Magnesis and Stasis.
+
+    **Input Text:**
+    Link crouched in the tall grass outside the Shrine of Resurrection, watching the Bokoblin camp below. He checked his Sheikah Slate and selected the Magnesis rune. Aiming carefully, he lifted a large metal crate and dropped it on the unsuspecting enemy. Afterwards, he gathered some Spicy Peppers to cook a meal for the cold journey ahead.
+
+    **Output:**
+    ("entity"{tuple_delimiter}"Link"{tuple_delimiter}"character"{tuple_delimiter}"Link is the main protagonist who uses stealth and technology to defeat enemies."){record_delimiter}
+    ("entity"{tuple_delimiter}"Shrine Of Resurrection"{tuple_delimiter}"location"{tuple_delimiter}"The Shrine of Resurrection is a specific location where Link begins his journey."){record_delimiter}
+    ("entity"{tuple_delimiter}"Bokoblin"{tuple_delimiter}"enemy"{tuple_delimiter}"A Bokoblin is a common enemy type found in camps across Hyrule."){record_delimiter}
+    ("entity"{tuple_delimiter}"Sheikah Slate"{tuple_delimiter}"technology"{tuple_delimiter}"The Sheikah Slate is a multi-purpose tablet device used to access runes."){record_delimiter}
+    ("entity"{tuple_delimiter}"Magnesis"{tuple_delimiter}"mechanic"{tuple_delimiter}"Magnesis is a rune ability that allows the manipulation of metal objects."){record_delimiter}
+    ("entity"{tuple_delimiter}"Spicy Peppers"{tuple_delimiter}"item"{tuple_delimiter}"Spicy Peppers are a resource ingredient used in cooking to provide cold resistance."){completion_delimiter}
+
+    ### TASK DATA
+
+    **Game Context:**
+    {game_context}
+
+    **Input Text:**
+    {input_text}
+
+    **Output:**
+    """
     
-    all_prompts = [
-        entity_extract_prompt_template.format(**context_base, input_text=chunk_dp["content"])
+    entity_prompts = [
+        entity_prompt_template.format(
+            game_context=game_context,
+            input_text=chunk_dp["content"],
+            **context_base
+        )
         for _, chunk_dp in ordered_chunks
     ]
+    
+    # Batch Call 1: Entities
+    raw_entity_results = await local_llm_batch_generate(model_name, entity_prompts)
 
-    # 2. Make a single batched call to the LLM
-    logger.info(f"Sending a batch of {len(all_prompts)} prompts to the LLM for entity extraction...")
-    all_llm_results = await local_llm_batch_generate(model_name, all_prompts)
-    logger.info("Batch processing complete.")
-
-    # 3. Process the results
+    # --- DEBUG PRINT 2: Entities ---
+    print("\n" + "="*40)
+    print("DEBUG: LLM Response - Entity Extraction (First 3)")
+    print("="*40)
+    for i, res in enumerate(raw_entity_results[:3]):
+        print(f"--- Entity Response {i+1} ---")
+        print(res)
+        print("---------------------------")
+    print("="*40 + "\n")
+    
+    # Parse Entities per chunk
+    chunk_entities_map = {} # chunk_key -> list of dict
     maybe_nodes = defaultdict(list)
-    maybe_edges = defaultdict(list)
-
-    for (chunk_key, _), final_result in zip(ordered_chunks, all_llm_results):
-        logger.info(f"LLM Output for chunk {chunk_key}:\n{final_result}\n---")
+    
+    for (chunk_key, _), result in zip(ordered_chunks, raw_entity_results):
+        chunk_entities = []
         records = split_string_by_multi_markers(
-            final_result,
+            result,
             [context_base["record_delimiter"], context_base["completion_delimiter"]],
         )
-
         for record in records:
             record_match = re.search(r"\((.*)\)", record)
-            if record_match is None:
-                continue
+            if record_match is None: continue
             
-            record_content = record_match.group(1)
-            record_attributes = split_string_by_multi_markers(
-                record_content, [context_base["tuple_delimiter"]]
+            attributes = split_string_by_multi_markers(
+                record_match.group(1), [context_base["tuple_delimiter"]]
             )
+            
+            entity_data = await _handle_single_entity_extraction(attributes, chunk_key)
+            if entity_data:
+                chunk_entities.append(entity_data)
+                maybe_nodes[entity_data["entity_name"]].append(entity_data)
+        
+        chunk_entities_map[chunk_key] = chunk_entities
 
-            if_entities = await _handle_single_entity_extraction(
-                record_attributes, chunk_key
-            )
-            if if_entities is not None:
-                maybe_nodes[if_entities["entity_name"]].append(if_entities)
-                continue
+    # --- Step 3: Context-Aware Relationship Extraction ---
+    logger.info("--- Step 3: Extracting Relationships with Context & Entities ---")
+    
+    relation_prompt_template = """
+    ### INSTRUCTION
+    You are an expert relationship extraction system for video games.
+    Your task is to identify relationships between valid entities within the input text based on the game context.
 
-            if_relation = await _handle_single_relationship_extraction(
-                record_attributes, chunk_key
+    ### GAME CONTEXT
+    {game_context}
+
+    ### VALID ENTITIES
+    You must ONLY use entities from this list as Source or Target:
+    [{entity_list_str}]
+
+    ### FORMATTING RULES
+    1. **Identification:** Find pairs of entities from the list that interact or are logically connected in the text.
+    2. **Direction:** Determine the Source (actor/owner) and Target (receiver/object).
+    3. **Scoring:** Assign a Relationship Strength (1-10):
+    - 1-4: Indirect or weak connection (e.g., in the same room).
+    - 5-7: Direct interaction (e.g., talking, observing).
+    - 8-10: Critical interaction (e.g., attacking, using item, distinct plot point).
+    4. **Constraints:**
+    - Do NOT create new entities. Use the exact spelling from the "Valid Entities" list.
+    - Do NOT output relationships if there is no evidence in the text.
+    - Output ONLY the formatted string.
+    5. **Structure:** Format every relationship exactly like this:
+    ("relationship"{tuple_delimiter}<Source_Entity>{tuple_delimiter}<Target_Entity>{tuple_delimiter}<Description>{tuple_delimiter}<Strength>)
+    6. **Separation:** Separate every relationship with: {record_delimiter}
+    7. **Completion:** When finished, output: {completion_delimiter}
+
+    ### EXAMPLES
+
+    --- Example 1: Mario Kart 8 Deluxe ---
+
+    **Valid Entities:**
+    ['Yoshi', 'Donkey Kong', 'Red Shell', 'Toad Harbor']
+
+    **Input Text:**
+    Yoshi was drifting tight around the corner of Toad Harbor. He picked up a Red Shell and threw it forward, hitting Donkey Kong and spinning him out.
+
+    **Output:**
+    ("relationship"{tuple_delimiter}"Yoshi"{tuple_delimiter}"Toad Harbor"{tuple_delimiter}"Yoshi is racing on the track Toad Harbor."{tuple_delimiter}5){record_delimiter}
+    ("relationship"{tuple_delimiter}"Yoshi"{tuple_delimiter}"Red Shell"{tuple_delimiter}"Yoshi picks up and uses the Red Shell as a weapon."{tuple_delimiter}9){record_delimiter}
+    ("relationship"{tuple_delimiter}"Red Shell"{tuple_delimiter}"Donkey Kong"{tuple_delimiter}"The Red Shell physically hits Donkey Kong, causing him to spin out."{tuple_delimiter}10){record_delimiter}
+    ("relationship"{tuple_delimiter}"Yoshi"{tuple_delimiter}"Donkey Kong"{tuple_delimiter}"Yoshi attacks Donkey Kong to overtake him in the race."{tuple_delimiter}8){completion_delimiter}
+
+    --- Example 2: The Legend of Zelda: Breath of the Wild ---
+
+    **Valid Entities:**
+    ['Link', 'Magnesis', 'Metal Crate', 'Bokoblin', 'Sheikah Slate']
+
+    **Input Text:**
+    Link checked his Sheikah Slate and selected the Magnesis rune. Aiming carefully, he lifted a large Metal Crate and dropped it on the unsuspecting Bokoblin.
+
+    **Output:**
+    ("relationship"{tuple_delimiter}"Link"{tuple_delimiter}"Sheikah Slate"{tuple_delimiter}"Link uses the Sheikah Slate to access his abilities."{tuple_delimiter}7){record_delimiter}
+    ("relationship"{tuple_delimiter}"Sheikah Slate"{tuple_delimiter}"Magnesis"{tuple_delimiter}"The Sheikah Slate provides the Magnesis rune ability."{tuple_delimiter}9){record_delimiter}
+    ("relationship"{tuple_delimiter}"Link"{tuple_delimiter}"Magnesis"{tuple_delimiter}"Link activates Magnesis to manipulate the environment."{tuple_delimiter}8){record_delimiter}
+    ("relationship"{tuple_delimiter}"Magnesis"{tuple_delimiter}"Metal Crate"{tuple_delimiter}"Magnesis is used to lift and move the Metal Crate."{tuple_delimiter}9){record_delimiter}
+    ("relationship"{tuple_delimiter}"Metal Crate"{tuple_delimiter}"Bokoblin"{tuple_delimiter}"The Metal Crate is used as a weapon to crush the Bokoblin."{tuple_delimiter}10){record_delimiter}
+    ("relationship"{tuple_delimiter}"Link"{tuple_delimiter}"Bokoblin"{tuple_delimiter}"Link attacks the Bokoblin using the environment."{tuple_delimiter}8){completion_delimiter}
+
+    ### TASK DATA
+
+    **Valid Entities:**
+    [{entity_list_str}]
+
+    **Input Text:**
+    {input_text}
+
+    **Output:**
+    """
+    
+    relation_prompts = []
+    for chunk_key, chunk_dp in ordered_chunks:
+        found_entities = chunk_entities_map.get(chunk_key, [])
+        if not found_entities:
+            # If no entities, skip or send empty list prompt (LLM might find new ones or fail, better to skip relation extraction if no nodes)
+            # But to keep batch alignment, we send a dummy prompt or a valid one with empty list.
+            entity_list_str = "None identified."
+        else:
+            entity_list_str = ", ".join([e['entity_name'] for e in found_entities])
+            
+        relation_prompts.append(
+            relation_prompt_template.format(
+                game_context=game_context,
+                entity_list_str=entity_list_str,
+                input_text=chunk_dp["content"],
+                **context_base
             )
-            if if_relation is not None:
-                # Ensure undirected graph by sorting the tuple
-                maybe_edges[tuple(sorted((if_relation["src_id"], if_relation["tgt_id"])))].append(
-                    if_relation
+        )
+
+    # Batch Call 2: Relationships
+    raw_relation_results = await local_llm_batch_generate(model_name, relation_prompts)
+
+    # --- DEBUG PRINT 3: Relationships ---
+    print("\n" + "="*40)
+    print("DEBUG: LLM Response - Relationship Extraction (First 3)")
+    print("="*40)
+    for i, res in enumerate(raw_relation_results[:3]):
+        print(f"--- Relation Response {i+1} ---")
+        print(res)
+        print("---------------------------")
+    print("="*40 + "\n")
+    
+    maybe_edges = defaultdict(list)
+    
+    for (chunk_key, _), result in zip(ordered_chunks, raw_relation_results):
+        records = split_string_by_multi_markers(
+            result,
+            [context_base["record_delimiter"], context_base["completion_delimiter"]],
+        )
+        for record in records:
+            record_match = re.search(r"\((.*)\)", record)
+            if record_match is None: continue
+            
+            attributes = split_string_by_multi_markers(
+                record_match.group(1), [context_base["tuple_delimiter"]]
+            )
+            
+            relation_data = await _handle_single_relationship_extraction(attributes, chunk_key)
+            if relation_data:
+                 maybe_edges[tuple(sorted((relation_data["src_id"], relation_data["tgt_id"])))].append(
+                    relation_data
                 )
 
-    # 4. Merge and upsert nodes and edges (same as before)
+    # --- Step 4: Merge & Upsert (Existing Logic) ---
     logger.info(f"Extracted {len(maybe_nodes)} unique entities and {len(maybe_edges)} unique relationships.")
     
     all_entities_data = await asyncio.gather(
