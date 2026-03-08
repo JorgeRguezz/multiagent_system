@@ -1,0 +1,2573 @@
+{
+  "directed": false,
+  "multigraph": false,
+  "graph": {
+    "node_default": {},
+    "edge_default": {}
+  },
+  "nodes": [
+    {
+      "entity_type": "\"PERSON\"",
+      "description": "\"Ari is a champion character described as a Bastaya of Nine Tails, known for her ice fox heritage and mystical, nature-based abilities.\"<SEP>\"Ari is a character positioned high on a tree branch in the mystical forest of Omikai Alan, using a bow and later casting a powerful blue spell.\"<SEP>\"Ari is a fox‑like champion who experiences a transformative moment in a dense forest, holding a glowing green‑lit flower that symbolizes memory consumption and emotional change.\"<SEP>\"Ari is the main playable champion navigating a mystical forest and later a bustling town marketplace, interacting with various guardians and gathering information about Ymelo stones.\"<SEP>\"Ari is the player’s character who holds a glowing orb and performs a sustained magical ritual involving Ymelo stones.\"",
+      "source_id": "chunk-384453835cabf302cc1866f083c441b8<SEP>chunk-5369aae6f52fc67ffbf63b3db7c1e061<SEP>chunk-0faee823efab3399ac6507a90b21a27c<SEP>chunk-3dba909d410645c865e1539e1cd713d6<SEP>chunk-2e403ab6dfb1007767efd391cca7a115",
+      "id": "\"ARI\""
+    },
+    {
+      "entity_type": "\"ORGANIZATION\"",
+      "description": "\"Bastaya refers to a race or group of champions, including Ari, characterized by unique traits and cultural significance within the game world.\"",
+      "source_id": "chunk-2e403ab6dfb1007767efd391cca7a115",
+      "id": "\"BASTAYA\""
+    },
+    {
+      "entity_type": "\"GEO\"",
+      "description": "\"Nine Tails is a descriptor indicating Ari's lineage or the number of tails she possesses, signifying her unique identity.\"",
+      "source_id": "chunk-2e403ab6dfb1007767efd391cca7a115",
+      "id": "\"NINE TAILS\""
+    },
+    {
+      "entity_type": "\"GEO\"",
+      "description": "\"Sean is a geographic location mentioned as the northern region where Ari's memories involve running with ice foxes.\"",
+      "source_id": "chunk-2e403ab6dfb1007767efd391cca7a115",
+      "id": "\"SEAN\""
+    },
+    {
+      "entity_type": "\"GEO\"",
+      "description": "\"Honía is a snowy region described as the coldest area in the game world, associated with ice foxes and environmental features.\"",
+      "source_id": "chunk-2e403ab6dfb1007767efd391cca7a115",
+      "id": "\"HONÍA\""
+    },
+    {
+      "entity_type": "\"PERSON\"",
+      "description": "\"Ice Fox is a creature companion to Ari, depicted as a massive, icy creature that her champion rides or interacts with in snowy landscapes.\"",
+      "source_id": "chunk-2e403ab6dfb1007767efd391cca7a115",
+      "id": "\"ICE FOX\""
+    },
+    {
+      "description": [
+        "\"Champion is a character who manipulates ice and channels a blue, dragon‑like spirit.\"",
+        "\"Champion refers to Smolder, the main character in the described scenario.\""
+      ],
+      "entity_type": "\"PERSON\"",
+      "source_id": [
+        "chunk-0faee823efab3399ac6507a90b21a27c",
+        "chunk-921a2c333f18b12f26287e340c8ea6a8"
+      ],
+      "id": "\"CHAMPION\""
+    },
+    {
+      "entity_type": "\"GEO\"",
+      "description": "\"Ice‑Covered Branches are locations within the gameplay segment where the champion focuses her ice manipulation.\"",
+      "source_id": "chunk-0faee823efab3399ac6507a90b21a27c",
+      "id": "\"ICE‑COVERED BRANCHES\""
+    },
+    {
+      "entity_type": "\"GEO\"",
+      "description": "\"Red Berries are items found on the ice‑covered branches that are highlighted during the champion's actions.\"",
+      "source_id": "chunk-0faee823efab3399ac6507a90b21a27c",
+      "id": "\"RED BERRIES\""
+    },
+    {
+      "entity_type": "\"PERSON\"",
+      "description": "\"Blue Spirit is a glowing, dragon‑like entity that the champion channels and feeds into her power.\"",
+      "source_id": "chunk-0faee823efab3399ac6507a90b21a27c",
+      "id": "\"BLUE SPIRIT\""
+    },
+    {
+      "entity_type": "\"PERSON\"",
+      "description": "\"Horned Creature is a menacing, horned entity with glowing eyes that confronts the champion.\"",
+      "source_id": "chunk-0faee823efab3399ac6507a90b21a27c",
+      "id": "\"HORNED CREATURE\""
+    },
+    {
+      "entity_type": "\"PERSON\"",
+      "description": "\"Child is a young figure seen in a field of red flowers, representing a reflective interlude after the encounter.\"",
+      "source_id": "chunk-0faee823efab3399ac6507a90b21a27c",
+      "id": "\"CHILD\""
+    },
+    {
+      "entity_type": "\"PERSON\"",
+      "description": "\"Adult is a background figure seen with the child, suggesting a pause or reflection.\"",
+      "source_id": "chunk-0faee823efab3399ac6507a90b21a27c",
+      "id": "\"ADULT\""
+    },
+    {
+      "entity_type": "\"GEO\"",
+      "description": "\"Omikai Alan is a mystical forest environment where Ari observes, moves, interacts with a winged guardian, and confronts a glowing wolf-like creature, serving as the setting for Ari's early encounters.\"<SEP>\"Omikai Alan is a mystical forest where Ari is positioned and where she encounters enemies and guardians.\"",
+      "source_id": "chunk-384453835cabf302cc1866f083c441b8<SEP>chunk-0faee823efab3399ac6507a90b21a27c",
+      "id": "\"OMIKAI ALAN\""
+    },
+    {
+      "entity_type": "\"PERSON\"",
+      "description": "\"Bow is a weapon Ari holds, poised to shoot an arrow at the approaching foes.\"",
+      "source_id": "chunk-0faee823efab3399ac6507a90b21a27c",
+      "id": "\"BOW\""
+    },
+    {
+      "entity_type": "\"PERSON\"",
+      "description": "\"Blue Magic — a bright blue glow that Ari raises to prepare a high‑intensity spell.\"",
+      "source_id": "chunk-0faee823efab3399ac6507a90b21a27c",
+      "id": "\"BLUE MAGIC\""
+    },
+    {
+      "entity_type": "\"PERSON\"",
+      "description": "\"Spell — the blue aura that Ari creates and expands to strike unseen enemies and is released later.\"",
+      "source_id": "chunk-0faee823efab3399ac6507a90b21a27c",
+      "id": "\"SPELL\""
+    },
+    {
+      "entity_type": "\"PERSON\"",
+      "description": "\"Sinen Milcolas is a semi‑god guardian of the forest, depicted as a large glowing wolf‑like creature emitting blue energy, protecting the forest and its mystical elements.\"",
+      "source_id": "chunk-384453835cabf302cc1866f083c441b8",
+      "id": "\"SINEN MILCOLAS\""
+    },
+    {
+      "entity_type": "\"PERSON\"",
+      "description": "\"Girín attempts to attack Ari with poison, aiming to sell one of his tails, but is ultimately defeated by Ari.\"<SEP>\"Girín is a character Ari meets in the town marketplace, who provides information about Ymelo stones, aiding Ari's quest for magical artifacts.\"",
+      "source_id": "chunk-5369aae6f52fc67ffbf63b3db7c1e061<SEP>chunk-384453835cabf302cc1866f083c441b8",
+      "id": "\"GIRÍN\""
+    },
+    {
+      "entity_type": "\"EVENT\"",
+      "description": "\"Ymelo Stones are mystical solar stones discussed by Girín, significant to Ari's quest and linked to the magical symbol seen in the marketplace.\"<SEP>\"Ymelo stones are magical items used by Ari in the ritual, referenced as a source of power and as a stone sold in a tavern.\"",
+      "source_id": "chunk-5369aae6f52fc67ffbf63b3db7c1e061<SEP>chunk-384453835cabf302cc1866f083c441b8",
+      "id": "\"YMELO STONES\""
+    },
+    {
+      "entity_type": "\"PERSON\"",
+      "description": "\"Harry is a champion shown in a tranquil enchanted forest, focusing on a glowing orb and swirling magical symbols, reflecting on painful memories.\"",
+      "source_id": "chunk-5369aae6f52fc67ffbf63b3db7c1e061",
+      "id": "\"HARRY\""
+    },
+    {
+      "entity_type": "\"GEO\"",
+      "description": "\"The jardín de lo olvido is a tranquil enchanted forest where Harry goes to confront and release memories of a deceased lover.\"",
+      "source_id": "chunk-5369aae6f52fc67ffbf63b3db7c1e061",
+      "id": "\"JARDÍN DE LO OLVIDO\""
+    },
+    {
+      "entity_type": "\"PERSON\"",
+      "description": "\"Ali is a traveler who continues his journey under the name Imelo, carrying the memory of a stone in mind.\"",
+      "source_id": "chunk-5369aae6f52fc67ffbf63b3db7c1e061",
+      "id": "\"ALI\""
+    },
+    {
+      "entity_type": "\"OBJECT\"",
+      "description": "\"The glowing, green‑lit flower is a key visual element in the scene, representing transformation or memory consumption for Ari.\"",
+      "source_id": "chunk-3dba909d410645c865e1539e1cd713d6",
+      "id": "\"GLOWING, GREEN‑LIT FLOWER\""
+    },
+    {
+      "entity_type": "\"LOCATION\"",
+      "description": "\"The graveyard is a setting with stone steps, a statue, overgrown vegetation, and bright red flowers, reflecting Ari’s struggle to escape memories and the consequences of past actions.\"",
+      "source_id": "chunk-3dba909d410645c865e1539e1cd713d6",
+      "id": "\"GRAVEYARD\""
+    },
+    {
+      "description": [
+        "\"Yasuo is a champion in a defensive stance, aligned with Ahri, preparing for an upcoming fight.\"<SEP>\"Yasuo is a champion who appears in the narrative, questioning the need for a bodyguard and interacting with the protagonist about hiring him.\"",
+        "\"Yasuo is an enemy champion in the bot lane who is targeted by S’molder's Q and R abilities, ultimately dying in a team fight.\"<SEP>\"Yasuo is an enemy champion present in the bottom lane team fight, opposing Smolder and other allied champions.\""
+      ],
+      "entity_type": "\"PERSON\"",
+      "source_id": [
+        "chunk-726dd0c8af60735dae395e0a2512fd55<SEP>chunk-3dba909d410645c865e1539e1cd713d6",
+        "chunk-5df652d0714d2857af1e3e898b9f2fd6<SEP>chunk-e3b7da4bd1ce9d33975f0aad5df36196"
+      ],
+      "id": "\"YASUO\""
+    },
+    {
+      "entity_type": "\"PERSON\"",
+      "description": "\"Karma is a champion who dominates the early fight using Essence Theft and Ignite, dealing significant damage and draining health from nearby minions and champions.\"",
+      "source_id": "chunk-726dd0c8af60735dae395e0a2512fd55",
+      "id": "\"KARMA\""
+    },
+    {
+      "description": [
+        "\"Arya is a player who grips a glowing blue object, likely an ability or item used to counter a massive creature, preparing for combat.\"",
+        "\"Arya is a champion character in the game, referenced as a subject for coaching services.\""
+      ],
+      "entity_type": "\"PERSON\"",
+      "source_id": [
+        "chunk-726dd0c8af60735dae395e0a2512fd55",
+        "chunk-953b9aee22e2a1b84ad1a1cbfdbb365d"
+      ],
+      "id": "\"ARYA\""
+    },
+    {
+      "description": [
+        "\"Ahri is a champion in the game League of Legends, depicted exploring a jungle environment, using abilities, and engaging in strategic positioning.\"<SEP>\"Ahri is a champion in the game who experiences inner turmoil and must control her powers during a tense duel.\"<SEP>\"Ahri is a champion positioned on a wooden platform, aligned with Yasuo, in a defensive stance, ready to coordinate or move together.\"<SEP>\"Ahri is a nine‑tail fox champion known for manipulating memories and reality, depicted walking through a mystical forest in the clip.\"",
+        "We need to produce comprehensive description of Ahri. Concatenate all descriptions, resolve contradictions, third person. Provide entity names.\n\nLet's produce summary: Ahri is a 9-level? Actually levels vary. We can state she is a mage champion known as the Fox Spirit, etc. Provide general description: mid lane or bottom lane. Provide abilities: Spirit Rush, Charm, etc. Provide build: Luden's Echo, Zhonya's Hourglass, Rabadon's Deathcap. Provide typical playstyle: engages, applies pressure, uses ultimate. Provide level ranges. Provide mention of being Eternal Hero. Provide mention of channeling ultimate.\n\nLet's produce coherent summary.<|end|><|start|>assistant<|channel|>final|> Ahri, known in League of Legends as the **Fox‑Spirit** and often called the “Eternal Hero,” is a **mid‑lane mage** whose playstyle focuses on burst damage, mobility, and crowd‑control.  In the early game she typically establishes herself in the middle lane, using her **Charm (Q)** to lock down a single target, followed by **Essence Theft (W)** to sustain herself and then **Spirit Rush (R)** to either chase, escape, or set up a team fight.  Her kit is built around high burst magic damage and the ability to reposition quickly, making her a frequent pick for players who enjoy a “hit‑and‑run” style of combat.\n\nTypical item builds for Ahri include **Luden’s Echo** or **Rabadon’s Deathcap** for raw damage, **Zhonya’s Hourglass** for survivability, and **Riot’s Resolve** or **Morellonomicon** when facing heavy crowd‑control or healing.  Boots are usually **Plated Steelcaps** or **Ionian Boots of Lucidity** depending on the enemy team composition.\n\nThroughout the game, Ahri is known for:\n- **Engaging** aggressively in the mid‑lane or, on occasion, in the bottom lane during early skirmishes.\n- Using **Spirit Rush** to create distance, chase down key targets, or disengage from danger.\n- Applying constant pressure on the enemy team, often forcing the opposing side to respond or risk losing objectives.\n- Capitalizing on high‑level opportunities (e.g., levels 11–16) to **destroy turrets**, **kill enemy champions**, and **secure inhibitors**.\n\nHer ultimate, **Spirit Rush**, is a powerful, high‑"
+      ],
+      "entity_type": "\"PERSON\"",
+      "source_id": [
+        "chunk-726dd0c8af60735dae395e0a2512fd55<SEP>chunk-d2d05bcd1ec590f77890a543d174bb6d<SEP>chunk-8377f8fa8c8920a4f1c1486212346024<SEP>chunk-0e6c127c10fb89705812a342908329d8",
+        "chunk-791d3fb02596d8ddb511354fbec9341f<SEP>chunk-cbe08d93d9eaa38f66f60a865fd58f2f<SEP>chunk-e7a9ac28f921cd6d848bb8b8410c429c<SEP>chunk-997d95dbdb8840540c33069e74ffe0ce<SEP>chunk-e095614c66786b44e85c903db324d2eb<SEP>chunk-54a6f8ba3aa2145b8ba6ba20249682e1<SEP>chunk-971b1c301f9b1d04b8bfcff2de204430<SEP>chunk-0b22f6ec63cfca9b8465893ca0119cc0<SEP>chunk-5c40e6b373211082863b6adfadfbb910<SEP>chunk-df231031873dcc5add5b5640412bd723<SEP>chunk-d17d2ebbc3a40b6ba39d37a7b89f003c<SEP>chunk-766683e031208fd1d376543ecbbaf0c0<SEP>chunk-50e5f3799024f122b368387f1b3cc171<SEP>chunk-127edeb91b48f1fe0ba1ffce2f11202c<SEP>chunk-dd5f34c12cb9551bd43f628eeab5e4b0<SEP>chunk-a97ca96b821a76d5444998f5d238857e<SEP>chunk-9075c07f19742a09b3ad74a010af53ca<SEP>chunk-9de993ea4d2737c78e4581b4f330ff47<SEP>chunk-ca45e459def78a35a02aa8dfd32f62f6<SEP>chunk-5418d6b0956d9698de0cc256bc7a6ed1"
+      ],
+      "id": "\"AHRI\""
+    },
+    {
+      "entity_type": "\"PERSON\"",
+      "description": "\"Gunplank is a champion who appears later, holding a weapon and looking alert, ready to join the upcoming fight or make a tactical decision.\"",
+      "source_id": "chunk-726dd0c8af60735dae395e0a2512fd55",
+      "id": "\"GUNPLANK\""
+    },
+    {
+      "entity_type": "\"PERSON\"",
+      "description": "\"Madokai is a threat or objective that the team is preparing to face, mentioned as a potential opponent.\"",
+      "source_id": "chunk-726dd0c8af60735dae395e0a2512fd55",
+      "id": "\"MADOKAI\""
+    },
+    {
+      "description": "<entity_description>",
+      "entity_type": "<ENTITY_TYPE>",
+      "source_id": [
+        "chunk-a56c4818476bcdea47ba1d588f35d67c",
+        "chunk-a97ca96b821a76d5444998f5d238857e"
+      ],
+      "id": "<ENTITY_NAME>"
+    },
+    {
+      "entity_type": "\"PERSON\"",
+      "description": "\"Arife is a champion who confronts a shadowy figure, navigates underwater turmoil, and casts a powerful spell using memories.\"",
+      "source_id": "chunk-8377f8fa8c8920a4f1c1486212346024",
+      "id": "\"ARIFE\""
+    },
+    {
+      "entity_type": "\"PERSON\"",
+      "description": "\"Tathresh is a champion who fights alongside Arife against Gunplaán.\"",
+      "source_id": "chunk-8377f8fa8c8920a4f1c1486212346024",
+      "id": "\"TATHRESH\""
+    },
+    {
+      "entity_type": "\"PERSON\"",
+      "description": "\"Gunplaán is a champion possessed by the king Arruinado, opposing Arife and Tathresh.\"",
+      "source_id": "chunk-8377f8fa8c8920a4f1c1486212346024",
+      "id": "\"GUNPLAÁN\""
+    },
+    {
+      "entity_type": "\"PERSON\"",
+      "description": "\"King Arruinado is a shadowy figure who possesses Gunplaán and threatens to attack with muddy waters.\"",
+      "source_id": "chunk-8377f8fa8c8920a4f1c1486212346024",
+      "id": "\"KING ARRUINADO\""
+    },
+    {
+      "description": [
+        "\"Viego is a champion whose memories are used by Arife to empower her spell and ultimately defeat him.\"",
+        "\"Viego is a fiery champion seen near the lane, potentially helping push the wave.\""
+      ],
+      "entity_type": "\"PERSON\"",
+      "source_id": [
+        "chunk-8377f8fa8c8920a4f1c1486212346024",
+        "chunk-d3fc44abada49d7cd74346e3bacb4252"
+      ],
+      "id": "\"VIEGO\""
+    },
+    {
+      "entity_type": "\"EVENT\"",
+      "description": "\"The event describes Arife casting a powerful spell that uses Viego’s memories to defeat him.\"",
+      "source_id": "chunk-8377f8fa8c8920a4f1c1486212346024",
+      "id": "\"ARIFE’S EMPOWERED SPELL‑CASTING SEQUENCE\""
+    },
+    {
+      "entity_type": "\"EVENT\"",
+      "description": "\"The event summarizes the gameplay moments involving Ahri and Arife, highlighting emotional and tactical beats.\"",
+      "source_id": "chunk-8377f8fa8c8920a4f1c1486212346024",
+      "id": "\"GAMEPLAY‑STYLE RECAP OF THE CLIP\""
+    },
+    {
+      "entity_type": "\"PERSON\"",
+      "description": "\"Braum is a champion who sits in a tavern, has a glowing armored hand, and is known for his protective gestures.\"",
+      "source_id": "chunk-c7343d69d5361334cb6bc5fa9f032df2",
+      "id": "\"BRAUM\""
+    },
+    {
+      "entity_type": "\"PERSON\"",
+      "description": "\"Maokai is a champion who observes the map, has a glowing blue eye, and engages in strategic planning.\"",
+      "source_id": "chunk-c7343d69d5361334cb6bc5fa9f032df2",
+      "id": "\"MAOKAI\""
+    },
+    {
+      "entity_type": "\"PERSON\"",
+      "description": "\"Hecarim is a champion who interacts with Maokai, exchanging glowing blue effects that suggest information or power transfer.\"",
+      "source_id": "chunk-c7343d69d5361334cb6bc5fa9f032df2",
+      "id": "\"HECARIM\""
+    },
+    {
+      "entity_type": "\"GEO\"",
+      "description": "\"The Tavern is a cozy location where champions gather, discuss plans, and acknowledge each other's worth.\"",
+      "source_id": "chunk-c7343d69d5361334cb6bc5fa9f032df2",
+      "id": "\"THE TAVERN\""
+    },
+    {
+      "entity_type": "\"GEO\"",
+      "description": "\"The Map is a panoramic view of the game world, featuring lush mountains, forests, and a central jungle area.\"",
+      "source_id": "chunk-c7343d69d5361334cb6bc5fa9f032df2",
+      "id": "\"THE MAP\""
+    },
+    {
+      "entity_type": "\"GEO\"",
+      "description": "\"The Rift is a game‑world location that’s part of the League of Legends universe.\"",
+      "source_id": "chunk-c7343d69d5361334cb6bc5fa9f032df2",
+      "id": "\"THE RIFT\""
+    },
+    {
+      "entity_type": "\"PERSON\"",
+      "description": "\"Ahrī is a female champion with long blonde hair, a mage-like character who holds a staff topped with a blue orb, and is central to the narrative text describing her feelings, connection to a spirit world, and her pack.\"",
+      "source_id": "chunk-63d31af389b05ace19fe8249375a5fbc",
+      "id": "\"AHRĪ\""
+    },
+    {
+      "entity_type": "\"ORGANIZATION\"",
+      "description": "\"Turret‑like robot is a mechanical sentinel with glowing blue eyes, serving a defensive or observational role in the game, and is featured in the frame as a guardian.\"",
+      "source_id": "chunk-63d31af389b05ace19fe8249375a5fbc",
+      "id": "\"TURRET‑LIKE ROBOT\""
+    },
+    {
+      "entity_type": "\"EVENT\"",
+      "description": "\"Garden of Forgotten Things, also known as the jardín de lo olvido, is a setting within the champion story format, representing a location or event where the champion’s journey unfolds.\"",
+      "source_id": "chunk-63d31af389b05ace19fe8249375a5fbc",
+      "id": "\"GARDEN OF FORGOTTEN THINGS\""
+    },
+    {
+      "entity_type": "\"GEO\"",
+      "description": "\"The mystical forest is a dream‑like, luminescent environment where Ahri wanders, featuring tall twisted trees, glowing vines, and a glowing energy that surrounds her.\"",
+      "source_id": "chunk-0e6c127c10fb89705812a342908329d8",
+      "id": "\"MYSTICAL FOREST\""
+    },
+    {
+      "entity_type": "\"GEO\"",
+      "description": "\"Glowing energy refers to the faint, luminous aura that surrounds Ahri, hinting at her ability to manipulate memories and reality within the forest.\"",
+      "source_id": "chunk-0e6c127c10fb89705812a342908329d8",
+      "id": "\"GLOWING ENERGY\""
+    },
+    {
+      "entity_type": "\"ORGANIZATION\"",
+      "description": "\"Riot is the developer and publisher of League of Legends, responsible for creating and maintaining the game and its characters.\"",
+      "source_id": "chunk-d2d05bcd1ec590f77890a543d174bb6d",
+      "id": "\"RIOT\""
+    },
+    {
+      "entity_type": "\"GEO\"",
+      "description": "\"Jungle is a dense forest area within the game where Ahri navigates, explores, and encounters various challenges.\"",
+      "source_id": "chunk-d2d05bcd1ec590f77890a543d174bb6d",
+      "id": "\"JUNGLE\""
+    },
+    {
+      "entity_type": "\"PERSON\"",
+      "description": "\"Ari Bossque Viejo is a champion character in League of Legends, depicted with fox-like ears, purple eyes, and a pink‑and‑white color scheme, showcased in a cinematic promotional video.\"",
+      "source_id": "chunk-10fe0e28e96ec1021e96b83bf4fe6b1f",
+      "id": "\"ARI BOSSQUE VIEJO\""
+    },
+    {
+      "entity_type": "\"ORGANIZATION\"",
+      "description": "\"League of Legends is a popular online multiplayer game developed by Riot Games, serving as the platform where the champion Ari Bossque Viejo appears.\"<SEP>\"League of Legends is a popular online multiplayer game featuring champions, teams, and competitive play.\"",
+      "source_id": "chunk-10fe0e28e96ec1021e96b83bf4fe6b1f<SEP>chunk-a5910213a3de1a7ae5964b2c93d215c0",
+      "id": "\"LEAGUE OF LEGENDS\""
+    },
+    {
+      "entity_type": "\"ORGANIZATION\"",
+      "description": "\"Riot Games is the developer and publisher of League of Legends, responsible for creating and promoting champions such as Ari Bossque Viejo.\"",
+      "source_id": "chunk-10fe0e28e96ec1021e96b83bf4fe6b1f",
+      "id": "\"RIOT GAMES\""
+    },
+    {
+      "entity_type": "\"GEO\"",
+      "description": "\"Kpop refers to Korean pop music, mentioned in the transcript as a cultural influence associated with the champion's skins.\"",
+      "source_id": "chunk-10fe0e28e96ec1021e96b83bf4fe6b1f",
+      "id": "\"KPOP\""
+    },
+    {
+      "entity_type": "\"PERSON\"",
+      "description": "\"Chaya is a champion character in League of Legends, known for her magical abilities and lore.\"",
+      "source_id": "chunk-a5910213a3de1a7ae5964b2c93d215c0",
+      "id": "\"CHAYA\""
+    },
+    {
+      "source_id": "chunk-5369aae6f52fc67ffbf63b3db7c1e061",
+      "description": "9",
+      "entity_type": "\"UNKNOWN\"",
+      "id": "\"ARI USES YMELO STONES IN A MAGICAL RITUAL, INDICATING A DIRECT INTERACTION AND RELIANCE ON THESE STONES FOR POWER.\""
+    },
+    {
+      "source_id": "chunk-5369aae6f52fc67ffbf63b3db7c1e061",
+      "description": "9",
+      "entity_type": "\"UNKNOWN\"",
+      "id": "\"ARI\"<|\"YMELO STONES\""
+    },
+    {
+      "source_id": "chunk-5369aae6f52fc67ffbf63b3db7c1e061",
+      "description": "8",
+      "entity_type": "\"UNKNOWN\"",
+      "id": "\"GIRÍN ATTACKS ARI WITH POISON, BUT ARI ESCAPES AND DEFEATS GIRÍN, SHOWING A CONFLICT AND SUBSEQUENT VICTORY.\""
+    },
+    {
+      "source_id": "chunk-5369aae6f52fc67ffbf63b3db7c1e061",
+      "description": "8",
+      "entity_type": "\"UNKNOWN\"",
+      "id": "\"GIRÍN\"<|\"ARI\""
+    },
+    {
+      "source_id": "chunk-5369aae6f52fc67ffbf63b3db7c1e061",
+      "description": "9",
+      "entity_type": "\"UNKNOWN\"",
+      "id": "\"HARRY VISITS THE JARDÍN DE LO OLVIDO TO CONFRONT AND RELEASE MEMORIES, INDICATING A PURPOSEFUL RELATIONSHIP BETWEEN THE CHARACTER AND THE LOCATION.\""
+    },
+    {
+      "source_id": "chunk-5369aae6f52fc67ffbf63b3db7c1e061",
+      "description": "9",
+      "entity_type": "\"UNKNOWN\"",
+      "id": "\"HARRY\"<|\"JARDÍN DE LO OLVIDO\""
+    },
+    {
+      "source_id": "chunk-5369aae6f52fc67ffbf63b3db7c1e061",
+      "description": "7",
+      "entity_type": "\"UNKNOWN\"",
+      "id": "\"ALI\"<|\"JARDÍN DE LO OLVIDO\""
+    },
+    {
+      "source_id": "chunk-5369aae6f52fc67ffbf63b3db7c1e061",
+      "description": "7",
+      "entity_type": "\"UNKNOWN\"",
+      "id": "\"ALI’S JOURNEY LEADS HIM TO THE JARDÍN DE LO OLVIDO, SUGGESTING A CONNECTION BETWEEN THE TRAVELER AND THE ENCHANTED FOREST.\""
+    },
+    {
+      "entity_type": "\"EVENT\"",
+      "description": "\"Smolder Starter Guide is a guide video that provides a concise summary of key events and actions for Smolder, including his preparation to move, engagement with an opposing champion near a turret, and the use of a fiery ability.\"",
+      "source_id": "chunk-38f6b17996dfa4f0725931853356e5c7",
+      "id": "\"SMOLDER STARTER GUIDE\""
+    },
+    {
+      "entity_type": "\"EVENT\"",
+      "description": "\"Master in Minutes is a collection of guides for various aspects of the game, including trading, wave control, CS, macro, hotkeys, jungle clearing, and more.\"",
+      "source_id": "chunk-38f6b17996dfa4f0725931853356e5c7",
+      "id": "\"MASTER IN MINUTES\""
+    },
+    {
+      "entity_type": "\"PERSON\"",
+      "description": "\"Ezreal is referenced as a similar champion to Smolder, indicating a comparable playstyle of a caster ADC.\"",
+      "source_id": "chunk-3c2817e67c2a0f4eba0e8992bca8e29b",
+      "id": "\"EZREAL\""
+    },
+    {
+      "entity_type": "\"PERSON\"",
+      "description": "\"Lux is a teammate of Smolder, supporting him in lane battles.\"",
+      "source_id": "chunk-3c2817e67c2a0f4eba0e8992bca8e29b",
+      "id": "\"LUX\""
+    },
+    {
+      "entity_type": "\"PERSON\"",
+      "description": "\"Irelia is an enemy champion who is killed by Smolder during a team fight.\"",
+      "source_id": "chunk-3c2817e67c2a0f4eba0e8992bca8e29b",
+      "id": "\"IRELIA\""
+    },
+    {
+      "entity_type": "\"PERSON\"",
+      "description": "\"Fizz is a teammate of Smolder, contributing to the team’s offensive efforts.\"",
+      "source_id": "chunk-3c2817e67c2a0f4eba0e8992bca8e29b",
+      "id": "\"FIZZ\""
+    },
+    {
+      "entity_type": "\"PERSON\"",
+      "description": "\"Kayn is a teammate of Smolder, participating in the team’s combat actions.\"",
+      "source_id": "chunk-3c2817e67c2a0f4eba0e8992bca8e29b",
+      "id": "\"KAYN\""
+    },
+    {
+      "entity_type": "\"ORGANIZATION\"",
+      "description": "\"The ranking‑improvement service is a promotional entity offering a subscription plan to help players improve their rank in the game.\"",
+      "source_id": "chunk-3c2817e67c2a0f4eba0e8992bca8e29b",
+      "id": "\"RANKING‑IMPROVEMENT SERVICE\""
+    },
+    {
+      "entity_type": "\"EVENT\"",
+      "description": "\"Season 14 refers to the current competitive season of the game during which the ranking‑improvement service is promoted.\"",
+      "source_id": "chunk-3c2817e67c2a0f4eba0e8992bca8e29b",
+      "id": "\"SEASON 14\""
+    },
+    {
+      "entity_type": "\"PERSON\"",
+      "description": "\"Allyslain is an enemy champion present in the lane, being targeted by Smolder's Q for potential damage.\"",
+      "source_id": "chunk-668593e769836f1556568b94ee14f49e",
+      "id": "\"ALLYSLAIN\""
+    },
+    {
+      "entity_type": "\"PERSON\"",
+      "description": "\"Aurora Soj is a champion who was killed during the bottom‑lane showdown, as noted in the kill notifications.\"",
+      "source_id": "chunk-eec1a77179830c031a31412197497ccf",
+      "id": "\"AURORA SOJ\""
+    },
+    {
+      "entity_type": "\"EVENT\"",
+      "description": "\"The Elder … \"",
+      "source_id": "chunk-eec1a77179830c031a31412197497ccf",
+      "id": "\"ELDER DRAGON\""
+    },
+    {
+      "entity_type": "\"EVENT\"",
+      "description": "\"Dragon Practice is Smolder's ultimate ability that creates a large AoE blast, dealing heavy damage and pushing minions back.\"",
+      "source_id": "chunk-8b662881b81d9f98abf16595ae3bc91a",
+      "id": "\"DRAGON PRACTICE\""
+    },
+    {
+      "entity_type": "\"EVENT\"",
+      "description": "\"Q Flash is a combo involving Smolder's Q ability, used to shred enemies and add displacement.\"",
+      "source_id": "chunk-8b662881b81d9f98abf16595ae3bc91a",
+      "id": "\"Q FLASH\""
+    },
+    {
+      "entity_type": "\"EVENT\"",
+      "description": "\"W Flash is a combo involving Smolder's W ability, used to shred enemies and add displacement.\"",
+      "source_id": "chunk-8b662881b81d9f98abf16595ae3bc91a",
+      "id": "\"W FLASH\""
+    },
+    {
+      "entity_type": "\"GEO\"",
+      "description": "[\"\\\"Turret is a defensive structure in the game that can be destroyed by Smolder’s ultimate, affecting lane control.\\\"<SEP>\\\"Turret is a defensive structure in the lane that is under attack and exposed due to Smolder's wave control.\\\"<SEP>\\\"Turret is a defensive structure that Smolder keeps near to maintain lane control and push the minion wave.\\\"<SEP>\\\"Turret is the defensive structure in the Bottom Lane that both champions aim to protect or attack, influencing wave movement and team strategy.\\\"\", \"\\\"The bottom‑lane turret is the central objective, contested by both teams, with minions pushing toward it and the enemy team holding it with defensive spells.\\\"<SEP>\\\"The turret is a defensive structure in the bottom lane that both teams are contesting, with Ahri applying pressure to keep it under her team's control.\\\"<SEP>\\\"The turret is the objective being contested by both teams in the bottom‑lane, remaining intact throughout the described skirmishes.\\\"<SEP>\\\"Turret is a defensive structure in the game that is targeted during team fights in the bottom lane.\\\"\"]",
+      "source_id": "[\"chunk-8b662881b81d9f98abf16595ae3bc91a<SEP>chunk-56760db9e5f22657231001b182fa8f2c<SEP>chunk-921a2c333f18b12f26287e340c8ea6a8<SEP>chunk-dde3ef385da20ee7d75730ea561e38fb\", \"chunk-e7a9ac28f921cd6d848bb8b8410c429c<SEP>chunk-9de993ea4d2737c78e4581b4f330ff47<SEP>chunk-0b22f6ec63cfca9b8465893ca0119cc0<SEP>chunk-9075c07f19742a09b3ad74a010af53ca\"]",
+      "id": "\"TURRET\""
+    },
+    {
+      "entity_type": "\"PERSON\"",
+      "description": "\"An unnamed champion positioned in the lane, facing Smolder's attacks and being pushed toward the turret.\"<SEP>\"The enemy champion is the opponent targeted by Smolder’s Q and ultimate, kept at bayonet distance and pressured throughout the clip.\"",
+      "source_id": "chunk-8052217c808d9d0d02c75c0672fe10cb<SEP>chunk-921a2c333f18b12f26287e340c8ea6a8",
+      "id": "\"ENEMY CHAMPION\""
+    },
+    {
+      "entity_type": "\"ORGANIZATION\"",
+      "description": "\"Minions are the allied units in the lane that are being pushed and cleared by Smolder's abilities.\"",
+      "source_id": "chunk-921a2c333f18b12f26287e340c8ea6a8",
+      "id": "\"MINIONS\""
+    },
+    {
+      "entity_type": "\"PERSON\"",
+      "description": "\"Sivir is another champion mentioned for comparison, noted for her smooth auto‑attack pattern after casting spells.\"",
+      "source_id": "chunk-dde3ef385da20ee7d75730ea561e38fb",
+      "id": "\"SIVIR\""
+    },
+    {
+      "entity_type": "\"ORGANIZATION\"",
+      "description": "\"ADC refers to the role of Attack‑Damage Carry in the game, a class of champions like Smolder and Sivir.\"",
+      "source_id": "chunk-dde3ef385da20ee7d75730ea561e38fb",
+      "id": "\"ADC\""
+    },
+    {
+      "entity_type": "[\"\\\"GEO\\\"\", \"\\\"UNKNOWN\\\"\"]",
+      "description": "[\"\\\"Minion wave is a group of neutral units that can be pushed or cleared by Smolder’s abilities, influencing lane pressure.\\\"<SEP>\\\"Minion wave refers to the group of minions pushing toward the enemy turret, influenced by Smolder’s splash Q to maintain favorable positioning.\\\"\", \"\\\"A champion Ahri uses the minion wave to support the fight.\\\"|>7\"]",
+      "source_id": "[\"chunk-8052217c808d9d0d02c75c0672fe10cb<SEP>chunk-dde3ef385da20ee7d75730ea561e38fb\", \"chunk-a97ca96b821a76d5444998f5d238857e\"]",
+      "id": "\"MINION WAVE\""
+    },
+    {
+      "entity_type": "\"GEO\"",
+      "description": "\"Lane is the area of the map where Smolder’s actions take place, determining control and pressure in the game.\"",
+      "source_id": "chunk-dde3ef385da20ee7d75730ea561e38fb",
+      "id": "\"LANE\""
+    },
+    {
+      "entity_type": "\"GEO\"",
+      "description": "[\"\\\"Mid‑lane is a strategic area in League of Legends where Smolder focuses his abilities to maintain control and dictate engagements.\\\"\", \"\\\"Mid‑lane is a location on the game map where the skirmish between Ahri and Jhin takes place.\\\"\"]",
+      "source_id": "[\"chunk-8052217c808d9d0d02c75c0672fe10cb\", \"chunk-791d3fb02596d8ddb511354fbec9341f\"]",
+      "id": "\"MID‑LANE\""
+    },
+    {
+      "entity_type": "\"GEO\"",
+      "description": "[\"\\\"River is a lane feature in League of Legends that Smolder moves toward to position himself advantageously for his long‑range abilities.\\\"<SEP>\\\"River is a map feature in the game’s mid‑lane, acting as a wall that forces enemies to play defensively and provides defensive positioning for Smolder.\\\"\", \"\\\"River is a location near the mid‑lane brush where the battle is set.\\\"\"]",
+      "source_id": "[\"chunk-8052217c808d9d0d02c75c0672fe10cb<SEP>chunk-1bb8fa15612c7fb77ceb57839a48669e\", \"chunk-791d3fb02596d8ddb511354fbec9341f\"]",
+      "id": "\"RIVER\""
+    },
+    {
+      "entity_type": "\"GEO\"",
+      "description": "\"Enemy turret is the defensive structure at the end of the lane that the minion wave pushes toward, indirectly affected by Smolder’s pressure.\"",
+      "source_id": "chunk-8052217c808d9d0d02c75c0672fe10cb",
+      "id": "\"ENEMY TURRET\""
+    },
+    {
+      "entity_type": "\"PERSON\"",
+      "description": "\"Gnar is a champion in the game, a mid‑laner who is targeted by Smolder's abilities and is ultimately eliminated in the described showdown.\"",
+      "source_id": "chunk-c656bbd0a81bad3a9fdd373336233e94",
+      "id": "\"GNAR\""
+    },
+    {
+      "entity_type": "\"PERSON\"",
+      "description": "\"Janna is a champion who takes damage from Smolder's ultimate during the fight.\"<SEP>\"Janna is a teammate of Smolder, providing crowd‑control support during the mid‑lane showdown against Gnar.\"",
+      "source_id": "chunk-6f57568b2b676851343d311738188737<SEP>chunk-c656bbd0a81bad3a9fdd373336233e94",
+      "id": "\"JANNA\""
+    },
+    {
+      "entity_type": "\"PERSON\"",
+      "description": "\"Lucian is a champion who kills Mordekaiser, earning a double kill and gold reward.\"<SEP>\"Lucian is a teammate of Smolder, contributing poke damage to help keep Gnar pinned during the fight.\"",
+      "source_id": "chunk-6f57568b2b676851343d311738188737<SEP>chunk-c656bbd0a81bad3a9fdd373336233e94",
+      "id": "\"LUCIAN\""
+    },
+    {
+      "entity_type": "\"PERSON\"",
+      "description": "\"Gragas is a teammate of Smolder, offering crowd‑control to assist in maintaining pressure on Gnar.\"",
+      "source_id": "chunk-c656bbd0a81bad3a9fdd373336233e94",
+      "id": "\"GRAGAS\""
+    },
+    {
+      "entity_type": "\"EVENT\"",
+      "description": "\"Mid‑lane Recap refers to a summary of the gameplay events between Smolder and Gnar, highlighting key actions such as level gains, ability usage, and lane control.\"",
+      "source_id": "chunk-c656bbd0a81bad3a9fdd373336233e94",
+      "id": "\"MID‑LANE RECAP\""
+    },
+    {
+      "entity_type": "\"EVENT\"",
+      "description": "\"Mid‑lane Showdown describes the specific encounter where Smolder and Gnar face off, culminating in Gnar's elimination.\"",
+      "source_id": "chunk-c656bbd0a81bad3a9fdd373336233e94",
+      "id": "\"MID‑LANE SHOWDOWN\""
+    },
+    {
+      "entity_type": "\"EVENT\"",
+      "description": "\"Bottom‑lane Smolder push is an action where Smolder leads a coordinated team push, moving the minion wave toward the enemy turret while allies chip away at minions and the turret.\"",
+      "source_id": "chunk-af73a4b73a0139c676fd73cb1660025e",
+      "id": "\"BOTTOM‑LANE SMOLDER PUSH\""
+    },
+    {
+      "entity_type": "\"EVENT\"",
+      "description": "\"Draft‑phase transition is a cutaway to pre‑game strategic planning, focusing on selecting champions and builds for effective wave‑pushing play.\"",
+      "source_id": "chunk-af73a4b73a0139c676fd73cb1660025e",
+      "id": "\"DRAFT‑PHASE TRANSITION\""
+    },
+    {
+      "entity_type": "\"TECHNOLOGY\"",
+      "description": "\"Q is Smolder’s spread‑damage ability that can hit several enemies at once, often aimed at the back‑line of the enemy team.\"",
+      "source_id": "chunk-1bb8fa15612c7fb77ceb57839a48669e",
+      "id": "\"Q\""
+    },
+    {
+      "entity_type": "\"GEO\"",
+      "description": "\"Mid‑turret is a defensive structure in the mid‑lane that helps Smolder maintain a solid position while harassing the enemy back‑line.\"",
+      "source_id": "chunk-1bb8fa15612c7fb77ceb57839a48669e",
+      "id": "\"MID‑TURRET\""
+    },
+    {
+      "entity_type": "\"EVENT\"",
+      "description": "[\"\\\"Rift Herald is an objective in the game that the team has defeated, as indicated by a banner in the last frame of the clip.\\\"\", \"\\\"The Rift Herald is an objective in the game that can be stolen or contested, and it plays a key role in the bottom lane showdown described.\\\"<SEP>\\\"The Rift Herald is an objective on the enemy side of the map, still present during the engagement, indicating the team has not yet lost that objective.\\\"\"]",
+      "source_id": "[\"chunk-1bb8fa15612c7fb77ceb57839a48669e\", \"chunk-971b1c301f9b1d04b8bfcff2de204430<SEP>chunk-cbe08d93d9eaa38f66f60a865fd58f2f\"]",
+      "id": "\"RIFT HERALD\""
+    },
+    {
+      "entity_type": "\"PERSON\"",
+      "description": "\"Mordekaiser is a champion who is killed by Lucian and later by Smolder's ultimate.\"",
+      "source_id": "chunk-6f57568b2b676851343d311738188737",
+      "id": "\"MORDEKAISER\""
+    },
+    {
+      "entity_type": "\"PERSON\"",
+      "description": "\"Kennen is a champion who joins the lane, uses his ultimate to clear minions, and applies pressure on the turret.\"",
+      "source_id": "chunk-6f57568b2b676851343d311738188737",
+      "id": "\"KENNEN\""
+    },
+    {
+      "entity_type": "\"ORGANIZATION\"",
+      "description": "\"Essence Reaver is an item purchased by Smolder to increase damage against minions.\"<SEP>\"Essence Reaver is an item rune used in the build strategy for the mid‑lane champion.\"",
+      "source_id": "chunk-6f57568b2b676851343d311738188737<SEP>chunk-d3fc44abada49d7cd74346e3bacb4252",
+      "id": "\"ESSENCE REAVER\""
+    },
+    {
+      "entity_type": "\"ORGANIZATION\"",
+      "description": "\"Cooldown Boots is an item rune used in the build strategy for the mid‑lane champion.\"",
+      "source_id": "chunk-6f57568b2b676851343d311738188737",
+      "id": "\"COOLDOWN BOOTS\""
+    },
+    {
+      "entity_type": "\"ORGANIZATION\"",
+      "description": "\"Navori is an item rune used in the build strategy for the mid‑lane champion.\"",
+      "source_id": "chunk-6f57568b2b676851343d311738188737",
+      "id": "\"NAVORI\""
+    },
+    {
+      "entity_type": "\"ORGANIZATION\"",
+      "description": "\"Trinity Force is an item rune used in the build strategy for the mid‑lane champion.\"",
+      "source_id": "chunk-6f57568b2b676851343d311738188737",
+      "id": "\"TRINITY FORCE\""
+    },
+    {
+      "entity_type": "\"ORGANIZATION\"",
+      "description": "\"Murekai route is an item rune used in the build strategy for the mid‑lane champion.\"",
+      "source_id": "chunk-6f57568b2b676851343d311738188737",
+      "id": "\"MUREKAI ROUTE\""
+    },
+    {
+      "entity_type": "\"PERSON\"",
+      "description": "\"Cogma is an ADC character mentioned as similar to Smolder, known for percentage-based damage and item balancing strategies.\"",
+      "source_id": "chunk-5df652d0714d2857af1e3e898b9f2fd6",
+      "id": "\"COGMA\""
+    },
+    {
+      "entity_type": "\"PERSON\"",
+      "description": "\"Vayne is an ADC character mentioned as similar to Smolder, known for percentage-based damage and item balancing strategies.\"",
+      "source_id": "chunk-5df652d0714d2857af1e3e898b9f2fd6",
+      "id": "\"VAYNE\""
+    },
+    {
+      "entity_type": "\"PERSON\"",
+      "description": "\"Varus is an ADC character mentioned as similar to Smolder, known for percentage-based damage and item balancing strategies.\"",
+      "source_id": "chunk-5df652d0714d2857af1e3e898b9f2fd6",
+      "id": "\"VARUS\""
+    },
+    {
+      "entity_type": "\"PERSON\"",
+      "description": "\"S’molder is a champion in the game, known for aggressive wave‑clear, passive‑stack buildup, and early‑game pressure, using Q and R abilities to shred minions and enemy champions.\"",
+      "source_id": "chunk-e3b7da4bd1ce9d33975f0aad5df36196",
+      "id": "\"S’MOLDER\""
+    },
+    {
+      "entity_type": "[\"\\\"EVENT\\\"\", \"\\\"UNKNOWN\\\"\"]",
+      "description": "[\"\\\"Ocean Drake is a neutral monster that the bot lane team captures, providing a significant objective advantage.\\\"\", \"\\\"The recent kill of the Ocean Drake provides Ahri’s team with a buff that enhances their ability to push the turret.\\\"|>8\"]",
+      "source_id": "[\"chunk-e3b7da4bd1ce9d33975f0aad5df36196\", \"chunk-50e5f3799024f122b368387f1b3cc171\"]",
+      "id": "\"OCEAN DRAKE\""
+    },
+    {
+      "entity_type": "\"GEO\"",
+      "description": "\"Ally turret is a defensive structure in the bot lane that is destroyed during the game, exposing the enemy bot lane.\"",
+      "source_id": "chunk-e3b7da4bd1ce9d33975f0aad5df36196",
+      "id": "\"ALLY TURRET\""
+    },
+    {
+      "entity_type": "\"PERSON\"",
+      "description": "\"SKILLCAPED is the enemy champion targeted by Smolder during a coordinated team fight, ultimately receiving a decisive Q hit that secures the kill.\"",
+      "source_id": "chunk-56760db9e5f22657231001b182fa8f2c",
+      "id": "\"SKILLCAPED\""
+    },
+    {
+      "entity_type": "\"GEO\"",
+      "description": "[\"\\\"Bottom Lane is the specific area of the game map where Smolder and SKILLCAPED engage, featuring the enemy turret and minion wave dynamics.\\\"\", \"\\\"Bottom lane is a location in the game where the main actions of recalling, item buying, and team fights occur.\\\"\"]",
+      "source_id": "[\"chunk-56760db9e5f22657231001b182fa8f2c\", \"chunk-9075c07f19742a09b3ad74a010af53ca\"]",
+      "id": "\"BOTTOM LANE\""
+    },
+    {
+      "entity_type": "\"EVENT\"",
+      "description": "[\"\\\"Team Fight is the coordinated combat near the turret where Smolder engages SKILLCAPED, leading to a kill and subsequent pressure on the lane.\\\"\", \"\\\"Team fight is the ongoing battle between both teams, involving multiple champions and ultimates, and is the central focus of the clip.\\\"\"]",
+      "source_id": "[\"chunk-56760db9e5f22657231001b182fa8f2c\", \"chunk-e095614c66786b44e85c903db324d2eb\"]",
+      "id": "\"TEAM FIGHT\""
+    },
+    {
+      "entity_type": "\"GEO\"",
+      "description": "\"Voidgrubs is a neutral objective taken by the enemy team, indicating map activity.\"",
+      "source_id": "chunk-d3fc44abada49d7cd74346e3bacb4252",
+      "id": "\"VOIDGRUBS\""
+    },
+    {
+      "entity_type": "\"ORGANIZATION\"",
+      "description": "\"skillcapped is a service that offers a full‑refund guarantee if a player does not rank up while actively using it.\"",
+      "source_id": "chunk-3e81b71e9a756dcb53e16da09de60616",
+      "id": "\"SKILLCAPPED\""
+    },
+    {
+      "entity_type": "\"PERSON\"",
+      "description": "We need to produce a comprehensive summary of the data. Entities: \"SMOLDER\". The description list has many contradictory statements: some say bottom lane carry champion, some say top lane, some say mid lane. The Q ability described differently: long-range Q splash damage fireball, short-range Q/E to poke towers, etc. There are also statements about ultimate: Dragon Practice, ultimate red laser, ultimate pulls enemies and pushes minions, level-6 ultimate. Also mention of other abilities: Q (Scorch Breath), etc. Also some statements about the game platform, level 10, etc. We need to resolve contradictions and produce a coherent summary.\n\nWe should produce a third-person description summarizing all info. The best approach: say that Smolder is a champion in League of Legends. He is primarily played as an ADC (bottom lane carry) but can be played in other lanes. He uses a long-range Q that deals splash damage; he can stack and evolve Q to become stronger. He uses his ultimate (red laser/Dragon Practice) to pull enemies or push minions. He is known for using combos like Q Flash or W Flash. He is a high-damage scaling carry, uses auto-attacks after spells, uses mana, etc. Provide details: at level 10, etc. Provide mention of items like Essence Reaver. Provide mention of his kit: Q, W, E, R. Also mention that he has abundant mana and health. Provide mention of his ability to farm minion waves, control waves, and secure kills. Mention of his ability to use Q on high-health minions. Provide mention of his ability to use Q to poke towers. Provide mention of his ability to use ultimate to pull enemies and push minions. Provide mention of his ability to weave auto-attacks after casting spells. Provide mention of his ability to use Q Flash combos. Provide mention of his presence in a video near a river, engaging enemy near turret using a fiery ability. Provide mention that Smolder is a game platform? Actually one description says \"Smolder is a game or platform that players use to rank up and is promoted in the video.\" That seems like a misinterpretation; we can note that Smolder is a champion not a platform.\n\nWe'll produce a comprehensive summary. Let's produce about 3-4 paragraphs. Ensure to mention all relevant info. Let's produce a single coherent summary. Ensure to avoid contradictions. Let's mention that his Q is a long",
+      "source_id": "chunk-3e81b71e9a756dcb53e16da09de60616<SEP>chunk-8b662881b81d9f98abf16595ae3bc91a<SEP>chunk-c656bbd0a81bad3a9fdd373336233e94<SEP>chunk-dde3ef385da20ee7d75730ea561e38fb<SEP>chunk-1bb8fa15612c7fb77ceb57839a48669e<SEP>chunk-6f57568b2b676851343d311738188737<SEP>chunk-38f6b17996dfa4f0725931853356e5c7<SEP>chunk-eec1a77179830c031a31412197497ccf<SEP>chunk-5df652d0714d2857af1e3e898b9f2fd6<SEP>chunk-3c2817e67c2a0f4eba0e8992bca8e29b<SEP>chunk-921a2c333f18b12f26287e340c8ea6a8<SEP>chunk-af73a4b73a0139c676fd73cb1660025e<SEP>chunk-56760db9e5f22657231001b182fa8f2c<SEP>chunk-d3fc44abada49d7cd74346e3bacb4252<SEP>chunk-8052217c808d9d0d02c75c0672fe10cb<SEP>chunk-668593e769836f1556568b94ee14f49e",
+      "id": "\"SMOLDER\""
+    },
+    {
+      "source_id": "chunk-eec1a77179830c031a31412197497ccf",
+      "description": "\"Smolder … \"",
+      "entity_type": "\"UNKNOWN\"",
+      "id": "\"BERTVETH\""
+    },
+    {
+      "entity_type": "\"PERSON\"",
+      "description": "\"Erdo is the player who narrates the gameplay and provides commentary on how to play Ahri.\"",
+      "source_id": "chunk-766683e031208fd1d376543ecbbaf0c0",
+      "id": "\"ERDO\""
+    },
+    {
+      "entity_type": "\"PERSON\"",
+      "description": "\"Singed is a champion in League of Legends, level 12, who follows up the fight with his signature swirling vortex ultimate, adding area‑control to the battle.\"<SEP>\"Singed is a champion in League of Legends, positioned as the enemy in the bottom lane, attempting to defend the turret and counter‑attack against Ahri.\"<SEP>\"Singed is a champion who moves toward mid‑lane and repositioning for next objective.\"<SEP>\"Singed is the enemy champion targeted by Jhin's ultimate, receiving high damage during the team fight.\"<SEP>\"Singed is the opponent champion faced by Ahri in the mid lane.\"",
+      "source_id": "chunk-766683e031208fd1d376543ecbbaf0c0<SEP>chunk-127edeb91b48f1fe0ba1ffce2f11202c<SEP>chunk-e095614c66786b44e85c903db324d2eb<SEP>chunk-db906804230df11e20be9716d01c395c<SEP>chunk-e7a9ac28f921cd6d848bb8b8410c429c",
+      "id": "\"SINGED\""
+    },
+    {
+      "entity_type": "\"GEO\"",
+      "description": "\"Mid Lane is the central lane in the game where Ahri and Singed compete for control and objectives.\"",
+      "source_id": "chunk-766683e031208fd1d376543ecbbaf0c0",
+      "id": "\"MID LANE\""
+    },
+    {
+      "entity_type": "\"PERSON\"",
+      "description": "\"Zyra is a champion in the game, level 15, with 60% HP, full mana, and uses her ultimate to attack enemies.\"<SEP>\"Zyra is a champion in the game, using her ultimate to clear minions and control enemies during turret fights.\"<SEP>\"Zyra is an enemy champion who is slain by Ahri, resulting in a kill notification and gold gain for Ahri.\"",
+      "source_id": "chunk-ca45e459def78a35a02aa8dfd32f62f6<SEP>chunk-a97ca96b821a76d5444998f5d238857e<SEP>chunk-9075c07f19742a09b3ad74a010af53ca",
+      "id": "\"ZYRA\""
+    },
+    {
+      "entity_type": "\"PERSON\"",
+      "description": "\"Xayah is a champion in the game, level 5, using Featherstorm, Spirit Rush, and Luden’s Echo or Rabadon’s Deathcap, and is part of the team pushing the bottom‑lane turret.\"",
+      "source_id": "chunk-dd5f34c12cb9551bd43f628eeab5e4b0",
+      "id": "\"XAYAH\""
+    },
+    {
+      "entity_type": "\"PERSON\"",
+      "description": "\"Lillia is a champion in the game, level 5, using Spinning Cut, Dark Scale, and Liandry’s Torment or Zhonya’s Hourglass, and is part of the team…\"",
+      "source_id": "chunk-dd5f34c12cb9551bd43f628eeab5e4b0",
+      "id": "\"LILLIA\""
+    },
+    {
+      "entity_type": "\"PERSON\"",
+      "description": "\"Jhin is a champion referred to as the Eternal Hero, channeling his ultimate Curtain Call to deal significant damage to Singed.\"<SEP>\"Jhin, also known as Milaxin, is an enemy mid‑laner engaged by Ahri with support from Aatrox and Elderwood.\"",
+      "source_id": "chunk-127edeb91b48f1fe0ba1ffce2f11202c<SEP>chunk-791d3fb02596d8ddb511354fbec9341f",
+      "id": "\"JHIN\""
+    },
+    {
+      "entity_type": "\"ORGANIZATION\"",
+      "description": "\"Champion & Ability refers to the context of the player controlling Jhin and channeling his ultimate in the team fight.\"",
+      "source_id": "chunk-127edeb91b48f1fe0ba1ffce2f11202c",
+      "id": "\"CHAMPION & ABILITY\""
+    },
+    {
+      "entity_type": "\"GEO\"",
+      "description": "\"The team fight occurs near the bottom‑lane turret, where the player's team pushes the turret while the enemy holds defensively.\"",
+      "source_id": "chunk-127edeb91b48f1fe0ba1ffce2f11202c",
+      "id": "\"TEAM FIGHT NEAR THE BOTTOM‑LANE TURRET\""
+    },
+    {
+      "entity_type": "\"ORGANIZATION\"",
+      "description": "\"Zhonya’s Hourglass is an item built by Ahri for burst damage and survivability.\"<SEP>\"Zhonya’s Hourglass is an item used by the player to provide damage, survivability, and utility during the fight.\"",
+      "source_id": "chunk-127edeb91b48f1fe0ba1ffce2f11202c<SEP>chunk-9de993ea4d2737c78e4581b4f330ff47",
+      "id": "\"ZHONYA’S HOURGLASS\""
+    },
+    {
+      "entity_type": "\"ORGANIZATION\"",
+      "description": "\"Rabadon’s Deathcap is an item used by the player to increase damage output during the fight.\"<SEP>\"R‑…..........………………………………………………………………………………………………………………………………………………………………‑……………………………………………………………………………………………………………………………………………………………………………………………………………………??…………………………………………………………………………??………………………………………………………??…………??………??…??……………………………………………………………………………………………………………………………………………………………………………………………………………………………………………………………………………………………………………………………………………………bottom……………………………………………………………………………………………………………………………………………………………………??…………………………………………………………………………………………………………………………………………………………………………………………………………………………………………………………………………………………………………………………………………………………………………………………………………………………………………………………………………………………………………………………………………………………………………………………………………………………………………………………………………………………………………??\"",
+      "source_id": "chunk-127edeb91b48f1fe0ba1ffce2f11202c<SEP>chunk-4061b232b0c3a178678edc709f927f81",
+      "id": "\"RABADON’S DEATHCAP\""
+    },
+    {
+      "entity_type": "\"PERSON\"",
+      "description": "\"Arradion is a key enemy champion the player intends to focus on during the fight.\"",
+      "source_id": "chunk-127edeb91b48f1fe0ba1ffce2f11202c",
+      "id": "\"ARRADION\""
+    },
+    {
+      "entity_type": "\"ORGANIZATION\"",
+      "description": "\"Spirit Rush is Ahri's ultimate ability used to dash across the lane and apply pressure on the enemy team.\"<SEP>\"Spirit Rush is Ahri's ultimate that channeling into Jhin to damage the enemy team.\"",
+      "source_id": "chunk-127edeb91b48f1fe0ba1ffce2f11202c<SEP>chunk-9de993ea4d2737c78e4581b4f330ff47",
+      "id": "\"SPIRIT RUSH\""
+    },
+    {
+      "entity_type": "\"EVENT\"",
+      "description": "\"Bottom‑lane turret teamfight is a specific in‑game event where the player’s Ahri is using her ultimate against the enemy champion Spiderman, occurring in the bottom lane of the map.\"",
+      "source_id": "chunk-d17d2ebbc3a40b6ba39d37a7b89f003c",
+      "id": "\"BOTTOM‑LANE TURRET TEAMFIGHT\""
+    },
+    {
+      "entity_type": "\"PERSON\"",
+      "description": "\"Spiderman is an enemy champion being targeted by Ahri’s ultimate during the event.\"",
+      "source_id": "chunk-d17d2ebbc3a40b6ba39d37a7b89f003c",
+      "id": "\"SPIDERMAN\""
+    },
+    {
+      "entity_type": "\"PERSON\"",
+      "description": "\"Ashe is a champion in League of Legends, level 13, appearing later in the clip and using her ultimate Enchanted Crystal Arrow to target the same enemy champion and secure kills.\"<SEP>\"Ashe is a champion in the bottom lane, level 10, uses her ultimate Enchanted Crystal Arrow to target the turret area and maintain pressure on the enemy team.\"<SEP>\"Ashe is a level 8 ranged champion with 801/1112 HP, full mana, and a build featuring Zhonya’s Hourglass and Rabadon’s Deathcap. She follows up with her ultimate, Enchanted Crystal Arrow, during the turret push.\"",
+      "source_id": "chunk-e095614c66786b44e85c903db324d2eb<SEP>chunk-a97ca96b821a76d5444998f5d238857e<SEP>chunk-50e5f3799024f122b368387f1b3cc171",
+      "id": "\"ASHE\""
+    },
+    {
+      "entity_type": "\"PERSON\"",
+      "description": "\"Rakan is a champion in the bottom‑lane turret showdown, launching his ultimate‑skillshot toward the enemy cluster.\"<SEP>\"Rakan is a level 8 support champion with 929/1411 HP, full mana, and a build featuring Zhonya’s Hourglass and Luden’s Echo. He engages and applies damage during the team fight.\"",
+      "source_id": "chunk-9de993ea4d2737c78e4581b4f330ff47<SEP>chunk-50e5f3799024f122b368387f1b3cc171",
+      "id": "\"RAKAN\""
+    },
+    {
+      "entity_type": "\"ORGANIZATION\"",
+      "description": "\"The opposing team is defending the turret, with minions pushing toward it and a champion channeling a spell.\"",
+      "source_id": "chunk-9de993ea4d2737c78e4581b4f330ff47",
+      "id": "\"ENEMY TEAM\""
+    },
+    {
+      "entity_type": "\"EVENT\"",
+      "description": "\"The Voidgrubs objective was recently taken by the defending team, giving them a slight advantage in the ongoing battle.\"",
+      "source_id": "chunk-9de993ea4d2737c78e4581b4f330ff47",
+      "id": "\"VOIDGRUBS OBJECTIVE\""
+    },
+    {
+      "entity_type": "\"PERSON\"",
+      "description": "\"Warwick is a champion in the enemy squad, aggressively pushing back and using abilities to keep Ahri and allies at bayonet distance from the turret.\"<SEP>\"Warwick is a champion on the defending team, actively countering Ahri and channeling a big spell.\"<SEP>\"Warwick is an enemy champion targeted by Ahri's Charm (Q) and Ultimate (R), serving as the primary focus of the current fight.\"",
+      "source_id": "chunk-971b1c301f9b1d04b8bfcff2de204430<SEP>chunk-0b22f6ec63cfca9b8465893ca0119cc0<SEP>chunk-9de993ea4d2737c78e4581b4f330ff47",
+      "id": "\"WARWICK\""
+    },
+    {
+      "entity_type": "\"ORGANIZATION\"",
+      "description": "\"Luden’s Echo is an item built by Ahri for burst damage and survivability.\"<SEP>\"Luden’s Echo is an item considered by Ahri for survivability and burst damage, complementing her build strategy.\"<SEP>\"Luden’s Echo is an item in League of Legends that Ahri considers purchasing for burst damage.\"<SEP>\"Luden’s Echo is an item in League of Legends that provides damage amplification and mana regeneration, used by Ahri to increase her damage output.\"",
+      "source_id": "chunk-e7a9ac28f921cd6d848bb8b8410c429c<SEP>chunk-997d95dbdb8840540c33069e74ffe0ce<SEP>chunk-5c40e6b373211082863b6adfadfbb910<SEP>chunk-9de993ea4d2737c78e4581b4f330ff47",
+      "id": "\"LUDEN’S ECHO\""
+    },
+    {
+      "entity_type": "\"PERSON\"",
+      "description": "\"Lee Sin is a champion in the enemy squad, using healing or sustain spells to survive Ahri’s burst and contributing to the defensive stance.\"",
+      "source_id": "chunk-0b22f6ec63cfca9b8465893ca0119cc0",
+      "id": "\"LEE SIN\""
+    },
+    {
+      "entity_type": "\"EVENT\"",
+      "description": "\"An event where an ally of Ahri’s team is killed by the enemy, shifting momentum slightly in favor of the enemy side.\"",
+      "source_id": "chunk-0b22f6ec63cfca9b8465893ca0119cc0",
+      "id": "\"ALLY SLAIN\""
+    },
+    {
+      "entity_type": "\"PERSON\"",
+      "description": "\"Ivern is a champion in the bottom lane, level 9, uses his ultimate Back in Time to pull enemies back while keeping up the fight around the turret.\"",
+      "source_id": "chunk-a97ca96b821a76d5444998f5d238857e",
+      "id": "\"IVERN\""
+    },
+    {
+      "entity_type": "\"PERSON\"",
+      "description": "\"Sion is a champion in League of Legends, being targeted by Ahri and channeling a spell during the Baron Nashor team fight.\"<SEP>\"Sion is a champion in the bottom lane, level 10, joins the push, displays an unstoppable banner, and later retreats into a cooldown state before re‑engaging.\"<SEP>\"Sion is an enemy champion engaged by Ahri after Warwick, used to maintain lane control and prevent minion wave push.\"<SEP>\"Sion is an enemy champion targeted by Ahri’s Charm ability during the team fight.\"",
+      "source_id": "chunk-5c40e6b373211082863b6adfadfbb910<SEP>chunk-971b1c301f9b1d04b8bfcff2de204430<SEP>chunk-997d95dbdb8840540c33069e74ffe0ce<SEP>chunk-a97ca96b821a76d5444998f5d238857e",
+      "id": "\"SION\""
+    },
+    {
+      "entity_type": "\"PERSON\"",
+      "description": "\"Eternal Hero is a rune page configuration used in the game, set up for a player’s strategy.\"<SEP>\"Eternal Hero refers to the champion Ahri in the context of the game, highlighted as the focal point of the action.\"",
+      "source_id": "chunk-953b9aee22e2a1b84ad1a1cbfdbb365d<SEP>chunk-a97ca96b821a76d5444998f5d238857e",
+      "id": "\"ETERNAL HERO\""
+    },
+    {
+      "entity_type": "\"EVENT\"",
+      "description": "\"Dragon is an objective that spawns during the clip, shifting the focus from lane defense to a team fight for the high‑stakes objective.\"<SEP>\"Dragon is the objective in the first segment of the fight, with both teams fighting to secure it.\"",
+      "source_id": "chunk-971b1c301f9b1d04b8bfcff2de204430<SEP>chunk-e095614c66786b44e85c903db324d2eb",
+      "id": "\"DRAGON\""
+    },
+    {
+      "entity_type": "\"PERSON\"",
+      "description": "\"Cain is a teammate referenced as responsible for teleport usage, indicating a missed objective‑control moment.\"",
+      "source_id": "chunk-971b1c301f9b1d04b8bfcff2de204430",
+      "id": "\"CAIN\""
+    },
+    {
+      "entity_type": "\"EVENT\"",
+      "description": "\"Spirit Fire is Ahri's ultimate ability used to target and attempt to kill an enemy champion during the Dragon‑pit team fight.\"",
+      "source_id": "chunk-e095614c66786b44e85c903db324d2eb",
+      "id": "\"SPIRIT FIRE\""
+    },
+    {
+      "entity_type": "\"EVENT\"",
+      "description": "\"Enchanted Crystal Arrow is Ashe's ultimate ability used to target an enemy champion during the team fight.\"",
+      "source_id": "chunk-e095614c66786b44e85c903db324d2eb",
+      "id": "\"ENCHANTED CRYSTAL ARROW\""
+    },
+    {
+      "entity_type": "\"PERSON\"",
+      "description": "\"Thresh is a champion in League of Legends, level 31, who keeps the momentum with his ultimate, a large vortex that pulls in enemies and minions.\"<SEP>\"Thresh is a champion in the bot lane, casting his ultimate to create a vortex that pulls enemies and minions.\"<SEP>\"Thresh is a champion with a glowing Death Sentence ultimate that locks down multiple enemies.\"",
+      "source_id": "chunk-54a6f8ba3aa2145b8ba6ba20249682e1<SEP>chunk-e095614c66786b44e85c903db324d2eb<SEP>chunk-db906804230df11e20be9716d01c395c",
+      "id": "\"THRESH\""
+    },
+    {
+      "entity_type": "\"GEO\"",
+      "description": "\"Dragon pit is the location of the key events in the team fight, where both teams converge and the minion wave pushes forward, indicating pressure on the objective.\"",
+      "source_id": "chunk-e095614c66786b44e85c903db324d2eb",
+      "id": "\"DRAGON PIT\""
+    },
+    {
+      "entity_type": "\"PERSON\"",
+      "description": "\"Thornbound Atakhan is an enemy bot champion that spawns in the bot lane during the fight.\"",
+      "source_id": "chunk-db906804230df11e20be9716d01c395c",
+      "id": "\"THORNBOUND ATAKHAN\""
+    },
+    {
+      "entity_type": "\"EVENT\"",
+      "description": "\"Mountain Drake is an objective in the game that the enemy team lost during the fight.\"<SEP>\"Mountain Drake is an objective in the game that was lost by the enemy side, giving the Akali/Ahri team a temporary advantage.\"<SEP>\"Mountain Drake is an objective that the enemy team slays, granting them a buff and shifting focus to the mid lane.\"",
+      "source_id": "chunk-54a6f8ba3aa2145b8ba6ba20249682e1<SEP>chunk-db906804230df11e20be9716d01c395c<SEP>chunk-5418d6b0956d9698de0cc256bc7a6ed1",
+      "id": "\"MOUNTAIN DRAKE\""
+    },
+    {
+      "entity_type": "\"PERSON\"",
+      "description": "\"Akali is a champion in the game, level 14, using the ultimate Shadow Dance to damage and gain mobility against the enemy Milaxin.\"",
+      "source_id": "chunk-5418d6b0956d9698de0cc256bc7a6ed1",
+      "id": "\"AKALI\""
+    },
+    {
+      "entity_type": "\"PERSON\"",
+      "description": "\"Milaxin is a champion that recorded a double‑kill for the allied team.\"<SEP>\"Milaxin is an enemy champion targeted by Ahri’s Charm ability during the team fight.\"<SEP>\"Milaxin is an enemy champion targeted by Akali's Shadow Dance.\"",
+      "source_id": "chunk-54a6f8ba3aa2145b8ba6ba20249682e1<SEP>chunk-997d95dbdb8840540c33069e74ffe0ce<SEP>chunk-5418d6b0956d9698de0cc256bc7a6ed1",
+      "id": "\"MILAXIN\""
+    },
+    {
+      "entity_type": "\"PERSON\"",
+      "description": "\"Polnarev is an enemy champion targeted by Ahri's Twisted Fate.\"",
+      "source_id": "chunk-5418d6b0956d9698de0cc256bc7a6ed1",
+      "id": "\"POLNAREV\""
+    },
+    {
+      "entity_type": "\"PERSON\"",
+      "description": "\"Eternal Hero is a champion in the game, known for a bright red explosion ultimate that pushes enemies back.\"",
+      "source_id": "chunk-54a6f8ba3aa2145b8ba6ba20249682e1",
+      "id": "\"ETERNAL HERO\""
+    },
+    {
+      "entity_type": "\"PERSON\"",
+      "description": "\"Spidermaddf is a champion who uses a powerful red‑explosion ability and has recently leveled up to 10.\"",
+      "source_id": "chunk-54a6f8ba3aa2145b8ba6ba20249682e1",
+      "id": "\"SPIDERMADDF\""
+    },
+    {
+      "entity_type": "\"EVENT\"",
+      "description": "\"Baron Nashor is a major objective in League of Legends, with a team fight erupting around it, involving Ahri, Sion, and other teammates.\"<SEP>\"Baron Nashor is a neutral monster that the team attempts to kill; the team eventually slays it, as noted in the chat.\"",
+      "source_id": "chunk-5c40e6b373211082863b6adfadfbb910<SEP>chunk-4061b232b0c3a178678edc709f927f81",
+      "id": "\"BARON NASHOR\""
+    },
+    {
+      "entity_type": "\"GEO\"",
+      "description": "\"The mid‑lane turret is a defensive structure in League of Legends, near which Ahri and Sion engage in a showdown.\"<SEP>\"The mid‑lane turret is a strategic objective in the game, destroyed during the engagement, affecting minion wave movement and team positioning.\"",
+      "source_id": "chunk-997d95dbdb8840540c33069e74ffe0ce<SEP>chunk-5c40e6b373211082863b6adfadfbb910",
+      "id": "\"MID‑LANE TURRET\""
+    },
+    {
+      "entity_type": "\"ORGANIZATION\"",
+      "description": "\"Void Staff is an item in League of Legends that Ahri considers purchasing for magic penetration.\"<SEP>\"Void Staff is an item purchased by Ahri to provide magic penetration, enhancing her damage output against enemies.\"",
+      "source_id": "chunk-997d95dbdb8840540c33069e74ffe0ce<SEP>chunk-5c40e6b373211082863b6adfadfbb910",
+      "id": "\"VOID STAFF\""
+    },
+    {
+      "entity_type": "\"ORGANIZATION\"",
+      "description": "\"Zonya’s Hourglass is an item considered by Ahri for survivability and burst damage, complementing her build strategy.\"<SEP>\"Zonya’s Hourglass is an item in League of Legends that Ahri considers purchasing for survivability.\"",
+      "source_id": "chunk-997d95dbdb8840540c33069e74ffe0ce<SEP>chunk-5c40e6b373211082863b6adfadfbb910",
+      "id": "\"ZONYA’S HOURGLASS\""
+    },
+    {
+      "entity_type": "\"PERSON\"",
+      "description": "\"Skedy is an enemy champion targeted by Ahri’s Charm ability during the team fight.\"",
+      "source_id": "chunk-997d95dbdb8840540c33069e74ffe0ce",
+      "id": "\"SKEDY\""
+    },
+    {
+      "entity_type": "\"PERSON\"",
+      "description": "\"Guczaha is an enemy champion targeted by Ahri’s Charm ability during the team fight.\"",
+      "source_id": "chunk-997d95dbdb8840540c33069e74ffe0ce",
+      "id": "\"GUCZAHA\""
+    },
+    {
+      "entity_type": "\"PERSON\"",
+      "description": "\"Spidermaaan is an enemy champion targeted by Ahri’s Charm ability during the team fight.\"",
+      "source_id": "chunk-997d95dbdb8840540c33069e74ffe0ce",
+      "id": "\"SPIDERMAAAN\""
+    },
+    {
+      "entity_type": "\"PERSON\"",
+      "description": "\"Guezaha is a champion opposing Eternal Hero (Ahri) in the mid‑lane skirmish, receiving attacks and abilities from Ahri.\"<SEP>\"Guezaha is an enemy champion repeatedly focused by Ahri during the engagement, using Charm, Shockwave, and Spirit Rush.\"",
+      "source_id": "chunk-997d95dbdb8840540c33069e74ffe0ce<SEP>chunk-4061b232b0c3a178678edc709f927f81",
+      "id": "\"GUEZAHA\""
+    },
+    {
+      "entity_type": "\"PERSON\"",
+      "description": "\"Eternal Hero (Ahri) is a champion in the game, level 16 in the mid‑lane skirmish, with high health and mana, and is actively engaging Guezaha with combos.\"",
+      "source_id": "chunk-4061b232b0c3a178678edc709f927f81",
+      "id": "\"ETERNAL HERO (AHRI)\""
+    },
+    {
+      "entity_type": "\"TECHNOLOGY\"",
+      "description": "\"Zz’Rot Portal is an item that’s part of Ahri’s build, indicating damage‑boosting capabilities.\"",
+      "source_id": "chunk-4061b232b0c3a178678edc709f927f81",
+      "id": "\"ZZ’ROT PORTAL\""
+    },
+    {
+      "entity_type": "\"PERSON\"",
+      "description": "\"Spidermaan is an enemy split‑pusher targeted by Ahri in the bottom lane.\"",
+      "source_id": "chunk-791d3fb02596d8ddb511354fbec9341f",
+      "id": "\"SPIDERMAAN\""
+    },
+    {
+      "entity_type": "\"PERSON\"",
+      "description": "\"Aatrox, also known as Guzzaha, supports Jhin in the mid‑lane skirmish.\"",
+      "source_id": "chunk-791d3fb02596d8ddb511354fbec9341f",
+      "id": "\"AATROX\""
+    },
+    {
+      "entity_type": "\"PERSON\"",
+      "description": "\"Elderwood, also known as PolarisS85, supports Jhin in the mid‑lane skirmish.\"",
+      "source_id": "chunk-791d3fb02596d8ddb511354fbec9341f",
+      "id": "\"ELDERWOOD\""
+    },
+    {
+      "entity_type": "\"GEO\"",
+      "description": "\"Bottom‑lane is a location on the game map where Ahri is attacking Spidermaan.\"",
+      "source_id": "chunk-791d3fb02596d8ddb511354fbec9341f",
+      "id": "\"BOTTOM‑LANE\""
+    },
+    {
+      "entity_type": "\"GEO\"",
+      "description": "\"The mid lane turret is a key structure in the game that can be destroyed by the team, leading to a strategic advantage.\"",
+      "source_id": "chunk-df231031873dcc5add5b5640412bd723",
+      "id": "\"MID LANE TURRET\""
+    },
+    {
+      "entity_type": "\"GEO\"",
+      "description": "\"The inhibitor turret is a structure that can be destroyed by the team, leading to a strategic advantage.\"",
+      "source_id": "chunk-df231031873dcc5add5b5640412bd723",
+      "id": "\"INHIBITOR TURRET\""
+    },
+    {
+      "entity_type": "\"ORGANIZATION\"",
+      "description": "\"The team is a group of players working together to achieve objectives in the game.\"",
+      "source_id": "chunk-df231031873dcc5add5b5640412bd723",
+      "id": "\"TEAM\""
+    },
+    {
+      "entity_type": "\"ORGANIZATION\"",
+      "description": "\"Discord is a communication platform used for coaching and contact purposes.\"",
+      "source_id": "chunk-953b9aee22e2a1b84ad1a1cbfdbb365d",
+      "id": "\"DISCORD\""
+    },
+    {
+      "source_id": "chunk-a97ca96b821a76d5444998f5d238857e<SEP>chunk-50e5f3799024f122b368387f1b3cc171",
+      "description": "\"Ahri actively engages the turret by using Charm and Spirit Rush to apply pressure and attempt to secure a kill.\"|>8<SEP>\"Ahri applies her ultimate to the turret area, contributing to the pressure on the turret.\"|>8",
+      "entity_type": "\"UNKNOWN\"",
+      "id": "\"BOTTOM‑LANE TURRET\""
+    },
+    {
+      "source_id": "chunk-50e5f3799024f122b368387f1b3cc171",
+      "description": "\"The timing of the fight aligns with mid‑game objectives, indicating strategic importance.\"|>9",
+      "entity_type": "\"UNKNOWN\"",
+      "id": "\"GAME CLOCK 7:50–8:32\""
+    },
+    {
+      "source_id": "chunk-50e5f3799024f122b368387f1b3cc171",
+      "description": "\"The score change reflects the outcome of the turret fight, with Ahri’s team gaining the advantage.\"|>8",
+      "entity_type": "\"UNKNOWN\"",
+      "id": "\"SCORE 7–6 TO 8–7\""
+    },
+    {
+      "source_id": "chunk-a97ca96b821a76d5444998f5d238857e",
+      "description": "\"Ahri kills BlueCz, resulting in a gain of gold.\"|>9",
+      "entity_type": "\"UNKNOWN\"",
+      "id": "\"BLUECZ\""
+    },
+    {
+      "source_id": "chunk-a97ca96b821a76d5444998f5d238857e",
+      "description": "\"The first turret destruction by Ahri or the team is a key event.\"|>8",
+      "entity_type": "\"UNKNOWN\"",
+      "id": "\"FIRST TURRET\""
+    },
+    {
+      "source_id": "chunk-cbe08d93d9eaa38f66f60a865fd58f2f",
+      "description": "\"Securing The Skies Descend gives the team vision in the bottom lane.\"|>8",
+      "entity_type": "\"UNKNOWN\"",
+      "id": "\"THE SKIES DESCEND\""
+    }
+  ],
+  "links": [
+    {
+      "weight": 9.0,
+      "description": "\"Ari is identified as a Bastaya, establishing a direct affiliation between the character and the Bastaya race.\"",
+      "source_id": "chunk-2e403ab6dfb1007767efd391cca7a115",
+      "order": 1,
+      "source": "\"ARI\"",
+      "target": "\"BASTAYA\""
+    },
+    {
+      "weight": 8.0,
+      "description": "\"Ari is described as a Bastaya of Nine Tails, indicating a specific lineage or trait within her race.\"",
+      "source_id": "chunk-2e403ab6dfb1007767efd391cca7a115",
+      "order": 1,
+      "source": "\"ARI\"",
+      "target": "\"NINE TAILS\""
+    },
+    {
+      "weight": 7.0,
+      "description": "\"Ari's memories involve running with ice foxes in the northern region of Sean, linking her personal history to that location.\"",
+      "source_id": "chunk-2e403ab6dfb1007767efd391cca7a115",
+      "order": 1,
+      "source": "\"ARI\"",
+      "target": "\"SEAN\""
+    },
+    {
+      "weight": 6.0,
+      "description": "\"\"",
+      "source_id": "chunk-2e403ab6dfb1007767efd391cca7a115",
+      "order": 1,
+      "source": "\"ARI\"",
+      "target": "\"HONÍA\""
+    },
+    {
+      "weight": 9.0,
+      "description": "\"Ari navigates and interacts within the mystical forest of Omikai Alan, making it the primary setting for her early actions.\"",
+      "source_id": "chunk-384453835cabf302cc1866f083c441b8",
+      "order": 1,
+      "source": "\"ARI\"",
+      "target": "\"OMIKAI ALAN\""
+    },
+    {
+      "weight": 8.0,
+      "description": "\"Ari encounters and confronts Sinen Milcolas, the semi‑god guardian, during her forest traversal.\"",
+      "source_id": "chunk-384453835cabf302cc1866f083c441b8",
+      "order": 1,
+      "source": "\"ARI\"",
+      "target": "\"SINEN MILCOLAS\""
+    },
+    {
+      "weight": 9.0,
+      "description": "\"Ari meets Girín in the marketplace, receiving crucial information about Ymelo stones.\"",
+      "source_id": "chunk-384453835cabf302cc1866f083c441b8",
+      "order": 1,
+      "source": "\"ARI\"",
+      "target": "\"GIRÍN\""
+    },
+    {
+      "weight": 8.0,
+      "description": "\"Ari holds the glowing green‑lit flower, indicating its importance in her transformation and memory consumption process.\"",
+      "source_id": "chunk-3dba909d410645c865e1539e1cd713d6",
+      "order": 1,
+      "source": "\"ARI\"",
+      "target": "\"GLOWING, GREEN‑LIT FLOWER\""
+    },
+    {
+      "weight": 7.0,
+      "description": "\"Ari visits the graveyard, where the setting reinforces her internal struggle and past memories.\"",
+      "source_id": "chunk-3dba909d410645c865e1539e1cd713d6",
+      "order": 1,
+      "source": "\"ARI\"",
+      "target": "\"GRAVEYARD\""
+    },
+    {
+      "weight": 8.0,
+      "description": "\"Yasuo interacts with Ari, discussing hiring him as a bodyguard, showing a direct narrative connection.\"",
+      "source_id": "chunk-3dba909d410645c865e1539e1cd713d6",
+      "order": 1,
+      "source": "\"ARI\"",
+      "target": "\"YASUO\""
+    },
+    {
+      "weight": 9.0,
+      "description": "\"Champion channels the Blue Spirit, feeding it into her power.\"",
+      "source_id": "chunk-0faee823efab3399ac6507a90b21a27c",
+      "order": 1,
+      "source": "\"CHAMPION\"",
+      "target": "\"BLUE SPIRIT\""
+    },
+    {
+      "weight": 8.0,
+      "description": "\"Champion confronts the Horned Creature during the gameplay segment.\"",
+      "source_id": "chunk-0faee823efab3399ac6507a90b21a27c",
+      "order": 1,
+      "source": "\"CHAMPION\"",
+      "target": "\"HORNED CREATURE\""
+    },
+    {
+      "weight": 1.0,
+      "description": "\"Champion … … … … … … … … … … … …??\"",
+      "source_id": "chunk-0faee823efab3399ac6507a90b21a27c",
+      "order": 1,
+      "source": "\"CHAMPION\"",
+      "target": "\"CHILD\""
+    },
+    {
+      "weight": 7.0,
+      "description": "\"Sinen Milcolas, as the forest guardian, protects and embodies the mystical environment of Omikai Alan.\"",
+      "source_id": "chunk-384453835cabf302cc1866f083c441b8",
+      "order": 1,
+      "source": "\"OMIKAI ALAN\"",
+      "target": "\"SINEN MILCOLAS\""
+    },
+    {
+      "weight": 8.0,
+      "description": "\"Girín informs Ari about Ymelo stones, establishing a direct informational link.\"",
+      "source_id": "chunk-384453835cabf302cc1866f083c441b8",
+      "order": 1,
+      "source": "\"GIRÍN\"",
+      "target": "\"YMELO STONES\""
+    },
+    {
+      "weight": 1.0,
+      "description": "\"Ahri and Yasuo are visibly aligned, both in defensive stances, indicating coordination and shared strategy.\"|>9",
+      "source_id": "chunk-726dd0c8af60735dae395e0a2512fd55",
+      "order": 1,
+      "source": "\"YASUO\"",
+      "target": "\"AHRI\""
+    },
+    {
+      "weight": 1.0,
+      "description": "\"Yasuo and Gunplank are part of the same team, with Gunplank joining later to support the upcoming fight.\"|>7",
+      "source_id": "chunk-726dd0c8af60735dae395e0a2512fd55",
+      "order": 1,
+      "source": "\"YASUO\"",
+      "target": "\"GUNPLANK\""
+    },
+    {
+      "weight": 1.0,
+      "description": "\"Yasuo is preparing to face Madokai, the threat mentioned in the gameplay summary.\"|>6",
+      "source_id": "chunk-726dd0c8af60735dae395e0a2512fd55",
+      "order": 1,
+      "source": "\"YASUO\"",
+      "target": "\"MADOKAI\""
+    },
+    {
+      "weight": 9.0,
+      "description": "\"Smolder and Yasuo are directly engaged in combat within the same bottom lane team fight, with Smolder targeting Yasuo as an enemy champion.\"",
+      "source_id": "chunk-5df652d0714d2857af1e3e898b9f2fd6",
+      "order": 1,
+      "source": "\"YASUO\"",
+      "target": "\"SMOLDER\""
+    },
+    {
+      "weight": 1.0,
+      "description": "\"S’molder uses Q and R abilities to attack and ultimately kill Yasuo in a team fight.\"|>8",
+      "source_id": "chunk-e3b7da4bd1ce9d33975f0aad5df36196",
+      "order": 1,
+      "source": "\"YASUO\"",
+      "target": "\"S’MOLDER\""
+    },
+    {
+      "weight": 1.0,
+      "description": "\"Yasuo dies near the ally turret, indicating the turret's destruction is part of the team fight.\"|>5",
+      "source_id": "chunk-e3b7da4bd1ce9d33975f0aad5df36196",
+      "order": 1,
+      "source": "\"YASUO\"",
+      "target": "\"ALLY TURRET\""
+    },
+    {
+      "weight": 1.0,
+      "description": "\"Karma and Arya are part of the same team, engaging in coordinated actions during the game, with Karma dominating early fights and Arya preparing for a boss encounter.\"|>8",
+      "source_id": "chunk-726dd0c8af60735dae395e0a2512fd55",
+      "order": 1,
+      "source": "\"KARMA\"",
+      "target": "\"ARYA\""
+    },
+    {
+      "weight": 1.0,
+      "description": "\"Arya is preparing to confront a large creature, likely Madokai, using a powerful ability.\"|>7",
+      "source_id": "chunk-726dd0c8af60735dae395e0a2512fd55",
+      "order": 1,
+      "source": "\"ARYA\"",
+      "target": "\"MADOKAI\""
+    },
+    {
+      "weight": 8.0,
+      "description": "\"The player’s coaching services for Arya are offered through Discord.\"<",
+      "source_id": "chunk-953b9aee22e2a1b84ad1a1cbfdbb365d",
+      "order": 1,
+      "source": "\"ARYA\"",
+      "target": "\"DISCORD\""
+    },
+    {
+      "weight": 1.0,
+      "description": "\"Ahri and Gunplank are part of the same team, with Gunplank joining later to support the upcoming fight.\"|>7",
+      "source_id": "chunk-726dd0c8af60735dae395e0a2512fd55",
+      "order": 1,
+      "source": "\"AHRI\"",
+      "target": "\"GUNPLANK\""
+    },
+    {
+      "weight": 1.0,
+      "description": "\"Ahri is preparing to face Madokai, the threat mentioned in the gameplay summary.\"|>6",
+      "source_id": "chunk-726dd0c8af60735dae395e0a2512fd55",
+      "order": 1,
+      "source": "\"AHRI\"",
+      "target": "\"MADOKAI\""
+    },
+    {
+      "weight": 1.0,
+      "description": "\"Ahri and Arife are both champions involved in the same gameplay clip, each facing different opponents.\"|>7",
+      "source_id": "chunk-8377f8fa8c8920a4f1c1486212346024",
+      "order": 1,
+      "source": "\"AHRI\"",
+      "target": "\"ARIFE\""
+    },
+    {
+      "weight": 9.0,
+      "description": "\"Ahri is the central figure moving through and interacting with the mystical forest, which serves as the setting for her memory‑manipulation narrative.\"",
+      "source_id": "chunk-0e6c127c10fb89705812a342908329d8",
+      "order": 1,
+      "source": "\"AHRI\"",
+      "target": "\"MYSTICAL FOREST\""
+    },
+    {
+      "weight": 8.0,
+      "description": "\"Ahri emits and is surrounded by glowing energy, illustrating her power to manipulate memories and reality.\"",
+      "source_id": "chunk-0e6c127c10fb89705812a342908329d8",
+      "order": 1,
+      "source": "\"AHRI\"",
+      "target": "\"GLOWING ENERGY\""
+    },
+    {
+      "weight": 1.0,
+      "description": "\"Ahri actively moves through and explores the jungle area, interacting with its environment.\"|>9",
+      "source_id": "chunk-d2d05bcd1ec590f77890a543d174bb6d",
+      "order": 1,
+      "source": "\"AHRI\"",
+      "target": "\"JUNGLE\""
+    },
+    {
+      "weight": 1.0,
+      "description": "\"Ahri is a character created and managed by Riot, who designs her abilities and storyline.\"|>8",
+      "source_id": "chunk-d2d05bcd1ec590f77890a543d174bb6d",
+      "order": 1,
+      "source": "\"AHRI\"",
+      "target": "\"RIOT\""
+    },
+    {
+      "weight": 16.0,
+      "description": "\"Ahri is actively attacking the turret with her ultimate, maintaining pressure on the defending team.\"|>9<SEP>\"Ahri is applying pressure on the turret area, using her abilities to keep the enemy team from capturing it.\"|>7<SEP>\"Ahri uses her Q to clear minions and champions around the turret.\"<SEP>\"Ahri’s teammates are pushing to keep pressure on the turret, while the enemy team is defending it.\"",
+      "source_id": "chunk-e7a9ac28f921cd6d848bb8b8410c429c<SEP>chunk-9de993ea4d2737c78e4581b4f330ff47<SEP>chunk-0b22f6ec63cfca9b8465893ca0119cc0<SEP>chunk-9075c07f19742a09b3ad74a010af53ca",
+      "order": 1,
+      "source": "\"AHRI\"",
+      "target": "\"TURRET\""
+    },
+    {
+      "weight": 1.0,
+      "description": "\"A champion Ahri uses the minion wave to support the fight.\"|>7",
+      "source_id": "chunk-a97ca96b821a76d5444998f5d238857e",
+      "order": 1,
+      "source": "\"AHRI\"",
+      "target": "\"MINION WAVE\""
+    },
+    {
+      "weight": 8.0,
+      "description": "\"Ahri and her team are contesting the Rift Herald, which becomes a focal point of the engagement.\"|>8<SEP>\"Ahri's team secures the Rift Herald after the fight, indicating objective control influenced by Ahri's actions.\"",
+      "source_id": "chunk-971b1c301f9b1d04b8bfcff2de204430<SEP>chunk-cbe08d93d9eaa38f66f60a865fd58f2f",
+      "order": 1,
+      "source": "\"AHRI\"",
+      "target": "\"RIFT HERALD\""
+    },
+    {
+      "weight": 1.0,
+      "description": "\"The recent kill of the Ocean Drake provides Ahri’s team with a buff that enhances their ability to push the turret.\"|>8",
+      "source_id": "chunk-50e5f3799024f122b368387f1b3cc171",
+      "order": 1,
+      "source": "\"AHRI\"",
+      "target": "\"OCEAN DRAKE\""
+    },
+    {
+      "weight": 9.0,
+      "description": "\"Ahri is positioned in the bottom lane, maintaining pressure on the enemy turret.\"|>10<SEP>\"Ahri operates in the bottom lane, recalling and rejoining the lane during fights.\"",
+      "source_id": "chunk-cbe08d93d9eaa38f66f60a865fd58f2f<SEP>chunk-9075c07f19742a09b3ad74a010af53ca",
+      "order": 1,
+      "source": "\"AHRI\"",
+      "target": "\"BOTTOM LANE\""
+    },
+    {
+      "weight": 9.0,
+      "description": "\"Ahri is actively engaging in the team fight, using her ultimate to secure kills.\"",
+      "source_id": "chunk-e095614c66786b44e85c903db324d2eb",
+      "order": 1,
+      "source": "\"AHRI\"",
+      "target": "\"TEAM FIGHT\""
+    },
+    {
+      "weight": 1.0,
+      "description": "\"Erdo is the player controlling Ahri during the gameplay session.\"|>8",
+      "source_id": "chunk-766683e031208fd1d376543ecbbaf0c0",
+      "order": 1,
+      "source": "\"AHRI\"",
+      "target": "\"ERDO\""
+    },
+    {
+      "weight": 2.0,
+      "description": "\"Ahri competes against Singed in the mid lane, engaging in combat and attempting to secure kills.\"|>9<SEP>\"Ahri is actively engaging Singed with her Q charm and R Spirit Rush, attempting to control and damage him in the bottom lane.\"|>8",
+      "source_id": "chunk-e7a9ac28f921cd6d848bb8b8410c429c<SEP>chunk-766683e031208fd1d376543ecbbaf0c0",
+      "order": 1,
+      "source": "\"AHRI\"",
+      "target": "\"SINGED\""
+    },
+    {
+      "weight": 1.0,
+      "description": "\"Ahri is positioned in the mid lane, where she performs her gameplay actions.\"|>9",
+      "source_id": "chunk-766683e031208fd1d376543ecbbaf0c0",
+      "order": 1,
+      "source": "\"AHRI\"",
+      "target": "\"MID LANE\""
+    },
+    {
+      "weight": 10.0,
+      "description": "\"Ahri kills Zyra, establishing a direct combat relationship.\"|>9<SEP>\"Both champions share a coordinated build and participate in the same turret fight.\"",
+      "source_id": "chunk-a97ca96b821a76d5444998f5d238857e<SEP>chunk-9075c07f19742a09b3ad74a010af53ca",
+      "order": 1,
+      "source": "\"AHRI\"",
+      "target": "\"ZYRA\""
+    },
+    {
+      "weight": 1.0,
+      "description": "\"Ahri is attacking Jhin with her ultimate in the mid‑lane.\"|<strong>9",
+      "source_id": "chunk-791d3fb02596d8ddb511354fbec9341f",
+      "order": 1,
+      "source": "\"AHRI\"",
+      "target": "\"JHIN\""
+    },
+    {
+      "weight": 1.0,
+      "description": "\"Ahri relies on Zhonya’s Hourglass to survive counter‑attacks from Singed and his teammates.\"|>9",
+      "source_id": "chunk-e7a9ac28f921cd6d848bb8b8410c429c",
+      "order": 1,
+      "source": "\"AHRI\"",
+      "target": "\"ZHONYA’S HOURGLASS\""
+    },
+    {
+      "weight": 2.0,
+      "description": "\"Both champions are in the same bottom‑lane fight, using ultimates to maintain pressure on the enemy team.\"|>8<SEP>\"Both champions coordinate during the turret fight, with Ahri’s Charm and Ashe’s ultimate complementing each other.\"|>8",
+      "source_id": "chunk-a97ca96b821a76d5444998f5d238857e<SEP>chunk-50e5f3799024f122b368387f1b3cc171",
+      "order": 1,
+      "source": "\"AHRI\"",
+      "target": "\"ASHE\""
+    },
+    {
+      "weight": 2.0,
+      "description": "\"Ahri and Rakan work together to apply pressure on the turret, with Rakan’s support enabling Ahri’s burst.\"|>7<SEP>\"Both champions are on the same team, coordinating their ultimates to attack the enemy cluster around the turret.\"|>8",
+      "source_id": "chunk-9de993ea4d2737c78e4581b4f330ff47<SEP>chunk-50e5f3799024f122b368387f1b3cc171",
+      "order": 1,
+      "source": "\"AHRI\"",
+      "target": "\"RAKAN\""
+    },
+    {
+      "weight": 1.0,
+      "description": "\"Ahri is applying pressure on the enemy team, using her Spirit Rush to keep them on the defensive.\"|>8",
+      "source_id": "chunk-9de993ea4d2737c78e4581b4f330ff47",
+      "order": 1,
+      "source": "\"AHRI\"",
+      "target": "\"ENEMY TEAM\""
+    },
+    {
+      "weight": 18.0,
+      "description": "\"Ahri actively engages Warwick using Charm (Q) and Ultimate (R), directly targeting him in the fight.\"<SEP>\"Ahri is attacking Warwick with Spirit Rush and Charm, targeting him as a main focus of her attacks.\"<SEP>\"Ahri's team faces Warwick's push of the Rift Herald, influencing their defensive stance.\"|>7",
+      "source_id": "chunk-971b1c301f9b1d04b8bfcff2de204430<SEP>chunk-0b22f6ec63cfca9b8465893ca0119cc0<SEP>chunk-cbe08d93d9eaa38f66f60a865fd58f2f",
+      "order": 1,
+      "source": "\"AHRI\"",
+      "target": "\"WARWICK\""
+    },
+    {
+      "weight": 8.0,
+      "description": "\"Ahri considers adding Ludens …..??…..????\" |>8<SEP>\"Ahri considers purchasing Luden’s Echo for burst damage.\"<SEP>\"Ahri uses Luden’s Echo to maximize damage output during the engagement.\"|>9",
+      "source_id": "chunk-e7a9ac28f921cd6d848bb8b8410c429c<SEP>chunk-997d95dbdb8840540c33069e74ffe0ce<SEP>chunk-5c40e6b373211082863b6adfadfbb910",
+      "order": 1,
+      "source": "\"AHRI\"",
+      "target": "\"LUDEN’S ECHO\""
+    },
+    {
+      "weight": 8.0,
+      "description": "\"Ahri is attacking Lee Sin with Spirit Rush and Charm, targeting him as a main focus of her attacks.\"",
+      "source_id": "chunk-0b22f6ec63cfca9b8465893ca0119cc0",
+      "order": 1,
+      "source": "\"AHRI\"",
+      "target": "\"LEE SIN\""
+    },
+    {
+      "weight": 6.0,
+      "description": "\"The Ally Slain event involves an ally of Ahri’s team, affecting Ahri’s team’s momentum.\"",
+      "source_id": "chunk-0b22f6ec63cfca9b8465893ca0119cc0",
+      "order": 1,
+      "source": "\"AHRI\"",
+      "target": "\"ALLY SLAIN\""
+    },
+    {
+      "weight": 1.0,
+      "description": "\"Both champions are in the same bottom‑lane fight, applying ultimates to keep the enemy team under pressure.\"|>8",
+      "source_id": "chunk-a97ca96b821a76d5444998f5d238857e",
+      "order": 1,
+      "source": "\"AHRI\"",
+      "target": "\"IVERN\""
+    },
+    {
+      "weight": 19.0,
+      "description": "\"After neutralizing Warwick, Ahri continues to engage Sion to maintain lane control and prevent wave push.\"<SEP>\"Ahri and Sion are part of the same team, coordinating in the bottom‑lane push.\"|>7<SEP>\"Ahri is actively targeting and engaging Sion in multiple fights, indicating a direct combat relationship.\"<SEP>\"Ahri targets Sion with her ultimate, leading to his death, a pivotal event in the game.\"|>9",
+      "source_id": "chunk-5c40e6b373211082863b6adfadfbb910<SEP>chunk-971b1c301f9b1d04b8bfcff2de204430<SEP>chunk-a97ca96b821a76d5444998f5d238857e<SEP>chunk-cbe08d93d9eaa38f66f60a865fd58f2f",
+      "order": 1,
+      "source": "\"AHRI\"",
+      "target": "\"SION\""
+    },
+    {
+      "weight": 1.0,
+      "description": "\"Ahri is identified as the Eternal Hero in the game context, indicating a direct identity relationship.\"|>10",
+      "source_id": "chunk-a97ca96b821a76d5444998f5d238857e",
+      "order": 1,
+      "source": "\"AHRI\"",
+      "target": "\"ETERNAL HERO\""
+    },
+    {
+      "weight": 8.0,
+      "description": "\"Ahri moves toward the Dragon after the lane fight, shifting focus to the new objective.\"",
+      "source_id": "chunk-971b1c301f9b1d04b8bfcff2de204430",
+      "order": 1,
+      "source": "\"AHRI\"",
+      "target": "\"DRAGON\""
+    },
+    {
+      "weight": 6.0,
+      "description": "\"Cain is blamed for a wasted teleport, implying a missed opportunity that affected Ahri's positioning.\"",
+      "source_id": "chunk-971b1c301f9b1d04b8bfcff2de204430",
+      "order": 1,
+      "source": "\"AHRI\"",
+      "target": "\"CAIN\""
+    },
+    {
+      "weight": 9.0,
+      "description": "\"Ahri uses her ultimate Spirit Fire to target an enemy champion during the fight.\"",
+      "source_id": "chunk-e095614c66786b44e85c903db324d2eb",
+      "order": 1,
+      "source": "\"AHRI\"",
+      "target": "\"SPIRIT FIRE\""
+    },
+    {
+      "weight": 1.0,
+      "description": "\"Ahri's team lost the Mountain Drake, which impacted the objective advantage in the game.\"|>7",
+      "source_id": "chunk-5418d6b0956d9698de0cc256bc7a6ed1",
+      "order": 1,
+      "source": "\"AHRI\"",
+      "target": "\"MOUNTAIN DRAKE\""
+    },
+    {
+      "weight": 2.0,
+      "description": "\"Ahri and Akali are teammates, both using ultimates to push the lane and maintain pressure on the enemy turret.\"|>8<SEP>\"Akali and Ahri are teammates, both focusing on the same enemy targets and coordinating to secure kills and push the lane.\"|>8",
+      "source_id": "chunk-5418d6b0956d9698de0cc256bc7a6ed1",
+      "order": 1,
+      "source": "\"AHRI\"",
+      "target": "\"AKALI\""
+    },
+    {
+      "weight": 1.0,
+      "description": "\"Ahri directly attacks Polnarev with Twisted Fate, causing crowd control and damage.\"|>9",
+      "source_id": "chunk-5418d6b0956d9698de0cc256bc7a6ed1",
+      "order": 1,
+      "source": "\"AHRI\"",
+      "target": "\"POLNAREV\""
+    },
+    {
+      "weight": 1.0,
+      "description": "\"Eternal Hero and Ahri use their ultimates together to achieve a double kill.\"",
+      "source_id": "chunk-54a6f8ba3aa2145b8ba6ba20249682e1",
+      "order": 1,
+      "source": "\"AHRI\"",
+      "target": "\"ETERNAL HERO\""
+    },
+    {
+      "weight": 8.0,
+      "description": "\"Ahri is part of the team fighting for the Baron Nashor objective, showing strategic involvement.\"",
+      "source_id": "chunk-5c40e6b373211082863b6adfadfbb910",
+      "order": 1,
+      "source": "\"AHRI\"",
+      "target": "\"BARON NASHOR\""
+    },
+    {
+      "weight": 8.0,
+      "description": "\"Ahri engages in a showdown near the mid‑lane turret, indicating a positional relationship.\"<SEP>\"Ahri is actively engaging the mid‑lane turret, using her abilities to dominate the fight and ultimately destroy the turret.\"|>8",
+      "source_id": "chunk-997d95dbdb8840540c33069e74ffe0ce<SEP>chunk-5c40e6b373211082863b6adfadfbb910",
+      "order": 1,
+      "source": "\"AHRI\"",
+      "target": "\"MID‑LANE TURRET\""
+    },
+    {
+      "weight": 7.0,
+      "description": "\"Ahri considers purchasing Void Staff to enhance her damage output.\"<SEP>\"Ahri purchased Void Staff to increase her damage output against enemies during the fight.\"|>9",
+      "source_id": "chunk-997d95dbdb8840540c33069e74ffe0ce<SEP>chunk-5c40e6b373211082863b6adfadfbb910",
+      "order": 1,
+      "source": "\"AHRI\"",
+      "target": "\"VOID STAFF\""
+    },
+    {
+      "weight": 7.0,
+      "description": "\"Ahri considers adding Zonya’s Hourglass to her item build for survivability and burst damage.\"|>7<SEP>\"Ahri considers purchasing Zonya’s Hourglass for survivability.\"",
+      "source_id": "chunk-997d95dbdb8840540c33069e74ffe0ce<SEP>chunk-5c40e6b373211082863b6adfadfbb910",
+      "order": 1,
+      "source": "\"AHRI\"",
+      "target": "\"ZONYA’S HOURGLASS\""
+    },
+    {
+      "weight": 8.0,
+      "description": "\"Ahri is attacking Spidermaan with her ultimate in the bottom lane.\"|",
+      "source_id": "chunk-791d3fb02596d8ddb511354fbec9341f",
+      "order": 1,
+      "source": "\"AHRI\"",
+      "target": "\"SPIDERMAAN\""
+    },
+    {
+      "weight": 1.0,
+      "description": "\"Ahri destroys the mid lane turret, leading to a strategic advantage.\"",
+      "source_id": "chunk-df231031873dcc5add5b5640412bd723",
+      "order": 1,
+      "source": "\"AHRI\"",
+      "target": "\"MID LANE TURRET\""
+    },
+    {
+      "weight": 1.0,
+      "description": "\"Ahri destroys the inhibitor turret, leading to a strategic advantage.\"",
+      "source_id": "chunk-df231031873dcc5add5b5640412bd723",
+      "order": 1,
+      "source": "\"AHRI\"",
+      "target": "\"INHIBITOR TURRET\""
+    },
+    {
+      "weight": 1.0,
+      "description": "\"Ahri leads the team in the mid lane, achieving multiple kills and destroying the inhibitor turret, pushing the mid lane.\"",
+      "source_id": "chunk-df231031873dcc5add5b5640412bd723",
+      "order": 1,
+      "source": "\"AHRI\"",
+      "target": "\"TEAM\""
+    },
+    {
+      "weight": 2.0,
+      "description": "\"Ahri actively engages the turret by using Charm and Spirit Rush to apply pressure and attempt to secure a kill.\"|>8<SEP>\"Ahri applies her ultimate to the turret area, contributing to the pressure on the turret.\"|>8",
+      "source_id": "chunk-a97ca96b821a76d5444998f5d238857e<SEP>chunk-50e5f3799024f122b368387f1b3cc171",
+      "order": 1,
+      "source": "\"AHRI\"",
+      "target": "\"BOTTOM‑LANE TURRET\""
+    },
+    {
+      "weight": 1.0,
+      "description": "\"Ahri kills BlueCz, resulting in a gain of gold.\"|>9",
+      "source_id": "chunk-a97ca96b821a76d5444998f5d238857e",
+      "order": 1,
+      "source": "\"AHRI\"",
+      "target": "\"BLUECZ\""
+    },
+    {
+      "weight": 1.0,
+      "description": "\"The first turret destruction by Ahri or the team is a key event.\"|>8",
+      "source_id": "chunk-a97ca96b821a76d5444998f5d238857e",
+      "order": 1,
+      "source": "\"AHRI\"",
+      "target": "\"FIRST TURRET\""
+    },
+    {
+      "weight": 1.0,
+      "description": "\"Gunplank is preparing to face Madokai, the threat mentioned in the gameplay summary.\"|>6",
+      "source_id": "chunk-726dd0c8af60735dae395e0a2512fd55",
+      "order": 1,
+      "source": "\"GUNPLANK\"",
+      "target": "\"MADOKAI\""
+    },
+    {
+      "weight": 1.0,
+      "description": "\"Arife confronts the shadowy figure King Arruinado during the forest duel.\"|>8",
+      "source_id": "chunk-8377f8fa8c8920a4f1c1486212346024",
+      "order": 1,
+      "source": "\"ARIFE\"",
+      "target": "\"KING ARRUINADO\""
+    },
+    {
+      "weight": 1.0,
+      "description": "\"Arife uses Viego’s memories to empower her spell, targeting him.\"|>9",
+      "source_id": "chunk-8377f8fa8c8920a4f1c1486212346024",
+      "order": 1,
+      "source": "\"ARIFE\"",
+      "target": "\"VIEGO\""
+    },
+    {
+      "weight": 1.0,
+      "description": "\"Tathresh fights alongside Arife against the possessed Gunplaán.\"|>7",
+      "source_id": "chunk-8377f8fa8c8920a4f1c1486212346024",
+      "order": 1,
+      "source": "\"TATHRESH\"",
+      "target": "\"GUNPLAÁN\""
+    },
+    {
+      "weight": 1.0,
+      "description": "\"Smolder is in the same lane as Viego, who may assist in pushing the wave.\"|>7",
+      "source_id": "chunk-d3fc44abada49d7cd74346e3bacb4252",
+      "order": 1,
+      "source": "\"VIEGO\"",
+      "target": "\"SMOLDER\""
+    },
+    {
+      "weight": 8.0,
+      "description": "\"Ahrī’s narrative includes the Garden of Forgotten Things as part of her journey, indicating a direct relationship between the champion and the event.\"|",
+      "source_id": "chunk-63d31af389b05ace19fe8249375a5fbc",
+      "order": 1,
+      "source": "\"AHRĪ\"",
+      "target": "\"GARDEN OF FORGOTTEN THINGS\""
+    },
+    {
+      "weight": 1.0,
+      "description": "\"The glowing energy is a characteristic feature of the mystical forest, creating a symbolic‑tied‑…....??…..??? ?? ?? ?? ?? ?? ?? ?? ?? ?? … … … … … … … strong ……………………………………………………………………………?? ??………………………………………………………………………………??…………‑…………………………………………………………………………………………………………………??……………………………………………………………………………………………………??……………………………………………………………………??…………………………………………………………………………We…………………??……………………………………………??…………………………………………………………………………………………………………………………………………………………………??…………………………We………??………‑…………………………………………………………………………………………………………………………………………………………………………………………………………………………………………………………We…………………………………………………………………………………………………………………………………??…………………………………………………………………………………………………………………………………………………………………………………………………………………………………………………………………………??…………………………………………………………………………………………………………………………………………………………………………………………………………………………………………………………………………………………………………………………………………………………………………………………………………………………………………??……………………………………………………………………………………………………………………………………………………………………………………………………………………………………………………………………………………………………………………………………??…………………………………………………………………………………………………………………………………………………………………………………??………………………………………………………………………………………………………………………………………………………………………………………………………………………………………………………………………………………………………………………………………………………………??……………………………………………………………………………………………………………………………………………………………………………………………………………………………………………………………………………………………………………………………………………………………………………………………………………………………………………………………………………………………………………………………………………………………………………………………………………………………………………………………………………………………………………??",
+      "source_id": "chunk-0e6c127c10fb89705812a342908329d8",
+      "order": 1,
+      "source": "\"MYSTICAL FOREST\"",
+      "target": "\"GLOWING ENERGY\""
+    },
+    {
+      "weight": 1.0,
+      "description": "\"Ari Bossque Viejo is a champion character within the League of Legends game.\"|>9",
+      "source_id": "chunk-10fe0e28e96ec1021e96b83bf4fe6b1f",
+      "order": 1,
+      "source": "\"ARI BOSSQUE VIEJO\"",
+      "target": "\"LEAGUE OF LEGENDS\""
+    },
+    {
+      "weight": 1.0,
+      "description": "\"Riot Games develops and publishes League of Legends, the game featuring Ari Bossque Viejo.\"|>8",
+      "source_id": "chunk-10fe0e28e96ec1021e96b83bf4fe6b1f",
+      "order": 1,
+      "source": "\"ARI BOSSQUE VIEJO\"",
+      "target": "\"RIOT GAMES\""
+    },
+    {
+      "weight": 1.0,
+      "description": "\"The champion's skins are influenced by Kpop culture, as mentioned in the transcript.\"|>7",
+      "source_id": "chunk-10fe0e28e96ec1021e96b83bf4fe6b1f",
+      "order": 1,
+      "source": "\"ARI BOSSQUE VIEJO\"",
+      "target": "\"KPOP\""
+    },
+    {
+      "weight": 1.0,
+      "description": "\"Riot Games is the developer and publisher of League of Legends.\"|>10",
+      "source_id": "chunk-10fe0e28e96ec1021e96b83bf4fe6b1f",
+      "order": 1,
+      "source": "\"LEAGUE OF LEGENDS\"",
+      "target": "\"RIOT GAMES\""
+    },
+    {
+      "weight": 1.0,
+      "description": "9",
+      "source_id": "chunk-5369aae6f52fc67ffbf63b3db7c1e061",
+      "order": 1,
+      "source": "\"ARI USES YMELO STONES IN A MAGICAL RITUAL, INDICATING A DIRECT INTERACTION AND RELIANCE ON THESE STONES FOR POWER.\"",
+      "target": "\"ARI\"<|\"YMELO STONES\""
+    },
+    {
+      "weight": 1.0,
+      "description": "8",
+      "source_id": "chunk-5369aae6f52fc67ffbf63b3db7c1e061",
+      "order": 1,
+      "source": "\"GIRÍN ATTACKS ARI WITH POISON, BUT ARI ESCAPES AND DEFEATS GIRÍN, SHOWING A CONFLICT AND SUBSEQUENT VICTORY.\"",
+      "target": "\"GIRÍN\"<|\"ARI\""
+    },
+    {
+      "weight": 1.0,
+      "description": "9",
+      "source_id": "chunk-5369aae6f52fc67ffbf63b3db7c1e061",
+      "order": 1,
+      "source": "\"HARRY VISITS THE JARDÍN DE LO OLVIDO TO CONFRONT AND RELEASE MEMORIES, INDICATING A PURPOSEFUL RELATIONSHIP BETWEEN THE CHARACTER AND THE LOCATION.\"",
+      "target": "\"HARRY\"<|\"JARDÍN DE LO OLVIDO\""
+    },
+    {
+      "weight": 1.0,
+      "description": "7",
+      "source_id": "chunk-5369aae6f52fc67ffbf63b3db7c1e061",
+      "order": 1,
+      "source": "\"ALI\"<|\"JARDÍN DE LO OLVIDO\"",
+      "target": "\"ALI’S JOURNEY LEADS HIM TO THE JARDÍN DE LO OLVIDO, SUGGESTING A CONNECTION BETWEEN THE TRAVELER AND THE ENCHANTED FOREST.\""
+    },
+    {
+      "weight": 1.0,
+      "description": "\"Smolder is the main champion featured in the Smolder Starter Guide, which provides a concise summary of key events and actions for Smolder.\"|>9",
+      "source_id": "chunk-38f6b17996dfa4f0725931853356e5c7",
+      "order": 1,
+      "source": "\"SMOLDER STARTER GUIDE\"",
+      "target": "\"SMOLDER\""
+    },
+    {
+      "weight": 1.0,
+      "description": "\"The Smolder Starter Guide is part of the Master in Minutes collection of guides for various aspects of the game.\"|>8",
+      "source_id": "chunk-38f6b17996dfa4f0725931853356e5c7",
+      "order": 1,
+      "source": "\"SMOLDER STARTER GUIDE\"",
+      "target": "\"MASTER IN MINUTES\""
+    },
+    {
+      "weight": 8.0,
+      "description": "\"Smolder’s playstyle is compared to Ezreal’s, indicating a similarity in their ADC roles.\"",
+      "source_id": "chunk-3c2817e67c2a0f4eba0e8992bca8e29b",
+      "order": 1,
+      "source": "\"EZREAL\"",
+      "target": "\"SMOLDER\""
+    },
+    {
+      "weight": 7.0,
+      "description": "\"Smolder is supported by Lux during lane fights, showing a teammate relationship.\"",
+      "source_id": "chunk-3c2817e67c2a0f4eba0e8992bca8e29b",
+      "order": 1,
+      "source": "\"LUX\"",
+      "target": "\"SMOLDER\""
+    },
+    {
+      "weight": 9.0,
+      "description": "\"Smolder kills Irelia in a team fight, demonstrating an adversarial relationship.\"",
+      "source_id": "chunk-3c2817e67c2a0f4eba0e8992bca8e29b",
+      "order": 1,
+      "source": "\"IRELIA\"",
+      "target": "\"SMOLDER\""
+    },
+    {
+      "weight": 7.0,
+      "description": "\"Smolder is supported by Fizz in the game, indicating a teammate relationship.\"",
+      "source_id": "chunk-3c2817e67c2a0f4eba0e8992bca8e29b",
+      "order": 1,
+      "source": "\"FIZZ\"",
+      "target": "\"SMOLDER\""
+    },
+    {
+      "weight": 7.0,
+      "description": "\"Kayn is part of the team that’s fighting with Smoothed, showing a team‑player relationship.\"",
+      "source_id": "chunk-3c2817e67c2a0f4eba0e8992bca8e29b",
+      "order": 1,
+      "source": "\"KAYN\"",
+      "target": "\"SMOLDER\""
+    },
+    {
+      "weight": 6.0,
+      "description": "\"The ranking‑improvement service promotes Smolder’s gameplay to help players improve their rank.\"",
+      "source_id": "chunk-3c2817e67c2a0f4eba0e8992bca8e29b",
+      "order": 1,
+      "source": "\"RANKING‑IMPROVEMENT SERVICE\"",
+      "target": "\"SMOLDER\""
+    },
+    {
+      "weight": 5.0,
+      "description": "\"The service is offered during the Season 14 ‑  … … … .\"",
+      "source_id": "chunk-3c2817e67c2a0f4eba0e8992bca8e29b",
+      "order": 1,
+      "source": "\"RANKING‑IMPROVEMENT SERVICE\"",
+      "target": "\"SEASON 14\""
+    },
+    {
+      "weight": 8.0,
+      "description": "\"Smolder is actively harassing Allyslain with his Q ability, aiming to damage and potentially secure a kill.\"",
+      "source_id": "chunk-668593e769836f1556568b94ee14f49e",
+      "order": 1,
+      "source": "\"ALLYSLAIN\"",
+      "target": "\"SMOLDER\""
+    },
+    {
+      "weight": 7.0,
+      "description": "\"Smolder secured a kill on Aurora … \"",
+      "source_id": "chunk-eec1a77179830c031a31412197497ccf",
+      "order": 1,
+      "source": "\"AURORA SOJ\"",
+      "target": "\"SMOLDER\""
+    },
+    {
+      "weight": 1.0,
+      "description": "\"Smolder uses Dragon Practice as his ultimate to damage enemies and push minions.\"|>9",
+      "source_id": "chunk-8b662881b81d9f98abf16595ae3bc91a",
+      "order": 1,
+      "source": "\"DRAGON PRACTICE\"",
+      "target": "\"SMOLDER\""
+    },
+    {
+      "weight": 1.0,
+      "description": "\"Smolder chains his core kit with Q Flash to shred enemies and add displacement.\"|>8",
+      "source_id": "chunk-8b662881b81d9f98abf16595ae3bc91a",
+      "order": 1,
+      "source": "\"Q FLASH\"",
+      "target": "\"SMOLDER\""
+    },
+    {
+      "weight": 1.0,
+      "description": "\"Smolder chains his core kit with W Flash to shred enemies and add displacement.\"|>8",
+      "source_id": "chunk-8b662881b81d9f98abf16595ae3bc91a",
+      "order": 1,
+      "source": "\"W FLASH\"",
+      "target": "\"SMOLDER\""
+    },
+    {
+      "weight": 18.0,
+      "description": "\"Smolder stays near the turret to maintain lane control and push the minion wave.\"|>7<SEP>\"Smolder's wave control keeps the turret exposed and under attack, threatening the enemy's defensive position.\"|>7<SEP>\"Smolder's wave management and Q usage keep the wave moving toward the enemy turret, maintaining pressure.\"<SEP>\"Smolder’s ultimate can destroy the turret, directly affecting the defensive structure in the lane.\"",
+      "source_id": "chunk-8b662881b81d9f98abf16595ae3bc91a<SEP>chunk-56760db9e5f22657231001b182fa8f2c<SEP>chunk-921a2c333f18b12f26287e340c8ea6a8<SEP>chunk-dde3ef385da20ee7d75730ea561e38fb",
+      "order": 1,
+      "source": "\"TURRET\"",
+      "target": "\"SMOLDER\""
+    },
+    {
+      "weight": 1.0,
+      "description": "\"The enemy champion is being pushed toward the turret by Smolder's attacks, increasing the risk of turret damage.\"|>6",
+      "source_id": "chunk-921a2c333f18b12f26287e340c8ea6a8",
+      "order": 1,
+      "source": "\"TURRET\"",
+      "target": "\"ENEMY CHAMPION\""
+    },
+    {
+      "weight": 7.0,
+      "description": "\"The Team Fight is centered around the turret, influencing its defense and the wave's position.\"",
+      "source_id": "chunk-56760db9e5f22657231001b182fa8f2c",
+      "order": 1,
+      "source": "\"TURRET\"",
+      "target": "\"TEAM FIGHT\""
+    },
+    {
+      "weight": 1.0,
+      "description": "\"Singed is defending the turret and using defensive spells to hold it against Ahri's attacks.\"|>7",
+      "source_id": "chunk-e7a9ac28f921cd6d848bb8b8410c429c",
+      "order": 1,
+      "source": "\"TURRET\"",
+      "target": "\"SINGED\""
+    },
+    {
+      "weight": 8.0,
+      "description": "\"Zyra uses her ultimate to clear minions and crowd‑control enemies near the turret.\"",
+      "source_id": "chunk-9075c07f19742a09b3ad74a010af53ca",
+      "order": 1,
+      "source": "\"TURRET\"",
+      "target": "\"ZYRA\""
+    },
+    {
+      "weight": 1.0,
+      "description": "\"Rakan is also attacking the turret with his ultimate, contributing to the fight for the objective.\"|>8",
+      "source_id": "chunk-9de993ea4d2737c78e4581b4f330ff47",
+      "order": 1,
+      "source": "\"TURRET\"",
+      "target": "\"RAKAN\""
+    },
+    {
+      "weight": 7.0,
+      "description": "\"Warwick is aggressively pushing back to keep Ahri and her allies at bayonet distance from the turret.\"",
+      "source_id": "chunk-0b22f6ec63cfca9b8465893ca0119cc0",
+      "order": 1,
+      "source": "\"TURRET\"",
+      "target": "\"WARWICK\""
+    },
+    {
+      "weight": 7.0,
+      "description": "\"Lee Sin is using defensive spells to keep the turret from falling.\"",
+      "source_id": "chunk-0b22f6ec63cfca9b8465893ca0119cc0",
+      "order": 1,
+      "source": "\"TURRET\"",
+      "target": "\"LEE SIN\""
+    },
+    {
+      "weight": 10.0,
+      "description": "\"Smolder uses his Q and ultimate to harass, push back, and keep the enemy champion at bayonet distance.\"<SEP>\"Smolder's ultimate and E combo pushes the enemy champion toward the turret, maintaining pressure on the opponent.\"|>8",
+      "source_id": "chunk-8052217c808d9d0d02c75c0672fe10cb<SEP>chunk-921a2c333f18b12f26287e340c8ea6a8",
+      "order": 1,
+      "source": "\"ENEMY CHAMPION\"",
+      "target": "\"SMOLDER\""
+    },
+    {
+      "weight": 1.0,
+      "description": "\"Smolder's abilities clear the minion wave, keeping the lane under his control and preventing the enemy from pushing back.\"|>7",
+      "source_id": "chunk-921a2c333f18b12f26287e340c8ea6a8",
+      "order": 1,
+      "source": "\"MINIONS\"",
+      "target": "\"SMOLDER\""
+    },
+    {
+      "weight": 6.0,
+      "description": "\"Sivir is an example of an ADC champion, sharing the same role classification.\"",
+      "source_id": "chunk-dde3ef385da20ee7d75730ea561e38fb",
+      "order": 1,
+      "source": "\"SIVIR\"",
+      "target": "\"ADC\""
+    },
+    {
+      "weight": 8.0,
+      "description": "\"Smolder is also an ADC champion, belonging to the same role category.\"",
+      "source_id": "chunk-dde3ef385da20ee7d75730ea561e38fb",
+      "order": 1,
+      "source": "\"ADC\"",
+      "target": "\"SMOLDER\""
+    },
+    {
+      "weight": 15.0,
+      "description": "\"Smolder’s splash Q pushes the enemy champion back and keeps the minion wave in a favorable position.\"<SEP>\"Smolder’s ultimate pushes the minion wave, altering the composition of units in the lane.\"",
+      "source_id": "chunk-8052217c808d9d0d02c75c0672fe10cb<SEP>chunk-dde3ef385da20ee7d75730ea561e38fb",
+      "order": 1,
+      "source": "\"MINION WAVE\"",
+      "target": "\"SMOLDER\""
+    },
+    {
+      "weight": 7.0,
+      "description": "\"The minion wave pushes toward the enemy turret, a movement influenced by Smolder’s pressure.\"",
+      "source_id": "chunk-8052217c808d9d0d02c75c0672fe10cb",
+      "order": 1,
+      "source": "\"MINION WAVE\"",
+      "target": "\"ENEMY TURRET\""
+    },
+    {
+      "weight": 9.0,
+      "description": "\"Smolder’s actions maintain lane control, keeping the lane under his team’s influence.\"",
+      "source_id": "chunk-dde3ef385da20ee7d75730ea561e38fb",
+      "order": 1,
+      "source": "\"LANE\"",
+      "target": "\"SMOLDER\""
+    },
+    {
+      "weight": 9.0,
+      "description": "\"Smolder moves into the mid‑lane to set up a favorable engagement and maintain lane control.\"",
+      "source_id": "chunk-8052217c808d9d0d02c75c0672fe10cb",
+      "order": 1,
+      "source": "\"MID‑LANE\"",
+      "target": "\"SMOLDER\""
+    },
+    {
+      "weight": 9.0,
+      "description": "\"Smolder positions near the river to gain defensive advantage and control the back‑line.\"|>8<SEP>\"Smolder pulls away from the bottom lane toward the river to reposition for his long‑range abilities.\"",
+      "source_id": "chunk-8052217c808d9d0d02c75c0672fe10cb<SEP>chunk-1bb8fa15612c7fb77ceb57839a48669e",
+      "order": 1,
+      "source": "\"RIVER\"",
+      "target": "\"SMOLDER\""
+    },
+    {
+      "weight": 1.0,
+      "description": "\"The river and mid‑turret act as walls that force the enemy to play defensively.\"|>7",
+      "source_id": "chunk-1bb8fa15612c7fb77ceb57839a48669e",
+      "order": 1,
+      "source": "\"RIVER\"",
+      "target": "\"MID‑TURRET\""
+    },
+    {
+      "weight": 1.0,
+      "description": "\"Smolder directly engages Gnar with his abilities, ultimately leading to Gnar's death in the showdown.\"|>9",
+      "source_id": "chunk-c656bbd0a81bad3a9fdd373336233e94",
+      "order": 1,
+      "source": "\"GNAR\"",
+      "target": "\"SMOLDER\""
+    },
+    {
+      "weight": 2.0,
+      "description": "\"Smolder's teammates, including Janna, provide crowd‑control and support to help secure the kill on Gnar.\"|>8<SEP>\"Smolder's ultimate damages Janna, indicating a combat interaction.\"|>6",
+      "source_id": "chunk-6f57568b2b676851343d311738188737<SEP>chunk-c656bbd0a81bad3a9fdd373336233e94",
+      "order": 1,
+      "source": "\"JANNA\"",
+      "target": "\"SMOLDER\""
+    },
+    {
+      "weight": 1.0,
+      "description": "\"Janna and Lucian are teammates of Smolder, working together to apply pressure on Gnar.\"|>6",
+      "source_id": "chunk-c656bbd0a81bad3a9fdd373336233e94",
+      "order": 1,
+      "source": "\"JANNA\"",
+      "target": "\"LUCIAN\""
+    },
+    {
+      "weight": 1.0,
+      "description": "\"Janna and Gragas are teammates of Smolder, coordinating crowd‑control to support the fight.\"|>6",
+      "source_id": "chunk-c656bbd0a81bad3a9fdd373336233e94",
+      "order": 1,
+      "source": "\"JANNA\"",
+      "target": "\"GRAGAS\""
+    },
+    {
+      "weight": 2.0,
+      "description": "\"Lucian assists Smolder by delivering poke damage, aiding in maintaining pressure on Gnar.\"|>7<SEP>\"Smolder's ultimate is used to secure the kill that Lucian achieved, linking their actions in the fight.\"|>7",
+      "source_id": "chunk-6f57568b2b676851343d311738188737<SEP>chunk-c656bbd0a81bad3a9fdd373336233e94",
+      "order": 1,
+      "source": "\"LUCIAN\"",
+      "target": "\"SMOLDER\""
+    },
+    {
+      "weight": 1.0,
+      "description": "\"Lucian and Gragas collaborate with Smolder to maintain pressure on Gnar.\"|>6",
+      "source_id": "chunk-c656bbd0a81bad3a9fdd373336233e94",
+      "order": 1,
+      "source": "\"LUCIAN\"",
+      "target": "\"GRAGAS\""
+    },
+    {
+      "weight": 1.0,
+      "description": "\"Lucian kills Mordekaiser, establishing a direct combat relationship.\"|>9",
+      "source_id": "chunk-6f57568b2b676851343d311738188737",
+      "order": 1,
+      "source": "\"LUCIAN\"",
+      "target": "\"MORDEKAISER\""
+    },
+    {
+      "weight": 1.0,
+      "description": "\"Gragas contributes crowd‑control to keep Gnar pinned, supporting Smolder's ultimate.\"|>7",
+      "source_id": "chunk-c656bbd0a81bad3a9fdd373336233e94",
+      "order": 1,
+      "source": "\"GRAGAS\"",
+      "target": "\"SMOLDER\""
+    },
+    {
+      "weight": 1.0,
+      "description": "\"Smolder is the central figure in the Mid‑lane Recap, whose actions are highlighted in the summary.\"|>8",
+      "source_id": "chunk-c656bbd0a81bad3a9fdd373336233e94",
+      "order": 1,
+      "source": "\"MID‑LANE RECAP\"",
+      "target": "\"SMOLDER\""
+    },
+    {
+      "weight": 1.0,
+      "description": "\"The Mid‑lane Recap summarizes events that lead to the Mid‑lane Showdown.\"|>7",
+      "source_id": "chunk-c656bbd0a81bad3a9fdd373336233e94",
+      "order": 1,
+      "source": "\"MID‑LANE RECAP\"",
+      "target": "\"MID‑LANE SHOWDOWN\""
+    },
+    {
+      "weight": 1.0,
+      "description": "\"Smolder is the main participant in the Mid‑lane Showdown, leading the fight against Gnar.\"|>9",
+      "source_id": "chunk-c656bbd0a81bad3a9fdd373336233e94",
+      "order": 1,
+      "source": "\"MID‑LANE SHOWDOWN\"",
+      "target": "\"SMOLDER\""
+    },
+    {
+      "weight": 1.0,
+      "description": "\"Smolder is the central figure in the Bottom‑lane Smolder push event, leading the coordinated team push and using his abilities to poke the tower and minions.\"|>8",
+      "source_id": "chunk-af73a4b73a0139c676fd73cb1660025e",
+      "order": 1,
+      "source": "\"BOTTOM‑LANE SMOLDER PUSH\"",
+      "target": "\"SMOLDER\""
+    },
+    {
+      "weight": 1.0,
+      "description": "\"Smolder’s playstyle and champion choice are highlighted during the Draft‑phase transition, emphasizing the importance of early‑game champion selection for wave‑pushing.\"|>7",
+      "source_id": "chunk-af73a4b73a0139c676fd73cb1660025e",
+      "order": 1,
+      "source": "\"DRAFT‑PHASE TRANSITION\"",
+      "target": "\"SMOLDER\""
+    },
+    {
+      "weight": 1.0,
+      "description": "\"Smolder uses his Q ability repeatedly to spread damage across enemies.\"|>9",
+      "source_id": "chunk-1bb8fa15612c7fb77ceb57839a48669e",
+      "order": 1,
+      "source": "\"Q\"",
+      "target": "\"SMOLDER\""
+    },
+    {
+      "weight": 1.0,
+      "description": "\"Smolder stands near the mid‑turret to maintain a solid defensive position while harassing enemies.\"|>8",
+      "source_id": "chunk-1bb8fa15612c7fb77ceb57839a48669e",
+      "order": 1,
+      "source": "\"MID‑TURRET\"",
+      "target": "\"SMOLDER\""
+    },
+    {
+      "weight": 1.0,
+      "description": "\"Smolder’s Q contributes to the team’s push toward the enemy turret, helping secure the Rift Herald.\"|>7",
+      "source_id": "chunk-1bb8fa15612c7fb77ceb57839a48669e",
+      "order": 1,
+      "source": "\"RIFT HERALD\"",
+      "target": "\"SMOLDER\""
+    },
+    {
+      "weight": 1.0,
+      "description": "\"Warwick pushes the Rift Herald toward the bottom lane, making it a key objective.\"|>9",
+      "source_id": "chunk-cbe08d93d9eaa38f66f60a865fd58f2f",
+      "order": 1,
+      "source": "\"RIFT HERALD\"",
+      "target": "\"WARWICK\""
+    },
+    {
+      "weight": 1.0,
+      "description": "\"Sion's death occurs while the Rift Herald is contested, impacting the objective's control.\"|>7",
+      "source_id": "chunk-cbe08d93d9eaa38f66f60a865fd58f2f",
+      "order": 1,
+      "source": "\"RIFT HERALD\"",
+      "target": "\"SION\""
+    },
+    {
+      "weight": 1.0,
+      "description": "\"Smolder's ultimate directly kills Mordekaiser, establishing a direct combat relationship.\"|>9",
+      "source_id": "chunk-6f57568b2b676851343d311738188737",
+      "order": 1,
+      "source": "\"MORDEKAISER\"",
+      "target": "\"SMOLDER\""
+    },
+    {
+      "weight": 1.0,
+      "description": "\"Kennen's ultimate clears minions and applies pressure, contributing to the overall push that leads to Mordekaiser's death.\"|>7",
+      "source_id": "chunk-6f57568b2b676851343d311738188737",
+      "order": 1,
+      "source": "\"MORDEKAISER\"",
+      "target": "\"KENNEN\""
+    },
+    {
+      "weight": 1.0,
+      "description": "\"Smolder and Kennen both participate in the mid‑lane fight, coordinating the push toward the turret.\"|>8",
+      "source_id": "chunk-6f57568b2b676851343d311738188737",
+      "order": 1,
+      "source": "\"KENNEN\"",
+      "target": "\"SMOLDER\""
+    },
+    {
+      "weight": 2.0,
+      "description": "\"Smolder buys the Essence Reaver to improve his minion‑clearing efficiency.\"|>8<SEP>\"Smolder uses the Essence Reaver rune as part of his build strategy.\"|>8",
+      "source_id": "chunk-6f57568b2b676851343d311738188737<SEP>chunk-d3fc44abada49d7cd74346e3bacb4252",
+      "order": 1,
+      "source": "\"ESSENCE REAVER\"",
+      "target": "\"SMOLDER\""
+    },
+    {
+      "weight": 1.0,
+      "description": "\"Smolder uses the Cooldown Boots rune as part of his build strategy.\"|>8",
+      "source_id": "chunk-6f57568b2b676851343d311738188737",
+      "order": 1,
+      "source": "\"COOLDOWN BOOTS\"",
+      "target": "\"SMOLDER\""
+    },
+    {
+      "weight": 8.0,
+      "description": "\"Smolder is compared to Cogma in terms of similar ADC playstyle and item balancing, indicating a conceptual similarity.\"",
+      "source_id": "chunk-5df652d0714d2857af1e3e898b9f2fd6",
+      "order": 1,
+      "source": "\"COGMA\"",
+      "target": "\"SMOLDER\""
+    },
+    {
+      "weight": 8.0,
+      "description": "\"Smolder is compared to Vayne in terms of similar ADC playstyle and item balancing, indicating a conceptual similarity.\"",
+      "source_id": "chunk-5df652d0714d2857af1e3e898b9f2fd6",
+      "order": 1,
+      "source": "\"VAYNE\"",
+      "target": "\"SMOLDER\""
+    },
+    {
+      "weight": 8.0,
+      "description": "\"Smolder is compared to Varus in terms of similar ADC playstyle and item balancing, indicating a conceptual similarity.\"",
+      "source_id": "chunk-5df652d0714d2857af1e3e898b9f2fd6",
+      "order": 1,
+      "source": "\"VARUS\"",
+      "target": "\"SMOLDER\""
+    },
+    {
+      "weight": 1.0,
+      "description": "\"S’molder's team captures the Ocean Drake, contributing to the team's objective advantage.\"|>7",
+      "source_id": "chunk-e3b7da4bd1ce9d33975f0aad5df36196",
+      "order": 1,
+      "source": "\"S’MOLDER\"",
+      "target": "\"OCEAN DRAKE\""
+    },
+    {
+      "weight": 1.0,
+      "description": "\"S’molder continues to farm and push after the ally turret is destroyed, maintaining momentum.\"|>6",
+      "source_id": "chunk-e3b7da4bd1ce9d33975f0aad5df36196",
+      "order": 1,
+      "source": "\"S’MOLDER\"",
+      "target": "\"ALLY TURRET\""
+    },
+    {
+      "weight": 9.0,
+      "description": "\"Smolder directly engages SKILLCAPED with his Q ability, delivering a decisive blow that secures the kill.\"",
+      "source_id": "chunk-56760db9e5f22657231001b182fa8f2c",
+      "order": 1,
+      "source": "\"SKILLCAPED\"",
+      "target": "\"SMOLDER\""
+    },
+    {
+      "weight": 7.0,
+      "description": "\"SKILLCAPED is the enemy champion present in the Bottom Lane, facing Smolder's attacks.\"",
+      "source_id": "chunk-56760db9e5f22657231001b182fa8f2c",
+      "order": 1,
+      "source": "\"SKILLCAPED\"",
+      "target": "\"BOTTOM LANE\""
+    },
+    {
+      "weight": 8.0,
+      "description": "\"Smolder operates within the Bottom Lane, controlling wave movement and engaging enemies in that area.\"",
+      "source_id": "chunk-56760db9e5f22657231001b182fa8f2c",
+      "order": 1,
+      "source": "\"BOTTOM LANE\"",
+      "target": "\"SMOLDER\""
+    },
+    {
+      "weight": 8.0,
+      "description": "\"The Team Fight occurs near the turret within the Bottom Lane, involving Smolder and SKILLCAPED.\"",
+      "source_id": "chunk-56760db9e5f22657231001b182fa8f2c",
+      "order": 1,
+      "source": "\"BOTTOM LANE\"",
+      "target": "\"TEAM FIGHT\""
+    },
+    {
+      "weight": 8.0,
+      "description": "\"Zyra engages in a team fight near the bottom lane turret.\"",
+      "source_id": "chunk-9075c07f19742a09b3ad74a010af53ca",
+      "order": 1,
+      "source": "\"BOTTOM LANE\"",
+      "target": "\"ZYRA\""
+    },
+    {
+      "weight": 1.0,
+      "description": "\"Securing The Skies Descend gives the team vision in the bottom lane.\"|>8",
+      "source_id": "chunk-cbe08d93d9eaa38f66f60a865fd58f2f",
+      "order": 1,
+      "source": "\"BOTTOM LANE\"",
+      "target": "\"THE SKIES DESCEND\""
+    },
+    {
+      "weight": 8.0,
+      "description": "\"Singed follows up the fight with his ultimate, contributing to the ongoing team fight.\"",
+      "source_id": "chunk-e095614c66786b44e85c903db324d2eb",
+      "order": 1,
+      "source": "\"TEAM FIGHT\"",
+      "target": "\"SINGED\""
+    },
+    {
+      "weight": 9.0,
+      "description": "\"Ashe is part of the team fight, using her ultimate to continue the high‑intensity fight.\"",
+      "source_id": "chunk-e095614c66786b44e85c903db324d2eb",
+      "order": 1,
+      "source": "\"TEAM FIGHT\"",
+      "target": "\"ASHE\""
+    },
+    {
+      "weight": 8.0,
+      "description": "\"Thresh keeps the momentum with his ultimate, contributing to the ongoing team fight.\"",
+      "source_id": "chunk-e095614c66786b44e85c903db324d2eb",
+      "order": 1,
+      "source": "\"TEAM FIGHT\"",
+      "target": "\"THRESH\""
+    },
+    {
+      "weight": 10.0,
+      "description": "\"The location of the team fight is the Dragon pit.\"",
+      "source_id": "chunk-e095614c66786b44e85c903db324d2eb",
+      "order": 1,
+      "source": "\"TEAM FIGHT\"",
+      "target": "\"DRAGON PIT\""
+    },
+    {
+      "weight": 1.0,
+      "description": "\"Smolder observes the enemy team’s Voidgrub kill, affecting his strategic decisions.\"|>6",
+      "source_id": "chunk-d3fc44abada49d7cd74346e3bacb4252",
+      "order": 1,
+      "source": "\"VOIDGRUBS\"",
+      "target": "\"SMOLDER\""
+    },
+    {
+      "weight": 8.0,
+      "description": "\"Smolder … \"",
+      "source_id": "chunk-eec1a77179830c031a31412197497ccf",
+      "order": 1,
+      "source": "\"SMOLDER\"",
+      "target": "\"BERTVETH\""
+    },
+    {
+      "weight": 1.0,
+      "description": "\"Erdo is the player controlling Ahri, who competes against Singed.\"|>7",
+      "source_id": "chunk-766683e031208fd1d376543ecbbaf0c0",
+      "order": 1,
+      "source": "\"ERDO\"",
+      "target": "\"SINGED\""
+    },
+    {
+      "weight": 1.0,
+      "description": "\"Singed is also positioned in the mid lane, where the two champions fight.\"|>8",
+      "source_id": "chunk-766683e031208fd1d376543ecbbaf0c0",
+      "order": 1,
+      "source": "\"SINGED\"",
+      "target": "\"MID LANE\""
+    },
+    {
+      "weight": 1.0,
+      "description": "\"Jhin is channeling his ultimate Curtain Call, dealing significant damage to Singed during the team fight.\"|>8",
+      "source_id": "chunk-127edeb91b48f1fe0ba1ffce2f11202c",
+      "order": 1,
+      "source": "\"SINGED\"",
+      "target": "\"JHIN\""
+    },
+    {
+      "weight": 1.0,
+      "description": "\"Jhin is actively participating in the team fight near the bottom‑lane turret.\"|>7",
+      "source_id": "chunk-127edeb91b48f1fe0ba1ffce2f11202c",
+      "order": 1,
+      "source": "\"JHIN\"",
+      "target": "\"TEAM FIGHT NEAR THE BOTTOM‑LANE TURRET\""
+    },
+    {
+      "weight": 1.0,
+      "description": "\"Ashe supports the turret push by firing her ultimate to damage enemies and maintain the fight.\"|>7",
+      "source_id": "chunk-50e5f3799024f122b368387f1b3cc171",
+      "order": 1,
+      "source": "\"ASHE\"",
+      "target": "\"BOTTOM‑LANE TURRET\""
+    },
+    {
+      "weight": 9.0,
+      "description": "\"Ashe uses her ultimate Enchanted Crystal Arrow to target an enemy champion during the fight.\"",
+      "source_id": "chunk-e095614c66786b44e85c903db324d2eb",
+      "order": 1,
+      "source": "\"ASHE\"",
+      "target": "\"ENCHANTED CRYSTAL ARROW\""
+    },
+    {
+      "weight": 1.0,
+      "description": "\"Rakan contributes to the turret fight with his abilities, helping to sustain damage and control the enemy.\"|>7",
+      "source_id": "chunk-50e5f3799024f122b368387f1b3cc171",
+      "order": 1,
+      "source": "\"RAKAN\"",
+      "target": "\"BOTTOM‑LANE TURRET\""
+    },
+    {
+      "weight": 1.0,
+      "description": "\"Rakan and the enemy team are engaged in combat, with Rakan launching his ultimate against the enemy cluster.\"|>7",
+      "source_id": "chunk-9de993ea4d2737c78e4581b4f330ff47",
+      "order": 1,
+      "source": "\"RAKAN\"",
+      "target": "\"ENEMY TEAM\""
+    },
+    {
+      "weight": 1.0,
+      "description": "\"Warwick leads the push that includes Sion, affecting the flow of the match.\"|>6",
+      "source_id": "chunk-cbe08d93d9eaa38f66f60a865fd58f2f",
+      "order": 1,
+      "source": "\"WARWICK\"",
+      "target": "\"SION\""
+    },
+    {
+      "weight": 1.0,
+      "description": "\"Sion and Ivern the i team be the i team … … ….\"|>2",
+      "source_id": "chunk-a97ca96b821a76d5444998f5d238857e",
+      "order": 1,
+      "source": "\"IVERN\"",
+      "target": "\"SION\""
+    },
+    {
+      "weight": 8.0,
+      "description": "\"Sion is also involved in the Baron Nashor team fight, contributing to the objective's outcome.\"",
+      "source_id": "chunk-5c40e6b373211082863b6adfadfbb910",
+      "order": 1,
+      "source": "\"SION\"",
+      "target": "\"BARON NASHOR\""
+    },
+    {
+      "weight": 7.0,
+      "description": "\"Sion is present near the mid‑lane turret during the showdown, indicating a positional relationship.\"",
+      "source_id": "chunk-5c40e6b373211082863b6adfadfbb910",
+      "order": 1,
+      "source": "\"SION\"",
+      "target": "\"MID‑LANE TURRET\""
+    },
+    {
+      "weight": 1.0,
+      "description": "\"Eternal Hero and Thresh coordinate their ultimates to push the enemy back.\"",
+      "source_id": "chunk-54a6f8ba3aa2145b8ba6ba20249682e1",
+      "order": 1,
+      "source": "\"THRESH\"",
+      "target": "\"ETERNAL HERO\""
+    },
+    {
+      "weight": 1.0,
+      "description": "\"Akali's team lost the Mountain Drake, which impacted the objective advantage in the game.\"|>7",
+      "source_id": "chunk-5418d6b0956d9698de0cc256bc7a6ed1",
+      "order": 1,
+      "source": "\"MOUNTAIN DRAKE\"",
+      "target": "\"AKALI\""
+    },
+    {
+      "weight": 1.0,
+      "description": "\"Akali directly attacks Milaxin with Shadow Dance, causing damage and mobility.\"|>9",
+      "source_id": "chunk-5418d6b0956d9698de0cc256bc7a6ed1",
+      "order": 1,
+      "source": "\"AKALI\"",
+      "target": "\"MILAXIN\""
+    },
+    {
+      "weight": 1.0,
+      "description": "\"Both champions are firing their ultimates simultaneously in the same team fight.\"",
+      "source_id": "chunk-54a6f8ba3aa2145b8ba6ba20249682e1",
+      "order": 1,
+      "source": "\"ETERNAL HERO\"",
+      "target": "\"SPIDERMADDF\""
+    },
+    {
+      "weight": 1.0,
+      "description": "\"The team destroys the mid lane turret, leading to a strategic advantage.\"",
+      "source_id": "chunk-df231031873dcc5add5b5640412bd723",
+      "order": 1,
+      "source": "\"MID LANE TURRET\"",
+      "target": "\"TEAM\""
+    },
+    {
+      "weight": 1.0,
+      "description": "\"The team destroys the inhibitor turret, leading to a strategic advantage.\"",
+      "source_id": "chunk-df231031873dcc5add5b5640412bd723",
+      "order": 1,
+      "source": "\"INHIBITOR TURRET\"",
+      "target": "\"TEAM\""
+    },
+    {
+      "weight": 1.0,
+      "description": "\"The timing of the fight aligns with mid‑game objectives, indicating strategic importance.\"|>9",
+      "source_id": "chunk-50e5f3799024f122b368387f1b3cc171",
+      "order": 1,
+      "source": "\"BOTTOM‑LANE TURRET\"",
+      "target": "\"GAME CLOCK 7:50–8:32\""
+    },
+    {
+      "weight": 1.0,
+      "description": "\"The score change reflects the outcome of the turret fight, with Ahri’s team gaining the advantage.\"|>8",
+      "source_id": "chunk-50e5f3799024f122b368387f1b3cc171",
+      "order": 1,
+      "source": "\"BOTTOM‑LANE TURRET\"",
+      "target": "\"SCORE 7–6 TO 8–7\""
+    }
+  ]
+}

@@ -6,6 +6,149 @@ Reference:
 GRAPH_FIELD_SEP = "<SEP>"
 PROMPTS = {}
 
+PROMPTS["system_prompt_kg_context"] = """You generate concise domain context for knowledge-graph extraction.
+Only output the requested context text. Do not include markdown, bullet lists, or explanations."""
+
+PROMPTS["system_prompt_kg_entities"] = """You are an information extraction system for knowledge graph construction.
+Extract entities only according to the user format.
+
+Reasoning: High
+
+<|channel|>analysis<|message|>[user request]. Provide answer.<|end|>
+<|start|>assistant<|channel|>final<|message|>[your response]<|return|>
+"""
+
+PROMPTS["system_prompt_kg_relationships"] = """You are an information extraction system for knowledge graph construction.
+Extract relationships only according to the user format and constraints.
+
+Reasoning: High
+
+<|channel|>analysis<|message|>[user request]. Provide answer.<|end|>
+<|start|>assistant<|channel|>final<|message|>[your response]<|return|>
+"""
+
+PROMPTS["system_prompt_kg_glean_entities"] = """You are doing a delta extraction pass.
+Return only NEW missing entity tuples in the exact requested format.
+If nothing new is found, return only the completion delimiter.
+
+Reasoning: High
+
+<|channel|>analysis<|message|>[user request]. Provide answer.<|end|>
+<|start|>assistant<|channel|>final<|message|>[your response]<|return|>
+"""
+
+PROMPTS["system_prompt_kg_glean_relationships"] = """You are doing a delta extraction pass.
+Return only NEW missing relationship tuples in the exact requested format.
+If nothing new is found, return only the completion delimiter.
+
+Reasoning: High
+
+<|channel|>analysis<|message|>[user request]. Provide answer.<|end|>
+<|start|>assistant<|channel|>final<|message|>[your response]<|return|>
+"""
+
+PROMPTS["system_prompt_kg_glean_unified"] = """You are doing a unified delta extraction pass over a chunk-level graph.
+Return only NEW missing tuples (entities and/or relationships) in the exact requested format.
+If nothing new is found, return only the completion delimiter.
+
+Reasoning: High
+
+<|channel|>analysis<|message|>[user request]. Provide answer.<|end|>
+<|start|>assistant<|channel|>final<|message|>[your response]<|return|>
+"""
+
+PROMPTS["system_prompt_kg_summary"] = """You merge multiple descriptions into one concise, coherent description.
+Preserve factual content, resolve contradictions conservatively, and avoid unsupported claims.
+
+Reasoning: Medium
+
+<|channel|>analysis<|message|>[user request]. Provide answer.<|end|>
+<|start|>assistant<|channel|>final<|message|>[your response]<|return|>
+"""
+
+PROMPTS["kg_entity_extraction_template"] = """
+You are extracting entities for a knowledge graph from game-related text.
+Use the provided context and extract only entities in [{entity_types}].
+
+Game context:
+{game_context}
+
+Output format only:
+("entity"{tuple_delimiter}<entity_name>{tuple_delimiter}<entity_type>{tuple_delimiter}<entity_description>)
+Use {record_delimiter} between records and end with {completion_delimiter}.
+Text:
+{input_text}
+Output:
+"""
+
+PROMPTS["kg_relationship_extraction_template"] = """
+You are extracting relationships for a knowledge graph from game-related text.
+Use the game context and ONLY the provided valid entities as endpoints.
+
+Game context:
+{game_context}
+
+Valid entities:
+[{entity_list_str}]
+
+Output format only:
+("relationship"{tuple_delimiter}<source_entity>{tuple_delimiter}<target_entity>{tuple_delimiter}<relationship_description>{tuple_delimiter}<relationship_strength>)
+Use {record_delimiter} between records and end with {completion_delimiter}.
+Text:
+{input_text}
+Output:
+"""
+
+PROMPTS["kg_simple_graph_extraction_template"] = """
+You are extracting a chunk-level graph for a knowledge graph from game-related text.
+Extract entities and relationships together.
+
+Game context:
+{game_context}
+
+Allowed entity types:
+[{entity_types}]
+
+Output format only:
+("entity"{tuple_delimiter}<entity_name>{tuple_delimiter}<entity_type>{tuple_delimiter}<entity_description>)
+("relationship"{tuple_delimiter}<source_entity>{tuple_delimiter}<target_entity>{tuple_delimiter}<relationship_description>{tuple_delimiter}<relationship_strength>)
+Use {record_delimiter} between records and end with {completion_delimiter}.
+Text:
+{input_text}
+Output:
+"""
+
+PROMPTS["kg_unified_glean_template"] = """Review the current chunk-level graph and add ONLY missing tuples.
+You may output both entity and relationship tuples in the required format.
+
+Allowed entity types: [{entity_types}]
+Current entities:
+{entity_snapshot}
+
+Current relationships:
+{relation_snapshot}
+
+Chunk text:
+{chunk_text}
+
+Output format:
+("entity"{tuple_delimiter}<entity_name>{tuple_delimiter}<entity_type>{tuple_delimiter}<entity_description>)
+("relationship"{tuple_delimiter}<source_entity>{tuple_delimiter}<target_entity>{tuple_delimiter}<relationship_description>{tuple_delimiter}<relationship_strength>)
+Use {record_delimiter} between records and end with {completion_delimiter}.
+If nothing new is missing, output only {completion_delimiter}.
+"""
+
+PROMPTS["kg_entity_glean_template"] = """Return ONLY NEW missing entity tuples in the exact format.
+Already found entities: {existing_entities}.
+If none, output only {completion_delimiter}.
+"""
+
+PROMPTS["kg_relationship_glean_template"] = """Return ONLY NEW missing relationship tuples in the exact format.
+Valid entities: {valid_entities}.
+Already found pairs: {existing_pairs}.
+If none, output only {completion_delimiter}.
+"""
+
 PROMPTS[
     "entity_extraction"
 ] = """-Goal-

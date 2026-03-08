@@ -56,6 +56,11 @@ class VideoKnowledgeExtractor:
     entity_extraction_func: callable = extract_entities_api
     entity_extract_max_gleaning: int = 1
     entity_summary_to_max_tokens: int = 500
+    video_game_name: str = "League of Legends"
+    relationship_strength_min: float = 1.0
+    relationship_strength_max: float = 10.0
+    extraction_use_domain_context: bool = True
+    extraction_glean_mode: str = "split"
 
     def __post_init__(self):
         """Initializes working directory and storage for the client side."""

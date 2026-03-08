@@ -40,8 +40,8 @@ from ._llm import LLMConfig, local_llm_config, shutdown_local_llm
 
 # Imports for patching and vLLM
 from vllm import LLM
-import knowledge_graph_build._llm as llm_module
-import knowledge_graph_build._op as op_module
+from . import _llm as llm_module
+from . import _op as op_module
 
 
 @dataclass
@@ -79,6 +79,11 @@ class VideoKnowledgeExtractor:
     entity_extraction_func: callable = extract_entities
     entity_extract_max_gleaning: int = 1
     entity_summary_to_max_tokens: int = 500
+    video_game_name: str = "League of Legends"
+    relationship_strength_min: float = 1.0
+    relationship_strength_max: float = 10.0
+    extraction_use_domain_context: bool = True
+    extraction_glean_mode: str = "split"
 
     def __post_init__(self):
         """Initializes working directory and storage for the client side."""
@@ -350,4 +355,3 @@ if __name__ == '__main__':
     # python -m knowledge_graph_build.test_data_build
     from tqdm import tqdm # ensure tqdm is available
     asyncio.run(main())
-

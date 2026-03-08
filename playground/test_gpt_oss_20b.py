@@ -57,7 +57,7 @@ for video in knowledge_json.values():
 system_prompt = """
     You are an expert on summarizing League of Legends gameplay based on visual descriptions.
 
-    Reasoning: medium
+    Reasoning: low
 
     Given the VLM outputs describing the visual content of consecutive video segments, your task is to generate a description of the key events and actions.
     Focus on identifying the main champion(s) involved, their actions, and any significant interactions as well as gameplay events or game situations.
@@ -69,7 +69,7 @@ system_prompt = """
 
 # Compile the regex pattern once
 # pattern = re.compile(r"<\|end\|><\|start\|>assistant<\|channel\|>final(?:<\|message\|>|\|assistant_output\|?|>| <\|constrain\|><\|assistant\|>)")
-pattern =  re.compile(r"final<\|message\|>")
+pattern = re.compile(r"final<\|message\|>")
     
 chunk_size = 5
 batch_number = 0
@@ -100,7 +100,7 @@ for i in range(0, len(all_segments), chunk_size):
     output = llm(
         full_prompt,
         max_tokens=10000, 
-        temperature=1.0,
+        temperature=0.1,
         top_p=1.0,
         top_k=0,
         # stop=["User:"]

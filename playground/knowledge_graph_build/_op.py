@@ -140,7 +140,16 @@ async def _handle_entity_relation_summary(
     )
     use_prompt = prompt_template.format(**context_base)
     logger.debug(f"Trigger summary: {entity_or_relation_name}")
-    summary = await use_llm_func(use_prompt, max_tokens=summary_max_tokens, hashing_kv=llm_response_cache)
+    summary = await use_llm_func(
+        use_prompt,
+        system_prompt=PROMPTS["system_prompt_kg_summary"],
+        max_tokens=summary_max_tokens,
+        hashing_kv=llm_response_cache,
+    )
+    _print_llm_stage_output(
+        stage=f"SUMMARY::{entity_or_relation_name}",
+        output=summary,
+    )
     return summary
 
 
@@ -300,315 +309,552 @@ async def _merge_edges_then_upsert(
 from ._llm import local_llm_batch_generate
 
 
-async def extract_entities(chunks: dict[str, TextChunkSchema], knowledge_graph_inst: BaseGraphStorage, entity_vdb: BaseVectorStorage, global_config: dict, video_game_name: str= "League of Legends") -> Union[BaseGraphStorage, None]:
+def _print_llm_stage_output(
+    stage: str,
+    output: str,
+    chunk_key: str | None = None,
+    pass_index: int | None = None,
+):
+    title = f"LLM OUTPUT | {stage}"
+    if chunk_key is not None:
+        title += f" | chunk={chunk_key}"
+    if pass_index is not None:
+        title += f" | pass={pass_index}"
+    line = "=" * max(60, len(title) + 8)
+    print(f"\n{line}\n{title}\n{line}")
+    print(output if output and output.strip() else "<EMPTY>")
+    print(line)
+
+
+def _split_extraction_records(text: str, context_base: dict) -> list[list[str]]:
+    records = split_string_by_multi_markers(
+        text,
+        [context_base["record_delimiter"], context_base["completion_delimiter"]],
+    )
+    parsed_records = []
+    for record in records:
+        record_match = re.search(r"\((.*)\)", record)
+        if record_match is None:
+            continue
+        parsed_records.append(
+            split_string_by_multi_markers(
+                record_match.group(1),
+                [context_base["tuple_delimiter"]],
+            )
+        )
+    return parsed_records
+
+
+def _normalize_entity_type(entity_type: str, allowed_types: set[str]) -> str:
+    normalized = clean_str(entity_type.upper())
+    return normalized if normalized in allowed_types else "UNKNOWN"
+
+
+def _sanitize_relationship_weight(weight: float, minimum: float = 1.0, maximum: float = 10.0) -> float:
+    if weight < minimum:
+        return minimum
+    if weight > maximum:
+        return maximum
+    return weight
+
+
+async def _extract_entities_from_text(
+    chunk_key: str,
+    raw_text: str,
+    context_base: dict,
+    allowed_types: set[str],
+) -> list[dict]:
+    parsed = _split_extraction_records(raw_text, context_base)
+    chunk_entities = []
+    seen_names = set()
+    for attributes in parsed:
+        entity_data = await _handle_single_entity_extraction(attributes, chunk_key)
+        if not entity_data:
+            continue
+        entity_data["entity_type"] = _normalize_entity_type(entity_data["entity_type"], allowed_types)
+        if entity_data["entity_name"] in seen_names:
+            continue
+        if not entity_data["description"].strip():
+            continue
+        seen_names.add(entity_data["entity_name"])
+        chunk_entities.append(entity_data)
+    return chunk_entities
+
+
+async def _extract_relationships_from_text(
+    chunk_key: str,
+    raw_text: str,
+    context_base: dict,
+    valid_entities: set[str],
+    min_weight: float = 1.0,
+    max_weight: float = 10.0,
+) -> list[dict]:
+    parsed = _split_extraction_records(raw_text, context_base)
+    chunk_relationships = []
+    seen_pairs = set()
+    for attributes in parsed:
+        relation_data = await _handle_single_relationship_extraction(attributes, chunk_key)
+        if not relation_data:
+            continue
+        src = relation_data["src_id"]
+        tgt = relation_data["tgt_id"]
+        if src == tgt:
+            continue
+        if src not in valid_entities or tgt not in valid_entities:
+            continue
+        relation_data["weight"] = _sanitize_relationship_weight(
+            relation_data["weight"], minimum=min_weight, maximum=max_weight
+        )
+        if not relation_data["description"].strip():
+            continue
+        undirected_key = tuple(sorted((src, tgt)))
+        if undirected_key in seen_pairs:
+            continue
+        seen_pairs.add(undirected_key)
+        chunk_relationships.append(relation_data)
+    return chunk_relationships
+
+
+async def extract_entities(
+    chunks: dict[str, TextChunkSchema],
+    knowledge_graph_inst: BaseGraphStorage,
+    entity_vdb: BaseVectorStorage,
+    global_config: dict,
+    video_game_name: str = "League of Legends",
+) -> Union[BaseGraphStorage, None]:
     """
-    Extracts entities and relationships using a 3-stage Context-Aware Pipeline:
-    1. Global Game Context Analysis (Summary of the game).
-    2. Entity Extraction (conditioned on Game Context).
-    3. Relationship Extraction (conditioned on Game Context + Found Entities).
+    Rollout implementation:
+    1) Deterministic post-parse validation.
+    2) Two-stage extraction (entities first, relationships second).
+    3) Optional light gleaning (default 1) for entities and relationships.
     """
     model_name = global_config["llm"]["best_model_name"]
+    use_llm_func: callable = global_config["llm"]["best_model_func"]
+    llm_response_cache = global_config.get("llm_response_cache")
+    max_gleaning = int(global_config.get("entity_extract_max_gleaning", 1))
+    glean_mode = str(global_config.get("extraction_glean_mode", "split")).strip().lower()
+    if glean_mode not in {"split", "unified", "simple"}:
+        logger.warning(f"Unknown extraction_glean_mode='{glean_mode}', falling back to 'split'")
+        glean_mode = "split"
+    logger.info(f"[Extraction Mode] {glean_mode}")
+    video_game_name = str(global_config.get("video_game_name", video_game_name)).strip()
+    use_domain_context = bool(global_config.get("extraction_use_domain_context", True))
+    min_weight = float(global_config.get("relationship_strength_min", 1.0))
+    max_weight = float(global_config.get("relationship_strength_max", 10.0))
     ordered_chunks = list(chunks.items())
-    
-    # --- Step 1: Generate Global Game Context ---
-    logger.info("--- Step 1: Analyzing Game Context ---")
-    
-    
-    game_context_prompt = f"""### INSTRUCTION
-    You are a Context Generator for an Entity Extraction AI.
-    Your goal is to provide a **concise, keyword-focused summary** of the video game "{video_game_name}".
 
-    The output will be used to help an AI understand proper nouns and specific terminology in text.
-    You must IGNORE release dates, developers, sales history, reviews, or graphical fidelity.
-
-    ### CONTENT REQUIREMENTS
-    Focus ONLY on these three categories:
-    1.  **Setting & Premise:** The fictional world, time period, and main conflict.
-    2.  **Key Factions & Figures:** Major protagonists, antagonists, and groups (e.g., "The Empire", "Mario", "Ganon").
-    3.  **Unique Vocabulary:** Specific names for currency, magic, items, or mechanics (e.g., "Rupees", "Mana", "Drifting", "Fatality").
-
-    ### FORMATTING RULES
-    - Keep the total output under 150 words.
-    - Use dense, informative sentences.
-    - Do not use bullet points; write as a cohesive summary paragraph.
-
-    ### EXAMPLE (Pac-Man)
-    Pac-Man is an arcade maze game set in a neon labyrinth. The protagonist, Pac-Man, must navigate the maze to eat dots and "Power Pellets" while avoiding four ghosts: Blinky, Pinky, Inky, and Clyde. Consuming a Power Pellet turns the ghosts blue, allowing Pac-Man to eat them for points. Fruit items occasionally appear as bonuses.
-
-    ### INPUT
-    Target Game: {video_game_name}
-
-    ### OUTPUT
-    """
-    
-    # Single call for context
-    game_context = await local_llm_batch_generate(model_name, [game_context_prompt])
-    game_context = game_context[0]
-    logger.info(f"Game Context Generated:\n{game_context[:200]}...")
-
-    # --- DEBUG PRINT 1: Game Context ---
-    print("\n" + "="*40)
-    print("DEBUG: LLM Response - Game Context")
-    print("="*40)
-    print(game_context)
-    print("="*40 + "\n")
-
-    # --- Step 2: Context-Aware Entity Extraction ---
-    logger.info("--- Step 2: Extracting Entities with Context ---")
-    
     context_base = dict(
         tuple_delimiter=PROMPTS["DEFAULT_TUPLE_DELIMITER"],
         record_delimiter=PROMPTS["DEFAULT_RECORD_DELIMITER"],
         completion_delimiter=PROMPTS["DEFAULT_COMPLETION_DELIMITER"],
         entity_types=",".join(PROMPTS["DEFAULT_ENTITY_TYPES"]),
     )
+    allowed_types = {t.upper() for t in PROMPTS["DEFAULT_ENTITY_TYPES"]}
 
-    entity_prompt_template = """
-    ### INSTRUCTION
-    You are an expert entity extraction system for video games.
-    Your task is to identify entities in the input text that match specific types and the provided game context.
+    game_context = ""
+    if use_domain_context and video_game_name:
+        logger.info("--- Step 1: Analyze Domain Context ---")
+        game_context_prompt = f"""Provide a concise, high-signal context summary for the game "{video_game_name}".
+Focus on lore-specific terminology, key actors/factions, locations, and mechanics.
+Keep under 120 words and avoid metadata like release date or studio."""
+        game_context = (
+            await local_llm_batch_generate(
+                model_name,
+                [game_context_prompt],
+                system_prompt=PROMPTS["system_prompt_kg_context"],
+                max_tokens=256,
+            )
+        )[0]
+        _print_llm_stage_output(stage="DOMAIN_CONTEXT", output=game_context)
+    else:
+        logger.info("--- Step 1: Domain Context Disabled ---")
 
-    ### GAME CONTEXT
-    {game_context}
-
-    ### ENTITY TYPES
-    Only extract entities that fit into these categories:
-    [{entity_types}]
-
-    ### FORMATTING RULES
-    1. **Extraction:** For each entity, determine the Name, Type, and a brief Description based on the text and Game Context.
-    2. **Capitalization:** Always capitalize the Entity Name.
-    3. **Strict Constraints:**
-    - Do NOT output lists, bullet points, or numbering.
-    - Do NOT output the same entity twice.
-    - Output ONLY the formatted string.
-    4. **Structure:** Format every entity exactly like this:
-    ("entity"{tuple_delimiter}<Name>{tuple_delimiter}<Type>{tuple_delimiter}<Description>)
-    5. **Separation:** Separate every entity with: {record_delimiter}
-    6. **Completion:** When finished, output: {completion_delimiter}
-
-    ### EXAMPLES
-
-    --- Example 1: Mario Kart 8 Deluxe ---
-
-    **Game Context:**
-    Mario Kart 8 Deluxe is a kart racing game set in the whimsical Mushroom Kingdom. Key characters include Mario (balanced), Bowser (heavyweight), and Toad (lightweight). The gameplay focuses on chaotic racing on gravity-defying tracks. Mechanics include "Drifting" to gain speed boosts, using "Items" (like Shells and Bananas) found in Item Boxes to hinder opponents, and "Gliding" sections.
-
-    **Input Text:**
-    Yoshi was drifting tight around the corner of Toad Harbor, sparks flying from his tires. He was in second place, just behind Donkey Kong. Suddenly, Yoshi picked up a Red Shell from an item box. He threw it forward, hitting Donkey Kong and spinning him out, allowing Yoshi to take the lead just before the glide ramp.
-
-    **Output:**
-    ("entity"{tuple_delimiter}"Yoshi"{tuple_delimiter}"character"{tuple_delimiter}"Yoshi is a playable racer who utilizes drifting mechanics to maintain speed."){record_delimiter}
-    ("entity"{tuple_delimiter}"Toad Harbor"{tuple_delimiter}"location"{tuple_delimiter}"Toad Harbor is a race track setting within the Mushroom Kingdom."){record_delimiter}
-    ("entity"{tuple_delimiter}"Donkey Kong"{tuple_delimiter}"character"{tuple_delimiter}"Donkey Kong is a rival racer who is hit by an item and loses first place."){record_delimiter}
-    ("entity"{tuple_delimiter}"Red Shell"{tuple_delimiter}"item"{tuple_delimiter}"A Red Shell is an offensive item used to target and hit the racer in front."){record_delimiter}
-    ("entity"{tuple_delimiter}"Drifting"{tuple_delimiter}"mechanic"{tuple_delimiter}"Drifting is a driving technique used to navigate corners and generate sparks for speed."){record_delimiter}
-    ("entity"{tuple_delimiter}"Glide Ramp"{tuple_delimiter}"mechanic"{tuple_delimiter}"A Glide Ramp is a track feature that allows racers to fly through the air."){completion_delimiter}
-
-    --- Example 2: The Legend of Zelda: Breath of the Wild ---
-
-    **Game Context:**
-    An open-world action-adventure game set in a post-apocalyptic Hyrule. The protagonist, Link, wakes after 100 years to defeat Calamity Ganon. The world is vast, containing "Shrines" (puzzle rooms), "Towers," and dangerous wilderness. Key mechanics include climbing surfaces, cooking food for buffs, and using the "Sheikah Slate," a tablet that provides magical runes like Magnesis and Stasis.
-
-    **Input Text:**
-    Link crouched in the tall grass outside the Shrine of Resurrection, watching the Bokoblin camp below. He checked his Sheikah Slate and selected the Magnesis rune. Aiming carefully, he lifted a large metal crate and dropped it on the unsuspecting enemy. Afterwards, he gathered some Spicy Peppers to cook a meal for the cold journey ahead.
-
-    **Output:**
-    ("entity"{tuple_delimiter}"Link"{tuple_delimiter}"character"{tuple_delimiter}"Link is the main protagonist who uses stealth and technology to defeat enemies."){record_delimiter}
-    ("entity"{tuple_delimiter}"Shrine Of Resurrection"{tuple_delimiter}"location"{tuple_delimiter}"The Shrine of Resurrection is a specific location where Link begins his journey."){record_delimiter}
-    ("entity"{tuple_delimiter}"Bokoblin"{tuple_delimiter}"enemy"{tuple_delimiter}"A Bokoblin is a common enemy type found in camps across Hyrule."){record_delimiter}
-    ("entity"{tuple_delimiter}"Sheikah Slate"{tuple_delimiter}"technology"{tuple_delimiter}"The Sheikah Slate is a multi-purpose tablet device used to access runes."){record_delimiter}
-    ("entity"{tuple_delimiter}"Magnesis"{tuple_delimiter}"mechanic"{tuple_delimiter}"Magnesis is a rune ability that allows the manipulation of metal objects."){record_delimiter}
-    ("entity"{tuple_delimiter}"Spicy Peppers"{tuple_delimiter}"item"{tuple_delimiter}"Spicy Peppers are a resource ingredient used in cooking to provide cold resistance."){completion_delimiter}
-
-    ### TASK DATA
-
-    **Game Context:**
-    {game_context}
-
-    **Input Text:**
-    {input_text}
-
-    **Output:**
-    """
-    
-    entity_prompts = [
-        entity_prompt_template.format(
-            game_context=game_context,
-            input_text=chunk_dp["content"],
-            **context_base
+    if glean_mode == "simple":
+        logger.info("--- Simple Mode: Base Graph Extraction + Unified Glean ---")
+        maybe_nodes = defaultdict(list)
+        maybe_edges = defaultdict(list)
+        simple_prompt_template = PROMPTS["kg_simple_graph_extraction_template"]
+        simple_prompts = [
+            simple_prompt_template.format(game_context=game_context, input_text=chunk_dp["content"], **context_base)
+            for _, chunk_dp in ordered_chunks
+        ]
+        raw_simple_results = await local_llm_batch_generate(
+            model_name,
+            simple_prompts,
+            system_prompt=PROMPTS["system_prompt_kg_glean_unified"],
+            max_tokens=3000,
         )
+
+        for (chunk_key, _), prompt, result in zip(ordered_chunks, simple_prompts, raw_simple_results):
+            _print_llm_stage_output(
+                stage="GRAPH_EXTRACTION_BASE",
+                output=result,
+                chunk_key=chunk_key,
+            )
+            chunk_entities = await _extract_entities_from_text(
+                chunk_key=chunk_key,
+                raw_text=result,
+                context_base=context_base,
+                allowed_types=allowed_types,
+            )
+            existing_names = {e["entity_name"] for e in chunk_entities}
+            valid_entities = set(existing_names)
+
+            chunk_relationships = await _extract_relationships_from_text(
+                chunk_key=chunk_key,
+                raw_text=result,
+                context_base=context_base,
+                valid_entities=valid_entities,
+                min_weight=min_weight,
+                max_weight=max_weight,
+            )
+            existing_pairs = {tuple(sorted((r["src_id"], r["tgt_id"]))) for r in chunk_relationships}
+
+            history = pack_user_ass_to_openai_messages(prompt, result)
+            chunk_text = chunks[chunk_key]["content"]
+            for pass_idx in range(max_gleaning):
+                entity_snapshot = "\n".join(
+                    [f'- "{e["entity_name"]}" ({e["entity_type"]}): {e["description"]}' for e in chunk_entities]
+                )
+                relation_snapshot = "\n".join(
+                    [f'- "{r["src_id"]}" -> "{r["tgt_id"]}" (w={r["weight"]}): {r["description"]}' for r in chunk_relationships]
+                )
+                unified_prompt = PROMPTS["kg_unified_glean_template"].format(
+                    entity_types=context_base["entity_types"],
+                    entity_snapshot=(entity_snapshot if entity_snapshot else "None"),
+                    relation_snapshot=(relation_snapshot if relation_snapshot else "None"),
+                    chunk_text=chunk_text,
+                    tuple_delimiter=context_base["tuple_delimiter"],
+                    record_delimiter=context_base["record_delimiter"],
+                    completion_delimiter=context_base["completion_delimiter"],
+                )
+                unified_result = await use_llm_func(
+                    unified_prompt,
+                    system_prompt=PROMPTS["system_prompt_kg_glean_unified"],
+                    history_messages=history,
+                    max_tokens=3000,
+                    hashing_kv=llm_response_cache,
+                )
+                _print_llm_stage_output(
+                    stage="GRAPH_SIMPLE_GLEAN",
+                    output=unified_result,
+                    chunk_key=chunk_key,
+                    pass_index=pass_idx + 1,
+                )
+                history += pack_user_ass_to_openai_messages(unified_prompt, unified_result)
+
+                gleaned_entities = await _extract_entities_from_text(
+                    chunk_key=chunk_key,
+                    raw_text=unified_result,
+                    context_base=context_base,
+                    allowed_types=allowed_types,
+                )
+                net_new_entities = []
+                for ent in gleaned_entities:
+                    if ent["entity_name"] in existing_names:
+                        continue
+                    existing_names.add(ent["entity_name"])
+                    net_new_entities.append(ent)
+                if net_new_entities:
+                    chunk_entities.extend(net_new_entities)
+
+                valid_entities = {e["entity_name"] for e in chunk_entities}
+                gleaned_relations = await _extract_relationships_from_text(
+                    chunk_key=chunk_key,
+                    raw_text=unified_result,
+                    context_base=context_base,
+                    valid_entities=valid_entities,
+                    min_weight=min_weight,
+                    max_weight=max_weight,
+                )
+                net_new_relations = []
+                for rel in gleaned_relations:
+                    pair = tuple(sorted((rel["src_id"], rel["tgt_id"])))
+                    if pair in existing_pairs:
+                        continue
+                    existing_pairs.add(pair)
+                    net_new_relations.append(rel)
+                if net_new_relations:
+                    chunk_relationships.extend(net_new_relations)
+
+                if not net_new_entities and not net_new_relations:
+                    break
+
+            for ent in chunk_entities:
+                maybe_nodes[ent["entity_name"]].append(ent)
+            for rel in chunk_relationships:
+                maybe_edges[tuple(sorted((rel["src_id"], rel["tgt_id"])))].append(rel)
+
+        logger.info(
+            f"Extracted {len(maybe_nodes)} unique entities and {len(maybe_edges)} unique relationships."
+        )
+
+        all_entities_data = await asyncio.gather(
+            *[
+                _merge_nodes_then_upsert(k, v, knowledge_graph_inst, global_config)
+                for k, v in maybe_nodes.items()
+            ]
+        )
+        all_edges_data = await asyncio.gather(
+            *[
+                _merge_edges_then_upsert(k[0], k[1], v, knowledge_graph_inst, global_config)
+                for k, v in maybe_edges.items()
+            ]
+        )
+
+        if not len(all_entities_data):
+            logger.warning("Didn't extract any entities, maybe your LLM is not working as expected.")
+            return None, None, None
+
+        if entity_vdb is not None:
+            data_for_vdb = {
+                compute_mdhash_id(dp["entity_name"], prefix="ent-"): {
+                    "content": dp["entity_name"] + dp["description"],
+                    "entity_name": dp["entity_name"],
+                }
+                for dp in all_entities_data
+            }
+            await entity_vdb.upsert(data_for_vdb)
+
+        return knowledge_graph_inst, all_entities_data, all_edges_data
+
+    logger.info("--- Step 2: Extract Entities (with optional gleaning) ---")
+    entity_prompt_template = PROMPTS["kg_entity_extraction_template"]
+    entity_prompts = [
+        entity_prompt_template.format(game_context=game_context, input_text=chunk_dp["content"], **context_base)
         for _, chunk_dp in ordered_chunks
     ]
-    
-    # Batch Call 1: Entities
-    raw_entity_results = await local_llm_batch_generate(model_name, entity_prompts)
+    raw_entity_results = await local_llm_batch_generate(
+        model_name,
+        entity_prompts,
+        system_prompt=PROMPTS["system_prompt_kg_entities"],
+        max_tokens=3000,
+    )
 
-    # --- DEBUG PRINT 2: Entities ---
-    print("\n" + "="*40)
-    print("DEBUG: LLM Response - Entity Extraction (First 3)")
-    print("="*40)
-    for i, res in enumerate(raw_entity_results[:3]):
-        print(f"--- Entity Response {i+1} ---")
-        print(res)
-        print("---------------------------")
-    print("="*40 + "\n")
-    
-    # Parse Entities per chunk
-    chunk_entities_map = {} # chunk_key -> list of dict
+    chunk_entities_map: dict[str, list[dict]] = {}
     maybe_nodes = defaultdict(list)
-    
-    for (chunk_key, _), result in zip(ordered_chunks, raw_entity_results):
-        chunk_entities = []
-        records = split_string_by_multi_markers(
-            result,
-            [context_base["record_delimiter"], context_base["completion_delimiter"]],
+
+    for (chunk_key, _), prompt, result in zip(ordered_chunks, entity_prompts, raw_entity_results):
+        _print_llm_stage_output(
+            stage="ENTITY_EXTRACTION_BASE",
+            output=result,
+            chunk_key=chunk_key,
         )
-        for record in records:
-            record_match = re.search(r"\((.*)\)", record)
-            if record_match is None: continue
-            
-            attributes = split_string_by_multi_markers(
-                record_match.group(1), [context_base["tuple_delimiter"]]
-            )
-            
-            entity_data = await _handle_single_entity_extraction(attributes, chunk_key)
-            if entity_data:
-                chunk_entities.append(entity_data)
-                maybe_nodes[entity_data["entity_name"]].append(entity_data)
-        
+        chunk_entities = await _extract_entities_from_text(
+            chunk_key=chunk_key,
+            raw_text=result,
+            context_base=context_base,
+            allowed_types=allowed_types,
+        )
+
+        if glean_mode == "split":
+            # Split-mode gleaning: entities first.
+            history = pack_user_ass_to_openai_messages(prompt, result)
+            existing_names = {e["entity_name"] for e in chunk_entities}
+            for pass_idx in range(max_gleaning):
+                glean_prompt = PROMPTS["kg_entity_glean_template"].format(
+                    existing_entities=sorted(existing_names),
+                    completion_delimiter=context_base["completion_delimiter"],
+                )
+                glean_result = await use_llm_func(
+                    glean_prompt,
+                    system_prompt=PROMPTS["system_prompt_kg_glean_entities"],
+                    history_messages=history,
+                    max_tokens=3000,
+                    hashing_kv=llm_response_cache,
+                )
+                _print_llm_stage_output(
+                    stage="ENTITY_EXTRACTION_GLEAN",
+                    output=glean_result,
+                    chunk_key=chunk_key,
+                    pass_index=pass_idx + 1,
+                )
+                history += pack_user_ass_to_openai_messages(glean_prompt, glean_result)
+
+                gleaned_entities = await _extract_entities_from_text(
+                    chunk_key=chunk_key,
+                    raw_text=glean_result,
+                    context_base=context_base,
+                    allowed_types=allowed_types,
+                )
+                net_new = [e for e in gleaned_entities if e["entity_name"] not in existing_names]
+                if not net_new:
+                    break
+                for e in net_new:
+                    existing_names.add(e["entity_name"])
+                    chunk_entities.append(e)
+
         chunk_entities_map[chunk_key] = chunk_entities
+        for entity_data in chunk_entities:
+            maybe_nodes[entity_data["entity_name"]].append(entity_data)
 
-    # --- Step 3: Context-Aware Relationship Extraction ---
-    logger.info("--- Step 3: Extracting Relationships with Context & Entities ---")
-    
-    relation_prompt_template = """
-    ### INSTRUCTION
-    You are an expert relationship extraction system for video games.
-    Your task is to identify relationships between valid entities within the input text based on the game context.
-
-    ### GAME CONTEXT
-    {game_context}
-
-    ### VALID ENTITIES
-    You must ONLY use entities from this list as Source or Target:
-    [{entity_list_str}]
-
-    ### FORMATTING RULES
-    1. **Identification:** Find pairs of entities from the list that interact or are logically connected in the text.
-    2. **Direction:** Determine the Source (actor/owner) and Target (receiver/object).
-    3. **Scoring:** Assign a Relationship Strength (1-10):
-    - 1-4: Indirect or weak connection (e.g., in the same room).
-    - 5-7: Direct interaction (e.g., talking, observing).
-    - 8-10: Critical interaction (e.g., attacking, using item, distinct plot point).
-    4. **Constraints:**
-    - Do NOT create new entities. Use the exact spelling from the "Valid Entities" list.
-    - Do NOT output relationships if there is no evidence in the text.
-    - Output ONLY the formatted string.
-    5. **Structure:** Format every relationship exactly like this:
-    ("relationship"{tuple_delimiter}<Source_Entity>{tuple_delimiter}<Target_Entity>{tuple_delimiter}<Description>{tuple_delimiter}<Strength>)
-    6. **Separation:** Separate every relationship with: {record_delimiter}
-    7. **Completion:** When finished, output: {completion_delimiter}
-
-    ### EXAMPLES
-
-    --- Example 1: Mario Kart 8 Deluxe ---
-
-    **Valid Entities:**
-    ['Yoshi', 'Donkey Kong', 'Red Shell', 'Toad Harbor']
-
-    **Input Text:**
-    Yoshi was drifting tight around the corner of Toad Harbor. He picked up a Red Shell and threw it forward, hitting Donkey Kong and spinning him out.
-
-    **Output:**
-    ("relationship"{tuple_delimiter}"Yoshi"{tuple_delimiter}"Toad Harbor"{tuple_delimiter}"Yoshi is racing on the track Toad Harbor."{tuple_delimiter}5){record_delimiter}
-    ("relationship"{tuple_delimiter}"Yoshi"{tuple_delimiter}"Red Shell"{tuple_delimiter}"Yoshi picks up and uses the Red Shell as a weapon."{tuple_delimiter}9){record_delimiter}
-    ("relationship"{tuple_delimiter}"Red Shell"{tuple_delimiter}"Donkey Kong"{tuple_delimiter}"The Red Shell physically hits Donkey Kong, causing him to spin out."{tuple_delimiter}10){record_delimiter}
-    ("relationship"{tuple_delimiter}"Yoshi"{tuple_delimiter}"Donkey Kong"{tuple_delimiter}"Yoshi attacks Donkey Kong to overtake him in the race."{tuple_delimiter}8){completion_delimiter}
-
-    --- Example 2: The Legend of Zelda: Breath of the Wild ---
-
-    **Valid Entities:**
-    ['Link', 'Magnesis', 'Metal Crate', 'Bokoblin', 'Sheikah Slate']
-
-    **Input Text:**
-    Link checked his Sheikah Slate and selected the Magnesis rune. Aiming carefully, he lifted a large Metal Crate and dropped it on the unsuspecting Bokoblin.
-
-    **Output:**
-    ("relationship"{tuple_delimiter}"Link"{tuple_delimiter}"Sheikah Slate"{tuple_delimiter}"Link uses the Sheikah Slate to access his abilities."{tuple_delimiter}7){record_delimiter}
-    ("relationship"{tuple_delimiter}"Sheikah Slate"{tuple_delimiter}"Magnesis"{tuple_delimiter}"The Sheikah Slate provides the Magnesis rune ability."{tuple_delimiter}9){record_delimiter}
-    ("relationship"{tuple_delimiter}"Link"{tuple_delimiter}"Magnesis"{tuple_delimiter}"Link activates Magnesis to manipulate the environment."{tuple_delimiter}8){record_delimiter}
-    ("relationship"{tuple_delimiter}"Magnesis"{tuple_delimiter}"Metal Crate"{tuple_delimiter}"Magnesis is used to lift and move the Metal Crate."{tuple_delimiter}9){record_delimiter}
-    ("relationship"{tuple_delimiter}"Metal Crate"{tuple_delimiter}"Bokoblin"{tuple_delimiter}"The Metal Crate is used as a weapon to crush the Bokoblin."{tuple_delimiter}10){record_delimiter}
-    ("relationship"{tuple_delimiter}"Link"{tuple_delimiter}"Bokoblin"{tuple_delimiter}"Link attacks the Bokoblin using the environment."{tuple_delimiter}8){completion_delimiter}
-
-    ### TASK DATA
-
-    **Valid Entities:**
-    [{entity_list_str}]
-
-    **Input Text:**
-    {input_text}
-
-    **Output:**
-    """
-    
+    logger.info("--- Step 3: Extract Relationships (constrained + optional gleaning) ---")
+    relation_prompt_template = PROMPTS["kg_relationship_extraction_template"]
     relation_prompts = []
     for chunk_key, chunk_dp in ordered_chunks:
-        found_entities = chunk_entities_map.get(chunk_key, [])
-        if not found_entities:
-            # If no entities, skip or send empty list prompt (LLM might find new ones or fail, better to skip relation extraction if no nodes)
-            # But to keep batch alignment, we send a dummy prompt or a valid one with empty list.
-            entity_list_str = "None identified."
-        else:
-            entity_list_str = ", ".join([e['entity_name'] for e in found_entities])
-            
+        entities = chunk_entities_map.get(chunk_key, [])
+        entity_list_str = ", ".join(sorted({e["entity_name"] for e in entities}))
         relation_prompts.append(
             relation_prompt_template.format(
                 game_context=game_context,
                 entity_list_str=entity_list_str,
                 input_text=chunk_dp["content"],
-                **context_base
+                **context_base,
             )
         )
+    raw_relation_results = await local_llm_batch_generate(
+        model_name,
+        relation_prompts,
+        system_prompt=PROMPTS["system_prompt_kg_relationships"],
+        max_tokens=3000,
+    )
 
-    # Batch Call 2: Relationships
-    raw_relation_results = await local_llm_batch_generate(model_name, relation_prompts)
-
-    # --- DEBUG PRINT 3: Relationships ---
-    print("\n" + "="*40)
-    print("DEBUG: LLM Response - Relationship Extraction (First 3)")
-    print("="*40)
-    for i, res in enumerate(raw_relation_results[:3]):
-        print(f"--- Relation Response {i+1} ---")
-        print(res)
-        print("---------------------------")
-    print("="*40 + "\n")
-    
     maybe_edges = defaultdict(list)
-    
-    for (chunk_key, _), result in zip(ordered_chunks, raw_relation_results):
-        records = split_string_by_multi_markers(
-            result,
-            [context_base["record_delimiter"], context_base["completion_delimiter"]],
+    for (chunk_key, _), prompt, result in zip(ordered_chunks, relation_prompts, raw_relation_results):
+        _print_llm_stage_output(
+            stage="RELATIONSHIP_EXTRACTION_BASE",
+            output=result,
+            chunk_key=chunk_key,
         )
-        for record in records:
-            record_match = re.search(r"\((.*)\)", record)
-            if record_match is None: continue
-            
-            attributes = split_string_by_multi_markers(
-                record_match.group(1), [context_base["tuple_delimiter"]]
+        valid_entities = {e["entity_name"] for e in chunk_entities_map.get(chunk_key, [])}
+        chunk_relationships = []
+        if valid_entities:
+            chunk_relationships = await _extract_relationships_from_text(
+                chunk_key=chunk_key,
+                raw_text=result,
+                context_base=context_base,
+                valid_entities=valid_entities,
+                min_weight=min_weight,
+                max_weight=max_weight,
             )
-            
-            relation_data = await _handle_single_relationship_extraction(attributes, chunk_key)
-            if relation_data:
-                 maybe_edges[tuple(sorted((relation_data["src_id"], relation_data["tgt_id"])))].append(
-                    relation_data
-                )
 
-    # --- Step 4: Merge & Upsert (Existing Logic) ---
-    logger.info(f"Extracted {len(maybe_nodes)} unique entities and {len(maybe_edges)} unique relationships.")
-    
+        if glean_mode == "split":
+            if not valid_entities:
+                continue
+            history = pack_user_ass_to_openai_messages(prompt, result)
+            existing_pairs = {tuple(sorted((r["src_id"], r["tgt_id"]))) for r in chunk_relationships}
+            for pass_idx in range(max_gleaning):
+                glean_prompt = PROMPTS["kg_relationship_glean_template"].format(
+                    valid_entities=sorted(valid_entities),
+                    existing_pairs=sorted(existing_pairs),
+                    completion_delimiter=context_base["completion_delimiter"],
+                )
+                glean_result = await use_llm_func(
+                    glean_prompt,
+                    system_prompt=PROMPTS["system_prompt_kg_glean_relationships"],
+                    history_messages=history,
+                    max_tokens=3000,
+                    hashing_kv=llm_response_cache,
+                )
+                _print_llm_stage_output(
+                    stage="RELATIONSHIP_EXTRACTION_GLEAN",
+                    output=glean_result,
+                    chunk_key=chunk_key,
+                    pass_index=pass_idx + 1,
+                )
+                history += pack_user_ass_to_openai_messages(glean_prompt, glean_result)
+
+                gleaned_relations = await _extract_relationships_from_text(
+                    chunk_key=chunk_key,
+                    raw_text=glean_result,
+                    context_base=context_base,
+                    valid_entities=valid_entities,
+                    min_weight=min_weight,
+                    max_weight=max_weight,
+                )
+                net_new = []
+                for rel in gleaned_relations:
+                    pair = tuple(sorted((rel["src_id"], rel["tgt_id"])))
+                    if pair in existing_pairs:
+                        continue
+                    existing_pairs.add(pair)
+                    net_new.append(rel)
+                if not net_new:
+                    break
+                chunk_relationships.extend(net_new)
+        else:
+            # Unified-mode gleaning: one review pass can add entities and relationships.
+            history = pack_user_ass_to_openai_messages(prompt, result)
+            existing_names = {e["entity_name"] for e in chunk_entities_map.get(chunk_key, [])}
+            existing_pairs = {tuple(sorted((r["src_id"], r["tgt_id"]))) for r in chunk_relationships}
+            chunk_text = chunks[chunk_key]["content"]
+            for pass_idx in range(max_gleaning):
+                entity_snapshot = "\n".join(
+                    [f'- "{e["entity_name"]}" ({e["entity_type"]}): {e["description"]}' for e in chunk_entities_map.get(chunk_key, [])]
+                )
+                relation_snapshot = "\n".join(
+                    [f'- "{r["src_id"]}" -> "{r["tgt_id"]}" (w={r["weight"]}): {r["description"]}' for r in chunk_relationships]
+                )
+                unified_prompt = PROMPTS["kg_unified_glean_template"].format(
+                    entity_types=context_base["entity_types"],
+                    entity_snapshot=(entity_snapshot if entity_snapshot else "None"),
+                    relation_snapshot=(relation_snapshot if relation_snapshot else "None"),
+                    chunk_text=chunk_text,
+                    tuple_delimiter=context_base["tuple_delimiter"],
+                    record_delimiter=context_base["record_delimiter"],
+                    completion_delimiter=context_base["completion_delimiter"],
+                )
+                unified_result = await use_llm_func(
+                    unified_prompt,
+                    system_prompt=PROMPTS["system_prompt_kg_glean_unified"],
+                    history_messages=history,
+                    max_tokens=3000,
+                    hashing_kv=llm_response_cache,
+                )
+                _print_llm_stage_output(
+                    stage="GRAPH_UNIFIED_GLEAN",
+                    output=unified_result,
+                    chunk_key=chunk_key,
+                    pass_index=pass_idx + 1,
+                )
+                history += pack_user_ass_to_openai_messages(unified_prompt, unified_result)
+
+                gleaned_entities = await _extract_entities_from_text(
+                    chunk_key=chunk_key,
+                    raw_text=unified_result,
+                    context_base=context_base,
+                    allowed_types=allowed_types,
+                )
+                net_new_entities = []
+                for ent in gleaned_entities:
+                    if ent["entity_name"] in existing_names:
+                        continue
+                    existing_names.add(ent["entity_name"])
+                    net_new_entities.append(ent)
+                if net_new_entities:
+                    chunk_entities_map[chunk_key].extend(net_new_entities)
+                    for ent in net_new_entities:
+                        maybe_nodes[ent["entity_name"]].append(ent)
+
+                valid_entities = {e["entity_name"] for e in chunk_entities_map.get(chunk_key, [])}
+                gleaned_relations = await _extract_relationships_from_text(
+                    chunk_key=chunk_key,
+                    raw_text=unified_result,
+                    context_base=context_base,
+                    valid_entities=valid_entities,
+                    min_weight=min_weight,
+                    max_weight=max_weight,
+                )
+                net_new_relations = []
+                for rel in gleaned_relations:
+                    pair = tuple(sorted((rel["src_id"], rel["tgt_id"])))
+                    if pair in existing_pairs:
+                        continue
+                    existing_pairs.add(pair)
+                    net_new_relations.append(rel)
+                if net_new_relations:
+                    chunk_relationships.extend(net_new_relations)
+
+                if not net_new_entities and not net_new_relations:
+                    break
+
+        for rel in chunk_relationships:
+            maybe_edges[tuple(sorted((rel["src_id"], rel["tgt_id"])))].append(rel)
+
+    logger.info(
+        f"Extracted {len(maybe_nodes)} unique entities and {len(maybe_edges)} unique relationships."
+    )
+
     all_entities_data = await asyncio.gather(
         *[
             _merge_nodes_then_upsert(k, v, knowledge_graph_inst, global_config)
@@ -635,7 +881,7 @@ async def extract_entities(chunks: dict[str, TextChunkSchema], knowledge_graph_i
             for dp in all_entities_data
         }
         await entity_vdb.upsert(data_for_vdb)
-        
+
     return knowledge_graph_inst, all_entities_data, all_edges_data
 
 

@@ -1,0 +1,2001 @@
+<?xml version='1.0' encoding='utf-8'?>
+<graphml xmlns="http://graphml.graphdrawing.org/xmlns" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://graphml.graphdrawing.org/xmlns http://graphml.graphdrawing.org/xmlns/1.0/graphml.xsd"><key id="d6" for="edge" attr.name="order" attr.type="long"/>
+<key id="d5" for="edge" attr.name="source_id" attr.type="string"/>
+<key id="d4" for="edge" attr.name="description" attr.type="string"/>
+<key id="d3" for="edge" attr.name="weight" attr.type="double"/>
+<key id="d2" for="node" attr.name="source_id" attr.type="string"/>
+<key id="d1" for="node" attr.name="description" attr.type="string"/>
+<key id="d0" for="node" attr.name="entity_type" attr.type="string"/>
+<graph edgedefault="undirected"><node id="&quot;ARI&quot;">
+  <data key="d0">"PERSON"</data>
+  <data key="d1">"Ari is a champion character described as a Bastaya of Nine Tails, known for her ice fox heritage and mystical, nature-based abilities."&lt;SEP&gt;"Ari is a character positioned high on a tree branch in the mystical forest of Omikai Alan, using a bow and later casting a powerful blue spell."&lt;SEP&gt;"Ari is a fox‑like champion who experiences a transformative moment in a dense forest, holding a glowing green‑lit flower that symbolizes memory consumption and emotional change."&lt;SEP&gt;"Ari is the main playable champion navigating a mystical forest and later a bustling town marketplace, interacting with various guardians and gathering information about Ymelo stones."&lt;SEP&gt;"Ari is the player’s character who holds a glowing orb and performs a sustained magical ritual involving Ymelo stones."</data>
+  <data key="d2">chunk-384453835cabf302cc1866f083c441b8&lt;SEP&gt;chunk-5369aae6f52fc67ffbf63b3db7c1e061&lt;SEP&gt;chunk-0faee823efab3399ac6507a90b21a27c&lt;SEP&gt;chunk-3dba909d410645c865e1539e1cd713d6&lt;SEP&gt;chunk-2e403ab6dfb1007767efd391cca7a115</data>
+</node>
+<node id="&quot;BASTAYA&quot;">
+  <data key="d0">"ORGANIZATION"</data>
+  <data key="d1">"Bastaya refers to a race or group of champions, including Ari, characterized by unique traits and cultural significance within the game world."</data>
+  <data key="d2">chunk-2e403ab6dfb1007767efd391cca7a115</data>
+</node>
+<node id="&quot;NINE TAILS&quot;">
+  <data key="d0">"GEO"</data>
+  <data key="d1">"Nine Tails is a descriptor indicating Ari's lineage or the number of tails she possesses, signifying her unique identity."</data>
+  <data key="d2">chunk-2e403ab6dfb1007767efd391cca7a115</data>
+</node>
+<node id="&quot;SEAN&quot;">
+  <data key="d0">"GEO"</data>
+  <data key="d1">"Sean is a geographic location mentioned as the northern region where Ari's memories involve running with ice foxes."</data>
+  <data key="d2">chunk-2e403ab6dfb1007767efd391cca7a115</data>
+</node>
+<node id="&quot;HONÍA&quot;">
+  <data key="d0">"GEO"</data>
+  <data key="d1">"Honía is a snowy region described as the coldest area in the game world, associated with ice foxes and environmental features."</data>
+  <data key="d2">chunk-2e403ab6dfb1007767efd391cca7a115</data>
+</node>
+<node id="&quot;ICE FOX&quot;">
+  <data key="d0">"PERSON"</data>
+  <data key="d1">"Ice Fox is a creature companion to Ari, depicted as a massive, icy creature that her champion rides or interacts with in snowy landscapes."</data>
+  <data key="d2">chunk-2e403ab6dfb1007767efd391cca7a115</data>
+</node>
+<node id="&quot;CHAMPION&quot;">
+  <data key="d1">["\"Champion is a character who manipulates ice and channels a blue, dragon‑like spirit.\"", "\"Champion refers to Smolder, the main character in the described scenario.\""]</data>
+  <data key="d0">"PERSON"</data>
+  <data key="d2">["chunk-0faee823efab3399ac6507a90b21a27c", "chunk-921a2c333f18b12f26287e340c8ea6a8"]</data>
+</node>
+<node id="&quot;ICE‑COVERED BRANCHES&quot;">
+  <data key="d0">"GEO"</data>
+  <data key="d1">"Ice‑Covered Branches are locations within the gameplay segment where the champion focuses her ice manipulation."</data>
+  <data key="d2">chunk-0faee823efab3399ac6507a90b21a27c</data>
+</node>
+<node id="&quot;RED BERRIES&quot;">
+  <data key="d0">"GEO"</data>
+  <data key="d1">"Red Berries are items found on the ice‑covered branches that are highlighted during the champion's actions."</data>
+  <data key="d2">chunk-0faee823efab3399ac6507a90b21a27c</data>
+</node>
+<node id="&quot;BLUE SPIRIT&quot;">
+  <data key="d0">"PERSON"</data>
+  <data key="d1">"Blue Spirit is a glowing, dragon‑like entity that the champion channels and feeds into her power."</data>
+  <data key="d2">chunk-0faee823efab3399ac6507a90b21a27c</data>
+</node>
+<node id="&quot;HORNED CREATURE&quot;">
+  <data key="d0">"PERSON"</data>
+  <data key="d1">"Horned Creature is a menacing, horned entity with glowing eyes that confronts the champion."</data>
+  <data key="d2">chunk-0faee823efab3399ac6507a90b21a27c</data>
+</node>
+<node id="&quot;CHILD&quot;">
+  <data key="d0">"PERSON"</data>
+  <data key="d1">"Child is a young figure seen in a field of red flowers, representing a reflective interlude after the encounter."</data>
+  <data key="d2">chunk-0faee823efab3399ac6507a90b21a27c</data>
+</node>
+<node id="&quot;ADULT&quot;">
+  <data key="d0">"PERSON"</data>
+  <data key="d1">"Adult is a background figure seen with the child, suggesting a pause or reflection."</data>
+  <data key="d2">chunk-0faee823efab3399ac6507a90b21a27c</data>
+</node>
+<node id="&quot;OMIKAI ALAN&quot;">
+  <data key="d0">"GEO"</data>
+  <data key="d1">"Omikai Alan is a mystical forest environment where Ari observes, moves, interacts with a winged guardian, and confronts a glowing wolf-like creature, serving as the setting for Ari's early encounters."&lt;SEP&gt;"Omikai Alan is a mystical forest where Ari is positioned and where she encounters enemies and guardians."</data>
+  <data key="d2">chunk-384453835cabf302cc1866f083c441b8&lt;SEP&gt;chunk-0faee823efab3399ac6507a90b21a27c</data>
+</node>
+<node id="&quot;BOW&quot;">
+  <data key="d0">"PERSON"</data>
+  <data key="d1">"Bow is a weapon Ari holds, poised to shoot an arrow at the approaching foes."</data>
+  <data key="d2">chunk-0faee823efab3399ac6507a90b21a27c</data>
+</node>
+<node id="&quot;BLUE MAGIC&quot;">
+  <data key="d0">"PERSON"</data>
+  <data key="d1">"Blue Magic — a bright blue glow that Ari raises to prepare a high‑intensity spell."</data>
+  <data key="d2">chunk-0faee823efab3399ac6507a90b21a27c</data>
+</node>
+<node id="&quot;SPELL&quot;">
+  <data key="d0">"PERSON"</data>
+  <data key="d1">"Spell — the blue aura that Ari creates and expands to strike unseen enemies and is released later."</data>
+  <data key="d2">chunk-0faee823efab3399ac6507a90b21a27c</data>
+</node>
+<node id="&quot;SINEN MILCOLAS&quot;">
+  <data key="d0">"PERSON"</data>
+  <data key="d1">"Sinen Milcolas is a semi‑god guardian of the forest, depicted as a large glowing wolf‑like creature emitting blue energy, protecting the forest and its mystical elements."</data>
+  <data key="d2">chunk-384453835cabf302cc1866f083c441b8</data>
+</node>
+<node id="&quot;GIRÍN&quot;">
+  <data key="d0">"PERSON"</data>
+  <data key="d1">"Girín attempts to attack Ari with poison, aiming to sell one of his tails, but is ultimately defeated by Ari."&lt;SEP&gt;"Girín is a character Ari meets in the town marketplace, who provides information about Ymelo stones, aiding Ari's quest for magical artifacts."</data>
+  <data key="d2">chunk-5369aae6f52fc67ffbf63b3db7c1e061&lt;SEP&gt;chunk-384453835cabf302cc1866f083c441b8</data>
+</node>
+<node id="&quot;YMELO STONES&quot;">
+  <data key="d0">"EVENT"</data>
+  <data key="d1">"Ymelo Stones are mystical solar stones discussed by Girín, significant to Ari's quest and linked to the magical symbol seen in the marketplace."&lt;SEP&gt;"Ymelo stones are magical items used by Ari in the ritual, referenced as a source of power and as a stone sold in a tavern."</data>
+  <data key="d2">chunk-5369aae6f52fc67ffbf63b3db7c1e061&lt;SEP&gt;chunk-384453835cabf302cc1866f083c441b8</data>
+</node>
+<node id="&quot;HARRY&quot;">
+  <data key="d0">"PERSON"</data>
+  <data key="d1">"Harry is a champion shown in a tranquil enchanted forest, focusing on a glowing orb and swirling magical symbols, reflecting on painful memories."</data>
+  <data key="d2">chunk-5369aae6f52fc67ffbf63b3db7c1e061</data>
+</node>
+<node id="&quot;JARDÍN DE LO OLVIDO&quot;">
+  <data key="d0">"GEO"</data>
+  <data key="d1">"The jardín de lo olvido is a tranquil enchanted forest where Harry goes to confront and release memories of a deceased lover."</data>
+  <data key="d2">chunk-5369aae6f52fc67ffbf63b3db7c1e061</data>
+</node>
+<node id="&quot;ALI&quot;">
+  <data key="d0">"PERSON"</data>
+  <data key="d1">"Ali is a traveler who continues his journey under the name Imelo, carrying the memory of a stone in mind."</data>
+  <data key="d2">chunk-5369aae6f52fc67ffbf63b3db7c1e061</data>
+</node>
+<node id="&quot;GLOWING, GREEN‑LIT FLOWER&quot;">
+  <data key="d0">"OBJECT"</data>
+  <data key="d1">"The glowing, green‑lit flower is a key visual element in the scene, representing transformation or memory consumption for Ari."</data>
+  <data key="d2">chunk-3dba909d410645c865e1539e1cd713d6</data>
+</node>
+<node id="&quot;GRAVEYARD&quot;">
+  <data key="d0">"LOCATION"</data>
+  <data key="d1">"The graveyard is a setting with stone steps, a statue, overgrown vegetation, and bright red flowers, reflecting Ari’s struggle to escape memories and the consequences of past actions."</data>
+  <data key="d2">chunk-3dba909d410645c865e1539e1cd713d6</data>
+</node>
+<node id="&quot;YASUO&quot;">
+  <data key="d1">["\"Yasuo is a champion in a defensive stance, aligned with Ahri, preparing for an upcoming fight.\"&lt;SEP&gt;\"Yasuo is a champion who appears in the narrative, questioning the need for a bodyguard and interacting with the protagonist about hiring him.\"", "\"Yasuo is an enemy champion in the bot lane who is targeted by S’molder's Q and R abilities, ultimately dying in a team fight.\"&lt;SEP&gt;\"Yasuo is an enemy champion present in the bottom lane team fight, opposing Smolder and other allied champions.\""]</data>
+  <data key="d0">"PERSON"</data>
+  <data key="d2">["chunk-726dd0c8af60735dae395e0a2512fd55&lt;SEP&gt;chunk-3dba909d410645c865e1539e1cd713d6", "chunk-5df652d0714d2857af1e3e898b9f2fd6&lt;SEP&gt;chunk-e3b7da4bd1ce9d33975f0aad5df36196"]</data>
+</node>
+<node id="&quot;KARMA&quot;">
+  <data key="d0">"PERSON"</data>
+  <data key="d1">"Karma is a champion who dominates the early fight using Essence Theft and Ignite, dealing significant damage and draining health from nearby minions and champions."</data>
+  <data key="d2">chunk-726dd0c8af60735dae395e0a2512fd55</data>
+</node>
+<node id="&quot;ARYA&quot;">
+  <data key="d1">["\"Arya is a player who grips a glowing blue object, likely an ability or item used to counter a massive creature, preparing for combat.\"", "\"Arya is a champion character in the game, referenced as a subject for coaching services.\""]</data>
+  <data key="d0">"PERSON"</data>
+  <data key="d2">["chunk-726dd0c8af60735dae395e0a2512fd55", "chunk-953b9aee22e2a1b84ad1a1cbfdbb365d"]</data>
+</node>
+<node id="&quot;AHRI&quot;">
+  <data key="d1">["\"Ahri is a champion in the game League of Legends, depicted exploring a jungle environment, using abilities, and engaging in strategic positioning.\"&lt;SEP&gt;\"Ahri is a champion in the game who experiences inner turmoil and must control her powers during a tense duel.\"&lt;SEP&gt;\"Ahri is a champion positioned on a wooden platform, aligned with Yasuo, in a defensive stance, ready to coordinate or move together.\"&lt;SEP&gt;\"Ahri is a nine‑tail fox champion known for manipulating memories and reality, depicted walking through a mystical forest in the clip.\"", "We need to produce comprehensive description of Ahri. Concatenate all descriptions, resolve contradictions, third person. Provide entity names.\n\nLet's produce summary: Ahri is a 9-level? Actually levels vary. We can state she is a mage champion known as the Fox Spirit, etc. Provide general description: mid lane or bottom lane. Provide abilities: Spirit Rush, Charm, etc. Provide build: Luden's Echo, Zhonya's Hourglass, Rabadon's Deathcap. Provide typical playstyle: engages, applies pressure, uses ultimate. Provide level ranges. Provide mention of being Eternal Hero. Provide mention of channeling ultimate.\n\nLet's produce coherent summary.&lt;|end|&gt;&lt;|start|&gt;assistant&lt;|channel|&gt;final|&gt; Ahri, known in League of Legends as the **Fox‑Spirit** and often called the “Eternal Hero,” is a **mid‑lane mage** whose playstyle focuses on burst damage, mobility, and crowd‑control.  In the early game she typically establishes herself in the middle lane, using her **Charm (Q)** to lock down a single target, followed by **Essence Theft (W)** to sustain herself and then **Spirit Rush (R)** to either chase, escape, or set up a team fight.  Her kit is built around high burst magic damage and the ability to reposition quickly, making her a frequent pick for players who enjoy a “hit‑and‑run” style of combat.\n\nTypical item builds for Ahri include **Luden’s Echo** or **Rabadon’s Deathcap** for raw damage, **Zhonya’s Hourglass** for survivability, and **Riot’s Resolve** or **Morellonomicon** when facing heavy crowd‑control or healing.  Boots are usually **Plated Steelcaps** or **Ionian Boots of Lucidity** depending on the enemy team composition.\n\nThroughout the game, Ahri is known for:\n- **Engaging** aggressively in the mid‑lane or, on occasion, in the bottom lane during early skirmishes.\n- Using **Spirit Rush** to create distance, chase down key targets, or disengage from danger.\n- Applying constant pressure on the enemy team, often forcing the opposing side to respond or risk losing objectives.\n- Capitalizing on high‑level opportunities (e.g., levels 11–16) to **destroy turrets**, **kill enemy champions**, and **secure inhibitors**.\n\nHer ultimate, **Spirit Rush**, is a powerful, high‑"]</data>
+  <data key="d0">"PERSON"</data>
+  <data key="d2">["chunk-726dd0c8af60735dae395e0a2512fd55&lt;SEP&gt;chunk-d2d05bcd1ec590f77890a543d174bb6d&lt;SEP&gt;chunk-8377f8fa8c8920a4f1c1486212346024&lt;SEP&gt;chunk-0e6c127c10fb89705812a342908329d8", "chunk-791d3fb02596d8ddb511354fbec9341f&lt;SEP&gt;chunk-cbe08d93d9eaa38f66f60a865fd58f2f&lt;SEP&gt;chunk-e7a9ac28f921cd6d848bb8b8410c429c&lt;SEP&gt;chunk-997d95dbdb8840540c33069e74ffe0ce&lt;SEP&gt;chunk-e095614c66786b44e85c903db324d2eb&lt;SEP&gt;chunk-54a6f8ba3aa2145b8ba6ba20249682e1&lt;SEP&gt;chunk-971b1c301f9b1d04b8bfcff2de204430&lt;SEP&gt;chunk-0b22f6ec63cfca9b8465893ca0119cc0&lt;SEP&gt;chunk-5c40e6b373211082863b6adfadfbb910&lt;SEP&gt;chunk-df231031873dcc5add5b5640412bd723&lt;SEP&gt;chunk-d17d2ebbc3a40b6ba39d37a7b89f003c&lt;SEP&gt;chunk-766683e031208fd1d376543ecbbaf0c0&lt;SEP&gt;chunk-50e5f3799024f122b368387f1b3cc171&lt;SEP&gt;chunk-127edeb91b48f1fe0ba1ffce2f11202c&lt;SEP&gt;chunk-dd5f34c12cb9551bd43f628eeab5e4b0&lt;SEP&gt;chunk-a97ca96b821a76d5444998f5d238857e&lt;SEP&gt;chunk-9075c07f19742a09b3ad74a010af53ca&lt;SEP&gt;chunk-9de993ea4d2737c78e4581b4f330ff47&lt;SEP&gt;chunk-ca45e459def78a35a02aa8dfd32f62f6&lt;SEP&gt;chunk-5418d6b0956d9698de0cc256bc7a6ed1"]</data>
+</node>
+<node id="&quot;GUNPLANK&quot;">
+  <data key="d0">"PERSON"</data>
+  <data key="d1">"Gunplank is a champion who appears later, holding a weapon and looking alert, ready to join the upcoming fight or make a tactical decision."</data>
+  <data key="d2">chunk-726dd0c8af60735dae395e0a2512fd55</data>
+</node>
+<node id="&quot;MADOKAI&quot;">
+  <data key="d0">"PERSON"</data>
+  <data key="d1">"Madokai is a threat or objective that the team is preparing to face, mentioned as a potential opponent."</data>
+  <data key="d2">chunk-726dd0c8af60735dae395e0a2512fd55</data>
+</node>
+<node id="&lt;ENTITY_NAME&gt;">
+  <data key="d1">&lt;entity_description&gt;</data>
+  <data key="d0">&lt;ENTITY_TYPE&gt;</data>
+  <data key="d2">["chunk-a56c4818476bcdea47ba1d588f35d67c", "chunk-a97ca96b821a76d5444998f5d238857e"]</data>
+</node>
+<node id="&quot;ARIFE&quot;">
+  <data key="d0">"PERSON"</data>
+  <data key="d1">"Arife is a champion who confronts a shadowy figure, navigates underwater turmoil, and casts a powerful spell using memories."</data>
+  <data key="d2">chunk-8377f8fa8c8920a4f1c1486212346024</data>
+</node>
+<node id="&quot;TATHRESH&quot;">
+  <data key="d0">"PERSON"</data>
+  <data key="d1">"Tathresh is a champion who fights alongside Arife against Gunplaán."</data>
+  <data key="d2">chunk-8377f8fa8c8920a4f1c1486212346024</data>
+</node>
+<node id="&quot;GUNPLAÁN&quot;">
+  <data key="d0">"PERSON"</data>
+  <data key="d1">"Gunplaán is a champion possessed by the king Arruinado, opposing Arife and Tathresh."</data>
+  <data key="d2">chunk-8377f8fa8c8920a4f1c1486212346024</data>
+</node>
+<node id="&quot;KING ARRUINADO&quot;">
+  <data key="d0">"PERSON"</data>
+  <data key="d1">"King Arruinado is a shadowy figure who possesses Gunplaán and threatens to attack with muddy waters."</data>
+  <data key="d2">chunk-8377f8fa8c8920a4f1c1486212346024</data>
+</node>
+<node id="&quot;VIEGO&quot;">
+  <data key="d1">["\"Viego is a champion whose memories are used by Arife to empower her spell and ultimately defeat him.\"", "\"Viego is a fiery champion seen near the lane, potentially helping push the wave.\""]</data>
+  <data key="d0">"PERSON"</data>
+  <data key="d2">["chunk-8377f8fa8c8920a4f1c1486212346024", "chunk-d3fc44abada49d7cd74346e3bacb4252"]</data>
+</node>
+<node id="&quot;ARIFE’S EMPOWERED SPELL‑CASTING SEQUENCE&quot;">
+  <data key="d0">"EVENT"</data>
+  <data key="d1">"The event describes Arife casting a powerful spell that uses Viego’s memories to defeat him."</data>
+  <data key="d2">chunk-8377f8fa8c8920a4f1c1486212346024</data>
+</node>
+<node id="&quot;GAMEPLAY‑STYLE RECAP OF THE CLIP&quot;">
+  <data key="d0">"EVENT"</data>
+  <data key="d1">"The event summarizes the gameplay moments involving Ahri and Arife, highlighting emotional and tactical beats."</data>
+  <data key="d2">chunk-8377f8fa8c8920a4f1c1486212346024</data>
+</node>
+<node id="&quot;BRAUM&quot;">
+  <data key="d0">"PERSON"</data>
+  <data key="d1">"Braum is a champion who sits in a tavern, has a glowing armored hand, and is known for his protective gestures."</data>
+  <data key="d2">chunk-c7343d69d5361334cb6bc5fa9f032df2</data>
+</node>
+<node id="&quot;MAOKAI&quot;">
+  <data key="d0">"PERSON"</data>
+  <data key="d1">"Maokai is a champion who observes the map, has a glowing blue eye, and engages in strategic planning."</data>
+  <data key="d2">chunk-c7343d69d5361334cb6bc5fa9f032df2</data>
+</node>
+<node id="&quot;HECARIM&quot;">
+  <data key="d0">"PERSON"</data>
+  <data key="d1">"Hecarim is a champion who interacts with Maokai, exchanging glowing blue effects that suggest information or power transfer."</data>
+  <data key="d2">chunk-c7343d69d5361334cb6bc5fa9f032df2</data>
+</node>
+<node id="&quot;THE TAVERN&quot;">
+  <data key="d0">"GEO"</data>
+  <data key="d1">"The Tavern is a cozy location where champions gather, discuss plans, and acknowledge each other's worth."</data>
+  <data key="d2">chunk-c7343d69d5361334cb6bc5fa9f032df2</data>
+</node>
+<node id="&quot;THE MAP&quot;">
+  <data key="d0">"GEO"</data>
+  <data key="d1">"The Map is a panoramic view of the game world, featuring lush mountains, forests, and a central jungle area."</data>
+  <data key="d2">chunk-c7343d69d5361334cb6bc5fa9f032df2</data>
+</node>
+<node id="&quot;THE RIFT&quot;">
+  <data key="d0">"GEO"</data>
+  <data key="d1">"The Rift is a game‑world location that’s part of the League of Legends universe."</data>
+  <data key="d2">chunk-c7343d69d5361334cb6bc5fa9f032df2</data>
+</node>
+<node id="&quot;AHRĪ&quot;">
+  <data key="d0">"PERSON"</data>
+  <data key="d1">"Ahrī is a female champion with long blonde hair, a mage-like character who holds a staff topped with a blue orb, and is central to the narrative text describing her feelings, connection to a spirit world, and her pack."</data>
+  <data key="d2">chunk-63d31af389b05ace19fe8249375a5fbc</data>
+</node>
+<node id="&quot;TURRET‑LIKE ROBOT&quot;">
+  <data key="d0">"ORGANIZATION"</data>
+  <data key="d1">"Turret‑like robot is a mechanical sentinel with glowing blue eyes, serving a defensive or observational role in the game, and is featured in the frame as a guardian."</data>
+  <data key="d2">chunk-63d31af389b05ace19fe8249375a5fbc</data>
+</node>
+<node id="&quot;GARDEN OF FORGOTTEN THINGS&quot;">
+  <data key="d0">"EVENT"</data>
+  <data key="d1">"Garden of Forgotten Things, also known as the jardín de lo olvido, is a setting within the champion story format, representing a location or event where the champion’s journey unfolds."</data>
+  <data key="d2">chunk-63d31af389b05ace19fe8249375a5fbc</data>
+</node>
+<node id="&quot;MYSTICAL FOREST&quot;">
+  <data key="d0">"GEO"</data>
+  <data key="d1">"The mystical forest is a dream‑like, luminescent environment where Ahri wanders, featuring tall twisted trees, glowing vines, and a glowing energy that surrounds her."</data>
+  <data key="d2">chunk-0e6c127c10fb89705812a342908329d8</data>
+</node>
+<node id="&quot;GLOWING ENERGY&quot;">
+  <data key="d0">"GEO"</data>
+  <data key="d1">"Glowing energy refers to the faint, luminous aura that surrounds Ahri, hinting at her ability to manipulate memories and reality within the forest."</data>
+  <data key="d2">chunk-0e6c127c10fb89705812a342908329d8</data>
+</node>
+<node id="&quot;RIOT&quot;">
+  <data key="d0">"ORGANIZATION"</data>
+  <data key="d1">"Riot is the developer and publisher of League of Legends, responsible for creating and maintaining the game and its characters."</data>
+  <data key="d2">chunk-d2d05bcd1ec590f77890a543d174bb6d</data>
+</node>
+<node id="&quot;JUNGLE&quot;">
+  <data key="d0">"GEO"</data>
+  <data key="d1">"Jungle is a dense forest area within the game where Ahri navigates, explores, and encounters various challenges."</data>
+  <data key="d2">chunk-d2d05bcd1ec590f77890a543d174bb6d</data>
+</node>
+<node id="&quot;ARI BOSSQUE VIEJO&quot;">
+  <data key="d0">"PERSON"</data>
+  <data key="d1">"Ari Bossque Viejo is a champion character in League of Legends, depicted with fox-like ears, purple eyes, and a pink‑and‑white color scheme, showcased in a cinematic promotional video."</data>
+  <data key="d2">chunk-10fe0e28e96ec1021e96b83bf4fe6b1f</data>
+</node>
+<node id="&quot;LEAGUE OF LEGENDS&quot;">
+  <data key="d0">"ORGANIZATION"</data>
+  <data key="d1">"League of Legends is a popular online multiplayer game developed by Riot Games, serving as the platform where the champion Ari Bossque Viejo appears."&lt;SEP&gt;"League of Legends is a popular online multiplayer game featuring champions, teams, and competitive play."</data>
+  <data key="d2">chunk-10fe0e28e96ec1021e96b83bf4fe6b1f&lt;SEP&gt;chunk-a5910213a3de1a7ae5964b2c93d215c0</data>
+</node>
+<node id="&quot;RIOT GAMES&quot;">
+  <data key="d0">"ORGANIZATION"</data>
+  <data key="d1">"Riot Games is the developer and publisher of League of Legends, responsible for creating and promoting champions such as Ari Bossque Viejo."</data>
+  <data key="d2">chunk-10fe0e28e96ec1021e96b83bf4fe6b1f</data>
+</node>
+<node id="&quot;KPOP&quot;">
+  <data key="d0">"GEO"</data>
+  <data key="d1">"Kpop refers to Korean pop music, mentioned in the transcript as a cultural influence associated with the champion's skins."</data>
+  <data key="d2">chunk-10fe0e28e96ec1021e96b83bf4fe6b1f</data>
+</node>
+<node id="&quot;CHAYA&quot;">
+  <data key="d0">"PERSON"</data>
+  <data key="d1">"Chaya is a champion character in League of Legends, known for her magical abilities and lore."</data>
+  <data key="d2">chunk-a5910213a3de1a7ae5964b2c93d215c0</data>
+</node>
+<node id="&quot;ARI USES YMELO STONES IN A MAGICAL RITUAL, INDICATING A DIRECT INTERACTION AND RELIANCE ON THESE STONES FOR POWER.&quot;">
+  <data key="d2">chunk-5369aae6f52fc67ffbf63b3db7c1e061</data>
+  <data key="d1">9</data>
+  <data key="d0">"UNKNOWN"</data>
+</node>
+<node id="&quot;ARI&quot;&lt;|&quot;YMELO STONES&quot;">
+  <data key="d2">chunk-5369aae6f52fc67ffbf63b3db7c1e061</data>
+  <data key="d1">9</data>
+  <data key="d0">"UNKNOWN"</data>
+</node>
+<node id="&quot;GIRÍN ATTACKS ARI WITH POISON, BUT ARI ESCAPES AND DEFEATS GIRÍN, SHOWING A CONFLICT AND SUBSEQUENT VICTORY.&quot;">
+  <data key="d2">chunk-5369aae6f52fc67ffbf63b3db7c1e061</data>
+  <data key="d1">8</data>
+  <data key="d0">"UNKNOWN"</data>
+</node>
+<node id="&quot;GIRÍN&quot;&lt;|&quot;ARI&quot;">
+  <data key="d2">chunk-5369aae6f52fc67ffbf63b3db7c1e061</data>
+  <data key="d1">8</data>
+  <data key="d0">"UNKNOWN"</data>
+</node>
+<node id="&quot;HARRY VISITS THE JARDÍN DE LO OLVIDO TO CONFRONT AND RELEASE MEMORIES, INDICATING A PURPOSEFUL RELATIONSHIP BETWEEN THE CHARACTER AND THE LOCATION.&quot;">
+  <data key="d2">chunk-5369aae6f52fc67ffbf63b3db7c1e061</data>
+  <data key="d1">9</data>
+  <data key="d0">"UNKNOWN"</data>
+</node>
+<node id="&quot;HARRY&quot;&lt;|&quot;JARDÍN DE LO OLVIDO&quot;">
+  <data key="d2">chunk-5369aae6f52fc67ffbf63b3db7c1e061</data>
+  <data key="d1">9</data>
+  <data key="d0">"UNKNOWN"</data>
+</node>
+<node id="&quot;ALI&quot;&lt;|&quot;JARDÍN DE LO OLVIDO&quot;">
+  <data key="d2">chunk-5369aae6f52fc67ffbf63b3db7c1e061</data>
+  <data key="d1">7</data>
+  <data key="d0">"UNKNOWN"</data>
+</node>
+<node id="&quot;ALI’S JOURNEY LEADS HIM TO THE JARDÍN DE LO OLVIDO, SUGGESTING A CONNECTION BETWEEN THE TRAVELER AND THE ENCHANTED FOREST.&quot;">
+  <data key="d2">chunk-5369aae6f52fc67ffbf63b3db7c1e061</data>
+  <data key="d1">7</data>
+  <data key="d0">"UNKNOWN"</data>
+</node>
+<node id="&quot;SMOLDER STARTER GUIDE&quot;">
+  <data key="d0">"EVENT"</data>
+  <data key="d1">"Smolder Starter Guide is a guide video that provides a concise summary of key events and actions for Smolder, including his preparation to move, engagement with an opposing champion near a turret, and the use of a fiery ability."</data>
+  <data key="d2">chunk-38f6b17996dfa4f0725931853356e5c7</data>
+</node>
+<node id="&quot;MASTER IN MINUTES&quot;">
+  <data key="d0">"EVENT"</data>
+  <data key="d1">"Master in Minutes is a collection of guides for various aspects of the game, including trading, wave control, CS, macro, hotkeys, jungle clearing, and more."</data>
+  <data key="d2">chunk-38f6b17996dfa4f0725931853356e5c7</data>
+</node>
+<node id="&quot;EZREAL&quot;">
+  <data key="d0">"PERSON"</data>
+  <data key="d1">"Ezreal is referenced as a similar champion to Smolder, indicating a comparable playstyle of a caster ADC."</data>
+  <data key="d2">chunk-3c2817e67c2a0f4eba0e8992bca8e29b</data>
+</node>
+<node id="&quot;LUX&quot;">
+  <data key="d0">"PERSON"</data>
+  <data key="d1">"Lux is a teammate of Smolder, supporting him in lane battles."</data>
+  <data key="d2">chunk-3c2817e67c2a0f4eba0e8992bca8e29b</data>
+</node>
+<node id="&quot;IRELIA&quot;">
+  <data key="d0">"PERSON"</data>
+  <data key="d1">"Irelia is an enemy champion who is killed by Smolder during a team fight."</data>
+  <data key="d2">chunk-3c2817e67c2a0f4eba0e8992bca8e29b</data>
+</node>
+<node id="&quot;FIZZ&quot;">
+  <data key="d0">"PERSON"</data>
+  <data key="d1">"Fizz is a teammate of Smolder, contributing to the team’s offensive efforts."</data>
+  <data key="d2">chunk-3c2817e67c2a0f4eba0e8992bca8e29b</data>
+</node>
+<node id="&quot;KAYN&quot;">
+  <data key="d0">"PERSON"</data>
+  <data key="d1">"Kayn is a teammate of Smolder, participating in the team’s combat actions."</data>
+  <data key="d2">chunk-3c2817e67c2a0f4eba0e8992bca8e29b</data>
+</node>
+<node id="&quot;RANKING‑IMPROVEMENT SERVICE&quot;">
+  <data key="d0">"ORGANIZATION"</data>
+  <data key="d1">"The ranking‑improvement service is a promotional entity offering a subscription plan to help players improve their rank in the game."</data>
+  <data key="d2">chunk-3c2817e67c2a0f4eba0e8992bca8e29b</data>
+</node>
+<node id="&quot;SEASON 14&quot;">
+  <data key="d0">"EVENT"</data>
+  <data key="d1">"Season 14 refers to the current competitive season of the game during which the ranking‑improvement service is promoted."</data>
+  <data key="d2">chunk-3c2817e67c2a0f4eba0e8992bca8e29b</data>
+</node>
+<node id="&quot;ALLYSLAIN&quot;">
+  <data key="d0">"PERSON"</data>
+  <data key="d1">"Allyslain is an enemy champion present in the lane, being targeted by Smolder's Q for potential damage."</data>
+  <data key="d2">chunk-668593e769836f1556568b94ee14f49e</data>
+</node>
+<node id="&quot;AURORA SOJ&quot;">
+  <data key="d0">"PERSON"</data>
+  <data key="d1">"Aurora Soj is a champion who was killed during the bottom‑lane showdown, as noted in the kill notifications."</data>
+  <data key="d2">chunk-eec1a77179830c031a31412197497ccf</data>
+</node>
+<node id="&quot;ELDER DRAGON&quot;">
+  <data key="d0">"EVENT"</data>
+  <data key="d1">"The Elder … "</data>
+  <data key="d2">chunk-eec1a77179830c031a31412197497ccf</data>
+</node>
+<node id="&quot;DRAGON PRACTICE&quot;">
+  <data key="d0">"EVENT"</data>
+  <data key="d1">"Dragon Practice is Smolder's ultimate ability that creates a large AoE blast, dealing heavy damage and pushing minions back."</data>
+  <data key="d2">chunk-8b662881b81d9f98abf16595ae3bc91a</data>
+</node>
+<node id="&quot;Q FLASH&quot;">
+  <data key="d0">"EVENT"</data>
+  <data key="d1">"Q Flash is a combo involving Smolder's Q ability, used to shred enemies and add displacement."</data>
+  <data key="d2">chunk-8b662881b81d9f98abf16595ae3bc91a</data>
+</node>
+<node id="&quot;W FLASH&quot;">
+  <data key="d0">"EVENT"</data>
+  <data key="d1">"W Flash is a combo involving Smolder's W ability, used to shred enemies and add displacement."</data>
+  <data key="d2">chunk-8b662881b81d9f98abf16595ae3bc91a</data>
+</node>
+<node id="&quot;TURRET&quot;">
+  <data key="d0">"GEO"</data>
+  <data key="d1">["\"Turret is a defensive structure in the game that can be destroyed by Smolder’s ultimate, affecting lane control.\"&lt;SEP&gt;\"Turret is a defensive structure in the lane that is under attack and exposed due to Smolder's wave control.\"&lt;SEP&gt;\"Turret is a defensive structure that Smolder keeps near to maintain lane control and push the minion wave.\"&lt;SEP&gt;\"Turret is the defensive structure in the Bottom Lane that both champions aim to protect or attack, influencing wave movement and team strategy.\"", "\"The bottom‑lane turret is the central objective, contested by both teams, with minions pushing toward it and the enemy team holding it with defensive spells.\"&lt;SEP&gt;\"The turret is a defensive structure in the bottom lane that both teams are contesting, with Ahri applying pressure to keep it under her team's control.\"&lt;SEP&gt;\"The turret is the objective being contested by both teams in the bottom‑lane, remaining intact throughout the described skirmishes.\"&lt;SEP&gt;\"Turret is a defensive structure in the game that is targeted during team fights in the bottom lane.\""]</data>
+  <data key="d2">["chunk-8b662881b81d9f98abf16595ae3bc91a&lt;SEP&gt;chunk-56760db9e5f22657231001b182fa8f2c&lt;SEP&gt;chunk-921a2c333f18b12f26287e340c8ea6a8&lt;SEP&gt;chunk-dde3ef385da20ee7d75730ea561e38fb", "chunk-e7a9ac28f921cd6d848bb8b8410c429c&lt;SEP&gt;chunk-9de993ea4d2737c78e4581b4f330ff47&lt;SEP&gt;chunk-0b22f6ec63cfca9b8465893ca0119cc0&lt;SEP&gt;chunk-9075c07f19742a09b3ad74a010af53ca"]</data>
+</node>
+<node id="&quot;ENEMY CHAMPION&quot;">
+  <data key="d0">"PERSON"</data>
+  <data key="d1">"An unnamed champion positioned in the lane, facing Smolder's attacks and being pushed toward the turret."&lt;SEP&gt;"The enemy champion is the opponent targeted by Smolder’s Q and ultimate, kept at bayonet distance and pressured throughout the clip."</data>
+  <data key="d2">chunk-8052217c808d9d0d02c75c0672fe10cb&lt;SEP&gt;chunk-921a2c333f18b12f26287e340c8ea6a8</data>
+</node>
+<node id="&quot;MINIONS&quot;">
+  <data key="d0">"ORGANIZATION"</data>
+  <data key="d1">"Minions are the allied units in the lane that are being pushed and cleared by Smolder's abilities."</data>
+  <data key="d2">chunk-921a2c333f18b12f26287e340c8ea6a8</data>
+</node>
+<node id="&quot;SIVIR&quot;">
+  <data key="d0">"PERSON"</data>
+  <data key="d1">"Sivir is another champion mentioned for comparison, noted for her smooth auto‑attack pattern after casting spells."</data>
+  <data key="d2">chunk-dde3ef385da20ee7d75730ea561e38fb</data>
+</node>
+<node id="&quot;ADC&quot;">
+  <data key="d0">"ORGANIZATION"</data>
+  <data key="d1">"ADC refers to the role of Attack‑Damage Carry in the game, a class of champions like Smolder and Sivir."</data>
+  <data key="d2">chunk-dde3ef385da20ee7d75730ea561e38fb</data>
+</node>
+<node id="&quot;MINION WAVE&quot;">
+  <data key="d0">["\"GEO\"", "\"UNKNOWN\""]</data>
+  <data key="d1">["\"Minion wave is a group of neutral units that can be pushed or cleared by Smolder’s abilities, influencing lane pressure.\"&lt;SEP&gt;\"Minion wave refers to the group of minions pushing toward the enemy turret, influenced by Smolder’s splash Q to maintain favorable positioning.\"", "\"A champion Ahri uses the minion wave to support the fight.\"|&gt;7"]</data>
+  <data key="d2">["chunk-8052217c808d9d0d02c75c0672fe10cb&lt;SEP&gt;chunk-dde3ef385da20ee7d75730ea561e38fb", "chunk-a97ca96b821a76d5444998f5d238857e"]</data>
+</node>
+<node id="&quot;LANE&quot;">
+  <data key="d0">"GEO"</data>
+  <data key="d1">"Lane is the area of the map where Smolder’s actions take place, determining control and pressure in the game."</data>
+  <data key="d2">chunk-dde3ef385da20ee7d75730ea561e38fb</data>
+</node>
+<node id="&quot;MID‑LANE&quot;">
+  <data key="d0">"GEO"</data>
+  <data key="d1">["\"Mid‑lane is a strategic area in League of Legends where Smolder focuses his abilities to maintain control and dictate engagements.\"", "\"Mid‑lane is a location on the game map where the skirmish between Ahri and Jhin takes place.\""]</data>
+  <data key="d2">["chunk-8052217c808d9d0d02c75c0672fe10cb", "chunk-791d3fb02596d8ddb511354fbec9341f"]</data>
+</node>
+<node id="&quot;RIVER&quot;">
+  <data key="d0">"GEO"</data>
+  <data key="d1">["\"River is a lane feature in League of Legends that Smolder moves toward to position himself advantageously for his long‑range abilities.\"&lt;SEP&gt;\"River is a map feature in the game’s mid‑lane, acting as a wall that forces enemies to play defensively and provides defensive positioning for Smolder.\"", "\"River is a location near the mid‑lane brush where the battle is set.\""]</data>
+  <data key="d2">["chunk-8052217c808d9d0d02c75c0672fe10cb&lt;SEP&gt;chunk-1bb8fa15612c7fb77ceb57839a48669e", "chunk-791d3fb02596d8ddb511354fbec9341f"]</data>
+</node>
+<node id="&quot;ENEMY TURRET&quot;">
+  <data key="d0">"GEO"</data>
+  <data key="d1">"Enemy turret is the defensive structure at the end of the lane that the minion wave pushes toward, indirectly affected by Smolder’s pressure."</data>
+  <data key="d2">chunk-8052217c808d9d0d02c75c0672fe10cb</data>
+</node>
+<node id="&quot;GNAR&quot;">
+  <data key="d0">"PERSON"</data>
+  <data key="d1">"Gnar is a champion in the game, a mid‑laner who is targeted by Smolder's abilities and is ultimately eliminated in the described showdown."</data>
+  <data key="d2">chunk-c656bbd0a81bad3a9fdd373336233e94</data>
+</node>
+<node id="&quot;JANNA&quot;">
+  <data key="d0">"PERSON"</data>
+  <data key="d1">"Janna is a champion who takes damage from Smolder's ultimate during the fight."&lt;SEP&gt;"Janna is a teammate of Smolder, providing crowd‑control support during the mid‑lane showdown against Gnar."</data>
+  <data key="d2">chunk-6f57568b2b676851343d311738188737&lt;SEP&gt;chunk-c656bbd0a81bad3a9fdd373336233e94</data>
+</node>
+<node id="&quot;LUCIAN&quot;">
+  <data key="d0">"PERSON"</data>
+  <data key="d1">"Lucian is a champion who kills Mordekaiser, earning a double kill and gold reward."&lt;SEP&gt;"Lucian is a teammate of Smolder, contributing poke damage to help keep Gnar pinned during the fight."</data>
+  <data key="d2">chunk-6f57568b2b676851343d311738188737&lt;SEP&gt;chunk-c656bbd0a81bad3a9fdd373336233e94</data>
+</node>
+<node id="&quot;GRAGAS&quot;">
+  <data key="d0">"PERSON"</data>
+  <data key="d1">"Gragas is a teammate of Smolder, offering crowd‑control to assist in maintaining pressure on Gnar."</data>
+  <data key="d2">chunk-c656bbd0a81bad3a9fdd373336233e94</data>
+</node>
+<node id="&quot;MID‑LANE RECAP&quot;">
+  <data key="d0">"EVENT"</data>
+  <data key="d1">"Mid‑lane Recap refers to a summary of the gameplay events between Smolder and Gnar, highlighting key actions such as level gains, ability usage, and lane control."</data>
+  <data key="d2">chunk-c656bbd0a81bad3a9fdd373336233e94</data>
+</node>
+<node id="&quot;MID‑LANE SHOWDOWN&quot;">
+  <data key="d0">"EVENT"</data>
+  <data key="d1">"Mid‑lane Showdown describes the specific encounter where Smolder and Gnar face off, culminating in Gnar's elimination."</data>
+  <data key="d2">chunk-c656bbd0a81bad3a9fdd373336233e94</data>
+</node>
+<node id="&quot;BOTTOM‑LANE SMOLDER PUSH&quot;">
+  <data key="d0">"EVENT"</data>
+  <data key="d1">"Bottom‑lane Smolder push is an action where Smolder leads a coordinated team push, moving the minion wave toward the enemy turret while allies chip away at minions and the turret."</data>
+  <data key="d2">chunk-af73a4b73a0139c676fd73cb1660025e</data>
+</node>
+<node id="&quot;DRAFT‑PHASE TRANSITION&quot;">
+  <data key="d0">"EVENT"</data>
+  <data key="d1">"Draft‑phase transition is a cutaway to pre‑game strategic planning, focusing on selecting champions and builds for effective wave‑pushing play."</data>
+  <data key="d2">chunk-af73a4b73a0139c676fd73cb1660025e</data>
+</node>
+<node id="&quot;Q&quot;">
+  <data key="d0">"TECHNOLOGY"</data>
+  <data key="d1">"Q is Smolder’s spread‑damage ability that can hit several enemies at once, often aimed at the back‑line of the enemy team."</data>
+  <data key="d2">chunk-1bb8fa15612c7fb77ceb57839a48669e</data>
+</node>
+<node id="&quot;MID‑TURRET&quot;">
+  <data key="d0">"GEO"</data>
+  <data key="d1">"Mid‑turret is a defensive structure in the mid‑lane that helps Smolder maintain a solid position while harassing the enemy back‑line."</data>
+  <data key="d2">chunk-1bb8fa15612c7fb77ceb57839a48669e</data>
+</node>
+<node id="&quot;RIFT HERALD&quot;">
+  <data key="d0">"EVENT"</data>
+  <data key="d1">["\"Rift Herald is an objective in the game that the team has defeated, as indicated by a banner in the last frame of the clip.\"", "\"The Rift Herald is an objective in the game that can be stolen or contested, and it plays a key role in the bottom lane showdown described.\"&lt;SEP&gt;\"The Rift Herald is an objective on the enemy side of the map, still present during the engagement, indicating the team has not yet lost that objective.\""]</data>
+  <data key="d2">["chunk-1bb8fa15612c7fb77ceb57839a48669e", "chunk-971b1c301f9b1d04b8bfcff2de204430&lt;SEP&gt;chunk-cbe08d93d9eaa38f66f60a865fd58f2f"]</data>
+</node>
+<node id="&quot;MORDEKAISER&quot;">
+  <data key="d0">"PERSON"</data>
+  <data key="d1">"Mordekaiser is a champion who is killed by Lucian and later by Smolder's ultimate."</data>
+  <data key="d2">chunk-6f57568b2b676851343d311738188737</data>
+</node>
+<node id="&quot;KENNEN&quot;">
+  <data key="d0">"PERSON"</data>
+  <data key="d1">"Kennen is a champion who joins the lane, uses his ultimate to clear minions, and applies pressure on the turret."</data>
+  <data key="d2">chunk-6f57568b2b676851343d311738188737</data>
+</node>
+<node id="&quot;ESSENCE REAVER&quot;">
+  <data key="d0">"ORGANIZATION"</data>
+  <data key="d1">"Essence Reaver is an item purchased by Smolder to increase damage against minions."&lt;SEP&gt;"Essence Reaver is an item rune used in the build strategy for the mid‑lane champion."</data>
+  <data key="d2">chunk-6f57568b2b676851343d311738188737&lt;SEP&gt;chunk-d3fc44abada49d7cd74346e3bacb4252</data>
+</node>
+<node id="&quot;COOLDOWN BOOTS&quot;">
+  <data key="d0">"ORGANIZATION"</data>
+  <data key="d1">"Cooldown Boots is an item rune used in the build strategy for the mid‑lane champion."</data>
+  <data key="d2">chunk-6f57568b2b676851343d311738188737</data>
+</node>
+<node id="&quot;NAVORI&quot;">
+  <data key="d0">"ORGANIZATION"</data>
+  <data key="d1">"Navori is an item rune used in the build strategy for the mid‑lane champion."</data>
+  <data key="d2">chunk-6f57568b2b676851343d311738188737</data>
+</node>
+<node id="&quot;TRINITY FORCE&quot;">
+  <data key="d0">"ORGANIZATION"</data>
+  <data key="d1">"Trinity Force is an item rune used in the build strategy for the mid‑lane champion."</data>
+  <data key="d2">chunk-6f57568b2b676851343d311738188737</data>
+</node>
+<node id="&quot;MUREKAI ROUTE&quot;">
+  <data key="d0">"ORGANIZATION"</data>
+  <data key="d1">"Murekai route is an item rune used in the build strategy for the mid‑lane champion."</data>
+  <data key="d2">chunk-6f57568b2b676851343d311738188737</data>
+</node>
+<node id="&quot;COGMA&quot;">
+  <data key="d0">"PERSON"</data>
+  <data key="d1">"Cogma is an ADC character mentioned as similar to Smolder, known for percentage-based damage and item balancing strategies."</data>
+  <data key="d2">chunk-5df652d0714d2857af1e3e898b9f2fd6</data>
+</node>
+<node id="&quot;VAYNE&quot;">
+  <data key="d0">"PERSON"</data>
+  <data key="d1">"Vayne is an ADC character mentioned as similar to Smolder, known for percentage-based damage and item balancing strategies."</data>
+  <data key="d2">chunk-5df652d0714d2857af1e3e898b9f2fd6</data>
+</node>
+<node id="&quot;VARUS&quot;">
+  <data key="d0">"PERSON"</data>
+  <data key="d1">"Varus is an ADC character mentioned as similar to Smolder, known for percentage-based damage and item balancing strategies."</data>
+  <data key="d2">chunk-5df652d0714d2857af1e3e898b9f2fd6</data>
+</node>
+<node id="&quot;S’MOLDER&quot;">
+  <data key="d0">"PERSON"</data>
+  <data key="d1">"S’molder is a champion in the game, known for aggressive wave‑clear, passive‑stack buildup, and early‑game pressure, using Q and R abilities to shred minions and enemy champions."</data>
+  <data key="d2">chunk-e3b7da4bd1ce9d33975f0aad5df36196</data>
+</node>
+<node id="&quot;OCEAN DRAKE&quot;">
+  <data key="d0">["\"EVENT\"", "\"UNKNOWN\""]</data>
+  <data key="d1">["\"Ocean Drake is a neutral monster that the bot lane team captures, providing a significant objective advantage.\"", "\"The recent kill of the Ocean Drake provides Ahri’s team with a buff that enhances their ability to push the turret.\"|&gt;8"]</data>
+  <data key="d2">["chunk-e3b7da4bd1ce9d33975f0aad5df36196", "chunk-50e5f3799024f122b368387f1b3cc171"]</data>
+</node>
+<node id="&quot;ALLY TURRET&quot;">
+  <data key="d0">"GEO"</data>
+  <data key="d1">"Ally turret is a defensive structure in the bot lane that is destroyed during the game, exposing the enemy bot lane."</data>
+  <data key="d2">chunk-e3b7da4bd1ce9d33975f0aad5df36196</data>
+</node>
+<node id="&quot;SKILLCAPED&quot;">
+  <data key="d0">"PERSON"</data>
+  <data key="d1">"SKILLCAPED is the enemy champion targeted by Smolder during a coordinated team fight, ultimately receiving a decisive Q hit that secures the kill."</data>
+  <data key="d2">chunk-56760db9e5f22657231001b182fa8f2c</data>
+</node>
+<node id="&quot;BOTTOM LANE&quot;">
+  <data key="d0">"GEO"</data>
+  <data key="d1">["\"Bottom Lane is the specific area of the game map where Smolder and SKILLCAPED engage, featuring the enemy turret and minion wave dynamics.\"", "\"Bottom lane is a location in the game where the main actions of recalling, item buying, and team fights occur.\""]</data>
+  <data key="d2">["chunk-56760db9e5f22657231001b182fa8f2c", "chunk-9075c07f19742a09b3ad74a010af53ca"]</data>
+</node>
+<node id="&quot;TEAM FIGHT&quot;">
+  <data key="d0">"EVENT"</data>
+  <data key="d1">["\"Team Fight is the coordinated combat near the turret where Smolder engages SKILLCAPED, leading to a kill and subsequent pressure on the lane.\"", "\"Team fight is the ongoing battle between both teams, involving multiple champions and ultimates, and is the central focus of the clip.\""]</data>
+  <data key="d2">["chunk-56760db9e5f22657231001b182fa8f2c", "chunk-e095614c66786b44e85c903db324d2eb"]</data>
+</node>
+<node id="&quot;VOIDGRUBS&quot;">
+  <data key="d0">"GEO"</data>
+  <data key="d1">"Voidgrubs is a neutral objective taken by the enemy team, indicating map activity."</data>
+  <data key="d2">chunk-d3fc44abada49d7cd74346e3bacb4252</data>
+</node>
+<node id="&quot;SKILLCAPPED&quot;">
+  <data key="d0">"ORGANIZATION"</data>
+  <data key="d1">"skillcapped is a service that offers a full‑refund guarantee if a player does not rank up while actively using it."</data>
+  <data key="d2">chunk-3e81b71e9a756dcb53e16da09de60616</data>
+</node>
+<node id="&quot;SMOLDER&quot;">
+  <data key="d0">"PERSON"</data>
+  <data key="d1">We need to produce a comprehensive summary of the data. Entities: "SMOLDER". The description list has many contradictory statements: some say bottom lane carry champion, some say top lane, some say mid lane. The Q ability described differently: long-range Q splash damage fireball, short-range Q/E to poke towers, etc. There are also statements about ultimate: Dragon Practice, ultimate red laser, ultimate pulls enemies and pushes minions, level-6 ultimate. Also mention of other abilities: Q (Scorch Breath), etc. Also some statements about the game platform, level 10, etc. We need to resolve contradictions and produce a coherent summary.
+
+We should produce a third-person description summarizing all info. The best approach: say that Smolder is a champion in League of Legends. He is primarily played as an ADC (bottom lane carry) but can be played in other lanes. He uses a long-range Q that deals splash damage; he can stack and evolve Q to become stronger. He uses his ultimate (red laser/Dragon Practice) to pull enemies or push minions. He is known for using combos like Q Flash or W Flash. He is a high-damage scaling carry, uses auto-attacks after spells, uses mana, etc. Provide details: at level 10, etc. Provide mention of items like Essence Reaver. Provide mention of his kit: Q, W, E, R. Also mention that he has abundant mana and health. Provide mention of his ability to farm minion waves, control waves, and secure kills. Mention of his ability to use Q on high-health minions. Provide mention of his ability to use Q to poke towers. Provide mention of his ability to use ultimate to pull enemies and push minions. Provide mention of his ability to weave auto-attacks after casting spells. Provide mention of his ability to use Q Flash combos. Provide mention of his presence in a video near a river, engaging enemy near turret using a fiery ability. Provide mention that Smolder is a game platform? Actually one description says "Smolder is a game or platform that players use to rank up and is promoted in the video." That seems like a misinterpretation; we can note that Smolder is a champion not a platform.
+
+We'll produce a comprehensive summary. Let's produce about 3-4 paragraphs. Ensure to mention all relevant info. Let's produce a single coherent summary. Ensure to avoid contradictions. Let's mention that his Q is a long</data>
+  <data key="d2">chunk-3e81b71e9a756dcb53e16da09de60616&lt;SEP&gt;chunk-8b662881b81d9f98abf16595ae3bc91a&lt;SEP&gt;chunk-c656bbd0a81bad3a9fdd373336233e94&lt;SEP&gt;chunk-dde3ef385da20ee7d75730ea561e38fb&lt;SEP&gt;chunk-1bb8fa15612c7fb77ceb57839a48669e&lt;SEP&gt;chunk-6f57568b2b676851343d311738188737&lt;SEP&gt;chunk-38f6b17996dfa4f0725931853356e5c7&lt;SEP&gt;chunk-eec1a77179830c031a31412197497ccf&lt;SEP&gt;chunk-5df652d0714d2857af1e3e898b9f2fd6&lt;SEP&gt;chunk-3c2817e67c2a0f4eba0e8992bca8e29b&lt;SEP&gt;chunk-921a2c333f18b12f26287e340c8ea6a8&lt;SEP&gt;chunk-af73a4b73a0139c676fd73cb1660025e&lt;SEP&gt;chunk-56760db9e5f22657231001b182fa8f2c&lt;SEP&gt;chunk-d3fc44abada49d7cd74346e3bacb4252&lt;SEP&gt;chunk-8052217c808d9d0d02c75c0672fe10cb&lt;SEP&gt;chunk-668593e769836f1556568b94ee14f49e</data>
+</node>
+<node id="&quot;BERTVETH&quot;">
+  <data key="d2">chunk-eec1a77179830c031a31412197497ccf</data>
+  <data key="d1">"Smolder … "</data>
+  <data key="d0">"UNKNOWN"</data>
+</node>
+<node id="&quot;ERDO&quot;">
+  <data key="d0">"PERSON"</data>
+  <data key="d1">"Erdo is the player who narrates the gameplay and provides commentary on how to play Ahri."</data>
+  <data key="d2">chunk-766683e031208fd1d376543ecbbaf0c0</data>
+</node>
+<node id="&quot;SINGED&quot;">
+  <data key="d0">"PERSON"</data>
+  <data key="d1">"Singed is a champion in League of Legends, level 12, who follows up the fight with his signature swirling vortex ultimate, adding area‑control to the battle."&lt;SEP&gt;"Singed is a champion in League of Legends, positioned as the enemy in the bottom lane, attempting to defend the turret and counter‑attack against Ahri."&lt;SEP&gt;"Singed is a champion who moves toward mid‑lane and repositioning for next objective."&lt;SEP&gt;"Singed is the enemy champion targeted by Jhin's ultimate, receiving high damage during the team fight."&lt;SEP&gt;"Singed is the opponent champion faced by Ahri in the mid lane."</data>
+  <data key="d2">chunk-766683e031208fd1d376543ecbbaf0c0&lt;SEP&gt;chunk-127edeb91b48f1fe0ba1ffce2f11202c&lt;SEP&gt;chunk-e095614c66786b44e85c903db324d2eb&lt;SEP&gt;chunk-db906804230df11e20be9716d01c395c&lt;SEP&gt;chunk-e7a9ac28f921cd6d848bb8b8410c429c</data>
+</node>
+<node id="&quot;MID LANE&quot;">
+  <data key="d0">"GEO"</data>
+  <data key="d1">"Mid Lane is the central lane in the game where Ahri and Singed compete for control and objectives."</data>
+  <data key="d2">chunk-766683e031208fd1d376543ecbbaf0c0</data>
+</node>
+<node id="&quot;ZYRA&quot;">
+  <data key="d0">"PERSON"</data>
+  <data key="d1">"Zyra is a champion in the game, level 15, with 60% HP, full mana, and uses her ultimate to attack enemies."&lt;SEP&gt;"Zyra is a champion in the game, using her ultimate to clear minions and control enemies during turret fights."&lt;SEP&gt;"Zyra is an enemy champion who is slain by Ahri, resulting in a kill notification and gold gain for Ahri."</data>
+  <data key="d2">chunk-ca45e459def78a35a02aa8dfd32f62f6&lt;SEP&gt;chunk-a97ca96b821a76d5444998f5d238857e&lt;SEP&gt;chunk-9075c07f19742a09b3ad74a010af53ca</data>
+</node>
+<node id="&quot;XAYAH&quot;">
+  <data key="d0">"PERSON"</data>
+  <data key="d1">"Xayah is a champion in the game, level 5, using Featherstorm, Spirit Rush, and Luden’s Echo or Rabadon’s Deathcap, and is part of the team pushing the bottom‑lane turret."</data>
+  <data key="d2">chunk-dd5f34c12cb9551bd43f628eeab5e4b0</data>
+</node>
+<node id="&quot;LILLIA&quot;">
+  <data key="d0">"PERSON"</data>
+  <data key="d1">"Lillia is a champion in the game, level 5, using Spinning Cut, Dark Scale, and Liandry’s Torment or Zhonya’s Hourglass, and is part of the team…"</data>
+  <data key="d2">chunk-dd5f34c12cb9551bd43f628eeab5e4b0</data>
+</node>
+<node id="&quot;JHIN&quot;">
+  <data key="d0">"PERSON"</data>
+  <data key="d1">"Jhin is a champion referred to as the Eternal Hero, channeling his ultimate Curtain Call to deal significant damage to Singed."&lt;SEP&gt;"Jhin, also known as Milaxin, is an enemy mid‑laner engaged by Ahri with support from Aatrox and Elderwood."</data>
+  <data key="d2">chunk-127edeb91b48f1fe0ba1ffce2f11202c&lt;SEP&gt;chunk-791d3fb02596d8ddb511354fbec9341f</data>
+</node>
+<node id="&quot;CHAMPION &amp; ABILITY&quot;">
+  <data key="d0">"ORGANIZATION"</data>
+  <data key="d1">"Champion &amp; Ability refers to the context of the player controlling Jhin and channeling his ultimate in the team fight."</data>
+  <data key="d2">chunk-127edeb91b48f1fe0ba1ffce2f11202c</data>
+</node>
+<node id="&quot;TEAM FIGHT NEAR THE BOTTOM‑LANE TURRET&quot;">
+  <data key="d0">"GEO"</data>
+  <data key="d1">"The team fight occurs near the bottom‑lane turret, where the player's team pushes the turret while the enemy holds defensively."</data>
+  <data key="d2">chunk-127edeb91b48f1fe0ba1ffce2f11202c</data>
+</node>
+<node id="&quot;ZHONYA’S HOURGLASS&quot;">
+  <data key="d0">"ORGANIZATION"</data>
+  <data key="d1">"Zhonya’s Hourglass is an item built by Ahri for burst damage and survivability."&lt;SEP&gt;"Zhonya’s Hourglass is an item used by the player to provide damage, survivability, and utility during the fight."</data>
+  <data key="d2">chunk-127edeb91b48f1fe0ba1ffce2f11202c&lt;SEP&gt;chunk-9de993ea4d2737c78e4581b4f330ff47</data>
+</node>
+<node id="&quot;RABADON’S DEATHCAP&quot;">
+  <data key="d0">"ORGANIZATION"</data>
+  <data key="d1">"Rabadon’s Deathcap is an item used by the player to increase damage output during the fight."&lt;SEP&gt;"R‑…..........………………………………………………………………………………………………………………………………………………………………‑……………………………………………………………………………………………………………………………………………………………………………………………………………………??…………………………………………………………………………??………………………………………………………??…………??………??…??……………………………………………………………………………………………………………………………………………………………………………………………………………………………………………………………………………………………………………………………………………………bottom……………………………………………………………………………………………………………………………………………………………………??…………………………………………………………………………………………………………………………………………………………………………………………………………………………………………………………………………………………………………………………………………………………………………………………………………………………………………………………………………………………………………………………………………………………………………………………………………………………………………………………………………………………………………??"</data>
+  <data key="d2">chunk-127edeb91b48f1fe0ba1ffce2f11202c&lt;SEP&gt;chunk-4061b232b0c3a178678edc709f927f81</data>
+</node>
+<node id="&quot;ARRADION&quot;">
+  <data key="d0">"PERSON"</data>
+  <data key="d1">"Arradion is a key enemy champion the player intends to focus on during the fight."</data>
+  <data key="d2">chunk-127edeb91b48f1fe0ba1ffce2f11202c</data>
+</node>
+<node id="&quot;SPIRIT RUSH&quot;">
+  <data key="d0">"ORGANIZATION"</data>
+  <data key="d1">"Spirit Rush is Ahri's ultimate ability used to dash across the lane and apply pressure on the enemy team."&lt;SEP&gt;"Spirit Rush is Ahri's ultimate that channeling into Jhin to damage the enemy team."</data>
+  <data key="d2">chunk-127edeb91b48f1fe0ba1ffce2f11202c&lt;SEP&gt;chunk-9de993ea4d2737c78e4581b4f330ff47</data>
+</node>
+<node id="&quot;BOTTOM‑LANE TURRET TEAMFIGHT&quot;">
+  <data key="d0">"EVENT"</data>
+  <data key="d1">"Bottom‑lane turret teamfight is a specific in‑game event where the player’s Ahri is using her ultimate against the enemy champion Spiderman, occurring in the bottom lane of the map."</data>
+  <data key="d2">chunk-d17d2ebbc3a40b6ba39d37a7b89f003c</data>
+</node>
+<node id="&quot;SPIDERMAN&quot;">
+  <data key="d0">"PERSON"</data>
+  <data key="d1">"Spiderman is an enemy champion being targeted by Ahri’s ultimate during the event."</data>
+  <data key="d2">chunk-d17d2ebbc3a40b6ba39d37a7b89f003c</data>
+</node>
+<node id="&quot;ASHE&quot;">
+  <data key="d0">"PERSON"</data>
+  <data key="d1">"Ashe is a champion in League of Legends, level 13, appearing later in the clip and using her ultimate Enchanted Crystal Arrow to target the same enemy champion and secure kills."&lt;SEP&gt;"Ashe is a champion in the bottom lane, level 10, uses her ultimate Enchanted Crystal Arrow to target the turret area and maintain pressure on the enemy team."&lt;SEP&gt;"Ashe is a level 8 ranged champion with 801/1112 HP, full mana, and a build featuring Zhonya’s Hourglass and Rabadon’s Deathcap. She follows up with her ultimate, Enchanted Crystal Arrow, during the turret push."</data>
+  <data key="d2">chunk-e095614c66786b44e85c903db324d2eb&lt;SEP&gt;chunk-a97ca96b821a76d5444998f5d238857e&lt;SEP&gt;chunk-50e5f3799024f122b368387f1b3cc171</data>
+</node>
+<node id="&quot;RAKAN&quot;">
+  <data key="d0">"PERSON"</data>
+  <data key="d1">"Rakan is a champion in the bottom‑lane turret showdown, launching his ultimate‑skillshot toward the enemy cluster."&lt;SEP&gt;"Rakan is a level 8 support champion with 929/1411 HP, full mana, and a build featuring Zhonya’s Hourglass and Luden’s Echo. He engages and applies damage during the team fight."</data>
+  <data key="d2">chunk-9de993ea4d2737c78e4581b4f330ff47&lt;SEP&gt;chunk-50e5f3799024f122b368387f1b3cc171</data>
+</node>
+<node id="&quot;ENEMY TEAM&quot;">
+  <data key="d0">"ORGANIZATION"</data>
+  <data key="d1">"The opposing team is defending the turret, with minions pushing toward it and a champion channeling a spell."</data>
+  <data key="d2">chunk-9de993ea4d2737c78e4581b4f330ff47</data>
+</node>
+<node id="&quot;VOIDGRUBS OBJECTIVE&quot;">
+  <data key="d0">"EVENT"</data>
+  <data key="d1">"The Voidgrubs objective was recently taken by the defending team, giving them a slight advantage in the ongoing battle."</data>
+  <data key="d2">chunk-9de993ea4d2737c78e4581b4f330ff47</data>
+</node>
+<node id="&quot;WARWICK&quot;">
+  <data key="d0">"PERSON"</data>
+  <data key="d1">"Warwick is a champion in the enemy squad, aggressively pushing back and using abilities to keep Ahri and allies at bayonet distance from the turret."&lt;SEP&gt;"Warwick is a champion on the defending team, actively countering Ahri and channeling a big spell."&lt;SEP&gt;"Warwick is an enemy champion targeted by Ahri's Charm (Q) and Ultimate (R), serving as the primary focus of the current fight."</data>
+  <data key="d2">chunk-971b1c301f9b1d04b8bfcff2de204430&lt;SEP&gt;chunk-0b22f6ec63cfca9b8465893ca0119cc0&lt;SEP&gt;chunk-9de993ea4d2737c78e4581b4f330ff47</data>
+</node>
+<node id="&quot;LUDEN’S ECHO&quot;">
+  <data key="d0">"ORGANIZATION"</data>
+  <data key="d1">"Luden’s Echo is an item built by Ahri for burst damage and survivability."&lt;SEP&gt;"Luden’s Echo is an item considered by Ahri for survivability and burst damage, complementing her build strategy."&lt;SEP&gt;"Luden’s Echo is an item in League of Legends that Ahri considers purchasing for burst damage."&lt;SEP&gt;"Luden’s Echo is an item in League of Legends that provides damage amplification and mana regeneration, used by Ahri to increase her damage output."</data>
+  <data key="d2">chunk-e7a9ac28f921cd6d848bb8b8410c429c&lt;SEP&gt;chunk-997d95dbdb8840540c33069e74ffe0ce&lt;SEP&gt;chunk-5c40e6b373211082863b6adfadfbb910&lt;SEP&gt;chunk-9de993ea4d2737c78e4581b4f330ff47</data>
+</node>
+<node id="&quot;LEE SIN&quot;">
+  <data key="d0">"PERSON"</data>
+  <data key="d1">"Lee Sin is a champion in the enemy squad, using healing or sustain spells to survive Ahri’s burst and contributing to the defensive stance."</data>
+  <data key="d2">chunk-0b22f6ec63cfca9b8465893ca0119cc0</data>
+</node>
+<node id="&quot;ALLY SLAIN&quot;">
+  <data key="d0">"EVENT"</data>
+  <data key="d1">"An event where an ally of Ahri’s team is killed by the enemy, shifting momentum slightly in favor of the enemy side."</data>
+  <data key="d2">chunk-0b22f6ec63cfca9b8465893ca0119cc0</data>
+</node>
+<node id="&quot;IVERN&quot;">
+  <data key="d0">"PERSON"</data>
+  <data key="d1">"Ivern is a champion in the bottom lane, level 9, uses his ultimate Back in Time to pull enemies back while keeping up the fight around the turret."</data>
+  <data key="d2">chunk-a97ca96b821a76d5444998f5d238857e</data>
+</node>
+<node id="&quot;SION&quot;">
+  <data key="d0">"PERSON"</data>
+  <data key="d1">"Sion is a champion in League of Legends, being targeted by Ahri and channeling a spell during the Baron Nashor team fight."&lt;SEP&gt;"Sion is a champion in the bottom lane, level 10, joins the push, displays an unstoppable banner, and later retreats into a cooldown state before re‑engaging."&lt;SEP&gt;"Sion is an enemy champion engaged by Ahri after Warwick, used to maintain lane control and prevent minion wave push."&lt;SEP&gt;"Sion is an enemy champion targeted by Ahri’s Charm ability during the team fight."</data>
+  <data key="d2">chunk-5c40e6b373211082863b6adfadfbb910&lt;SEP&gt;chunk-971b1c301f9b1d04b8bfcff2de204430&lt;SEP&gt;chunk-997d95dbdb8840540c33069e74ffe0ce&lt;SEP&gt;chunk-a97ca96b821a76d5444998f5d238857e</data>
+</node>
+<node id="&quot;ETERNAL HERO&quot;">
+  <data key="d0">"PERSON"</data>
+  <data key="d1">"Eternal Hero is a rune page configuration used in the game, set up for a player’s strategy."&lt;SEP&gt;"Eternal Hero refers to the champion Ahri in the context of the game, highlighted as the focal point of the action."</data>
+  <data key="d2">chunk-953b9aee22e2a1b84ad1a1cbfdbb365d&lt;SEP&gt;chunk-a97ca96b821a76d5444998f5d238857e</data>
+</node>
+<node id="&quot;DRAGON&quot;">
+  <data key="d0">"EVENT"</data>
+  <data key="d1">"Dragon is an objective that spawns during the clip, shifting the focus from lane defense to a team fight for the high‑stakes objective."&lt;SEP&gt;"Dragon is the objective in the first segment of the fight, with both teams fighting to secure it."</data>
+  <data key="d2">chunk-971b1c301f9b1d04b8bfcff2de204430&lt;SEP&gt;chunk-e095614c66786b44e85c903db324d2eb</data>
+</node>
+<node id="&quot;CAIN&quot;">
+  <data key="d0">"PERSON"</data>
+  <data key="d1">"Cain is a teammate referenced as responsible for teleport usage, indicating a missed objective‑control moment."</data>
+  <data key="d2">chunk-971b1c301f9b1d04b8bfcff2de204430</data>
+</node>
+<node id="&quot;SPIRIT FIRE&quot;">
+  <data key="d0">"EVENT"</data>
+  <data key="d1">"Spirit Fire is Ahri's ultimate ability used to target and attempt to kill an enemy champion during the Dragon‑pit team fight."</data>
+  <data key="d2">chunk-e095614c66786b44e85c903db324d2eb</data>
+</node>
+<node id="&quot;ENCHANTED CRYSTAL ARROW&quot;">
+  <data key="d0">"EVENT"</data>
+  <data key="d1">"Enchanted Crystal Arrow is Ashe's ultimate ability used to target an enemy champion during the team fight."</data>
+  <data key="d2">chunk-e095614c66786b44e85c903db324d2eb</data>
+</node>
+<node id="&quot;THRESH&quot;">
+  <data key="d0">"PERSON"</data>
+  <data key="d1">"Thresh is a champion in League of Legends, level 31, who keeps the momentum with his ultimate, a large vortex that pulls in enemies and minions."&lt;SEP&gt;"Thresh is a champion in the bot lane, casting his ultimate to create a vortex that pulls enemies and minions."&lt;SEP&gt;"Thresh is a champion with a glowing Death Sentence ultimate that locks down multiple enemies."</data>
+  <data key="d2">chunk-54a6f8ba3aa2145b8ba6ba20249682e1&lt;SEP&gt;chunk-e095614c66786b44e85c903db324d2eb&lt;SEP&gt;chunk-db906804230df11e20be9716d01c395c</data>
+</node>
+<node id="&quot;DRAGON PIT&quot;">
+  <data key="d0">"GEO"</data>
+  <data key="d1">"Dragon pit is the location of the key events in the team fight, where both teams converge and the minion wave pushes forward, indicating pressure on the objective."</data>
+  <data key="d2">chunk-e095614c66786b44e85c903db324d2eb</data>
+</node>
+<node id="&quot;THORNBOUND ATAKHAN&quot;">
+  <data key="d0">"PERSON"</data>
+  <data key="d1">"Thornbound Atakhan is an enemy bot champion that spawns in the bot lane during the fight."</data>
+  <data key="d2">chunk-db906804230df11e20be9716d01c395c</data>
+</node>
+<node id="&quot;MOUNTAIN DRAKE&quot;">
+  <data key="d0">"EVENT"</data>
+  <data key="d1">"Mountain Drake is an objective in the game that the enemy team lost during the fight."&lt;SEP&gt;"Mountain Drake is an objective in the game that was lost by the enemy side, giving the Akali/Ahri team a temporary advantage."&lt;SEP&gt;"Mountain Drake is an objective that the enemy team slays, granting them a buff and shifting focus to the mid lane."</data>
+  <data key="d2">chunk-54a6f8ba3aa2145b8ba6ba20249682e1&lt;SEP&gt;chunk-db906804230df11e20be9716d01c395c&lt;SEP&gt;chunk-5418d6b0956d9698de0cc256bc7a6ed1</data>
+</node>
+<node id="&quot;AKALI&quot;">
+  <data key="d0">"PERSON"</data>
+  <data key="d1">"Akali is a champion in the game, level 14, using the ultimate Shadow Dance to damage and gain mobility against the enemy Milaxin."</data>
+  <data key="d2">chunk-5418d6b0956d9698de0cc256bc7a6ed1</data>
+</node>
+<node id="&quot;MILAXIN&quot;">
+  <data key="d0">"PERSON"</data>
+  <data key="d1">"Milaxin is a champion that recorded a double‑kill for the allied team."&lt;SEP&gt;"Milaxin is an enemy champion targeted by Ahri’s Charm ability during the team fight."&lt;SEP&gt;"Milaxin is an enemy champion targeted by Akali's Shadow Dance."</data>
+  <data key="d2">chunk-54a6f8ba3aa2145b8ba6ba20249682e1&lt;SEP&gt;chunk-997d95dbdb8840540c33069e74ffe0ce&lt;SEP&gt;chunk-5418d6b0956d9698de0cc256bc7a6ed1</data>
+</node>
+<node id="&quot;POLNAREV&quot;">
+  <data key="d0">"PERSON"</data>
+  <data key="d1">"Polnarev is an enemy champion targeted by Ahri's Twisted Fate."</data>
+  <data key="d2">chunk-5418d6b0956d9698de0cc256bc7a6ed1</data>
+</node>
+<node id="&quot;ETERNAL HERO&quot;">
+  <data key="d0">"PERSON"</data>
+  <data key="d1">"Eternal Hero is a champion in the game, known for a bright red explosion ultimate that pushes enemies back."</data>
+  <data key="d2">chunk-54a6f8ba3aa2145b8ba6ba20249682e1</data>
+</node>
+<node id="&quot;SPIDERMADDF&quot;">
+  <data key="d0">"PERSON"</data>
+  <data key="d1">"Spidermaddf is a champion who uses a powerful red‑explosion ability and has recently leveled up to 10."</data>
+  <data key="d2">chunk-54a6f8ba3aa2145b8ba6ba20249682e1</data>
+</node>
+<node id="&quot;BARON NASHOR&quot;">
+  <data key="d0">"EVENT"</data>
+  <data key="d1">"Baron Nashor is a major objective in League of Legends, with a team fight erupting around it, involving Ahri, Sion, and other teammates."&lt;SEP&gt;"Baron Nashor is a neutral monster that the team attempts to kill; the team eventually slays it, as noted in the chat."</data>
+  <data key="d2">chunk-5c40e6b373211082863b6adfadfbb910&lt;SEP&gt;chunk-4061b232b0c3a178678edc709f927f81</data>
+</node>
+<node id="&quot;MID‑LANE TURRET&quot;">
+  <data key="d0">"GEO"</data>
+  <data key="d1">"The mid‑lane turret is a defensive structure in League of Legends, near which Ahri and Sion engage in a showdown."&lt;SEP&gt;"The mid‑lane turret is a strategic objective in the game, destroyed during the engagement, affecting minion wave movement and team positioning."</data>
+  <data key="d2">chunk-997d95dbdb8840540c33069e74ffe0ce&lt;SEP&gt;chunk-5c40e6b373211082863b6adfadfbb910</data>
+</node>
+<node id="&quot;VOID STAFF&quot;">
+  <data key="d0">"ORGANIZATION"</data>
+  <data key="d1">"Void Staff is an item in League of Legends that Ahri considers purchasing for magic penetration."&lt;SEP&gt;"Void Staff is an item purchased by Ahri to provide magic penetration, enhancing her damage output against enemies."</data>
+  <data key="d2">chunk-997d95dbdb8840540c33069e74ffe0ce&lt;SEP&gt;chunk-5c40e6b373211082863b6adfadfbb910</data>
+</node>
+<node id="&quot;ZONYA’S HOURGLASS&quot;">
+  <data key="d0">"ORGANIZATION"</data>
+  <data key="d1">"Zonya’s Hourglass is an item considered by Ahri for survivability and burst damage, complementing her build strategy."&lt;SEP&gt;"Zonya’s Hourglass is an item in League of Legends that Ahri considers purchasing for survivability."</data>
+  <data key="d2">chunk-997d95dbdb8840540c33069e74ffe0ce&lt;SEP&gt;chunk-5c40e6b373211082863b6adfadfbb910</data>
+</node>
+<node id="&quot;SKEDY&quot;">
+  <data key="d0">"PERSON"</data>
+  <data key="d1">"Skedy is an enemy champion targeted by Ahri’s Charm ability during the team fight."</data>
+  <data key="d2">chunk-997d95dbdb8840540c33069e74ffe0ce</data>
+</node>
+<node id="&quot;GUCZAHA&quot;">
+  <data key="d0">"PERSON"</data>
+  <data key="d1">"Guczaha is an enemy champion targeted by Ahri’s Charm ability during the team fight."</data>
+  <data key="d2">chunk-997d95dbdb8840540c33069e74ffe0ce</data>
+</node>
+<node id="&quot;SPIDERMAAAN&quot;">
+  <data key="d0">"PERSON"</data>
+  <data key="d1">"Spidermaaan is an enemy champion targeted by Ahri’s Charm ability during the team fight."</data>
+  <data key="d2">chunk-997d95dbdb8840540c33069e74ffe0ce</data>
+</node>
+<node id="&quot;GUEZAHA&quot;">
+  <data key="d0">"PERSON"</data>
+  <data key="d1">"Guezaha is a champion opposing Eternal Hero (Ahri) in the mid‑lane skirmish, receiving attacks and abilities from Ahri."&lt;SEP&gt;"Guezaha is an enemy champion repeatedly focused by Ahri during the engagement, using Charm, Shockwave, and Spirit Rush."</data>
+  <data key="d2">chunk-997d95dbdb8840540c33069e74ffe0ce&lt;SEP&gt;chunk-4061b232b0c3a178678edc709f927f81</data>
+</node>
+<node id="&quot;ETERNAL HERO (AHRI)&quot;">
+  <data key="d0">"PERSON"</data>
+  <data key="d1">"Eternal Hero (Ahri) is a champion in the game, level 16 in the mid‑lane skirmish, with high health and mana, and is actively engaging Guezaha with combos."</data>
+  <data key="d2">chunk-4061b232b0c3a178678edc709f927f81</data>
+</node>
+<node id="&quot;ZZ’ROT PORTAL&quot;">
+  <data key="d0">"TECHNOLOGY"</data>
+  <data key="d1">"Zz’Rot Portal is an item that’s part of Ahri’s build, indicating damage‑boosting capabilities."</data>
+  <data key="d2">chunk-4061b232b0c3a178678edc709f927f81</data>
+</node>
+<node id="&quot;SPIDERMAAN&quot;">
+  <data key="d0">"PERSON"</data>
+  <data key="d1">"Spidermaan is an enemy split‑pusher targeted by Ahri in the bottom lane."</data>
+  <data key="d2">chunk-791d3fb02596d8ddb511354fbec9341f</data>
+</node>
+<node id="&quot;AATROX&quot;">
+  <data key="d0">"PERSON"</data>
+  <data key="d1">"Aatrox, also known as Guzzaha, supports Jhin in the mid‑lane skirmish."</data>
+  <data key="d2">chunk-791d3fb02596d8ddb511354fbec9341f</data>
+</node>
+<node id="&quot;ELDERWOOD&quot;">
+  <data key="d0">"PERSON"</data>
+  <data key="d1">"Elderwood, also known as PolarisS85, supports Jhin in the mid‑lane skirmish."</data>
+  <data key="d2">chunk-791d3fb02596d8ddb511354fbec9341f</data>
+</node>
+<node id="&quot;BOTTOM‑LANE&quot;">
+  <data key="d0">"GEO"</data>
+  <data key="d1">"Bottom‑lane is a location on the game map where Ahri is attacking Spidermaan."</data>
+  <data key="d2">chunk-791d3fb02596d8ddb511354fbec9341f</data>
+</node>
+<node id="&quot;MID LANE TURRET&quot;">
+  <data key="d0">"GEO"</data>
+  <data key="d1">"The mid lane turret is a key structure in the game that can be destroyed by the team, leading to a strategic advantage."</data>
+  <data key="d2">chunk-df231031873dcc5add5b5640412bd723</data>
+</node>
+<node id="&quot;INHIBITOR TURRET&quot;">
+  <data key="d0">"GEO"</data>
+  <data key="d1">"The inhibitor turret is a structure that can be destroyed by the team, leading to a strategic advantage."</data>
+  <data key="d2">chunk-df231031873dcc5add5b5640412bd723</data>
+</node>
+<node id="&quot;TEAM&quot;">
+  <data key="d0">"ORGANIZATION"</data>
+  <data key="d1">"The team is a group of players working together to achieve objectives in the game."</data>
+  <data key="d2">chunk-df231031873dcc5add5b5640412bd723</data>
+</node>
+<node id="&quot;DISCORD&quot;">
+  <data key="d0">"ORGANIZATION"</data>
+  <data key="d1">"Discord is a communication platform used for coaching and contact purposes."</data>
+  <data key="d2">chunk-953b9aee22e2a1b84ad1a1cbfdbb365d</data>
+</node>
+<node id="&quot;BOTTOM‑LANE TURRET&quot;">
+  <data key="d2">chunk-a97ca96b821a76d5444998f5d238857e&lt;SEP&gt;chunk-50e5f3799024f122b368387f1b3cc171</data>
+  <data key="d1">"Ahri actively engages the turret by using Charm and Spirit Rush to apply pressure and attempt to secure a kill."|&gt;8&lt;SEP&gt;"Ahri applies her ultimate to the turret area, contributing to the pressure on the turret."|&gt;8</data>
+  <data key="d0">"UNKNOWN"</data>
+</node>
+<node id="&quot;GAME CLOCK 7:50–8:32&quot;">
+  <data key="d2">chunk-50e5f3799024f122b368387f1b3cc171</data>
+  <data key="d1">"The timing of the fight aligns with mid‑game objectives, indicating strategic importance."|&gt;9</data>
+  <data key="d0">"UNKNOWN"</data>
+</node>
+<node id="&quot;SCORE 7–6 TO 8–7&quot;">
+  <data key="d2">chunk-50e5f3799024f122b368387f1b3cc171</data>
+  <data key="d1">"The score change reflects the outcome of the turret fight, with Ahri’s team gaining the advantage."|&gt;8</data>
+  <data key="d0">"UNKNOWN"</data>
+</node>
+<node id="&quot;BLUECZ&quot;">
+  <data key="d2">chunk-a97ca96b821a76d5444998f5d238857e</data>
+  <data key="d1">"Ahri kills BlueCz, resulting in a gain of gold."|&gt;9</data>
+  <data key="d0">"UNKNOWN"</data>
+</node>
+<node id="&quot;FIRST TURRET&quot;">
+  <data key="d2">chunk-a97ca96b821a76d5444998f5d238857e</data>
+  <data key="d1">"The first turret destruction by Ahri or the team is a key event."|&gt;8</data>
+  <data key="d0">"UNKNOWN"</data>
+</node>
+<node id="&quot;THE SKIES DESCEND&quot;">
+  <data key="d2">chunk-cbe08d93d9eaa38f66f60a865fd58f2f</data>
+  <data key="d1">"Securing The Skies Descend gives the team vision in the bottom lane."|&gt;8</data>
+  <data key="d0">"UNKNOWN"</data>
+</node>
+<edge source="&quot;ARI&quot;" target="&quot;BASTAYA&quot;">
+  <data key="d3">9.0</data>
+  <data key="d4">"Ari is identified as a Bastaya, establishing a direct affiliation between the character and the Bastaya race."</data>
+  <data key="d5">chunk-2e403ab6dfb1007767efd391cca7a115</data>
+  <data key="d6">1</data>
+</edge>
+<edge source="&quot;ARI&quot;" target="&quot;NINE TAILS&quot;">
+  <data key="d3">8.0</data>
+  <data key="d4">"Ari is described as a Bastaya of Nine Tails, indicating a specific lineage or trait within her race."</data>
+  <data key="d5">chunk-2e403ab6dfb1007767efd391cca7a115</data>
+  <data key="d6">1</data>
+</edge>
+<edge source="&quot;ARI&quot;" target="&quot;SEAN&quot;">
+  <data key="d3">7.0</data>
+  <data key="d4">"Ari's memories involve running with ice foxes in the northern region of Sean, linking her personal history to that location."</data>
+  <data key="d5">chunk-2e403ab6dfb1007767efd391cca7a115</data>
+  <data key="d6">1</data>
+</edge>
+<edge source="&quot;ARI&quot;" target="&quot;HONÍA&quot;">
+  <data key="d3">6.0</data>
+  <data key="d4">""</data>
+  <data key="d5">chunk-2e403ab6dfb1007767efd391cca7a115</data>
+  <data key="d6">1</data>
+</edge>
+<edge source="&quot;ARI&quot;" target="&quot;OMIKAI ALAN&quot;">
+  <data key="d3">9.0</data>
+  <data key="d4">"Ari navigates and interacts within the mystical forest of Omikai Alan, making it the primary setting for her early actions."</data>
+  <data key="d5">chunk-384453835cabf302cc1866f083c441b8</data>
+  <data key="d6">1</data>
+</edge>
+<edge source="&quot;ARI&quot;" target="&quot;SINEN MILCOLAS&quot;">
+  <data key="d3">8.0</data>
+  <data key="d4">"Ari encounters and confronts Sinen Milcolas, the semi‑god guardian, during her forest traversal."</data>
+  <data key="d5">chunk-384453835cabf302cc1866f083c441b8</data>
+  <data key="d6">1</data>
+</edge>
+<edge source="&quot;ARI&quot;" target="&quot;GIRÍN&quot;">
+  <data key="d3">9.0</data>
+  <data key="d4">"Ari meets Girín in the marketplace, receiving crucial information about Ymelo stones."</data>
+  <data key="d5">chunk-384453835cabf302cc1866f083c441b8</data>
+  <data key="d6">1</data>
+</edge>
+<edge source="&quot;ARI&quot;" target="&quot;GLOWING, GREEN‑LIT FLOWER&quot;">
+  <data key="d3">8.0</data>
+  <data key="d4">"Ari holds the glowing green‑lit flower, indicating its importance in her transformation and memory consumption process."</data>
+  <data key="d5">chunk-3dba909d410645c865e1539e1cd713d6</data>
+  <data key="d6">1</data>
+</edge>
+<edge source="&quot;ARI&quot;" target="&quot;GRAVEYARD&quot;">
+  <data key="d3">7.0</data>
+  <data key="d4">"Ari visits the graveyard, where the setting reinforces her internal struggle and past memories."</data>
+  <data key="d5">chunk-3dba909d410645c865e1539e1cd713d6</data>
+  <data key="d6">1</data>
+</edge>
+<edge source="&quot;ARI&quot;" target="&quot;YASUO&quot;">
+  <data key="d3">8.0</data>
+  <data key="d4">"Yasuo interacts with Ari, discussing hiring him as a bodyguard, showing a direct narrative connection."</data>
+  <data key="d5">chunk-3dba909d410645c865e1539e1cd713d6</data>
+  <data key="d6">1</data>
+</edge>
+<edge source="&quot;CHAMPION&quot;" target="&quot;BLUE SPIRIT&quot;">
+  <data key="d3">9.0</data>
+  <data key="d4">"Champion channels the Blue Spirit, feeding it into her power."</data>
+  <data key="d5">chunk-0faee823efab3399ac6507a90b21a27c</data>
+  <data key="d6">1</data>
+</edge>
+<edge source="&quot;CHAMPION&quot;" target="&quot;HORNED CREATURE&quot;">
+  <data key="d3">8.0</data>
+  <data key="d4">"Champion confronts the Horned Creature during the gameplay segment."</data>
+  <data key="d5">chunk-0faee823efab3399ac6507a90b21a27c</data>
+  <data key="d6">1</data>
+</edge>
+<edge source="&quot;CHAMPION&quot;" target="&quot;CHILD&quot;">
+  <data key="d3">1.0</data>
+  <data key="d4">"Champion … … … … … … … … … … … …??"</data>
+  <data key="d5">chunk-0faee823efab3399ac6507a90b21a27c</data>
+  <data key="d6">1</data>
+</edge>
+<edge source="&quot;OMIKAI ALAN&quot;" target="&quot;SINEN MILCOLAS&quot;">
+  <data key="d3">7.0</data>
+  <data key="d4">"Sinen Milcolas, as the forest guardian, protects and embodies the mystical environment of Omikai Alan."</data>
+  <data key="d5">chunk-384453835cabf302cc1866f083c441b8</data>
+  <data key="d6">1</data>
+</edge>
+<edge source="&quot;GIRÍN&quot;" target="&quot;YMELO STONES&quot;">
+  <data key="d3">8.0</data>
+  <data key="d4">"Girín informs Ari about Ymelo stones, establishing a direct informational link."</data>
+  <data key="d5">chunk-384453835cabf302cc1866f083c441b8</data>
+  <data key="d6">1</data>
+</edge>
+<edge source="&quot;YASUO&quot;" target="&quot;AHRI&quot;">
+  <data key="d3">1.0</data>
+  <data key="d4">"Ahri and Yasuo are visibly aligned, both in defensive stances, indicating coordination and shared strategy."|&gt;9</data>
+  <data key="d5">chunk-726dd0c8af60735dae395e0a2512fd55</data>
+  <data key="d6">1</data>
+</edge>
+<edge source="&quot;YASUO&quot;" target="&quot;GUNPLANK&quot;">
+  <data key="d3">1.0</data>
+  <data key="d4">"Yasuo and Gunplank are part of the same team, with Gunplank joining later to support the upcoming fight."|&gt;7</data>
+  <data key="d5">chunk-726dd0c8af60735dae395e0a2512fd55</data>
+  <data key="d6">1</data>
+</edge>
+<edge source="&quot;YASUO&quot;" target="&quot;MADOKAI&quot;">
+  <data key="d3">1.0</data>
+  <data key="d4">"Yasuo is preparing to face Madokai, the threat mentioned in the gameplay summary."|&gt;6</data>
+  <data key="d5">chunk-726dd0c8af60735dae395e0a2512fd55</data>
+  <data key="d6">1</data>
+</edge>
+<edge source="&quot;YASUO&quot;" target="&quot;SMOLDER&quot;">
+  <data key="d3">9.0</data>
+  <data key="d4">"Smolder and Yasuo are directly engaged in combat within the same bottom lane team fight, with Smolder targeting Yasuo as an enemy champion."</data>
+  <data key="d5">chunk-5df652d0714d2857af1e3e898b9f2fd6</data>
+  <data key="d6">1</data>
+</edge>
+<edge source="&quot;YASUO&quot;" target="&quot;S’MOLDER&quot;">
+  <data key="d3">1.0</data>
+  <data key="d4">"S’molder uses Q and R abilities to attack and ultimately kill Yasuo in a team fight."|&gt;8</data>
+  <data key="d5">chunk-e3b7da4bd1ce9d33975f0aad5df36196</data>
+  <data key="d6">1</data>
+</edge>
+<edge source="&quot;YASUO&quot;" target="&quot;ALLY TURRET&quot;">
+  <data key="d3">1.0</data>
+  <data key="d4">"Yasuo dies near the ally turret, indicating the turret's destruction is part of the team fight."|&gt;5</data>
+  <data key="d5">chunk-e3b7da4bd1ce9d33975f0aad5df36196</data>
+  <data key="d6">1</data>
+</edge>
+<edge source="&quot;KARMA&quot;" target="&quot;ARYA&quot;">
+  <data key="d3">1.0</data>
+  <data key="d4">"Karma and Arya are part of the same team, engaging in coordinated actions during the game, with Karma dominating early fights and Arya preparing for a boss encounter."|&gt;8</data>
+  <data key="d5">chunk-726dd0c8af60735dae395e0a2512fd55</data>
+  <data key="d6">1</data>
+</edge>
+<edge source="&quot;ARYA&quot;" target="&quot;MADOKAI&quot;">
+  <data key="d3">1.0</data>
+  <data key="d4">"Arya is preparing to confront a large creature, likely Madokai, using a powerful ability."|&gt;7</data>
+  <data key="d5">chunk-726dd0c8af60735dae395e0a2512fd55</data>
+  <data key="d6">1</data>
+</edge>
+<edge source="&quot;ARYA&quot;" target="&quot;DISCORD&quot;">
+  <data key="d3">8.0</data>
+  <data key="d4">"The player’s coaching services for Arya are offered through Discord."&lt;</data>
+  <data key="d5">chunk-953b9aee22e2a1b84ad1a1cbfdbb365d</data>
+  <data key="d6">1</data>
+</edge>
+<edge source="&quot;AHRI&quot;" target="&quot;GUNPLANK&quot;">
+  <data key="d3">1.0</data>
+  <data key="d4">"Ahri and Gunplank are part of the same team, with Gunplank joining later to support the upcoming fight."|&gt;7</data>
+  <data key="d5">chunk-726dd0c8af60735dae395e0a2512fd55</data>
+  <data key="d6">1</data>
+</edge>
+<edge source="&quot;AHRI&quot;" target="&quot;MADOKAI&quot;">
+  <data key="d3">1.0</data>
+  <data key="d4">"Ahri is preparing to face Madokai, the threat mentioned in the gameplay summary."|&gt;6</data>
+  <data key="d5">chunk-726dd0c8af60735dae395e0a2512fd55</data>
+  <data key="d6">1</data>
+</edge>
+<edge source="&quot;AHRI&quot;" target="&quot;ARIFE&quot;">
+  <data key="d3">1.0</data>
+  <data key="d4">"Ahri and Arife are both champions involved in the same gameplay clip, each facing different opponents."|&gt;7</data>
+  <data key="d5">chunk-8377f8fa8c8920a4f1c1486212346024</data>
+  <data key="d6">1</data>
+</edge>
+<edge source="&quot;AHRI&quot;" target="&quot;MYSTICAL FOREST&quot;">
+  <data key="d3">9.0</data>
+  <data key="d4">"Ahri is the central figure moving through and interacting with the mystical forest, which serves as the setting for her memory‑manipulation narrative."</data>
+  <data key="d5">chunk-0e6c127c10fb89705812a342908329d8</data>
+  <data key="d6">1</data>
+</edge>
+<edge source="&quot;AHRI&quot;" target="&quot;GLOWING ENERGY&quot;">
+  <data key="d3">8.0</data>
+  <data key="d4">"Ahri emits and is surrounded by glowing energy, illustrating her power to manipulate memories and reality."</data>
+  <data key="d5">chunk-0e6c127c10fb89705812a342908329d8</data>
+  <data key="d6">1</data>
+</edge>
+<edge source="&quot;AHRI&quot;" target="&quot;JUNGLE&quot;">
+  <data key="d3">1.0</data>
+  <data key="d4">"Ahri actively moves through and explores the jungle area, interacting with its environment."|&gt;9</data>
+  <data key="d5">chunk-d2d05bcd1ec590f77890a543d174bb6d</data>
+  <data key="d6">1</data>
+</edge>
+<edge source="&quot;AHRI&quot;" target="&quot;RIOT&quot;">
+  <data key="d3">1.0</data>
+  <data key="d4">"Ahri is a character created and managed by Riot, who designs her abilities and storyline."|&gt;8</data>
+  <data key="d5">chunk-d2d05bcd1ec590f77890a543d174bb6d</data>
+  <data key="d6">1</data>
+</edge>
+<edge source="&quot;AHRI&quot;" target="&quot;TURRET&quot;">
+  <data key="d3">16.0</data>
+  <data key="d4">"Ahri is actively attacking the turret with her ultimate, maintaining pressure on the defending team."|&gt;9&lt;SEP&gt;"Ahri is applying pressure on the turret area, using her abilities to keep the enemy team from capturing it."|&gt;7&lt;SEP&gt;"Ahri uses her Q to clear minions and champions around the turret."&lt;SEP&gt;"Ahri’s teammates are pushing to keep pressure on the turret, while the enemy team is defending it."</data>
+  <data key="d5">chunk-e7a9ac28f921cd6d848bb8b8410c429c&lt;SEP&gt;chunk-9de993ea4d2737c78e4581b4f330ff47&lt;SEP&gt;chunk-0b22f6ec63cfca9b8465893ca0119cc0&lt;SEP&gt;chunk-9075c07f19742a09b3ad74a010af53ca</data>
+  <data key="d6">1</data>
+</edge>
+<edge source="&quot;AHRI&quot;" target="&quot;MINION WAVE&quot;">
+  <data key="d3">1.0</data>
+  <data key="d4">"A champion Ahri uses the minion wave to support the fight."|&gt;7</data>
+  <data key="d5">chunk-a97ca96b821a76d5444998f5d238857e</data>
+  <data key="d6">1</data>
+</edge>
+<edge source="&quot;AHRI&quot;" target="&quot;RIFT HERALD&quot;">
+  <data key="d3">8.0</data>
+  <data key="d4">"Ahri and her team are contesting the Rift Herald, which becomes a focal point of the engagement."|&gt;8&lt;SEP&gt;"Ahri's team secures the Rift Herald after the fight, indicating objective control influenced by Ahri's actions."</data>
+  <data key="d5">chunk-971b1c301f9b1d04b8bfcff2de204430&lt;SEP&gt;chunk-cbe08d93d9eaa38f66f60a865fd58f2f</data>
+  <data key="d6">1</data>
+</edge>
+<edge source="&quot;AHRI&quot;" target="&quot;OCEAN DRAKE&quot;">
+  <data key="d3">1.0</data>
+  <data key="d4">"The recent kill of the Ocean Drake provides Ahri’s team with a buff that enhances their ability to push the turret."|&gt;8</data>
+  <data key="d5">chunk-50e5f3799024f122b368387f1b3cc171</data>
+  <data key="d6">1</data>
+</edge>
+<edge source="&quot;AHRI&quot;" target="&quot;BOTTOM LANE&quot;">
+  <data key="d3">9.0</data>
+  <data key="d4">"Ahri is positioned in the bottom lane, maintaining pressure on the enemy turret."|&gt;10&lt;SEP&gt;"Ahri operates in the bottom lane, recalling and rejoining the lane during fights."</data>
+  <data key="d5">chunk-cbe08d93d9eaa38f66f60a865fd58f2f&lt;SEP&gt;chunk-9075c07f19742a09b3ad74a010af53ca</data>
+  <data key="d6">1</data>
+</edge>
+<edge source="&quot;AHRI&quot;" target="&quot;TEAM FIGHT&quot;">
+  <data key="d3">9.0</data>
+  <data key="d4">"Ahri is actively engaging in the team fight, using her ultimate to secure kills."</data>
+  <data key="d5">chunk-e095614c66786b44e85c903db324d2eb</data>
+  <data key="d6">1</data>
+</edge>
+<edge source="&quot;AHRI&quot;" target="&quot;ERDO&quot;">
+  <data key="d3">1.0</data>
+  <data key="d4">"Erdo is the player controlling Ahri during the gameplay session."|&gt;8</data>
+  <data key="d5">chunk-766683e031208fd1d376543ecbbaf0c0</data>
+  <data key="d6">1</data>
+</edge>
+<edge source="&quot;AHRI&quot;" target="&quot;SINGED&quot;">
+  <data key="d3">2.0</data>
+  <data key="d4">"Ahri competes against Singed in the mid lane, engaging in combat and attempting to secure kills."|&gt;9&lt;SEP&gt;"Ahri is actively engaging Singed with her Q charm and R Spirit Rush, attempting to control and damage him in the bottom lane."|&gt;8</data>
+  <data key="d5">chunk-e7a9ac28f921cd6d848bb8b8410c429c&lt;SEP&gt;chunk-766683e031208fd1d376543ecbbaf0c0</data>
+  <data key="d6">1</data>
+</edge>
+<edge source="&quot;AHRI&quot;" target="&quot;MID LANE&quot;">
+  <data key="d3">1.0</data>
+  <data key="d4">"Ahri is positioned in the mid lane, where she performs her gameplay actions."|&gt;9</data>
+  <data key="d5">chunk-766683e031208fd1d376543ecbbaf0c0</data>
+  <data key="d6">1</data>
+</edge>
+<edge source="&quot;AHRI&quot;" target="&quot;ZYRA&quot;">
+  <data key="d3">10.0</data>
+  <data key="d4">"Ahri kills Zyra, establishing a direct combat relationship."|&gt;9&lt;SEP&gt;"Both champions share a coordinated build and participate in the same turret fight."</data>
+  <data key="d5">chunk-a97ca96b821a76d5444998f5d238857e&lt;SEP&gt;chunk-9075c07f19742a09b3ad74a010af53ca</data>
+  <data key="d6">1</data>
+</edge>
+<edge source="&quot;AHRI&quot;" target="&quot;JHIN&quot;">
+  <data key="d3">1.0</data>
+  <data key="d4">"Ahri is attacking Jhin with her ultimate in the mid‑lane."|&lt;strong&gt;9</data>
+  <data key="d5">chunk-791d3fb02596d8ddb511354fbec9341f</data>
+  <data key="d6">1</data>
+</edge>
+<edge source="&quot;AHRI&quot;" target="&quot;ZHONYA’S HOURGLASS&quot;">
+  <data key="d3">1.0</data>
+  <data key="d4">"Ahri relies on Zhonya’s Hourglass to survive counter‑attacks from Singed and his teammates."|&gt;9</data>
+  <data key="d5">chunk-e7a9ac28f921cd6d848bb8b8410c429c</data>
+  <data key="d6">1</data>
+</edge>
+<edge source="&quot;AHRI&quot;" target="&quot;ASHE&quot;">
+  <data key="d3">2.0</data>
+  <data key="d4">"Both champions are in the same bottom‑lane fight, using ultimates to maintain pressure on the enemy team."|&gt;8&lt;SEP&gt;"Both champions coordinate during the turret fight, with Ahri’s Charm and Ashe’s ultimate complementing each other."|&gt;8</data>
+  <data key="d5">chunk-a97ca96b821a76d5444998f5d238857e&lt;SEP&gt;chunk-50e5f3799024f122b368387f1b3cc171</data>
+  <data key="d6">1</data>
+</edge>
+<edge source="&quot;AHRI&quot;" target="&quot;RAKAN&quot;">
+  <data key="d3">2.0</data>
+  <data key="d4">"Ahri and Rakan work together to apply pressure on the turret, with Rakan’s support enabling Ahri’s burst."|&gt;7&lt;SEP&gt;"Both champions are on the same team, coordinating their ultimates to attack the enemy cluster around the turret."|&gt;8</data>
+  <data key="d5">chunk-9de993ea4d2737c78e4581b4f330ff47&lt;SEP&gt;chunk-50e5f3799024f122b368387f1b3cc171</data>
+  <data key="d6">1</data>
+</edge>
+<edge source="&quot;AHRI&quot;" target="&quot;ENEMY TEAM&quot;">
+  <data key="d3">1.0</data>
+  <data key="d4">"Ahri is applying pressure on the enemy team, using her Spirit Rush to keep them on the defensive."|&gt;8</data>
+  <data key="d5">chunk-9de993ea4d2737c78e4581b4f330ff47</data>
+  <data key="d6">1</data>
+</edge>
+<edge source="&quot;AHRI&quot;" target="&quot;WARWICK&quot;">
+  <data key="d3">18.0</data>
+  <data key="d4">"Ahri actively engages Warwick using Charm (Q) and Ultimate (R), directly targeting him in the fight."&lt;SEP&gt;"Ahri is attacking Warwick with Spirit Rush and Charm, targeting him as a main focus of her attacks."&lt;SEP&gt;"Ahri's team faces Warwick's push of the Rift Herald, influencing their defensive stance."|&gt;7</data>
+  <data key="d5">chunk-971b1c301f9b1d04b8bfcff2de204430&lt;SEP&gt;chunk-0b22f6ec63cfca9b8465893ca0119cc0&lt;SEP&gt;chunk-cbe08d93d9eaa38f66f60a865fd58f2f</data>
+  <data key="d6">1</data>
+</edge>
+<edge source="&quot;AHRI&quot;" target="&quot;LUDEN’S ECHO&quot;">
+  <data key="d3">8.0</data>
+  <data key="d4">"Ahri considers adding Ludens …..??…..????" |&gt;8&lt;SEP&gt;"Ahri considers purchasing Luden’s Echo for burst damage."&lt;SEP&gt;"Ahri uses Luden’s Echo to maximize damage output during the engagement."|&gt;9</data>
+  <data key="d5">chunk-e7a9ac28f921cd6d848bb8b8410c429c&lt;SEP&gt;chunk-997d95dbdb8840540c33069e74ffe0ce&lt;SEP&gt;chunk-5c40e6b373211082863b6adfadfbb910</data>
+  <data key="d6">1</data>
+</edge>
+<edge source="&quot;AHRI&quot;" target="&quot;LEE SIN&quot;">
+  <data key="d3">8.0</data>
+  <data key="d4">"Ahri is attacking Lee Sin with Spirit Rush and Charm, targeting him as a main focus of her attacks."</data>
+  <data key="d5">chunk-0b22f6ec63cfca9b8465893ca0119cc0</data>
+  <data key="d6">1</data>
+</edge>
+<edge source="&quot;AHRI&quot;" target="&quot;ALLY SLAIN&quot;">
+  <data key="d3">6.0</data>
+  <data key="d4">"The Ally Slain event involves an ally of Ahri’s team, affecting Ahri’s team’s momentum."</data>
+  <data key="d5">chunk-0b22f6ec63cfca9b8465893ca0119cc0</data>
+  <data key="d6">1</data>
+</edge>
+<edge source="&quot;AHRI&quot;" target="&quot;IVERN&quot;">
+  <data key="d3">1.0</data>
+  <data key="d4">"Both champions are in the same bottom‑lane fight, applying ultimates to keep the enemy team under pressure."|&gt;8</data>
+  <data key="d5">chunk-a97ca96b821a76d5444998f5d238857e</data>
+  <data key="d6">1</data>
+</edge>
+<edge source="&quot;AHRI&quot;" target="&quot;SION&quot;">
+  <data key="d3">19.0</data>
+  <data key="d4">"After neutralizing Warwick, Ahri continues to engage Sion to maintain lane control and prevent wave push."&lt;SEP&gt;"Ahri and Sion are part of the same team, coordinating in the bottom‑lane push."|&gt;7&lt;SEP&gt;"Ahri is actively targeting and engaging Sion in multiple fights, indicating a direct combat relationship."&lt;SEP&gt;"Ahri targets Sion with her ultimate, leading to his death, a pivotal event in the game."|&gt;9</data>
+  <data key="d5">chunk-5c40e6b373211082863b6adfadfbb910&lt;SEP&gt;chunk-971b1c301f9b1d04b8bfcff2de204430&lt;SEP&gt;chunk-a97ca96b821a76d5444998f5d238857e&lt;SEP&gt;chunk-cbe08d93d9eaa38f66f60a865fd58f2f</data>
+  <data key="d6">1</data>
+</edge>
+<edge source="&quot;AHRI&quot;" target="&quot;ETERNAL HERO&quot;">
+  <data key="d3">1.0</data>
+  <data key="d4">"Ahri is identified as the Eternal Hero in the game context, indicating a direct identity relationship."|&gt;10</data>
+  <data key="d5">chunk-a97ca96b821a76d5444998f5d238857e</data>
+  <data key="d6">1</data>
+</edge>
+<edge source="&quot;AHRI&quot;" target="&quot;DRAGON&quot;">
+  <data key="d3">8.0</data>
+  <data key="d4">"Ahri moves toward the Dragon after the lane fight, shifting focus to the new objective."</data>
+  <data key="d5">chunk-971b1c301f9b1d04b8bfcff2de204430</data>
+  <data key="d6">1</data>
+</edge>
+<edge source="&quot;AHRI&quot;" target="&quot;CAIN&quot;">
+  <data key="d3">6.0</data>
+  <data key="d4">"Cain is blamed for a wasted teleport, implying a missed opportunity that affected Ahri's positioning."</data>
+  <data key="d5">chunk-971b1c301f9b1d04b8bfcff2de204430</data>
+  <data key="d6">1</data>
+</edge>
+<edge source="&quot;AHRI&quot;" target="&quot;SPIRIT FIRE&quot;">
+  <data key="d3">9.0</data>
+  <data key="d4">"Ahri uses her ultimate Spirit Fire to target an enemy champion during the fight."</data>
+  <data key="d5">chunk-e095614c66786b44e85c903db324d2eb</data>
+  <data key="d6">1</data>
+</edge>
+<edge source="&quot;AHRI&quot;" target="&quot;MOUNTAIN DRAKE&quot;">
+  <data key="d3">1.0</data>
+  <data key="d4">"Ahri's team lost the Mountain Drake, which impacted the objective advantage in the game."|&gt;7</data>
+  <data key="d5">chunk-5418d6b0956d9698de0cc256bc7a6ed1</data>
+  <data key="d6">1</data>
+</edge>
+<edge source="&quot;AHRI&quot;" target="&quot;AKALI&quot;">
+  <data key="d3">2.0</data>
+  <data key="d4">"Ahri and Akali are teammates, both using ultimates to push the lane and maintain pressure on the enemy turret."|&gt;8&lt;SEP&gt;"Akali and Ahri are teammates, both focusing on the same enemy targets and coordinating to secure kills and push the lane."|&gt;8</data>
+  <data key="d5">chunk-5418d6b0956d9698de0cc256bc7a6ed1</data>
+  <data key="d6">1</data>
+</edge>
+<edge source="&quot;AHRI&quot;" target="&quot;POLNAREV&quot;">
+  <data key="d3">1.0</data>
+  <data key="d4">"Ahri directly attacks Polnarev with Twisted Fate, causing crowd control and damage."|&gt;9</data>
+  <data key="d5">chunk-5418d6b0956d9698de0cc256bc7a6ed1</data>
+  <data key="d6">1</data>
+</edge>
+<edge source="&quot;AHRI&quot;" target="&quot;ETERNAL HERO&quot;">
+  <data key="d3">1.0</data>
+  <data key="d4">"Eternal Hero and Ahri use their ultimates together to achieve a double kill."</data>
+  <data key="d5">chunk-54a6f8ba3aa2145b8ba6ba20249682e1</data>
+  <data key="d6">1</data>
+</edge>
+<edge source="&quot;AHRI&quot;" target="&quot;BARON NASHOR&quot;">
+  <data key="d3">8.0</data>
+  <data key="d4">"Ahri is part of the team fighting for the Baron Nashor objective, showing strategic involvement."</data>
+  <data key="d5">chunk-5c40e6b373211082863b6adfadfbb910</data>
+  <data key="d6">1</data>
+</edge>
+<edge source="&quot;AHRI&quot;" target="&quot;MID‑LANE TURRET&quot;">
+  <data key="d3">8.0</data>
+  <data key="d4">"Ahri engages in a showdown near the mid‑lane turret, indicating a positional relationship."&lt;SEP&gt;"Ahri is actively engaging the mid‑lane turret, using her abilities to dominate the fight and ultimately destroy the turret."|&gt;8</data>
+  <data key="d5">chunk-997d95dbdb8840540c33069e74ffe0ce&lt;SEP&gt;chunk-5c40e6b373211082863b6adfadfbb910</data>
+  <data key="d6">1</data>
+</edge>
+<edge source="&quot;AHRI&quot;" target="&quot;VOID STAFF&quot;">
+  <data key="d3">7.0</data>
+  <data key="d4">"Ahri considers purchasing Void Staff to enhance her damage output."&lt;SEP&gt;"Ahri purchased Void Staff to increase her damage output against enemies during the fight."|&gt;9</data>
+  <data key="d5">chunk-997d95dbdb8840540c33069e74ffe0ce&lt;SEP&gt;chunk-5c40e6b373211082863b6adfadfbb910</data>
+  <data key="d6">1</data>
+</edge>
+<edge source="&quot;AHRI&quot;" target="&quot;ZONYA’S HOURGLASS&quot;">
+  <data key="d3">7.0</data>
+  <data key="d4">"Ahri considers adding Zonya’s Hourglass to her item build for survivability and burst damage."|&gt;7&lt;SEP&gt;"Ahri considers purchasing Zonya’s Hourglass for survivability."</data>
+  <data key="d5">chunk-997d95dbdb8840540c33069e74ffe0ce&lt;SEP&gt;chunk-5c40e6b373211082863b6adfadfbb910</data>
+  <data key="d6">1</data>
+</edge>
+<edge source="&quot;AHRI&quot;" target="&quot;SPIDERMAAN&quot;">
+  <data key="d3">8.0</data>
+  <data key="d4">"Ahri is attacking Spidermaan with her ultimate in the bottom lane."|</data>
+  <data key="d5">chunk-791d3fb02596d8ddb511354fbec9341f</data>
+  <data key="d6">1</data>
+</edge>
+<edge source="&quot;AHRI&quot;" target="&quot;MID LANE TURRET&quot;">
+  <data key="d3">1.0</data>
+  <data key="d4">"Ahri destroys the mid lane turret, leading to a strategic advantage."</data>
+  <data key="d5">chunk-df231031873dcc5add5b5640412bd723</data>
+  <data key="d6">1</data>
+</edge>
+<edge source="&quot;AHRI&quot;" target="&quot;INHIBITOR TURRET&quot;">
+  <data key="d3">1.0</data>
+  <data key="d4">"Ahri destroys the inhibitor turret, leading to a strategic advantage."</data>
+  <data key="d5">chunk-df231031873dcc5add5b5640412bd723</data>
+  <data key="d6">1</data>
+</edge>
+<edge source="&quot;AHRI&quot;" target="&quot;TEAM&quot;">
+  <data key="d3">1.0</data>
+  <data key="d4">"Ahri leads the team in the mid lane, achieving multiple kills and destroying the inhibitor turret, pushing the mid lane."</data>
+  <data key="d5">chunk-df231031873dcc5add5b5640412bd723</data>
+  <data key="d6">1</data>
+</edge>
+<edge source="&quot;AHRI&quot;" target="&quot;BOTTOM‑LANE TURRET&quot;">
+  <data key="d3">2.0</data>
+  <data key="d4">"Ahri actively engages the turret by using Charm and Spirit Rush to apply pressure and attempt to secure a kill."|&gt;8&lt;SEP&gt;"Ahri applies her ultimate to the turret area, contributing to the pressure on the turret."|&gt;8</data>
+  <data key="d5">chunk-a97ca96b821a76d5444998f5d238857e&lt;SEP&gt;chunk-50e5f3799024f122b368387f1b3cc171</data>
+  <data key="d6">1</data>
+</edge>
+<edge source="&quot;AHRI&quot;" target="&quot;BLUECZ&quot;">
+  <data key="d3">1.0</data>
+  <data key="d4">"Ahri kills BlueCz, resulting in a gain of gold."|&gt;9</data>
+  <data key="d5">chunk-a97ca96b821a76d5444998f5d238857e</data>
+  <data key="d6">1</data>
+</edge>
+<edge source="&quot;AHRI&quot;" target="&quot;FIRST TURRET&quot;">
+  <data key="d3">1.0</data>
+  <data key="d4">"The first turret destruction by Ahri or the team is a key event."|&gt;8</data>
+  <data key="d5">chunk-a97ca96b821a76d5444998f5d238857e</data>
+  <data key="d6">1</data>
+</edge>
+<edge source="&quot;GUNPLANK&quot;" target="&quot;MADOKAI&quot;">
+  <data key="d3">1.0</data>
+  <data key="d4">"Gunplank is preparing to face Madokai, the threat mentioned in the gameplay summary."|&gt;6</data>
+  <data key="d5">chunk-726dd0c8af60735dae395e0a2512fd55</data>
+  <data key="d6">1</data>
+</edge>
+<edge source="&quot;ARIFE&quot;" target="&quot;KING ARRUINADO&quot;">
+  <data key="d3">1.0</data>
+  <data key="d4">"Arife confronts the shadowy figure King Arruinado during the forest duel."|&gt;8</data>
+  <data key="d5">chunk-8377f8fa8c8920a4f1c1486212346024</data>
+  <data key="d6">1</data>
+</edge>
+<edge source="&quot;ARIFE&quot;" target="&quot;VIEGO&quot;">
+  <data key="d3">1.0</data>
+  <data key="d4">"Arife uses Viego’s memories to empower her spell, targeting him."|&gt;9</data>
+  <data key="d5">chunk-8377f8fa8c8920a4f1c1486212346024</data>
+  <data key="d6">1</data>
+</edge>
+<edge source="&quot;TATHRESH&quot;" target="&quot;GUNPLAÁN&quot;">
+  <data key="d3">1.0</data>
+  <data key="d4">"Tathresh fights alongside Arife against the possessed Gunplaán."|&gt;7</data>
+  <data key="d5">chunk-8377f8fa8c8920a4f1c1486212346024</data>
+  <data key="d6">1</data>
+</edge>
+<edge source="&quot;VIEGO&quot;" target="&quot;SMOLDER&quot;">
+  <data key="d3">1.0</data>
+  <data key="d4">"Smolder is in the same lane as Viego, who may assist in pushing the wave."|&gt;7</data>
+  <data key="d5">chunk-d3fc44abada49d7cd74346e3bacb4252</data>
+  <data key="d6">1</data>
+</edge>
+<edge source="&quot;AHRĪ&quot;" target="&quot;GARDEN OF FORGOTTEN THINGS&quot;">
+  <data key="d3">8.0</data>
+  <data key="d4">"Ahrī’s narrative includes the Garden of Forgotten Things as part of her journey, indicating a direct relationship between the champion and the event."|</data>
+  <data key="d5">chunk-63d31af389b05ace19fe8249375a5fbc</data>
+  <data key="d6">1</data>
+</edge>
+<edge source="&quot;MYSTICAL FOREST&quot;" target="&quot;GLOWING ENERGY&quot;">
+  <data key="d3">1.0</data>
+  <data key="d4">"The glowing energy is a characteristic feature of the mystical forest, creating a symbolic‑tied‑…....??…..??? ?? ?? ?? ?? ?? ?? ?? ?? ?? … … … … … … … strong ……………………………………………………………………………?? ??………………………………………………………………………………??…………‑…………………………………………………………………………………………………………………??……………………………………………………………………………………………………??……………………………………………………………………??…………………………………………………………………………We…………………??……………………………………………??…………………………………………………………………………………………………………………………………………………………………??…………………………We………??………‑…………………………………………………………………………………………………………………………………………………………………………………………………………………………………………………………We…………………………………………………………………………………………………………………………………??…………………………………………………………………………………………………………………………………………………………………………………………………………………………………………………………………………??…………………………………………………………………………………………………………………………………………………………………………………………………………………………………………………………………………………………………………………………………………………………………………………………………………………………………………??……………………………………………………………………………………………………………………………………………………………………………………………………………………………………………………………………………………………………………………………………??…………………………………………………………………………………………………………………………………………………………………………………??………………………………………………………………………………………………………………………………………………………………………………………………………………………………………………………………………………………………………………………………………………………………??……………………………………………………………………………………………………………………………………………………………………………………………………………………………………………………………………………………………………………………………………………………………………………………………………………………………………………………………………………………………………………………………………………………………………………………………………………………………………………………………………………………………………………??</data>
+  <data key="d5">chunk-0e6c127c10fb89705812a342908329d8</data>
+  <data key="d6">1</data>
+</edge>
+<edge source="&quot;ARI BOSSQUE VIEJO&quot;" target="&quot;LEAGUE OF LEGENDS&quot;">
+  <data key="d3">1.0</data>
+  <data key="d4">"Ari Bossque Viejo is a champion character within the League of Legends game."|&gt;9</data>
+  <data key="d5">chunk-10fe0e28e96ec1021e96b83bf4fe6b1f</data>
+  <data key="d6">1</data>
+</edge>
+<edge source="&quot;ARI BOSSQUE VIEJO&quot;" target="&quot;RIOT GAMES&quot;">
+  <data key="d3">1.0</data>
+  <data key="d4">"Riot Games develops and publishes League of Legends, the game featuring Ari Bossque Viejo."|&gt;8</data>
+  <data key="d5">chunk-10fe0e28e96ec1021e96b83bf4fe6b1f</data>
+  <data key="d6">1</data>
+</edge>
+<edge source="&quot;ARI BOSSQUE VIEJO&quot;" target="&quot;KPOP&quot;">
+  <data key="d3">1.0</data>
+  <data key="d4">"The champion's skins are influenced by Kpop culture, as mentioned in the transcript."|&gt;7</data>
+  <data key="d5">chunk-10fe0e28e96ec1021e96b83bf4fe6b1f</data>
+  <data key="d6">1</data>
+</edge>
+<edge source="&quot;LEAGUE OF LEGENDS&quot;" target="&quot;RIOT GAMES&quot;">
+  <data key="d3">1.0</data>
+  <data key="d4">"Riot Games is the developer and publisher of League of Legends."|&gt;10</data>
+  <data key="d5">chunk-10fe0e28e96ec1021e96b83bf4fe6b1f</data>
+  <data key="d6">1</data>
+</edge>
+<edge source="&quot;ARI USES YMELO STONES IN A MAGICAL RITUAL, INDICATING A DIRECT INTERACTION AND RELIANCE ON THESE STONES FOR POWER.&quot;" target="&quot;ARI&quot;&lt;|&quot;YMELO STONES&quot;">
+  <data key="d3">1.0</data>
+  <data key="d4">9</data>
+  <data key="d5">chunk-5369aae6f52fc67ffbf63b3db7c1e061</data>
+  <data key="d6">1</data>
+</edge>
+<edge source="&quot;GIRÍN ATTACKS ARI WITH POISON, BUT ARI ESCAPES AND DEFEATS GIRÍN, SHOWING A CONFLICT AND SUBSEQUENT VICTORY.&quot;" target="&quot;GIRÍN&quot;&lt;|&quot;ARI&quot;">
+  <data key="d3">1.0</data>
+  <data key="d4">8</data>
+  <data key="d5">chunk-5369aae6f52fc67ffbf63b3db7c1e061</data>
+  <data key="d6">1</data>
+</edge>
+<edge source="&quot;HARRY VISITS THE JARDÍN DE LO OLVIDO TO CONFRONT AND RELEASE MEMORIES, INDICATING A PURPOSEFUL RELATIONSHIP BETWEEN THE CHARACTER AND THE LOCATION.&quot;" target="&quot;HARRY&quot;&lt;|&quot;JARDÍN DE LO OLVIDO&quot;">
+  <data key="d3">1.0</data>
+  <data key="d4">9</data>
+  <data key="d5">chunk-5369aae6f52fc67ffbf63b3db7c1e061</data>
+  <data key="d6">1</data>
+</edge>
+<edge source="&quot;ALI&quot;&lt;|&quot;JARDÍN DE LO OLVIDO&quot;" target="&quot;ALI’S JOURNEY LEADS HIM TO THE JARDÍN DE LO OLVIDO, SUGGESTING A CONNECTION BETWEEN THE TRAVELER AND THE ENCHANTED FOREST.&quot;">
+  <data key="d3">1.0</data>
+  <data key="d4">7</data>
+  <data key="d5">chunk-5369aae6f52fc67ffbf63b3db7c1e061</data>
+  <data key="d6">1</data>
+</edge>
+<edge source="&quot;SMOLDER STARTER GUIDE&quot;" target="&quot;SMOLDER&quot;">
+  <data key="d3">1.0</data>
+  <data key="d4">"Smolder is the main champion featured in the Smolder Starter Guide, which provides a concise summary of key events and actions for Smolder."|&gt;9</data>
+  <data key="d5">chunk-38f6b17996dfa4f0725931853356e5c7</data>
+  <data key="d6">1</data>
+</edge>
+<edge source="&quot;SMOLDER STARTER GUIDE&quot;" target="&quot;MASTER IN MINUTES&quot;">
+  <data key="d3">1.0</data>
+  <data key="d4">"The Smolder Starter Guide is part of the Master in Minutes collection of guides for various aspects of the game."|&gt;8</data>
+  <data key="d5">chunk-38f6b17996dfa4f0725931853356e5c7</data>
+  <data key="d6">1</data>
+</edge>
+<edge source="&quot;EZREAL&quot;" target="&quot;SMOLDER&quot;">
+  <data key="d3">8.0</data>
+  <data key="d4">"Smolder’s playstyle is compared to Ezreal’s, indicating a similarity in their ADC roles."</data>
+  <data key="d5">chunk-3c2817e67c2a0f4eba0e8992bca8e29b</data>
+  <data key="d6">1</data>
+</edge>
+<edge source="&quot;LUX&quot;" target="&quot;SMOLDER&quot;">
+  <data key="d3">7.0</data>
+  <data key="d4">"Smolder is supported by Lux during lane fights, showing a teammate relationship."</data>
+  <data key="d5">chunk-3c2817e67c2a0f4eba0e8992bca8e29b</data>
+  <data key="d6">1</data>
+</edge>
+<edge source="&quot;IRELIA&quot;" target="&quot;SMOLDER&quot;">
+  <data key="d3">9.0</data>
+  <data key="d4">"Smolder kills Irelia in a team fight, demonstrating an adversarial relationship."</data>
+  <data key="d5">chunk-3c2817e67c2a0f4eba0e8992bca8e29b</data>
+  <data key="d6">1</data>
+</edge>
+<edge source="&quot;FIZZ&quot;" target="&quot;SMOLDER&quot;">
+  <data key="d3">7.0</data>
+  <data key="d4">"Smolder is supported by Fizz in the game, indicating a teammate relationship."</data>
+  <data key="d5">chunk-3c2817e67c2a0f4eba0e8992bca8e29b</data>
+  <data key="d6">1</data>
+</edge>
+<edge source="&quot;KAYN&quot;" target="&quot;SMOLDER&quot;">
+  <data key="d3">7.0</data>
+  <data key="d4">"Kayn is part of the team that’s fighting with Smoothed, showing a team‑player relationship."</data>
+  <data key="d5">chunk-3c2817e67c2a0f4eba0e8992bca8e29b</data>
+  <data key="d6">1</data>
+</edge>
+<edge source="&quot;RANKING‑IMPROVEMENT SERVICE&quot;" target="&quot;SMOLDER&quot;">
+  <data key="d3">6.0</data>
+  <data key="d4">"The ranking‑improvement service promotes Smolder’s gameplay to help players improve their rank."</data>
+  <data key="d5">chunk-3c2817e67c2a0f4eba0e8992bca8e29b</data>
+  <data key="d6">1</data>
+</edge>
+<edge source="&quot;RANKING‑IMPROVEMENT SERVICE&quot;" target="&quot;SEASON 14&quot;">
+  <data key="d3">5.0</data>
+  <data key="d4">"The service is offered during the Season 14 ‑  … … … ."</data>
+  <data key="d5">chunk-3c2817e67c2a0f4eba0e8992bca8e29b</data>
+  <data key="d6">1</data>
+</edge>
+<edge source="&quot;ALLYSLAIN&quot;" target="&quot;SMOLDER&quot;">
+  <data key="d3">8.0</data>
+  <data key="d4">"Smolder is actively harassing Allyslain with his Q ability, aiming to damage and potentially secure a kill."</data>
+  <data key="d5">chunk-668593e769836f1556568b94ee14f49e</data>
+  <data key="d6">1</data>
+</edge>
+<edge source="&quot;AURORA SOJ&quot;" target="&quot;SMOLDER&quot;">
+  <data key="d3">7.0</data>
+  <data key="d4">"Smolder secured a kill on Aurora … "</data>
+  <data key="d5">chunk-eec1a77179830c031a31412197497ccf</data>
+  <data key="d6">1</data>
+</edge>
+<edge source="&quot;DRAGON PRACTICE&quot;" target="&quot;SMOLDER&quot;">
+  <data key="d3">1.0</data>
+  <data key="d4">"Smolder uses Dragon Practice as his ultimate to damage enemies and push minions."|&gt;9</data>
+  <data key="d5">chunk-8b662881b81d9f98abf16595ae3bc91a</data>
+  <data key="d6">1</data>
+</edge>
+<edge source="&quot;Q FLASH&quot;" target="&quot;SMOLDER&quot;">
+  <data key="d3">1.0</data>
+  <data key="d4">"Smolder chains his core kit with Q Flash to shred enemies and add displacement."|&gt;8</data>
+  <data key="d5">chunk-8b662881b81d9f98abf16595ae3bc91a</data>
+  <data key="d6">1</data>
+</edge>
+<edge source="&quot;W FLASH&quot;" target="&quot;SMOLDER&quot;">
+  <data key="d3">1.0</data>
+  <data key="d4">"Smolder chains his core kit with W Flash to shred enemies and add displacement."|&gt;8</data>
+  <data key="d5">chunk-8b662881b81d9f98abf16595ae3bc91a</data>
+  <data key="d6">1</data>
+</edge>
+<edge source="&quot;TURRET&quot;" target="&quot;SMOLDER&quot;">
+  <data key="d3">18.0</data>
+  <data key="d4">"Smolder stays near the turret to maintain lane control and push the minion wave."|&gt;7&lt;SEP&gt;"Smolder's wave control keeps the turret exposed and under attack, threatening the enemy's defensive position."|&gt;7&lt;SEP&gt;"Smolder's wave management and Q usage keep the wave moving toward the enemy turret, maintaining pressure."&lt;SEP&gt;"Smolder’s ultimate can destroy the turret, directly affecting the defensive structure in the lane."</data>
+  <data key="d5">chunk-8b662881b81d9f98abf16595ae3bc91a&lt;SEP&gt;chunk-56760db9e5f22657231001b182fa8f2c&lt;SEP&gt;chunk-921a2c333f18b12f26287e340c8ea6a8&lt;SEP&gt;chunk-dde3ef385da20ee7d75730ea561e38fb</data>
+  <data key="d6">1</data>
+</edge>
+<edge source="&quot;TURRET&quot;" target="&quot;ENEMY CHAMPION&quot;">
+  <data key="d3">1.0</data>
+  <data key="d4">"The enemy champion is being pushed toward the turret by Smolder's attacks, increasing the risk of turret damage."|&gt;6</data>
+  <data key="d5">chunk-921a2c333f18b12f26287e340c8ea6a8</data>
+  <data key="d6">1</data>
+</edge>
+<edge source="&quot;TURRET&quot;" target="&quot;TEAM FIGHT&quot;">
+  <data key="d3">7.0</data>
+  <data key="d4">"The Team Fight is centered around the turret, influencing its defense and the wave's position."</data>
+  <data key="d5">chunk-56760db9e5f22657231001b182fa8f2c</data>
+  <data key="d6">1</data>
+</edge>
+<edge source="&quot;TURRET&quot;" target="&quot;SINGED&quot;">
+  <data key="d3">1.0</data>
+  <data key="d4">"Singed is defending the turret and using defensive spells to hold it against Ahri's attacks."|&gt;7</data>
+  <data key="d5">chunk-e7a9ac28f921cd6d848bb8b8410c429c</data>
+  <data key="d6">1</data>
+</edge>
+<edge source="&quot;TURRET&quot;" target="&quot;ZYRA&quot;">
+  <data key="d3">8.0</data>
+  <data key="d4">"Zyra uses her ultimate to clear minions and crowd‑control enemies near the turret."</data>
+  <data key="d5">chunk-9075c07f19742a09b3ad74a010af53ca</data>
+  <data key="d6">1</data>
+</edge>
+<edge source="&quot;TURRET&quot;" target="&quot;RAKAN&quot;">
+  <data key="d3">1.0</data>
+  <data key="d4">"Rakan is also attacking the turret with his ultimate, contributing to the fight for the objective."|&gt;8</data>
+  <data key="d5">chunk-9de993ea4d2737c78e4581b4f330ff47</data>
+  <data key="d6">1</data>
+</edge>
+<edge source="&quot;TURRET&quot;" target="&quot;WARWICK&quot;">
+  <data key="d3">7.0</data>
+  <data key="d4">"Warwick is aggressively pushing back to keep Ahri and her allies at bayonet distance from the turret."</data>
+  <data key="d5">chunk-0b22f6ec63cfca9b8465893ca0119cc0</data>
+  <data key="d6">1</data>
+</edge>
+<edge source="&quot;TURRET&quot;" target="&quot;LEE SIN&quot;">
+  <data key="d3">7.0</data>
+  <data key="d4">"Lee Sin is using defensive spells to keep the turret from falling."</data>
+  <data key="d5">chunk-0b22f6ec63cfca9b8465893ca0119cc0</data>
+  <data key="d6">1</data>
+</edge>
+<edge source="&quot;ENEMY CHAMPION&quot;" target="&quot;SMOLDER&quot;">
+  <data key="d3">10.0</data>
+  <data key="d4">"Smolder uses his Q and ultimate to harass, push back, and keep the enemy champion at bayonet distance."&lt;SEP&gt;"Smolder's ultimate and E combo pushes the enemy champion toward the turret, maintaining pressure on the opponent."|&gt;8</data>
+  <data key="d5">chunk-8052217c808d9d0d02c75c0672fe10cb&lt;SEP&gt;chunk-921a2c333f18b12f26287e340c8ea6a8</data>
+  <data key="d6">1</data>
+</edge>
+<edge source="&quot;MINIONS&quot;" target="&quot;SMOLDER&quot;">
+  <data key="d3">1.0</data>
+  <data key="d4">"Smolder's abilities clear the minion wave, keeping the lane under his control and preventing the enemy from pushing back."|&gt;7</data>
+  <data key="d5">chunk-921a2c333f18b12f26287e340c8ea6a8</data>
+  <data key="d6">1</data>
+</edge>
+<edge source="&quot;SIVIR&quot;" target="&quot;ADC&quot;">
+  <data key="d3">6.0</data>
+  <data key="d4">"Sivir is an example of an ADC champion, sharing the same role classification."</data>
+  <data key="d5">chunk-dde3ef385da20ee7d75730ea561e38fb</data>
+  <data key="d6">1</data>
+</edge>
+<edge source="&quot;ADC&quot;" target="&quot;SMOLDER&quot;">
+  <data key="d3">8.0</data>
+  <data key="d4">"Smolder is also an ADC champion, belonging to the same role category."</data>
+  <data key="d5">chunk-dde3ef385da20ee7d75730ea561e38fb</data>
+  <data key="d6">1</data>
+</edge>
+<edge source="&quot;MINION WAVE&quot;" target="&quot;SMOLDER&quot;">
+  <data key="d3">15.0</data>
+  <data key="d4">"Smolder’s splash Q pushes the enemy champion back and keeps the minion wave in a favorable position."&lt;SEP&gt;"Smolder’s ultimate pushes the minion wave, altering the composition of units in the lane."</data>
+  <data key="d5">chunk-8052217c808d9d0d02c75c0672fe10cb&lt;SEP&gt;chunk-dde3ef385da20ee7d75730ea561e38fb</data>
+  <data key="d6">1</data>
+</edge>
+<edge source="&quot;MINION WAVE&quot;" target="&quot;ENEMY TURRET&quot;">
+  <data key="d3">7.0</data>
+  <data key="d4">"The minion wave pushes toward the enemy turret, a movement influenced by Smolder’s pressure."</data>
+  <data key="d5">chunk-8052217c808d9d0d02c75c0672fe10cb</data>
+  <data key="d6">1</data>
+</edge>
+<edge source="&quot;LANE&quot;" target="&quot;SMOLDER&quot;">
+  <data key="d3">9.0</data>
+  <data key="d4">"Smolder’s actions maintain lane control, keeping the lane under his team’s influence."</data>
+  <data key="d5">chunk-dde3ef385da20ee7d75730ea561e38fb</data>
+  <data key="d6">1</data>
+</edge>
+<edge source="&quot;MID‑LANE&quot;" target="&quot;SMOLDER&quot;">
+  <data key="d3">9.0</data>
+  <data key="d4">"Smolder moves into the mid‑lane to set up a favorable engagement and maintain lane control."</data>
+  <data key="d5">chunk-8052217c808d9d0d02c75c0672fe10cb</data>
+  <data key="d6">1</data>
+</edge>
+<edge source="&quot;RIVER&quot;" target="&quot;SMOLDER&quot;">
+  <data key="d3">9.0</data>
+  <data key="d4">"Smolder positions near the river to gain defensive advantage and control the back‑line."|&gt;8&lt;SEP&gt;"Smolder pulls away from the bottom lane toward the river to reposition for his long‑range abilities."</data>
+  <data key="d5">chunk-8052217c808d9d0d02c75c0672fe10cb&lt;SEP&gt;chunk-1bb8fa15612c7fb77ceb57839a48669e</data>
+  <data key="d6">1</data>
+</edge>
+<edge source="&quot;RIVER&quot;" target="&quot;MID‑TURRET&quot;">
+  <data key="d3">1.0</data>
+  <data key="d4">"The river and mid‑turret act as walls that force the enemy to play defensively."|&gt;7</data>
+  <data key="d5">chunk-1bb8fa15612c7fb77ceb57839a48669e</data>
+  <data key="d6">1</data>
+</edge>
+<edge source="&quot;GNAR&quot;" target="&quot;SMOLDER&quot;">
+  <data key="d3">1.0</data>
+  <data key="d4">"Smolder directly engages Gnar with his abilities, ultimately leading to Gnar's death in the showdown."|&gt;9</data>
+  <data key="d5">chunk-c656bbd0a81bad3a9fdd373336233e94</data>
+  <data key="d6">1</data>
+</edge>
+<edge source="&quot;JANNA&quot;" target="&quot;SMOLDER&quot;">
+  <data key="d3">2.0</data>
+  <data key="d4">"Smolder's teammates, including Janna, provide crowd‑control and support to help secure the kill on Gnar."|&gt;8&lt;SEP&gt;"Smolder's ultimate damages Janna, indicating a combat interaction."|&gt;6</data>
+  <data key="d5">chunk-6f57568b2b676851343d311738188737&lt;SEP&gt;chunk-c656bbd0a81bad3a9fdd373336233e94</data>
+  <data key="d6">1</data>
+</edge>
+<edge source="&quot;JANNA&quot;" target="&quot;LUCIAN&quot;">
+  <data key="d3">1.0</data>
+  <data key="d4">"Janna and Lucian are teammates of Smolder, working together to apply pressure on Gnar."|&gt;6</data>
+  <data key="d5">chunk-c656bbd0a81bad3a9fdd373336233e94</data>
+  <data key="d6">1</data>
+</edge>
+<edge source="&quot;JANNA&quot;" target="&quot;GRAGAS&quot;">
+  <data key="d3">1.0</data>
+  <data key="d4">"Janna and Gragas are teammates of Smolder, coordinating crowd‑control to support the fight."|&gt;6</data>
+  <data key="d5">chunk-c656bbd0a81bad3a9fdd373336233e94</data>
+  <data key="d6">1</data>
+</edge>
+<edge source="&quot;LUCIAN&quot;" target="&quot;SMOLDER&quot;">
+  <data key="d3">2.0</data>
+  <data key="d4">"Lucian assists Smolder by delivering poke damage, aiding in maintaining pressure on Gnar."|&gt;7&lt;SEP&gt;"Smolder's ultimate is used to secure the kill that Lucian achieved, linking their actions in the fight."|&gt;7</data>
+  <data key="d5">chunk-6f57568b2b676851343d311738188737&lt;SEP&gt;chunk-c656bbd0a81bad3a9fdd373336233e94</data>
+  <data key="d6">1</data>
+</edge>
+<edge source="&quot;LUCIAN&quot;" target="&quot;GRAGAS&quot;">
+  <data key="d3">1.0</data>
+  <data key="d4">"Lucian and Gragas collaborate with Smolder to maintain pressure on Gnar."|&gt;6</data>
+  <data key="d5">chunk-c656bbd0a81bad3a9fdd373336233e94</data>
+  <data key="d6">1</data>
+</edge>
+<edge source="&quot;LUCIAN&quot;" target="&quot;MORDEKAISER&quot;">
+  <data key="d3">1.0</data>
+  <data key="d4">"Lucian kills Mordekaiser, establishing a direct combat relationship."|&gt;9</data>
+  <data key="d5">chunk-6f57568b2b676851343d311738188737</data>
+  <data key="d6">1</data>
+</edge>
+<edge source="&quot;GRAGAS&quot;" target="&quot;SMOLDER&quot;">
+  <data key="d3">1.0</data>
+  <data key="d4">"Gragas contributes crowd‑control to keep Gnar pinned, supporting Smolder's ultimate."|&gt;7</data>
+  <data key="d5">chunk-c656bbd0a81bad3a9fdd373336233e94</data>
+  <data key="d6">1</data>
+</edge>
+<edge source="&quot;MID‑LANE RECAP&quot;" target="&quot;SMOLDER&quot;">
+  <data key="d3">1.0</data>
+  <data key="d4">"Smolder is the central figure in the Mid‑lane Recap, whose actions are highlighted in the summary."|&gt;8</data>
+  <data key="d5">chunk-c656bbd0a81bad3a9fdd373336233e94</data>
+  <data key="d6">1</data>
+</edge>
+<edge source="&quot;MID‑LANE RECAP&quot;" target="&quot;MID‑LANE SHOWDOWN&quot;">
+  <data key="d3">1.0</data>
+  <data key="d4">"The Mid‑lane Recap summarizes events that lead to the Mid‑lane Showdown."|&gt;7</data>
+  <data key="d5">chunk-c656bbd0a81bad3a9fdd373336233e94</data>
+  <data key="d6">1</data>
+</edge>
+<edge source="&quot;MID‑LANE SHOWDOWN&quot;" target="&quot;SMOLDER&quot;">
+  <data key="d3">1.0</data>
+  <data key="d4">"Smolder is the main participant in the Mid‑lane Showdown, leading the fight against Gnar."|&gt;9</data>
+  <data key="d5">chunk-c656bbd0a81bad3a9fdd373336233e94</data>
+  <data key="d6">1</data>
+</edge>
+<edge source="&quot;BOTTOM‑LANE SMOLDER PUSH&quot;" target="&quot;SMOLDER&quot;">
+  <data key="d3">1.0</data>
+  <data key="d4">"Smolder is the central figure in the Bottom‑lane Smolder push event, leading the coordinated team push and using his abilities to poke the tower and minions."|&gt;8</data>
+  <data key="d5">chunk-af73a4b73a0139c676fd73cb1660025e</data>
+  <data key="d6">1</data>
+</edge>
+<edge source="&quot;DRAFT‑PHASE TRANSITION&quot;" target="&quot;SMOLDER&quot;">
+  <data key="d3">1.0</data>
+  <data key="d4">"Smolder’s playstyle and champion choice are highlighted during the Draft‑phase transition, emphasizing the importance of early‑game champion selection for wave‑pushing."|&gt;7</data>
+  <data key="d5">chunk-af73a4b73a0139c676fd73cb1660025e</data>
+  <data key="d6">1</data>
+</edge>
+<edge source="&quot;Q&quot;" target="&quot;SMOLDER&quot;">
+  <data key="d3">1.0</data>
+  <data key="d4">"Smolder uses his Q ability repeatedly to spread damage across enemies."|&gt;9</data>
+  <data key="d5">chunk-1bb8fa15612c7fb77ceb57839a48669e</data>
+  <data key="d6">1</data>
+</edge>
+<edge source="&quot;MID‑TURRET&quot;" target="&quot;SMOLDER&quot;">
+  <data key="d3">1.0</data>
+  <data key="d4">"Smolder stands near the mid‑turret to maintain a solid defensive position while harassing enemies."|&gt;8</data>
+  <data key="d5">chunk-1bb8fa15612c7fb77ceb57839a48669e</data>
+  <data key="d6">1</data>
+</edge>
+<edge source="&quot;RIFT HERALD&quot;" target="&quot;SMOLDER&quot;">
+  <data key="d3">1.0</data>
+  <data key="d4">"Smolder’s Q contributes to the team’s push toward the enemy turret, helping secure the Rift Herald."|&gt;7</data>
+  <data key="d5">chunk-1bb8fa15612c7fb77ceb57839a48669e</data>
+  <data key="d6">1</data>
+</edge>
+<edge source="&quot;RIFT HERALD&quot;" target="&quot;WARWICK&quot;">
+  <data key="d3">1.0</data>
+  <data key="d4">"Warwick pushes the Rift Herald toward the bottom lane, making it a key objective."|&gt;9</data>
+  <data key="d5">chunk-cbe08d93d9eaa38f66f60a865fd58f2f</data>
+  <data key="d6">1</data>
+</edge>
+<edge source="&quot;RIFT HERALD&quot;" target="&quot;SION&quot;">
+  <data key="d3">1.0</data>
+  <data key="d4">"Sion's death occurs while the Rift Herald is contested, impacting the objective's control."|&gt;7</data>
+  <data key="d5">chunk-cbe08d93d9eaa38f66f60a865fd58f2f</data>
+  <data key="d6">1</data>
+</edge>
+<edge source="&quot;MORDEKAISER&quot;" target="&quot;SMOLDER&quot;">
+  <data key="d3">1.0</data>
+  <data key="d4">"Smolder's ultimate directly kills Mordekaiser, establishing a direct combat relationship."|&gt;9</data>
+  <data key="d5">chunk-6f57568b2b676851343d311738188737</data>
+  <data key="d6">1</data>
+</edge>
+<edge source="&quot;MORDEKAISER&quot;" target="&quot;KENNEN&quot;">
+  <data key="d3">1.0</data>
+  <data key="d4">"Kennen's ultimate clears minions and applies pressure, contributing to the overall push that leads to Mordekaiser's death."|&gt;7</data>
+  <data key="d5">chunk-6f57568b2b676851343d311738188737</data>
+  <data key="d6">1</data>
+</edge>
+<edge source="&quot;KENNEN&quot;" target="&quot;SMOLDER&quot;">
+  <data key="d3">1.0</data>
+  <data key="d4">"Smolder and Kennen both participate in the mid‑lane fight, coordinating the push toward the turret."|&gt;8</data>
+  <data key="d5">chunk-6f57568b2b676851343d311738188737</data>
+  <data key="d6">1</data>
+</edge>
+<edge source="&quot;ESSENCE REAVER&quot;" target="&quot;SMOLDER&quot;">
+  <data key="d3">2.0</data>
+  <data key="d4">"Smolder buys the Essence Reaver to improve his minion‑clearing efficiency."|&gt;8&lt;SEP&gt;"Smolder uses the Essence Reaver rune as part of his build strategy."|&gt;8</data>
+  <data key="d5">chunk-6f57568b2b676851343d311738188737&lt;SEP&gt;chunk-d3fc44abada49d7cd74346e3bacb4252</data>
+  <data key="d6">1</data>
+</edge>
+<edge source="&quot;COOLDOWN BOOTS&quot;" target="&quot;SMOLDER&quot;">
+  <data key="d3">1.0</data>
+  <data key="d4">"Smolder uses the Cooldown Boots rune as part of his build strategy."|&gt;8</data>
+  <data key="d5">chunk-6f57568b2b676851343d311738188737</data>
+  <data key="d6">1</data>
+</edge>
+<edge source="&quot;COGMA&quot;" target="&quot;SMOLDER&quot;">
+  <data key="d3">8.0</data>
+  <data key="d4">"Smolder is compared to Cogma in terms of similar ADC playstyle and item balancing, indicating a conceptual similarity."</data>
+  <data key="d5">chunk-5df652d0714d2857af1e3e898b9f2fd6</data>
+  <data key="d6">1</data>
+</edge>
+<edge source="&quot;VAYNE&quot;" target="&quot;SMOLDER&quot;">
+  <data key="d3">8.0</data>
+  <data key="d4">"Smolder is compared to Vayne in terms of similar ADC playstyle and item balancing, indicating a conceptual similarity."</data>
+  <data key="d5">chunk-5df652d0714d2857af1e3e898b9f2fd6</data>
+  <data key="d6">1</data>
+</edge>
+<edge source="&quot;VARUS&quot;" target="&quot;SMOLDER&quot;">
+  <data key="d3">8.0</data>
+  <data key="d4">"Smolder is compared to Varus in terms of similar ADC playstyle and item balancing, indicating a conceptual similarity."</data>
+  <data key="d5">chunk-5df652d0714d2857af1e3e898b9f2fd6</data>
+  <data key="d6">1</data>
+</edge>
+<edge source="&quot;S’MOLDER&quot;" target="&quot;OCEAN DRAKE&quot;">
+  <data key="d3">1.0</data>
+  <data key="d4">"S’molder's team captures the Ocean Drake, contributing to the team's objective advantage."|&gt;7</data>
+  <data key="d5">chunk-e3b7da4bd1ce9d33975f0aad5df36196</data>
+  <data key="d6">1</data>
+</edge>
+<edge source="&quot;S’MOLDER&quot;" target="&quot;ALLY TURRET&quot;">
+  <data key="d3">1.0</data>
+  <data key="d4">"S’molder continues to farm and push after the ally turret is destroyed, maintaining momentum."|&gt;6</data>
+  <data key="d5">chunk-e3b7da4bd1ce9d33975f0aad5df36196</data>
+  <data key="d6">1</data>
+</edge>
+<edge source="&quot;SKILLCAPED&quot;" target="&quot;SMOLDER&quot;">
+  <data key="d3">9.0</data>
+  <data key="d4">"Smolder directly engages SKILLCAPED with his Q ability, delivering a decisive blow that secures the kill."</data>
+  <data key="d5">chunk-56760db9e5f22657231001b182fa8f2c</data>
+  <data key="d6">1</data>
+</edge>
+<edge source="&quot;SKILLCAPED&quot;" target="&quot;BOTTOM LANE&quot;">
+  <data key="d3">7.0</data>
+  <data key="d4">"SKILLCAPED is the enemy champion present in the Bottom Lane, facing Smolder's attacks."</data>
+  <data key="d5">chunk-56760db9e5f22657231001b182fa8f2c</data>
+  <data key="d6">1</data>
+</edge>
+<edge source="&quot;BOTTOM LANE&quot;" target="&quot;SMOLDER&quot;">
+  <data key="d3">8.0</data>
+  <data key="d4">"Smolder operates within the Bottom Lane, controlling wave movement and engaging enemies in that area."</data>
+  <data key="d5">chunk-56760db9e5f22657231001b182fa8f2c</data>
+  <data key="d6">1</data>
+</edge>
+<edge source="&quot;BOTTOM LANE&quot;" target="&quot;TEAM FIGHT&quot;">
+  <data key="d3">8.0</data>
+  <data key="d4">"The Team Fight occurs near the turret within the Bottom Lane, involving Smolder and SKILLCAPED."</data>
+  <data key="d5">chunk-56760db9e5f22657231001b182fa8f2c</data>
+  <data key="d6">1</data>
+</edge>
+<edge source="&quot;BOTTOM LANE&quot;" target="&quot;ZYRA&quot;">
+  <data key="d3">8.0</data>
+  <data key="d4">"Zyra engages in a team fight near the bottom lane turret."</data>
+  <data key="d5">chunk-9075c07f19742a09b3ad74a010af53ca</data>
+  <data key="d6">1</data>
+</edge>
+<edge source="&quot;BOTTOM LANE&quot;" target="&quot;THE SKIES DESCEND&quot;">
+  <data key="d3">1.0</data>
+  <data key="d4">"Securing The Skies Descend gives the team vision in the bottom lane."|&gt;8</data>
+  <data key="d5">chunk-cbe08d93d9eaa38f66f60a865fd58f2f</data>
+  <data key="d6">1</data>
+</edge>
+<edge source="&quot;TEAM FIGHT&quot;" target="&quot;SINGED&quot;">
+  <data key="d3">8.0</data>
+  <data key="d4">"Singed follows up the fight with his ultimate, contributing to the ongoing team fight."</data>
+  <data key="d5">chunk-e095614c66786b44e85c903db324d2eb</data>
+  <data key="d6">1</data>
+</edge>
+<edge source="&quot;TEAM FIGHT&quot;" target="&quot;ASHE&quot;">
+  <data key="d3">9.0</data>
+  <data key="d4">"Ashe is part of the team fight, using her ultimate to continue the high‑intensity fight."</data>
+  <data key="d5">chunk-e095614c66786b44e85c903db324d2eb</data>
+  <data key="d6">1</data>
+</edge>
+<edge source="&quot;TEAM FIGHT&quot;" target="&quot;THRESH&quot;">
+  <data key="d3">8.0</data>
+  <data key="d4">"Thresh keeps the momentum with his ultimate, contributing to the ongoing team fight."</data>
+  <data key="d5">chunk-e095614c66786b44e85c903db324d2eb</data>
+  <data key="d6">1</data>
+</edge>
+<edge source="&quot;TEAM FIGHT&quot;" target="&quot;DRAGON PIT&quot;">
+  <data key="d3">10.0</data>
+  <data key="d4">"The location of the team fight is the Dragon pit."</data>
+  <data key="d5">chunk-e095614c66786b44e85c903db324d2eb</data>
+  <data key="d6">1</data>
+</edge>
+<edge source="&quot;VOIDGRUBS&quot;" target="&quot;SMOLDER&quot;">
+  <data key="d3">1.0</data>
+  <data key="d4">"Smolder observes the enemy team’s Voidgrub kill, affecting his strategic decisions."|&gt;6</data>
+  <data key="d5">chunk-d3fc44abada49d7cd74346e3bacb4252</data>
+  <data key="d6">1</data>
+</edge>
+<edge source="&quot;SMOLDER&quot;" target="&quot;BERTVETH&quot;">
+  <data key="d3">8.0</data>
+  <data key="d4">"Smolder … "</data>
+  <data key="d5">chunk-eec1a77179830c031a31412197497ccf</data>
+  <data key="d6">1</data>
+</edge>
+<edge source="&quot;ERDO&quot;" target="&quot;SINGED&quot;">
+  <data key="d3">1.0</data>
+  <data key="d4">"Erdo is the player controlling Ahri, who competes against Singed."|&gt;7</data>
+  <data key="d5">chunk-766683e031208fd1d376543ecbbaf0c0</data>
+  <data key="d6">1</data>
+</edge>
+<edge source="&quot;SINGED&quot;" target="&quot;MID LANE&quot;">
+  <data key="d3">1.0</data>
+  <data key="d4">"Singed is also positioned in the mid lane, where the two champions fight."|&gt;8</data>
+  <data key="d5">chunk-766683e031208fd1d376543ecbbaf0c0</data>
+  <data key="d6">1</data>
+</edge>
+<edge source="&quot;SINGED&quot;" target="&quot;JHIN&quot;">
+  <data key="d3">1.0</data>
+  <data key="d4">"Jhin is channeling his ultimate Curtain Call, dealing significant damage to Singed during the team fight."|&gt;8</data>
+  <data key="d5">chunk-127edeb91b48f1fe0ba1ffce2f11202c</data>
+  <data key="d6">1</data>
+</edge>
+<edge source="&quot;JHIN&quot;" target="&quot;TEAM FIGHT NEAR THE BOTTOM‑LANE TURRET&quot;">
+  <data key="d3">1.0</data>
+  <data key="d4">"Jhin is actively participating in the team fight near the bottom‑lane turret."|&gt;7</data>
+  <data key="d5">chunk-127edeb91b48f1fe0ba1ffce2f11202c</data>
+  <data key="d6">1</data>
+</edge>
+<edge source="&quot;ASHE&quot;" target="&quot;BOTTOM‑LANE TURRET&quot;">
+  <data key="d3">1.0</data>
+  <data key="d4">"Ashe supports the turret push by firing her ultimate to damage enemies and maintain the fight."|&gt;7</data>
+  <data key="d5">chunk-50e5f3799024f122b368387f1b3cc171</data>
+  <data key="d6">1</data>
+</edge>
+<edge source="&quot;ASHE&quot;" target="&quot;ENCHANTED CRYSTAL ARROW&quot;">
+  <data key="d3">9.0</data>
+  <data key="d4">"Ashe uses her ultimate Enchanted Crystal Arrow to target an enemy champion during the fight."</data>
+  <data key="d5">chunk-e095614c66786b44e85c903db324d2eb</data>
+  <data key="d6">1</data>
+</edge>
+<edge source="&quot;RAKAN&quot;" target="&quot;BOTTOM‑LANE TURRET&quot;">
+  <data key="d3">1.0</data>
+  <data key="d4">"Rakan contributes to the turret fight with his abilities, helping to sustain damage and control the enemy."|&gt;7</data>
+  <data key="d5">chunk-50e5f3799024f122b368387f1b3cc171</data>
+  <data key="d6">1</data>
+</edge>
+<edge source="&quot;RAKAN&quot;" target="&quot;ENEMY TEAM&quot;">
+  <data key="d3">1.0</data>
+  <data key="d4">"Rakan and the enemy team are engaged in combat, with Rakan launching his ultimate against the enemy cluster."|&gt;7</data>
+  <data key="d5">chunk-9de993ea4d2737c78e4581b4f330ff47</data>
+  <data key="d6">1</data>
+</edge>
+<edge source="&quot;WARWICK&quot;" target="&quot;SION&quot;">
+  <data key="d3">1.0</data>
+  <data key="d4">"Warwick leads the push that includes Sion, affecting the flow of the match."|&gt;6</data>
+  <data key="d5">chunk-cbe08d93d9eaa38f66f60a865fd58f2f</data>
+  <data key="d6">1</data>
+</edge>
+<edge source="&quot;IVERN&quot;" target="&quot;SION&quot;">
+  <data key="d3">1.0</data>
+  <data key="d4">"Sion and Ivern the i team be the i team … … …."|&gt;2</data>
+  <data key="d5">chunk-a97ca96b821a76d5444998f5d238857e</data>
+  <data key="d6">1</data>
+</edge>
+<edge source="&quot;SION&quot;" target="&quot;BARON NASHOR&quot;">
+  <data key="d3">8.0</data>
+  <data key="d4">"Sion is also involved in the Baron Nashor team fight, contributing to the objective's outcome."</data>
+  <data key="d5">chunk-5c40e6b373211082863b6adfadfbb910</data>
+  <data key="d6">1</data>
+</edge>
+<edge source="&quot;SION&quot;" target="&quot;MID‑LANE TURRET&quot;">
+  <data key="d3">7.0</data>
+  <data key="d4">"Sion is present near the mid‑lane turret during the showdown, indicating a positional relationship."</data>
+  <data key="d5">chunk-5c40e6b373211082863b6adfadfbb910</data>
+  <data key="d6">1</data>
+</edge>
+<edge source="&quot;THRESH&quot;" target="&quot;ETERNAL HERO&quot;">
+  <data key="d3">1.0</data>
+  <data key="d4">"Eternal Hero and Thresh coordinate their ultimates to push the enemy back."</data>
+  <data key="d5">chunk-54a6f8ba3aa2145b8ba6ba20249682e1</data>
+  <data key="d6">1</data>
+</edge>
+<edge source="&quot;MOUNTAIN DRAKE&quot;" target="&quot;AKALI&quot;">
+  <data key="d3">1.0</data>
+  <data key="d4">"Akali's team lost the Mountain Drake, which impacted the objective advantage in the game."|&gt;7</data>
+  <data key="d5">chunk-5418d6b0956d9698de0cc256bc7a6ed1</data>
+  <data key="d6">1</data>
+</edge>
+<edge source="&quot;AKALI&quot;" target="&quot;MILAXIN&quot;">
+  <data key="d3">1.0</data>
+  <data key="d4">"Akali directly attacks Milaxin with Shadow Dance, causing damage and mobility."|&gt;9</data>
+  <data key="d5">chunk-5418d6b0956d9698de0cc256bc7a6ed1</data>
+  <data key="d6">1</data>
+</edge>
+<edge source="&quot;ETERNAL HERO&quot;" target="&quot;SPIDERMADDF&quot;">
+  <data key="d3">1.0</data>
+  <data key="d4">"Both champions are firing their ultimates simultaneously in the same team fight."</data>
+  <data key="d5">chunk-54a6f8ba3aa2145b8ba6ba20249682e1</data>
+  <data key="d6">1</data>
+</edge>
+<edge source="&quot;MID LANE TURRET&quot;" target="&quot;TEAM&quot;">
+  <data key="d3">1.0</data>
+  <data key="d4">"The team destroys the mid lane turret, leading to a strategic advantage."</data>
+  <data key="d5">chunk-df231031873dcc5add5b5640412bd723</data>
+  <data key="d6">1</data>
+</edge>
+<edge source="&quot;INHIBITOR TURRET&quot;" target="&quot;TEAM&quot;">
+  <data key="d3">1.0</data>
+  <data key="d4">"The team destroys the inhibitor turret, leading to a strategic advantage."</data>
+  <data key="d5">chunk-df231031873dcc5add5b5640412bd723</data>
+  <data key="d6">1</data>
+</edge>
+<edge source="&quot;BOTTOM‑LANE TURRET&quot;" target="&quot;GAME CLOCK 7:50–8:32&quot;">
+  <data key="d3">1.0</data>
+  <data key="d4">"The timing of the fight aligns with mid‑game objectives, indicating strategic importance."|&gt;9</data>
+  <data key="d5">chunk-50e5f3799024f122b368387f1b3cc171</data>
+  <data key="d6">1</data>
+</edge>
+<edge source="&quot;BOTTOM‑LANE TURRET&quot;" target="&quot;SCORE 7–6 TO 8–7&quot;">
+  <data key="d3">1.0</data>
+  <data key="d4">"The score change reflects the outcome of the turret fight, with Ahri’s team gaining the advantage."|&gt;8</data>
+  <data key="d5">chunk-50e5f3799024f122b368387f1b3cc171</data>
+  <data key="d6">1</data>
+</edge>
+</graph></graphml>
