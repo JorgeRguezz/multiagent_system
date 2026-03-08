@@ -1,0 +1,487 @@
+IMPLEMENTATION INSTRUCTIONS: KNOWLEDGE INFERENCE (QA RAG)
+
+Audience:
+- This document is written for an engineer/agent with no prior context.
+- Follow it exactly to implement the inference phase end-to-end.
+
+Goal:
+- Build a QA inference system that answers user questions from sanitized knowledge caches.
+- Prioritize answer quality over latency, while keeping latency reasonable.
+- Use gpt-oss-20b with the same runtime style/config used in playground/test_gpt_oss_20b.py and knowledge_build/_llm.py.
+
+--------------------------------------------------------------------------------
+0) PROJECT CONTEXT AND CONSTRAINTS
+--------------------------------------------------------------------------------
+
+Repository root:
+- /home/gatv-projects/Desktop/project
+
+Data source for inference (already sanitized):
+- Per-video caches:
+  /home/gatv-projects/Desktop/project/knowledge_sanitization/cache/sanitized_build_cache_<video_name>/
+- Global graph:
+  /home/gatv-projects/Desktop/project/knowledge_sanitization/cache/sanitized_global/graph_AetherNexus.graphml
+
+Do NOT use unsanitized build caches for the new inference service.
+
+Expected QA behavior:
+- User asks open questions about all processed videos.
+- System retrieves relevant evidence and returns grounded answers.
+- If evidence is insufficient, say so explicitly (do not hallucinate).
+
+--------------------------------------------------------------------------------
+1) PRE-IMPLEMENTATION CHECKS
+--------------------------------------------------------------------------------
+
+1.1 Verify required folders exist
+- Ensure these exist:
+  - knowledge_sanitization/cache/
+  - knowledge_sanitization/cache/sanitized_build_cache_*/
+  - knowledge_sanitization/cache/sanitized_global/
+
+1.2 Verify Python dependencies
+- Required minimum runtime packages:
+  - numpy
+  - networkx
+  - nano-vectordb
+  - sentence-transformers
+  - torch
+  - (plus model runtime stack already used in knowledge_build/_llm.py)
+
+1.3 Verify data consistency for a sample video
+- For one sanitized cache folder, check:
+  - kv_store_text_chunks.json exists
+  - kv_store_video_segments.json exists
+  - vdb_chunks.json rows == number of chunks
+  - vdb_entities.json rows == graph nodes (or explicitly documented reason if not)
+
+If consistency fails broadly, stop and fix sanitization first.
+
+--------------------------------------------------------------------------------
+2) CREATE MODULE LAYOUT
+--------------------------------------------------------------------------------
+
+Create a new package under:
+- /home/gatv-projects/Desktop/project/knowledge_inference/
+
+Create these files:
+- knowledge_inference/__init__.py
+- knowledge_inference/config.py
+- knowledge_inference/types.py
+- knowledge_inference/store_loader.py
+- knowledge_inference/query_analyzer.py
+- knowledge_inference/retrievers.py
+- knowledge_inference/reranker.py
+- knowledge_inference/context_builder.py
+- knowledge_inference/prompts.py
+- knowledge_inference/generator.py
+- knowledge_inference/verifier.py
+- knowledge_inference/service.py
+- knowledge_inference/cli.py
+- knowledge_inference/eval.py
+- knowledge_inference/README.md
+
+All code should be ASCII unless existing file style requires otherwise.
+
+--------------------------------------------------------------------------------
+3) IMPLEMENT FILE-BY-FILE
+--------------------------------------------------------------------------------
+
+3.1 config.py
+Define all constants in one place.
+
+Required constants:
+- PATHS
+  - PROJECT_ROOT
+  - SANITIZED_CACHE_ROOT = knowledge_sanitization/cache
+  - SANITIZED_BUILD_GLOB = sanitized_build_cache_*
+  - SANITIZED_GLOBAL_GRAPH path
+- RETRIEVAL PARAMS (initial defaults)
+  - TOP_K_CHUNKS_DENSE = 30
+  - TOP_K_ENTITIES_DENSE = 20
+  - TOP_K_GRAPH_CHUNKS = 30
+  - FINAL_EVIDENCE_K = 14
+- SCORING WEIGHTS
+  - W_SEMANTIC = 0.45
+  - W_ENTITY = 0.20
+  - W_GRAPH = 0.20
+  - W_DIVERSITY = 0.15
+- BUDGETS
+  - MAX_CONTEXT_TOKENS (start 8k-12k equivalent, depends prompt size)
+  - MAX_ANSWER_TOKENS (e.g., 900)
+- CONFIDENCE / SAFETY
+  - MIN_EVIDENCE_SCORE
+  - MIN_SUPPORTED_CLAIMS_RATIO
+- GENERATION SETTINGS
+  - Set to match current gpt-oss usage style from knowledge_build/_llm.py
+
+Add comments for every parameter and why it exists.
+
+3.2 types.py
+Add dataclasses / typed objects:
+- VideoStore:
+  - video_name: str
+  - chunks_vdb: NanoVectorDB
+  - entities_vdb: NanoVectorDB
+  - chunks_kv: dict
+  - segments_kv: dict
+  - frames_kv: dict
+  - graph: nx.Graph
+- QueryIntent:
+  - normalized_query: str
+  - is_cross_video: bool
+  - is_temporal: bool
+  - is_visual_detail: bool
+  - entity_focus_terms: list[str]
+- RetrievalHit:
+  - chunk_id, video_name, source, chunk_text, segment_ids
+  - score_semantic, score_entity, score_graph, final_score
+- EvidenceBlock:
+  - video_name, time_span, chunk_id, source, text, final_score
+- AnswerResult:
+  - answer: str
+  - evidence: list[EvidenceBlock]
+  - confidence: float
+  - debug: dict
+
+3.3 store_loader.py
+Implement loading and validation.
+
+Functions:
+- discover_sanitized_video_dirs() -> list[Path]
+- load_video_store(video_dir: Path) -> VideoStore
+- load_all_video_stores() -> dict[str, VideoStore]
+- load_global_graph() -> nx.Graph
+- warmup() -> tuple[stores, global_graph]
+
+For each video dir:
+- Load JSON files:
+  - kv_store_text_chunks.json
+  - kv_store_video_segments.json
+  - kv_store_video_frames.json
+- Open NanoVectorDB:
+  - vdb_chunks.json
+  - vdb_entities.json
+- Load graph:
+  - graph_chunk_entity_relation_clean.graphml
+
+Validation checks (log warnings, don’t crash unless fatal):
+- chunks count > 0
+- vdb_chunks data length == chunks length
+- referenced segment IDs exist
+- graph nodes and vdb_entities roughly aligned
+
+3.4 query_analyzer.py
+Implement lightweight intent detection.
+
+Function:
+- analyze_query(query: str) -> QueryIntent
+
+Minimum behavior:
+- normalize whitespace
+- lowercased helper copy for heuristics
+- set is_cross_video True if query includes terms like:
+  - "across videos", "compare", "which video", "most videos"
+- set is_temporal True if query includes:
+  - "when", "timeline", "before", "after", "at what time"
+- set is_visual_detail True if query includes:
+  - "what appears", "what is shown", "in the frame", "visual"
+- entity_focus_terms:
+  - simple noun-like term extraction + champion-like terms from query tokens
+
+Note: This is intentionally simple first pass.
+
+3.5 retrievers.py
+Implement parallel hybrid retrieval.
+
+Functions:
+- retrieve_chunks_dense(query: str, stores: dict[str, VideoStore], k: int) -> list[RetrievalHit]
+  - Query each store.chunks_vdb with text query
+  - Resolve chunk text + segment ids from chunks_kv
+
+- retrieve_entity_graph(query: str, stores: dict[str, VideoStore], k_entities: int, k_graph_chunks: int) -> list[RetrievalHit]
+  - Query each store.entities_vdb
+  - For matched entities, find node in graph
+  - Collect source_id chunk IDs from nodes + 1-hop neighbors
+  - Convert to RetrievalHit with source="entity_graph"
+
+- retrieve_global_graph(query: str, global_graph: nx.Graph, stores: dict[str, VideoStore], k: int) -> list[RetrievalHit]
+  - Match candidate nodes in global graph by simple string similarity / contains
+  - Collect chunk IDs from source_id
+  - Map chunk IDs back to owning video store by membership in chunks_kv
+
+- retrieve_visual_support(...) -> list[RetrievalHit]
+  - OPTIONAL first version:
+    - use frame text only when intent.is_visual_detail is True
+    - do not run expensive image model in v1
+
+- retrieve_all(query, intent, stores, global_graph) -> list[RetrievalHit]
+  - Run retrieval branches in parallel with asyncio.gather
+  - Merge and return flat hits
+
+Important:
+- Always include source label: dense_chunk / entity_graph / global_graph / visual_support.
+- Do not silently drop exceptions; log and continue per branch.
+
+3.6 reranker.py
+Implement dedupe + weighted ranking + diversity.
+
+Functions:
+- dedupe_hits(hits) -> list[RetrievalHit]
+  - key = (video_name, chunk_id)
+  - keep best component scores
+
+- compute_component_scores(hits, query, intent) -> list[RetrievalHit]
+  - semantic score already from VDB
+  - entity score based on overlap between query terms and chunk text
+  - graph score based on graph-derived source and neighbor support
+
+- apply_weighted_score(hits) -> list[RetrievalHit]
+  - final_score = weighted sum from config
+
+- apply_diversity(hits, max_per_video: int) -> list[RetrievalHit]
+  - cap evidence concentration per video unless query is clearly single-video
+
+- rerank_hits(...) -> list[RetrievalHit]
+  - orchestrates all above and returns sorted top-N
+
+3.7 context_builder.py
+Convert ranked hits to prompt context.
+
+Functions:
+- resolve_time_span(store: VideoStore, segment_ids: list[str]) -> str
+  - parse segment time strings and return concise range
+- make_evidence_blocks(hits, stores, budget_tokens) -> list[EvidenceBlock]
+  - build blocks with provenance
+  - enforce context budget and stop when full
+- render_context_for_prompt(evidence_blocks) -> str
+  - format each block as:
+    [video=<name> | time=<h:mm:ss-h:mm:ss> | chunk=<id> | source=<source>]
+    <content>
+
+Budgeting:
+- Truncate long chunks with explicit marker "[truncated]".
+- Prefer many medium blocks over few huge blocks.
+
+3.8 prompts.py
+Create prompt templates.
+
+Required prompts:
+- SYSTEM_GROUNDED_QA
+  - must say: only use provided evidence, no fabrication
+- USER_QA_TEMPLATE
+  - include question and rendered evidence context
+- VERIFIER_TEMPLATE
+  - checks if each claim in answer is supported by evidence
+
+Keep prompt text explicit and deterministic.
+
+3.9 generator.py
+Wrap gpt-oss invocation.
+
+Function:
+- generate_answer(query: str, context: str) -> str
+
+Implementation notes:
+- Reuse model function already configured in knowledge_build._llm (best_model_func)
+- Pass system prompt + user prompt
+- Apply max token and decoding settings from config
+
+3.10 verifier.py
+Implement lightweight support check.
+
+Function:
+- verify_answer(answer: str, evidence_blocks: list[EvidenceBlock]) -> tuple[str, float, dict]
+
+Behavior:
+- Ask verifier prompt to classify claims as supported/unsupported/uncertain
+- If many unsupported claims:
+  - either prune unsupported sentences OR
+  - return cautious answer with lower confidence
+- Confidence formula should be explicit and logged
+
+3.11 service.py
+Build the orchestration service.
+
+Class:
+- InferenceService
+
+Methods:
+- initialize()
+  - load stores/global graph once
+- answer(query: str, debug: bool=False) -> AnswerResult
+  - analyze query
+  - retrieve (parallel)
+  - rerank
+  - build context
+  - generate
+  - verify
+  - return structured result
+
+Also add timing metrics per step.
+
+3.12 cli.py
+Implement command-line entrypoint.
+
+Command:
+- python3 -m knowledge_inference.cli --query "..." [--debug]
+
+Output:
+- Answer
+- Confidence
+- Top evidence blocks (video/time/chunk/source)
+- Optional debug timings
+
+3.13 eval.py
+Implement offline evaluator.
+
+Input:
+- JSON file with test cases:
+  - question
+  - optional expected answer keywords
+  - optional expected videos/champions
+
+Metrics:
+- retrieval_recall_proxy
+- groundedness proxy (verifier supported ratio)
+- latency p50/p95
+
+Output:
+- JSON report under knowledge_inference/reports/
+
+--------------------------------------------------------------------------------
+4) INTEGRATION RULES
+--------------------------------------------------------------------------------
+
+4.1 Data source enforcement
+- Inference loader must only read sanitized cache paths.
+- If unsanitized path is accidentally used, fail fast with explicit error.
+
+4.2 Provenance requirement
+- Every final answer must be backed by at least one evidence block.
+- If evidence empty or weak, return uncertainty answer.
+
+4.3 Threading/async
+- Retrieval should run concurrently.
+- Generation and verification can run sequentially.
+
+4.4 Logging
+- Add structured logs per query:
+  - query_id
+  - retrieval counts per branch
+  - final evidence count
+  - generation time
+  - verification result
+
+--------------------------------------------------------------------------------
+5) TEST PLAN (MANDATORY)
+--------------------------------------------------------------------------------
+
+5.1 Unit tests (minimum)
+- query_analyzer intent flags
+- reranker dedupe and sorting
+- context budget truncation
+- source time-span resolution
+
+5.2 Integration tests
+- Run CLI on 5+ real questions:
+  - champion guide question
+  - cross-video comparison question
+  - temporal question
+  - visual detail question
+  - out-of-scope question
+
+5.3 Regression checks
+- No crashes on empty retrieval branch.
+- No answer without evidence list.
+- Latency remains acceptable (define threshold in config).
+
+--------------------------------------------------------------------------------
+6) DEPLOYMENT ORDER
+--------------------------------------------------------------------------------
+
+Implement in this order:
+1) config.py, types.py
+2) store_loader.py
+3) basic retrievers.py (dense chunks only)
+4) service.py + cli.py with dense retrieval baseline
+5) entity_graph retrieval
+6) global_graph retrieval
+7) reranker diversity + context builder improvements
+8) verifier
+9) eval harness
+
+At each step, keep system runnable.
+
+--------------------------------------------------------------------------------
+7) OPEN QUESTIONS / UNDEFINED PARTS (DO NOT HIDE)
+--------------------------------------------------------------------------------
+
+These items are intentionally not fully fixed and require decision/tuning:
+
+1. Query intent method:
+- heuristic-only vs cheap-LLM-assisted intent detection.
+- Tradeoff: speed vs nuanced routing.
+
+2. Exact scoring weights:
+- Initial weights are placeholders; tune with eval set.
+
+3. Diversity policy:
+- strict max chunks per video vs adaptive based on dominance confidence.
+
+4. Verifier strictness:
+- aggressive pruning of unsupported claims can over-shorten answers.
+- Alternative: keep answer but label uncertain sections.
+
+5. Cross-video global graph retrieval algorithm:
+- simple lexical node matching vs embedding-based node retrieval.
+- Lexical is faster and simpler for v1.
+
+6. Visual retrieval depth in v1:
+- text-only frame evidence vs multimodal embedding retrieval.
+- Recommend text-only first for speed/stability.
+
+7. Confidence calibration:
+- Current formula is heuristic; should be calibrated on validation QA set.
+
+8. Maximum context size:
+- Needs tuning against quality/latency constraints and model behavior.
+
+9. How to handle conflicting evidence across videos:
+- Option A: majority evidence
+- Option B: report both interpretations with provenance
+
+10. Evaluation ground truth quality:
+- If expected answers are weak/noisy, tuning may optimize wrong behaviors.
+
+--------------------------------------------------------------------------------
+8) ACCEPTANCE CRITERIA FOR "DONE"
+--------------------------------------------------------------------------------
+
+Inference implementation is done only if:
+
+- CLI works end-to-end on sanitized caches.
+- Answers include provenance-backed evidence blocks.
+- Out-of-scope/low-evidence queries return explicit uncertainty.
+- No hardcoded dependence on a single video.
+- Eval script runs and writes report.
+- Major open choices above are at least documented in config or README.
+
+--------------------------------------------------------------------------------
+9) QUICK RUN COMMANDS
+--------------------------------------------------------------------------------
+
+From project root:
+
+1) Smoke test inference CLI
+- python3 -m knowledge_inference.cli --query "How does Pyke secure kills in this guide?" --debug
+
+2) Run evaluation
+- python3 -m knowledge_inference.eval --dataset /path/to/qa_eval.json
+
+3) Optional debug logs
+- set env var (if you add it), e.g. KNOWLEDGE_INFERENCE_DEBUG=1
+
+--------------------------------------------------------------------------------
+END OF DOCUMENT
+--------------------------------------------------------------------------------
