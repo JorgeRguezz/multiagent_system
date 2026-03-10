@@ -35,6 +35,8 @@ install_requirements() {
   local req_file="$2"
   log "Installing requirements from ${req_file} into ${venv_path}"
   "${venv_path}/bin/pip" install --upgrade pip setuptools wheel
+  # Build prerequisites needed by packages like pycocotools.
+  "${venv_path}/bin/pip" install --upgrade "Cython>=0.29" "numpy<2.0" wheel
   "${venv_path}/bin/pip" install -r "${req_file}"
 }
 
