@@ -44,7 +44,7 @@ lol_test_cache
 # sam3/
 # dinov2/
 *.gguf
-*.md
+# *.md
 *.sh
 frame_*.png
 
@@ -60,3 +60,24 @@ frame_*.png
 /knowledge_extraction/cache/*
 
 vlm_context_test_cache
+
+qa_datasets/
+
+kv_store_*
+
+vdb_*
+
+*.graphml
+
+full_pipeline_queue_*
+
+test_inference_10q_*
+
+post_build/
+pre_build/
+
+report_eval_test_*
+
+aether_manifest.json
+
+~/Desktop/project/playground/gpt-oss-20b/README.md
