@@ -91,6 +91,7 @@ class InferenceService:
                 "intent": intent.__dict__,
                 "timings": timings,
                 "retrieval_counts": self._counts_by_source(hits),
+                "evidence": evidence,
                 "final_evidence_count": len(evidence),
                 "verification": {"supported_ratio": 0.0, "reason": "insufficient_evidence"},
             }
@@ -107,9 +108,27 @@ class InferenceService:
         generated = await generate_answer(query=query, context=context)
         timings["generation_s"] = time.perf_counter() - t4
 
-        t5 = time.perf_counter()
-        verified_answer, supported_ratio, verify_debug = await verify_answer(generated, evidence)
-        timings["verification_s"] = time.perf_counter() - t5
+        verifier_enabled = config.ENABLE_VERIFIER
+        generated_answer = generated.answer
+
+        if verifier_enabled:
+            t5 = time.perf_counter()
+            verified_answer, supported_ratio, verify_debug = await verify_answer(generated_answer, evidence)
+            timings["verification_s"] = time.perf_counter() - t5
+            final_answer_source = "verified"
+        else:
+            verified_answer = generated_answer
+            supported_ratio = 0.0
+            verify_debug = {
+                "supported_ratio": 0.0,
+                "unsupported_ratio": 0.0,
+                "uncertain_ratio": 0.0,
+                "claims_total": 0,
+                "labels": [],
+                "summary": "verification disabled",
+                "enabled": False,
+            }
+            final_answer_source = "raw_generation"
 
         confidence = self._compute_confidence(
             query=query,
@@ -118,7 +137,7 @@ class InferenceService:
             verify_debug=verify_debug,
         )
 
-        if supported_ratio < config.MIN_SUPPORTED_CLAIMS_RATIO or confidence < 0.45:
+        if verifier_enabled and (supported_ratio < config.MIN_SUPPORTED_CLAIMS_RATIO or confidence < 0.45):
             verified_answer = (
                 "The available evidence supports only part of the answer. "
                 "I may be missing additional clips or stronger corroboration.\n\n"
@@ -133,7 +152,16 @@ class InferenceService:
             "intent": intent.__dict__,
             "timings": timings,
             "retrieval_counts": self._counts_by_source(hits),
+            "evidence": evidence,
             "final_evidence_count": len(evidence),
+            "generation": {
+                "thoughts": generated.thoughts,
+                "answer_raw": generated_answer,
+                "has_final_marker": generated.has_final_marker,
+                "raw_text": generated.raw_text,
+                "verifier_enabled": verifier_enabled,
+                "final_answer_source": final_answer_source,
+            },
             "verification": verify_debug,
             "confidence_band": self._confidence_band(confidence),
         }

@@ -57,3 +57,11 @@ class AnswerResult:
     context: str
     confidence: float
     debug: dict[str, Any]
+
+
+@dataclass
+class GenerationResult:
+    answer: str
+    thoughts: str
+    has_final_marker: bool
+    raw_text: str = ""

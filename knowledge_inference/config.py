@@ -66,6 +66,11 @@ CROSS_VIDEO_MAX_PER_VIDEO = 3
 # Optional intent fallback. Off by default to keep v1 simple and deterministic.
 ENABLE_INTENT_LLM_FALLBACK = False
 
+# Toggle post-generation verification. When disabled, the raw generated answer
+# still flows through answer post-processing, but no verifier pruning or
+# cautioning is applied.
+ENABLE_VERIFIER = False
+
 # GPT-OSS generation defaults mirroring knowledge_build/_llm.py usage.
 GEN_TEMPERATURE = 0.1
 GEN_TOP_P = 1.0

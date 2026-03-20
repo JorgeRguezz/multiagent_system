@@ -262,13 +262,14 @@ async def local_llm_complete(model_name, prompt, system_prompt=None, history_mes
 async def oss_llm_complete(model_name, prompt, system_prompt=None, history_messages=[], **kwargs) -> str:
     # model_name unused; kept for interface parity
     hashing_kv: BaseKVStorage = kwargs.pop("hashing_kv", None)
+    return_metadata = bool(kwargs.pop("return_metadata", False))
     messages = []
     if system_prompt:
         messages.append({"role": "system", "content": system_prompt})
     messages.extend(history_messages)
     messages.append({"role": "user", "content": prompt})
 
-    if hashing_kv is not None:
+    if hashing_kv is not None and not return_metadata:
         args_hash = compute_args_hash(OSS_MODEL_ID, messages)
         if_cache_return = await hashing_kv.get_by_id(args_hash)
         if if_cache_return is not None and if_cache_return["return"] is not None:
@@ -289,14 +290,21 @@ async def oss_llm_complete(model_name, prompt, system_prompt=None, history_messa
             repeat_penalty=kwargs.get("repeat_penalty", 1.12),
         )
         raw_text = output["choices"][0]["text"]
-        _, answer, _ = _split_thought_and_answer(raw_text)
+        thought_process, answer, has_final_marker = _split_thought_and_answer(raw_text)
         cleaned = _trim_to_extraction_payload(answer)
         cleaned = _truncate_on_repetition(cleaned)
+        if return_metadata:
+            return {
+                "raw_text": (raw_text or "").strip(),
+                "thoughts": thought_process,
+                "answer": cleaned,
+                "has_final_marker": has_final_marker,
+            }
         return cleaned
 
     response_text = await loop.run_in_executor(None, generate)
 
-    if hashing_kv is not None:
+    if hashing_kv is not None and not return_metadata:
         await hashing_kv.upsert(
             {args_hash: {"return": response_text, "model": OSS_MODEL_ID}}
         )
