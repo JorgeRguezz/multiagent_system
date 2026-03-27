@@ -1,9 +1,24 @@
 import os
+from pathlib import Path
 
-PROJECT_ROOT = "/home/gatv-projects/Desktop/project"
-SANITIZATION_ROOT = os.path.join(PROJECT_ROOT, "knowledge_sanitization", "cache")
+PROJECT_ROOT = Path(__file__).resolve().parents[1]
+SANITIZATION_ROOT = str(
+    Path(
+        os.environ.get(
+            "KNOWLEDGE_SANITIZATION_ROOT",
+            PROJECT_ROOT / "knowledge_sanitization" / "cache",
+        )
+    )
+)
 
-EXTRACTION_CACHE_ROOT = os.path.join(PROJECT_ROOT, "knowledge_extraction", "cache")
+EXTRACTION_CACHE_ROOT = str(
+    Path(
+        os.environ.get(
+            "KNOWLEDGE_EXTRACTION_CACHE_ROOT",
+            PROJECT_ROOT / "knowledge_extraction" / "cache",
+        )
+    )
+)
 EXTRACTED_DATA_ROOT = os.path.join(EXTRACTION_CACHE_ROOT, "extracted_data")
 SANITIZED_EXTRACTED_DATA_ROOT = os.path.join(SANITIZATION_ROOT, "sanitized_extracted_data")
 
@@ -11,7 +26,14 @@ BUILD_CACHE_PREFIX = "knowledge_build_cache_"
 SANITIZED_BUILD_CACHE_PREFIX = "sanitized_build_cache_"
 SANITIZED_GLOBAL_ROOT = os.path.join(SANITIZATION_ROOT, "sanitized_global")
 
-SPEC_ROOT = os.path.join(PROJECT_ROOT, "knowledge_sanitization", "spec")
+SPEC_ROOT = str(
+    Path(
+        os.environ.get(
+            "KNOWLEDGE_SANITIZATION_SPEC_ROOT",
+            PROJECT_ROOT / "knowledge_sanitization" / "spec",
+        )
+    )
+)
 REPORT_PRE_ROOT = os.path.join(SANITIZATION_ROOT, "reports", "pre_build")
 REPORT_POST_ROOT = os.path.join(SANITIZATION_ROOT, "reports", "post_build")
 QUAR_PRE_ROOT = os.path.join(SANITIZATION_ROOT, "quarantine", "pre_build")

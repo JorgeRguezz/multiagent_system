@@ -12,9 +12,18 @@ downloads/
 
 # Ignorar __pycache__
 __pycache__/
+*.pyc
 
 # Ignorar virtual environment
+.venv/
+venv/
 venv_*
+venv_*/
+
+knowledge_extraction/cache/
+knowledge_sanitization/cache/
+knowledge_build_cache_*/
+knowledge_build_cache_global/
 
 # Ignorar VideoRAG
 VideoRAG
@@ -40,18 +49,21 @@ error.txt
 lol_test_cache
 
 .checkpoints
-
+.cache/
+huggingface_cache/
+models/
 # sam3/
 # dinov2/
 *.gguf
 # *.md
 *.sh
 frame_*.png
+*.mp4
 
 =0.46.1
 =4.45.0
 
-/playground/lol_images_extraction/assets/*
+/knowledge_extraction/image_matching/assets/*
 
 *.safetensors
 
@@ -65,7 +77,7 @@ qa_datasets/
 
 kv_store_*
 
-vdb_*
+# vdb_*
 
 *.graphml
 
@@ -83,3 +95,4 @@ aether_manifest.json
 ~/Desktop/project/playground/gpt-oss-20b/README.md
 
 sam3
+

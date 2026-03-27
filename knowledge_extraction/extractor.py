@@ -12,7 +12,6 @@ import time
 from contextlib import AsyncExitStack
 from PIL import Image
 from moviepy.video.io.VideoFileClip import VideoFileClip
-from tqdm import tqdm
 
 # Add project root and playground to path
 current_dir = os.path.dirname(os.path.abspath(__file__))
@@ -65,7 +64,6 @@ async def run_pipeline(video_path: str = VIDEO_PATH):
 
     # Server parameters
     env = os.environ.copy()
-    # env["HF_HOME"] = HF_HOME
     env["PYTORCH_ALLOC_CONF"] = "expandable_segments:True"
     env["OMP_NUM_THREADS"] = "1"
     env["MKL_NUM_THREADS"] = "1"

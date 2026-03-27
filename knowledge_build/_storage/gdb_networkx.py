@@ -1,18 +1,11 @@
 import html
-import json
 import os
-from collections import defaultdict
 from dataclasses import dataclass
-from typing import Any, Union, cast
+from typing import Union, cast
 import networkx as nx
-import numpy as np
 
 from .._utils import logger
-from ..base import (
-    BaseGraphStorage,
-    SingleCommunitySchema,
-)
-from ..prompt import GRAPH_FIELD_SEP
+from ..base import BaseGraphStorage
 
 
 @dataclass
@@ -86,12 +79,6 @@ class NetworkXStorage(BaseGraphStorage):
                 f"Loaded graph from {self._graphml_xml_file} with {preloaded_graph.number_of_nodes()} nodes, {preloaded_graph.number_of_edges()} edges"
             )
         self._graph = preloaded_graph or nx.Graph()
-        self._clustering_algorithms = {
-            "leiden": self._leiden_clustering,
-        }
-        self._node_embed_algorithms = {
-            "node2vec": self._node2vec_embed,
-        }
 
     async def index_done_callback(self):
         NetworkXStorage.write_nx_graph(self._graph, self._graphml_xml_file)
@@ -131,108 +118,3 @@ class NetworkXStorage(BaseGraphStorage):
         self, source_node_id: str, target_node_id: str, edge_data: dict[str, str]
     ):
         self._graph.add_edge(source_node_id, target_node_id, **edge_data)
-
-    async def clustering(self, algorithm: str):
-        if algorithm not in self._clustering_algorithms:
-            raise ValueError(f"Clustering algorithm {algorithm} not supported")
-        await self._clustering_algorithms[algorithm]()
-
-    async def community_schema(self) -> dict[str, SingleCommunitySchema]:
-        results = defaultdict(
-            lambda: dict(
-                level=None,
-                title=None,
-                edges=set(),
-                nodes=set(),
-                chunk_ids=set(),
-                occurrence=0.0,
-                sub_communities=[],
-            )
-        )
-        max_num_ids = 0
-        levels = defaultdict(set)
-        for node_id, node_data in self._graph.nodes(data=True):
-            if "clusters" not in node_data:
-                continue
-            clusters = json.loads(node_data["clusters"])
-            this_node_edges = self._graph.edges(node_id)
-
-            for cluster in clusters:
-                level = cluster["level"]
-                cluster_key = str(cluster["cluster"])
-                levels[level].add(cluster_key)
-                results[cluster_key]["level"] = level
-                results[cluster_key]["title"] = f"Cluster {cluster_key}"
-                results[cluster_key]["nodes"].add(node_id)
-                results[cluster_key]["edges"].update(
-                    [tuple(sorted(e)) for e in this_node_edges]
-                )
-                results[cluster_key]["chunk_ids"].update(
-                    node_data["source_id"].split(GRAPH_FIELD_SEP)
-                )
-                max_num_ids = max(max_num_ids, len(results[cluster_key]["chunk_ids"]))
-
-        ordered_levels = sorted(levels.keys())
-        for i, curr_level in enumerate(ordered_levels[:-1]):
-            next_level = ordered_levels[i + 1]
-            this_level_comms = levels[curr_level]
-            next_level_comms = levels[next_level]
-            # compute the sub-communities by nodes intersection
-            for comm in this_level_comms:
-                results[comm]["sub_communities"] = [
-                    c
-                    for c in next_level_comms
-                    if results[c]["nodes"].issubset(results[comm]["nodes"])
-                ]
-
-        for k, v in results.items():
-            v["edges"] = list(v["edges"])
-            v["edges"] = [list(e) for e in v["edges"]]
-            v["nodes"] = list(v["nodes"])
-            v["chunk_ids"] = list(v["chunk_ids"])
-            v["occurrence"] = len(v["chunk_ids"]) / max_num_ids
-        return dict(results)
-
-    def _cluster_data_to_subgraphs(self, cluster_data: dict[str, list[dict[str, str]]]):
-        for node_id, clusters in cluster_data.items():
-            self._graph.nodes[node_id]["clusters"] = json.dumps(clusters)
-
-    async def _leiden_clustering(self):
-        from graspologic.partition import hierarchical_leiden
-
-        graph = NetworkXStorage.stable_largest_connected_component(self._graph)
-        community_mapping = hierarchical_leiden(
-            graph,
-            max_cluster_size=self.global_config["max_graph_cluster_size"],
-            random_seed=self.global_config["graph_cluster_seed"],
-        )
-
-        node_communities: dict[str, list[dict[str, str]]] = defaultdict(list)
-        __levels = defaultdict(set)
-        for partition in community_mapping:
-            level_key = partition.level
-            cluster_id = partition.cluster
-            node_communities[partition.node].append(
-                {"level": level_key, "cluster": cluster_id}
-            )
-            __levels[level_key].add(cluster_id)
-        node_communities = dict(node_communities)
-        __levels = {k: len(v) for k, v in __levels.items()}
-        logger.info(f"Each level has communities: {dict(__levels)}")
-        self._cluster_data_to_subgraphs(node_communities)
-
-    async def embed_nodes(self, algorithm: str) -> tuple[np.ndarray, list[str]]:
-        if algorithm not in self._node_embed_algorithms:
-            raise ValueError(f"Node embedding algorithm {algorithm} not supported")
-        return await self._node_embed_algorithms[algorithm]()
-
-    async def _node2vec_embed(self):
-        from graspologic import embed
-
-        embeddings, nodes = embed.node2vec_embed(
-            self._graph,
-            **self.global_config["node2vec_params"],
-        )
-
-        nodes_ids = [self._graph.nodes[node_id]["id"] for node_id in nodes]
-        return embeddings, nodes_ids

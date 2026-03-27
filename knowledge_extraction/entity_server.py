@@ -5,6 +5,7 @@ using SAM3 and DINOv2.
 import os
 import sys
 import contextlib
+from pathlib import Path
 import numpy as np
 import torch
 from PIL import Image
@@ -25,6 +26,7 @@ image_matching = os.path.join(project_root, "knowledge_extraction/image_matching
 sys.path.append(image_matching)
 import embed_dinov2_v7
 from embed_dinov2_v7 import embed_image, embed_patch_tokens
+from knowledge_extraction.config import CHAMPION_ASSETS_ROOT
 
 mcp = FastMCP("entity_extraction_server")
 
@@ -35,6 +37,7 @@ db = None
 db_token_cache = {}
 EMBEDDING_DIM = 1024
 TOP_K = 30
+CHAMPION_ASSETS_ROOT_PATH = Path(CHAMPION_ASSETS_ROOT).resolve()
 
 def load_sam3():
     global sam3_model, sam3_processor
@@ -101,6 +104,22 @@ def get_db_tokens(image_path):
         return tokens
     except Exception:
         return None
+
+
+def resolve_reference_image_path(match: dict) -> str | None:
+    asset_rel_path = str(match.get("asset_rel_path", "")).strip()
+    if not asset_rel_path:
+        return None
+
+    candidate = (CHAMPION_ASSETS_ROOT_PATH / asset_rel_path).resolve()
+    try:
+        candidate.relative_to(CHAMPION_ASSETS_ROOT_PATH)
+    except ValueError:
+        return None
+
+    if not candidate.exists():
+        return None
+    return str(candidate)
 
 @mcp.tool()
 async def warmup(db_path: str = "") -> str:
@@ -188,8 +207,8 @@ async def detect_and_match_regions(image_path: str, regions_config: list, db_pat
                 best_score = float('-inf')
 
                 for match in results:
-                    champ_path = match.get("img_path")
-                    if not champ_path or not os.path.exists(champ_path):
+                    champ_path = resolve_reference_image_path(match)
+                    if champ_path is None:
                         continue
 
                     d_tokens = get_db_tokens(champ_path)
@@ -277,8 +296,8 @@ async def detect_and_match(image_path: str, region: list, db_path: str, threshol
         best_score = float('-inf')
 
         for match in results:
-            champ_path = match.get("img_path")
-            if not champ_path or not os.path.exists(champ_path):
+            champ_path = resolve_reference_image_path(match)
+            if champ_path is None:
                 continue
 
             d_tokens = get_db_tokens(champ_path)

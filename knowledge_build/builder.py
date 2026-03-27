@@ -5,7 +5,6 @@ import json
 import asyncio
 import networkx as nx
 from dataclasses import dataclass, field, asdict
-from datetime import datetime
 from typing import Type, Dict, Optional, Callable, List, Union
 
 if __package__ in (None, ""):
@@ -20,7 +19,7 @@ from knowledge_build.config import (
 from knowledge_build._storage.kv_json import JsonKVStorage
 from knowledge_build._storage.vdb_nanovectordb import NanoVectorDBStorage
 from knowledge_build._storage.gdb_networkx import NetworkXStorage
-from knowledge_build.base import BaseKVStorage, BaseVectorStorage, BaseGraphStorage, StorageNameSpace
+from knowledge_build.base import BaseKVStorage, BaseVectorStorage, BaseGraphStorage
 from knowledge_build._utils import limit_async_func_call, wrap_embedding_func_with_attrs, load_json, logger
 from knowledge_build._op import chunking_by_video_segments, extract_entities, get_chunks
 from knowledge_build._llm import LLMConfig, local_llm_config
@@ -64,7 +63,6 @@ class KnowledgeBuilder:
     entity_summary_to_max_tokens: int = 500
 
     # internal state
-    video_segment_feature_vdb: BaseVectorStorage = field(init=False, repr=False, default=None)
     artifact_dir: str = field(init=False)
     source_video_name: str = field(init=False)
     global_cache_dir: str = field(init=False)

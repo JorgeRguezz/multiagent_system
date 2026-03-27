@@ -1,46 +1,12 @@
 from dataclasses import dataclass, field
-from typing import TypedDict, Union, Literal, Generic, TypeVar
-
-import numpy as np
+from typing import TypedDict, Union, Generic, TypeVar
 
 from ._utils import EmbeddingFunc
-
-
-@dataclass
-class QueryParam:
-    mode: Literal["local", "global", "naive"] = "global"
-    only_need_context: bool = False
-    response_type: str = "Multiple Paragraphs"
-    level: int = 2
-    top_k: int = 20
-    # naive search
-    naive_max_token_for_text_unit = 12000
-    # videorag search
-    only_need_context: bool = False
-
 
 TextChunkSchema = TypedDict(
     "TextChunkSchema",
     {"tokens": int, "content": str, "video_segment_id": str, "chunk_order_index": int},
 )
-
-SingleCommunitySchema = TypedDict(
-    "SingleCommunitySchema",
-    {
-        "level": int,
-        "title": str,
-        "edges": list[list[str, str]],
-        "nodes": list[str],
-        "chunk_ids": list[str],
-        "occurrence": float,
-        "sub_communities": list[str],
-    },
-)
-
-
-class CommunitySchema(SingleCommunitySchema):
-    report_string: str
-    report_json: dict
 
 
 T = TypeVar("T")
@@ -137,13 +103,3 @@ class BaseGraphStorage(StorageNameSpace):
         self, source_node_id: str, target_node_id: str, edge_data: dict[str, str]
     ):
         raise NotImplementedError
-
-    async def clustering(self, algorithm: str):
-        raise NotImplementedError
-
-    async def community_schema(self) -> dict[str, SingleCommunitySchema]:
-        """Return the community representation with report and nodes"""
-        raise NotImplementedError
-
-    async def embed_nodes(self, algorithm: str) -> tuple[np.ndarray, list[str]]:
-        raise NotImplementedError("Node embedding is not used in nano-graphrag.")

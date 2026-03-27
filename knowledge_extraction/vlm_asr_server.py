@@ -8,9 +8,7 @@ import contextlib
 import torch
 import torchvision.transforms as T
 
-# Ensure models are loaded from the correct cache
-from knowledge_extraction.config import HF_HOME
-# os.environ["HF_HOME"] = HF_HOME
+
 os.environ["PYTORCH_ALLOC_CONF"] = "expandable_segments:True"
 from torchvision.transforms.functional import InterpolationMode
 from PIL import Image

@@ -6,7 +6,7 @@ This document explains the full system implemented across:
 - `knowledge_sanitization/`
 - `knowledge_build/`
 - `knowledge_inference/`
-- orchestrated by `pipeline/run_full_queue.py`
+- orchestrated by `knowledge_pipeline/run_full_queue.py`
 
 It is written for readers with no prior project context.
 
@@ -30,7 +30,7 @@ Core design choice: **sanitized artifacts are the source of truth** for retrieva
 
 ## 2. End-to-End Orchestration
 
-Main orchestrator: `pipeline/run_full_queue.py`
+Main orchestrator: `knowledge_pipeline/run_full_queue.py`
 
 For each video in `downloads/queue/`:
 
@@ -365,11 +365,11 @@ Main pipeline/orchestrator process also needs dependencies from build/sanitizati
 ### Full pipeline
 
 ```bash
-python -m pipeline.run_full_queue
-python -m pipeline.run_full_queue --dry-run
-python -m pipeline.run_full_queue --force
-python -m pipeline.run_full_queue --video <video_basename>
-python -m pipeline.run_full_queue --continue-on-error
+python -m knowledge_pipeline.run_full_queue
+python -m knowledge_pipeline.run_full_queue --dry-run
+python -m knowledge_pipeline.run_full_queue --force
+python -m knowledge_pipeline.run_full_queue --video <video_basename>
+python -m knowledge_pipeline.run_full_queue --continue-on-error
 ```
 
 ### Individual stage queues
@@ -413,7 +413,7 @@ python -m knowledge_inference.cli --query "What happened around the first dragon
 
 If onboarding quickly, read in this order:
 
-1. `pipeline/run_full_queue.py`
+1. `knowledge_pipeline/run_full_queue.py`
 2. `knowledge_extraction/extractor.py`
 3. `knowledge_sanitization/pre_build.py`
 4. `knowledge_build/builder.py`

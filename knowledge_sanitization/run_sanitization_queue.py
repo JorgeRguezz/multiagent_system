@@ -4,9 +4,14 @@ import argparse
 import os
 import subprocess
 import sys
+from pathlib import Path
 
 
-PROJECT_ROOT = "/home/gatv-projects/Desktop/project"
+PROJECT_ROOT = str(
+    Path(
+        os.environ.get("KNOWLEDGE_PROJECT_ROOT", Path(__file__).resolve().parents[1])
+    ).resolve()
+)
 
 
 def _run(module: str, extra_args: list[str]) -> int:

@@ -1,0 +1,46 @@
+{
+  "version": 1,
+  "required": [
+    {
+      "path": "knowledge_sanitization/spec",
+      "type": "dir",
+      "purpose": "Spec-driven sanitization rules used by pre_build and post_build."
+    },
+    {
+      "path": "knowledge_extraction/image_matching/lol_champions_square_224.nvdb",
+      "type": "file",
+      "purpose": "Champion reference vector database used by entity_server."
+    },
+    {
+      "path": "knowledge_extraction/image_matching/assets/champions",
+      "type": "dir",
+      "purpose": "Champion image assets used to resolve entity reference images."
+    },
+    {
+      "path": "sam3",
+      "type": "dir",
+      "purpose": "Local SAM3 checkout imported directly by knowledge_extraction/entity_server.py."
+    }
+  ],
+  "recommended": [
+    {
+      "path": "downloads/queue",
+      "type": "dir",
+      "purpose": "Queue input directory used by knowledge_pipeline.run_full_queue."
+    },
+    {
+      "path": "knowledge_inference/video_metadata.json",
+      "type": "file",
+      "purpose": "Optional video URL registry used for answer post-processing."
+    },
+    {
+      "path": "gpt-oss-20b",
+      "type": "dir",
+      "purpose": "Local GPT-OSS cache populated by knowledge_pipeline/deploy/download_models.sh."
+    }
+  ],
+  "notes": [
+    "Model weights downloaded from Hugging Face are not committed to the repo by default.",
+    "The queue runner can exist without input videos, but actual end-to-end processing requires at least one video under downloads/queue."
+  ]
+}

@@ -63,9 +63,6 @@ MAX_ACCEPTABLE_LATENCY_SECONDS = 45.0
 DEFAULT_MAX_PER_VIDEO = 4
 CROSS_VIDEO_MAX_PER_VIDEO = 3
 
-# Optional intent fallback. Off by default to keep v1 simple and deterministic.
-ENABLE_INTENT_LLM_FALLBACK = False
-
 # Toggle post-generation verification. When disabled, the raw generated answer
 # still flows through answer post-processing, but no verifier pruning or
 # cautioning is applied.

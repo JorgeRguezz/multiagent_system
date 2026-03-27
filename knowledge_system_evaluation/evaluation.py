@@ -21,9 +21,9 @@ embeddings_model = LangchainEmbeddingsWrapper(
     )
 )
 
-print(hasattr(embeddings_model, "embed_query"))
-print(hasattr(embeddings_model, "embed_documents"))
-print(hasattr(embeddings_model, "embed_text"))
+# print(hasattr(embeddings_model, "embed_query"))
+# print(hasattr(embeddings_model, "embed_documents"))
+# print(hasattr(embeddings_model, "embed_text"))
 
 def run_ragas(df, answer_col):
     eval_df = df[["question", "context", "answer_gold", answer_col]].copy()
@@ -62,7 +62,7 @@ def run_ragas(df, answer_col):
 
     return result.to_pandas().mean(numeric_only=True)
 
-INPUT_FILE = "/home/gatv-projects/Desktop/project/knowledge_system_evaluation/ragas_eval_report.json"
+INPUT_FILE = os.path.join(os.path.dirname(os.path.abspath(__file__)), "report_eval_test_rag_merged_done_updated.json")
 with open(INPUT_FILE, "r", encoding="utf-8") as f:
     raw_data = json.load(f)
 

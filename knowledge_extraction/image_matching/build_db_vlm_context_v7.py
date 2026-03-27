@@ -1,20 +1,21 @@
 import os
 import sys
-import json
+from pathlib import Path
 from nano_vectordb import NanoVectorDB
 from tqdm import tqdm
 from PIL import Image
 
 # Ensure we can import 'embed' from the current directory
-current_dir = os.path.dirname(os.path.abspath(__file__))
-project_root = os.path.dirname(os.path.dirname(current_dir))
-sys.path.append(project_root)
+current_dir = Path(__file__).resolve().parent
+project_root = current_dir.parents[1]
+sys.path.append(str(project_root))
 
-from image_matching.v7.embed_dinov2_v7 import embed_image
+from knowledge_extraction.config import CHAMPION_ASSETS_ROOT, DB_PATH
+from embed_dinov2_v7 import embed_image
 
 # Configuration
-ASSETS_ROOT = "/home/gatv-projects/Desktop/project/playground/lol_images_extraction/assets/champions"
-DB_FILENAME = os.path.join(current_dir, "lol_champions_224.nvdb")
+ASSETS_ROOT = Path(CHAMPION_ASSETS_ROOT).resolve()
+DB_FILENAME = Path(DB_PATH).resolve()
 # EMBEDDING_DIM = 768 # DINOv2 ViT-B/14
 EMBEDDING_DIM = 1024 # DINOv2 ViT-L/14
 
@@ -50,39 +51,39 @@ def preprocess_image(input_path, target_size=224, fill_color=(0, 0, 0)):
 def build_champion_db():
     # Initialize DB
     print(f"--> Initializing NanoVectorDB with dim={EMBEDDING_DIM}...")
-    db = NanoVectorDB(EMBEDDING_DIM, storage_file=DB_FILENAME, metric="cosine")
+    db = NanoVectorDB(EMBEDDING_DIM, storage_file=str(DB_FILENAME), metric="cosine")
 
-    if not os.path.exists(ASSETS_ROOT):
+    if not ASSETS_ROOT.exists():
         print(f"Error: Assets directory not found at {ASSETS_ROOT}")
         return
 
     data_list = []
     
     # List all champions
-    champions = [d for d in os.listdir(ASSETS_ROOT) if os.path.isdir(os.path.join(ASSETS_ROOT, d))]
+    champions = [d.name for d in ASSETS_ROOT.iterdir() if d.is_dir()]
     print(f"--> Found {len(champions)} champions.")
 
     for champion_name in tqdm(champions, desc="Processing Champions"):
-        champion_dir = os.path.join(ASSETS_ROOT, champion_name)
+        champion_dir = ASSETS_ROOT / champion_name
         
         # Sub-categories: passives, spells, square
         sub_categories = ["passives", "spells", "square"]
         # sub_categories = ["square"]
         
         for category in sub_categories:
-            category_dir = os.path.join(champion_dir, category)
+            category_dir = champion_dir / category
             
-            if not os.path.exists(category_dir):
+            if not category_dir.exists():
                 continue
                 
             # Process images in this category
-            img_files = [f for f in os.listdir(category_dir) if f.lower().endswith(('.png', '.jpg', '.jpeg'))]
+            img_files = [p.name for p in category_dir.iterdir() if p.is_file() and p.suffix.lower() in (".png", ".jpg", ".jpeg")]
             
             for img_file in img_files:
-                img_path = os.path.join(category_dir, img_file)
+                img_path = category_dir / img_file
                 
                 try:
-
+                    asset_rel_path = img_path.relative_to(ASSETS_ROOT).as_posix()
                     # Preprocess Image (Resize + Pad)
                     pil_image = preprocess_image(img_path)
 
@@ -98,7 +99,7 @@ def build_champion_db():
                         "champion_name": champion_name,
                         "category": category,
                         "filename": img_file,
-                        "img_path": img_path
+                        "asset_rel_path": asset_rel_path,
                     }
                     data_list.append(data_item)
                     

@@ -5,49 +5,84 @@ Scope covered:
 - `knowledge_build/`
 - `knowledge_sanitization/`
 - `knowledge_inference/`
-- `pipeline/`
+- `knowledge_pipeline/`
 
 ## 1) Install Environments
 
 ```bash
-bash pipeline/deploy/setup_envs.sh
+bash knowledge_pipeline/deploy/setup_envs.sh
 ```
 
-## 2) Path Configuration Check (required on new machine)
+## 2) Environment Configuration Check
 
-These files contain absolute paths and must match the new machine:
-- `knowledge_extraction/config.py`
-- `knowledge_build/_llm.py`
-- `pipeline/run_full_queue.py` (PROJECT_ROOT constant)
+Copy and review the environment template on a new machine:
 
-If your repo is at a different location, update those paths first.
+```bash
+cp knowledge_pipeline/deploy/.env.example .env
+```
 
-## 3) Basic Import / Runtime Checks
+At minimum, confirm:
+- `KNOWLEDGE_PROJECT_ROOT`
+- `VENV_SMOLVLM_PYTHON`
+- `VENV_VLM_ASR_PYTHON`
+- `HF_HOME` if you want a custom model cache location
+
+Then export it for the current shell:
+
+```bash
+set -a
+source .env
+set +a
+```
+
+## 3) Asset Validation
+
+```bash
+python3 knowledge_pipeline/deploy/validate_assets.py
+```
+
+Expected:
+- required local directories and files found
+- warnings only for optional paths if they are missing
+
+## 4) Model Prefetch
+
+```bash
+bash knowledge_pipeline/deploy/download_models.sh
+```
+
+Optional Qwen weights:
+
+```bash
+DOWNLOAD_OPTIONAL_QWEN=1 bash knowledge_pipeline/deploy/download_models.sh
+```
+
+## 5) Basic Import / Runtime Checks
 
 ```bash
 source venv_smolvlm/bin/activate
-python -m compileall knowledge_extraction knowledge_build knowledge_sanitization knowledge_inference pipeline
+python -m compileall knowledge_extraction knowledge_build knowledge_sanitization knowledge_inference knowledge_pipeline
 ```
 
-## 4) Pipeline Dry Run (no heavy processing)
+## 6) Pipeline Dry Run (no heavy processing)
 
 ```bash
 source venv_smolvlm/bin/activate
-python -m pipeline.run_full_queue --dry-run
+python -m knowledge_pipeline.run_full_queue --dry-run
 ```
 
 Expected:
 - videos discovered from `downloads/queue`
 - planned extraction/pre-build/build/post-build commands printed
 
-## 5) Single Video End-to-End Queue Test
+## 7) Single Video End-to-End Queue Test
 
 ```bash
 source venv_smolvlm/bin/activate
-python -m pipeline.run_full_queue --video "How_to_Play_Like_a_PYKE_MAIN_-_ULTIMATE_PYKE_GUIDE" --continue-on-error
+python -m knowledge_pipeline.run_full_queue --video "How_to_Play_Like_a_PYKE_MAIN_-_ULTIMATE_PYKE_GUIDE" --continue-on-error
 ```
 
-## 6) Inference Smoke Test (after at least one sanitized build cache exists)
+## 8) Inference Smoke Test (after at least one sanitized build cache exists)
 
 ```bash
 source venv_smolvlm/bin/activate

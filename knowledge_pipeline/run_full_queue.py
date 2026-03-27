@@ -3,11 +3,11 @@ Run full per-video workflow for downloads/queue videos that are not fully proces
 extractor -> pre-build sanitization -> build -> post-build sanitization
 
 Usage:
-  python3 -m pipeline.run_full_queue
-  python3 -m pipeline.run_full_queue --dry-run
-  python3 -m pipeline.run_full_queue --force
-  python3 -m pipeline.run_full_queue --continue-on-error
-  python3 -m pipeline.run_full_queue --video <VIDEO_BASENAME>
+  python3 -m knowledge_pipeline.run_full_queue
+  python3 -m knowledge_pipeline.run_full_queue --dry-run
+  python3 -m knowledge_pipeline.run_full_queue --force
+  python3 -m knowledge_pipeline.run_full_queue --continue-on-error
+  python3 -m knowledge_pipeline.run_full_queue --video <VIDEO_BASENAME>
 """
 
 from __future__ import annotations
@@ -26,7 +26,9 @@ from typing import Any
 
 
 VIDEO_EXTENSIONS = {".mp4", ".mkv", ".mov", ".avi", ".webm", ".m4v"}
-PROJECT_ROOT = Path("/home/gatv-projects/Desktop/project")
+PROJECT_ROOT = Path(
+    os.environ.get("KNOWLEDGE_PROJECT_ROOT", Path(__file__).resolve().parents[1])
+).resolve()
 DOWNLOADS_QUEUE_DIR = PROJECT_ROOT / "downloads" / "queue"
 
 EXTRACTION_DIR = PROJECT_ROOT / "knowledge_extraction" / "cache" / "extracted_data"
