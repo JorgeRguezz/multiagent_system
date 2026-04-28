@@ -61,13 +61,16 @@ def get_llm():
 
 
 SYSTEM_PROMPT = """
-    You are an expert on summarizing League of Legends gameplay based on visual descriptions.
+    You are an expert on summarizing gameplay video segments from visual descriptions.
 
     Reasoning: medium
 
-    Given the VLM outputs describing the visual content of consecutive video segments, your task is to generate a description of the key events and actions.
-    Focus on identifying the main champion(s) involved, their actions, and any significant interactions as well as gameplay events or game situations.
-    Use the VLM output as your primary source of information, and infer the most likely gameplay events based on the visual cues provided. Your summary should be clear, informative, and capture the essence of the gameplay.
+    Given VLM outputs describing consecutive frames from a gameplay segment, your task
+    is to generate a concise but informative description of the key visible events,
+    entities, actions, interactions, and scene changes across the segment.
+    Use the VLM outputs as your primary source of information. Stay grounded in what
+    is visually described, avoid inventing unsupported game-specific details, and
+    summarize the segment in a way that preserves the most relevant gameplay context.
     
     <|channel|>analysis<|message|>User asks: "What is 2 + 2?" Simple arithmetic. Provide answer.<|end|>
     <|start|>assistant<|channel|>final<|message|>2 + 2 = 4.<|return|>
@@ -84,7 +87,16 @@ async def summarize_segment_captions(captions: List[str]) -> str:
     llm = get_llm()
     merged_content = "\n\n--- Next Segment ---\n\n".join(captions)
     prompt = f"""
-    Based on the following VLM descriptions of a League of Legends gameplay segment, provide a detailed description of what is happening.
+    Based on the following VLM descriptions of a gameplay segment, provide a detailed
+    summary of what is happening across the segment.
+
+    Focus on:
+    - the main visible entities and actors
+    - the most important actions, interactions, and scene changes
+    - persistent gameplay context that remains relevant across the sampled frames
+
+    Do not invent unsupported facts or game-specific details that are not grounded in
+    the frame descriptions.
 
     VLM Outputs of the merged frames:
     {merged_content}

@@ -81,14 +81,17 @@ Queue runner:
 
 3. **Entity extraction phase** (MCP `entity_server` workers)
 - Pre-extracts frame images to avoid contention on video reading.
-- For each frame, crops configured HUD regions and runs SAM3 + DINOv2 matching.
+- For each frame, uses the active game profile to select either configured ROIs or
+  full-frame inference, then runs SAM3 + DINOv2 matching.
 - Produces per-frame inferred entities:
-  - `main_champ`
-  - `partners`
+  - `entities` for every game
+  - optional game-specific fields such as `main_champ` and `partners` for
+    `league_of_legends`
 
 4. **ASR + VLM phase** (MCP `vlm_asr_server`)
 - ASR: transcribes each segment audio (Whisper).
-- VLM: generates frame descriptions conditioned on champion/partners/transcript and previous frame context.
+- VLM: generates frame descriptions conditioned on the active game profile,
+  transcript, previous-frame context, and available entity cues.
 - Produces per-frame multimodal records.
 
 5. **Segment summarization phase** (MCP `segment_summarization_server`)
@@ -113,7 +116,8 @@ Output location:
   - `frame_times`
 - `video_frames`: per sampled frame
   - frame metadata + normalized frame-level text (`vlm_output`, transcript)
-  - entity cues (`main_champ`, `partners`)
+  - shared entity cues (`entities`)
+  - optional game-specific cues (`main_champ`, `partners`) for supported profiles
 - `video_path`: source video absolute path
 
 ---

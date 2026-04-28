@@ -7,6 +7,8 @@ import uuid
 
 import networkx as nx
 
+from knowledge_pipeline.game_profiles import get_active_game_profile
+
 from . import config
 from .answer_postprocess import inject_video_urls, load_video_url_registry
 from .context_builder import make_evidence_blocks, render_context_for_prompt
@@ -40,6 +42,12 @@ class InferenceService:
     def initialize(self) -> None:
         if self._initialized:
             return
+        active_profile = get_active_game_profile()
+        logger.info(
+            "Initializing inference service with game profile %s (%s)",
+            active_profile.display_name,
+            active_profile.id,
+        )
         self.stores, self.global_graph = warmup()
         self._initialized = True
 

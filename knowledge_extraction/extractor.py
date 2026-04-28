@@ -21,9 +21,11 @@ sys.path.append(os.path.join(project_root, "playground"))
 
 from knowledge_extraction.config import *
 from knowledge_build._videoutil.split import split_video
+from knowledge_pipeline.game_profiles import get_active_game_profile
 
 from mcp import ClientSession, StdioServerParameters
 from mcp.client.stdio import stdio_client
+
 
 def _prepare_workspace_for_video(video_path: str) -> None:
     os.makedirs(WORKING_DIR, exist_ok=True)
@@ -39,11 +41,82 @@ def _prepare_workspace_for_video(video_path: str) -> None:
             os.remove(entry.path)
 
 
+def _dedupe_entity_names(matches: list, limit: int | None = None) -> list[str]:
+    ordered_names = []
+    seen = set()
+    for match in matches:
+        name = match.get("name")
+        if not name or name in seen:
+            continue
+        ordered_names.append(name)
+        seen.add(name)
+        if limit is not None and len(ordered_names) >= limit:
+            break
+    return ordered_names
+
+
+def _parse_lol_entity_results(batch_results: dict) -> dict:
+    main_champ = "Unknown"
+    partners = []
+
+    parsed_main = batch_results.get("middle", [])
+    if parsed_main:
+        parsed_main.sort(key=lambda x: x["score"], reverse=True)
+        main_champ = parsed_main[0]["name"]
+
+    parsed_partners = batch_results.get("partners", [])
+    if parsed_partners:
+        parsed_partners.sort(key=lambda x: x["score"], reverse=True)
+        partners = _dedupe_entity_names(parsed_partners, limit=4)
+
+    entities = []
+    if main_champ != "Unknown":
+        entities.append(main_champ)
+    for partner in partners:
+        if partner not in entities:
+            entities.append(partner)
+
+    return {
+        "main_champ": main_champ,
+        "partners": partners,
+        "entities": entities,
+    }
+
+
+def _parse_generic_entity_results(batch_results: dict) -> dict:
+    parsed_entities = batch_results.get("entities", [])
+    if parsed_entities:
+        parsed_entities.sort(key=lambda x: x["score"], reverse=True)
+    entities = _dedupe_entity_names(parsed_entities)
+    return {
+        "entities": entities,
+    }
+
+
+def _parse_entity_results(batch_results: dict, parser_mode: str) -> dict:
+    if parser_mode == "lol":
+        return _parse_lol_entity_results(batch_results)
+    if parser_mode == "generic":
+        return _parse_generic_entity_results(batch_results)
+    raise ValueError(f"Unsupported entity_result_parser={parser_mode!r}")
+
+
 async def run_pipeline(video_path: str = VIDEO_PATH):
     start_total = time.time()
     video_path = os.path.abspath(video_path)
     if not os.path.exists(video_path):
         raise FileNotFoundError(f"Video not found: {video_path}")
+
+    active_profile = get_active_game_profile()
+    if not os.path.exists(active_profile.entity_db_path):
+        raise FileNotFoundError(
+            f"Entity DB for game profile {active_profile.id!r} was not found: "
+            f"{active_profile.entity_db_path}"
+        )
+    print("\n[Config] Active Game Profile")
+    print(f" >> Game: {active_profile.display_name} ({active_profile.id})")
+    print(f" >> Detection mode: {active_profile.detection_mode}")
+    print(f" >> Entity DB: {active_profile.entity_db_path}")
 
     # 1. Setup workspace for this video only
     _prepare_workspace_for_video(video_path)
@@ -123,16 +196,15 @@ async def run_pipeline(video_path: str = VIDEO_PATH):
             frame_path = task["frame_path"]
             
             try:
-                # Call MCP Tool for multiple regions at once
                 regions_config = [
-                    {"name": "middle", "region": MIDDLE_HUD},
-                    {"name": "partners", "region": BOTTOM_RIGHT_HUD}
+                    {"name": region["name"], "region": region["region"]}
+                    for region in active_profile.regions_config
                 ]
-                
+
                 res = await session.call_tool("detect_and_match_regions", arguments={
                     "image_path": frame_path,
                     "regions_config": regions_config,
-                    "db_path": DB_PATH,
+                    "db_path": active_profile.entity_db_path,
                     "threshold": 0.0
                 })
 
@@ -146,37 +218,23 @@ async def run_pipeline(video_path: str = VIDEO_PATH):
 
                 # print(f"    [Worker {worker_id}] Frame s{task['index']}i{task['frame_idx']} - Raw MCP Output: {res.content}")
                 batch_results = parse_content(res.content)
-                
-                main_champ = "Unknown"
-                partners = []
+                parsed_entities = _parse_entity_results(
+                    batch_results,
+                    active_profile.entity_result_parser,
+                )
 
-                # Process Middle HUD
-                parsed_main = batch_results.get("middle", [])
-                # print(f"    [Worker {worker_id}] Frame s{task['index']}i{task['frame_idx']} - Middle HUD Matches: {parsed_main}")
-                if parsed_main:
-                    parsed_main.sort(key=lambda x: x["score"], reverse=True)
-                    main_champ = parsed_main[0]["name"]
-
-                # Process Partners
-                parsed_partners = batch_results.get("partners", [])
-                if parsed_partners:
-                    parsed_partners.sort(key=lambda x: x["score"], reverse=True)
-                    seen = set()
-                    for p in parsed_partners:
-                        if p["name"] not in seen:
-                            partners.append(p["name"])
-                            seen.add(p["name"])
-                        if len(partners) >= 4: break
-                
                 results[task_idx] = {
                     "frame_path": frame_path,
-                    "main_champ": main_champ,
-                    "partners": partners,
                     "segment_idx": task["index"],
                     "segment_name": task["segment_name"],
                     "frame_idx": task["frame_idx"],
+                    "game": active_profile.id,
+                    **parsed_entities,
                 }
-                print(f"    [Worker {worker_id}] Frame s{task['index']}i{task['frame_idx']} Done: main_champ -> {main_champ} | partners -> {partners}")
+                print(
+                    f"    [Worker {worker_id}] Frame s{task['index']}i{task['frame_idx']} "
+                    f"Done: entities -> {parsed_entities['entities']}"
+                )
                 
             except Exception as e:
                 print(f"    [Worker {worker_id}] ERROR on {frame_path}: {e}")
@@ -197,7 +255,7 @@ async def run_pipeline(video_path: str = VIDEO_PATH):
             session = await stack.enter_async_context(ClientSession(read, write))
             await session.initialize()
             print(f"    [Worker {i}] Initializing models...")
-            await session.call_tool("warmup", arguments={"db_path": DB_PATH})
+            await session.call_tool("warmup", arguments={"db_path": active_profile.entity_db_path})
             sessions.append(session)
             print(f"    [Worker {i}] Ready! ✅")
         
@@ -238,12 +296,15 @@ async def run_pipeline(video_path: str = VIDEO_PATH):
             for entry in context_data:
                 s_vlm = time.time()
                 transcript = transcripts.get(entry['segment_idx'], "")
-                
+
                 context = {
-                    "champion": entry['main_champ'],
-                    "teammates": entry['partners'],
-                    "transcript": transcript
+                    "game": active_profile.id,
+                    "transcript": transcript,
+                    "entities": entry.get("entities", []),
                 }
+                if active_profile.entity_result_parser == "lol":
+                    context["champion"] = entry["main_champ"]
+                    context["teammates"] = entry["partners"]
                 
                 # # 2x faster; lower quality
                 # description = await session.call_tool("run_qwen_description", arguments={
@@ -273,11 +334,14 @@ async def run_pipeline(video_path: str = VIDEO_PATH):
                     "segment_idx": str(entry["segment_idx"]),
                     "segment_name": entry["segment_name"],
                     "frame_idx": entry["frame_idx"],
-                    "main_champ": entry["main_champ"],
-                    "partners": entry["partners"],
+                    "game": entry["game"],
+                    "entities": entry["entities"],
                     "transcript": transcript,
                     "vlm_output": description.content[0].text,
                 }
+                if active_profile.entity_result_parser == "lol":
+                    frames_data[video_basename][frame_key]["main_champ"] = entry["main_champ"]
+                    frames_data[video_basename][frame_key]["partners"] = entry["partners"]
                 segments_captions.setdefault(entry["segment_idx"], []).append(description.content[0].text)
             # Unload VLM/ASR before starting GPT-OSS to reduce GPU memory pressure
             try:

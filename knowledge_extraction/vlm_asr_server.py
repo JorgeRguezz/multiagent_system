@@ -22,6 +22,7 @@ from transformers import (
 # from qwen_vl_utils import process_vision_info
 from mcp.server.fastmcp import FastMCP
 import whisper
+from knowledge_pipeline.game_profiles import get_active_game_profile
 
 mcp = FastMCP("vlm_asr_server")
 
@@ -177,6 +178,73 @@ def unload_models():
         torch.cuda.synchronize()
 
 
+def _get_profile_for_context(context: dict):
+    return get_active_game_profile(context.get("game"))
+
+
+def _build_qwen_description_prompt(context: dict) -> str:
+    profile = _get_profile_for_context(context)
+    transcript = context.get("transcript", "No speech detected.")
+
+    if profile.id == "league_of_legends":
+        partners_str = ", ".join(context.get("teammates", []))
+        context_block = (
+            f"- Champion: {context.get('champion', 'None')}\n"
+            f"- Teammates: {partners_str if partners_str else 'None'}\n"
+            f"- Transcript: {transcript}"
+        )
+    else:
+        entities_str = ", ".join(context.get("entities", []))
+        context_block = (
+            f"- Visible entities: {entities_str if entities_str else 'None'}\n"
+            f"- Transcript: {transcript}"
+        )
+
+    return (
+        f"{profile.vlm_prompt_profile.qwen_description_prompt}\n\n"
+        f"Context:\n{context_block}\n\n"
+        "Write the detailed scene description below:"
+    )
+
+
+def _build_internvl_description_prompt(context: dict, last_description: str) -> str:
+    profile = _get_profile_for_context(context)
+    transcript = context.get("transcript", "No transcript available.")
+
+    if last_description:
+        last_frame_context = (
+            "LAST FRAME (for delta comparison only — do not repeat or paraphrase):\n"
+            f"{last_description}"
+        )
+    else:
+        last_frame_context = (
+            "This is the FIRST frame of the sequence. There is no prior context. "
+            "Focus on providing a comprehensive initial description."
+        )
+
+    if profile.id == "league_of_legends":
+        partners_str = ", ".join(context.get("teammates", []))
+        context_block = (
+            f"- Player: {context.get('champion', 'None')} | "
+            f"Teammates: {partners_str if partners_str else 'None'}\n"
+            f"- Transcript Context: {transcript}"
+        )
+    else:
+        entities_str = ", ".join(context.get("entities", []))
+        context_block = (
+            f"- Visible entities: {entities_str if entities_str else 'None'}\n"
+            f"- Transcript Context: {transcript}"
+        )
+
+    return (
+        f"{profile.vlm_prompt_profile.internvl_description_prompt}\n\n"
+        f"Context:\n{context_block}\n\n"
+        "---\n\n"
+        f"{last_frame_context}\n\n"
+        "Scene description:"
+    )
+
+
 # --------------------- TOOLS -----------------------
 
 @mcp.tool()
@@ -198,56 +266,14 @@ async def unload_vlm_asr() -> str:
 async def run_qwen_description(image_path: str, context: dict, last_description: str) -> str:
     """
     Generates a detailed description of an image using Qwen2.5-VL with provided context.
-    context: {"champion": str, "teammates": list, "transcript": str}
+    context: profile-aware payload with transcript and optional game-specific entity cues.
     """
     load_vlm()
     if not os.path.exists(image_path):
         return "Error: Image not found."
 
     image = Image.open(image_path).convert("RGB")
-    partners_str = ", ".join(context.get("teammates", []))
-
-    prompt_text = f"""
-    **System Role:**  
-    You are a vision-language analyst for League of Legends gameplay. Your job is to create a **detailed, comprehensive textual description** of the provided video frame + context + transcript.  
-
-    **Purpose:**  
-    Generate a rich natural language summary that captures *every meaningful visual detail*, *contextual relationships*, and *transcript insights* so a downstream knowledge graph system can extract entities, events, and relationships.  
-
-    **Context:**
-    - Champion: {context.get('champion', 'None')}
-    - Teammates: {partners_str if partners_str else 'None'}
-    - Transcript: {context.get('transcript', 'No speech detected.')}
-
-    **Output Instructions:**  
-
-    Write a **detailed scene description** covering:  
-
-    ### 1. **Visual Scene Analysis** (most important).
-    - **Position**: Where the action is happening relative to important map landmarks (e.g. towers/statues, river, jungle).  
-    - **Actions/Animations**: Categorize the intensity of the action (e.g., idle, fighting) and identify any visible spell effects or animations.  
-    - **Health/Mana**: Approximate bars visible, who is low HP, who is full. Red health correspond to enemies, blue health correspond to allies and green health bars correspond to the player.
-    - **Map Context**: Indicate if there are any allied (blue) or enemy (red) minions and any allied (blue highlight//outline) or enemy (red highlight/outline) towers/statues visible. 
-    - **Items/Effects**: Active items, summoner spells, champion abilities on cooldown. Indicate the status of the players abilities (e.g. if they are on cooldown, ready or in use).   
-
-    ### 2. **Transcript Integration**  
-    - What the transcript reveals about intentions, strategies, or events not visible.  
-    - What the transcript reveals about gameplay information about players abilities, item builds, or team compositions that can be inferred from the transcript but not directly seen in the image.  
-
-    ### 3. **Temporal Context**  
-    - What seems to be happening RIGHT NOW
-
-    ### 4. **CONSTRAINT:**
-    - Do NOT guess champion positions or specific interactions if they are unclear.
-    - Do NOT invent a narrative. Describe only the visible frame supporting yourself in the provided context.
-    - Do NOT mention the knowledge graph or downstream extraction system.
-    - Do NOT describe location in too much detail, just locate where is the action happening in relation to important map landmarks (e.g. river, jungle, towers/statues).
-    - Do NOT describe animations (spell or abilities effects) in too much detail, just categorize the intensity of the action (e.g. idle, fighting) and identify if there are any visible spell effects or animations.
-
-    **Format your output as continuous descriptive text, in paragraphs (no subheadings).**   
-
-    **Write the detailed scene description below:**
-    """
+    prompt_text = _build_qwen_description_prompt(context)
 
     messages = [
         {
@@ -282,92 +308,13 @@ async def run_qwen_description(image_path: str, context: dict, last_description:
 async def run_internvl_description(image_path: str, context: dict, last_description: str) -> str:
     """
     Generates a detailed description of an image using InternVL3-14B with provided context.
-    context: {"champion": str, "teammates": list, "transcript": str}
+    context: profile-aware payload with transcript and optional game-specific entity cues.
     """
     load_internvl()
     if not os.path.exists(image_path):
         return "Error: Image not found."
 
-    if last_description is None or last_description == "":
-        last_frame_context = "This is the FIRST frame of the sequence. There is no prior context. Focus on providing a comprehensive initial description."
-    else:
-        last_frame_context = f"LAST FRAME (for delta comparison only — do not repeat or paraphrase):\n{last_description}"
-
-    partners_str = ", ".join(context.get("teammates", []))
-
-    prompt_text_alt = f"""
-    You are a specialized League of Legends gameplay analyst. Your goal is to extract actionable data for a knowledge graph.
-
-    **Context:**
-    - Player: {context.get('champion', 'None')} | Teammates: {partners_str if partners_str else 'None'}
-    - Transcript Context: {context.get('transcript', 'No transcript available.')}
-
-    ---
-
-    **YOUR TASK:**
-    Provide a high-density description of the CURRENT frame. 
-
-    **STRICT PRIORITY: Start with WHAT HAS CHANGED since the last frame.**
-    1. **Dynamic Events**: Describe new banners (e.g., "LEVEL UP!"), gold numbers (e.g., "+274"), and kill notifications in the chat.
-    2. **Action-State**: Detail the current intensity (e.g., "fighting in the bottom lane"). Identify the specific ability being cast (e.g., "MMOOOMMMM!") and its target.
-    3. **Player State**: Report current Level, Health %, and Mana % from the HUD.
-    4. **Map Logic**: Describe the movement of minions or champions relative to map landmarks.
-    5. **Transcript Tie-In**: Connect the current action to the transcript's tactical advice or facts.
-
-    **Rules:**
-    - DO NOT repeat background descriptions (e.g., "in the jungle") if they were mentioned in the last frame.
-    - DO NOT paraphrase the transcript; integrate it as strategic context for the VISUAL action.
-
-    ---
-
-    {last_frame_context}
-
-    **Scene description:**
-    """
-
-    # prompt_text_alt = f"""
-    # You are a specialized League of Legends gameplay analyst. Your goal is to extract visual data from this frame to build a knowledge graph.
-
-    # **CONTEXT:**
-    # - Player Champion: {context.get('champion', 'None')} (Green health bar)
-    # - Teammate Champions: {partners_str if partners_str else 'None'} (Blue health bars)
-    # - Enemies: Red health bars, red minions, red structures.
-    # - Transcript Context (~30s window): "{context.get('transcript', 'No transcript available.')}"
-
-    # **PREVIOUS FRAME (5 seconds ago):**
-    # {last_frame_context}
-
-    # ---
-
-    # **YOUR TASK:**
-    # Provide a high-density, structured description of the CURRENT frame. Focus strictly on what is visually verifiable.
-
-    # **OUTPUT FORMAT:**
-    # Use these exact headers for your response:
-
-    # ### 1. WHAT CHANGED (Delta)
-    # List new dynamic events since the last frame. Look for kill feed notifications (top right), banners (e.g., "Double Kill", "Level Up"), floating gold numbers, or sudden drops in health bars.
-
-    # ### 2. CURRENT ACTION
-    # Describe the immediate gameplay intensity (e.g., "skirmishing in the jungle", "farming minions"). Note specific visual actions like casting projectiles, dashing, retreating, or auto-attacking. 
-
-    # ### 3. PLAYER STATE
-    # Read the HUD. Report the Player's current Level, Health value, and Resource/Mana value.
-
-    # ### 4. MAP & POSITIONING
-    # Where is the action happening? Describe the movement of the player, visible enemies (red bars), and minions relative to map landmarks (turrets, river, lanes). Do not repeat static background info from the previous frame.
-
-    # ### 5. TRANSCRIPT TIE-IN
-    # Briefly connect the visual action to the transcript context. Does the visual confirm the transcript's tactical advice or callouts or valuable champion information?
-
-    # **RULES:**
-    # - If you cannot identify an enemy champion's exact name, simply call them "enemy champion". Do not guess.
-    # - Do not paraphrase the transcript; use it only to explain the strategic context of the visual action.
-    # - Keep sentences concise and highly factual.
-
-    # **Scene description:**
-    # """
-
+    prompt_text_alt = _build_internvl_description_prompt(context, last_description)
 
     # 1. Load and process the image into InternVL's required tensor format
     pixel_values = load_internvl_image(image_path, max_num=12).to(torch.bfloat16).cuda()

@@ -137,27 +137,40 @@ def sanitize_video_folder(video_dir: str) -> dict:
         report["contamination_hits"] += tstats.get("meta_tags_removed", 0) + tstats.get("meta_patterns_removed", 0)
         report["contamination_hits"] += vstats.get("meta_tags_removed", 0) + vstats.get("meta_patterns_removed", 0)
 
-        main_champ = normalize_name(str(fr.get("main_champ", "Unknown")), alias_map)
-        if main_champ != str(fr.get("main_champ", "Unknown")).upper():
-            report["normalizations"]["main_champ"] += 1
+        entities = fr.get("entities", [])
+        if not isinstance(entities, list):
+            entities = []
+        norm_entities = []
+        for entity in entities:
+            normalized_entity = normalize_name(str(entity), alias_map)
+            if normalized_entity and normalized_entity != "UNKNOWN" and normalized_entity not in norm_entities:
+                norm_entities.append(normalized_entity)
 
-        partners = fr.get("partners", [])
-        if not isinstance(partners, list):
-            partners = []
-        norm_partners = []
-        for p in partners:
-            np = normalize_name(str(p), alias_map)
-            if np and np != "UNKNOWN" and np not in norm_partners:
-                norm_partners.append(np)
-
-        clean_frames[video_name][frame_key] = {
+        clean_frame = {
             **fr,
             "segment_idx": seg_idx,
-            "main_champ": main_champ,
-            "partners": norm_partners,
+            "entities": norm_entities,
             "transcript": transcript,
             "vlm_output": vlm_output,
         }
+        if "main_champ" in fr:
+            main_champ = normalize_name(str(fr.get("main_champ", "Unknown")), alias_map)
+            if main_champ != str(fr.get("main_champ", "Unknown")).upper():
+                report["normalizations"]["main_champ"] += 1
+            clean_frame["main_champ"] = main_champ
+
+        if "partners" in fr:
+            partners = fr.get("partners", [])
+            if not isinstance(partners, list):
+                partners = []
+            norm_partners = []
+            for p in partners:
+                np = normalize_name(str(p), alias_map)
+                if np and np != "UNKNOWN" and np not in norm_partners:
+                    norm_partners.append(np)
+            clean_frame["partners"] = norm_partners
+
+        clean_frames[video_name][frame_key] = clean_frame
 
     report["files"]["kv_store_video_frames.json"]["out"] = len(clean_frames[video_name])
 

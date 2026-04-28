@@ -148,7 +148,7 @@ async def detect_and_match_regions(image_path: str, regions_config: list, db_pat
     for config in regions_config:
         region_name = config["name"]
         region = config["region"]
-        roi = full_image.crop(region)
+        roi = full_image if region is None else full_image.crop(region)
         # print(
         #     # f"      [DEBUG Entity Server] {os.path.basename(image_path)} "
         #     f"{region_name} ROI size={roi.size} region={region}",
@@ -243,7 +243,7 @@ async def detect_and_match(image_path: str, region: list, db_path: str, threshol
         return []
 
     full_image = Image.open(image_path).convert("RGB")
-    roi = full_image.crop(region)
+    roi = full_image if region is None else full_image.crop(region)
     
     # # Save ROI for debugging
     # debug_dir = os.path.join(os.path.dirname(image_path), "debug_roi")

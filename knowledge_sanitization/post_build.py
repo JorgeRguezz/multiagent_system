@@ -154,19 +154,38 @@ def _sanitize_build_cache(build_dir: str, drop_llm_cache: bool = True) -> dict:
         vlm_output, vstats = clean_text(str(fv.get("vlm_output", "")), blocked_meta)
         report["contamination_hits"] += tstats.get("meta_tags_removed", 0) + tstats.get("meta_patterns_removed", 0)
         report["contamination_hits"] += vstats.get("meta_tags_removed", 0) + vstats.get("meta_patterns_removed", 0)
-        main_champ = normalize_name(str(fv.get("main_champ", "Unknown")), alias_map)
-        partners = fv.get("partners", [])
-        if not isinstance(partners, list):
-            partners = []
-        norm_partners = sorted({normalize_name(str(p), alias_map) for p in partners if str(p).strip()})
-        clean_frames[video_name][fk] = {
+        entities = fv.get("entities", [])
+        if not isinstance(entities, list):
+            entities = []
+        norm_entities = sorted(
+            {
+                normalize_name(str(entity), alias_map)
+                for entity in entities
+                if str(entity).strip()
+            }
+        )
+        clean_frame = {
             **fv,
             "segment_idx": seg_idx,
-            "main_champ": main_champ,
-            "partners": norm_partners,
+            "entities": [entity for entity in norm_entities if entity and entity != "UNKNOWN"],
             "transcript": transcript,
             "vlm_output": vlm_output,
         }
+        if "main_champ" in fv:
+            clean_frame["main_champ"] = normalize_name(str(fv.get("main_champ", "Unknown")), alias_map)
+        if "partners" in fv:
+            partners = fv.get("partners", [])
+            if not isinstance(partners, list):
+                partners = []
+            norm_partners = sorted(
+                {
+                    normalize_name(str(p), alias_map)
+                    for p in partners
+                    if str(p).strip()
+                }
+            )
+            clean_frame["partners"] = [partner for partner in norm_partners if partner and partner != "UNKNOWN"]
+        clean_frames[video_name][fk] = clean_frame
     report["files"]["kv_store_video_frames.json"]["out"] = len(clean_frames[video_name])
 
     clean_video_path = {}
