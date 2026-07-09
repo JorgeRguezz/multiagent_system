@@ -100,8 +100,6 @@ knowledge_system_evaluation_v2/scripts/mobafire_browser_profile
 
 *.html
 
-*.md
-
 youtube_search_*.json
 search_plan_*.json
 latest_*.json
@@ -109,8 +107,8 @@ gaps_*.json
 *.csv
 inventory_*.json
 
-GEMINI.md
+# .mds files
+Agents.md
+
 
 ieee-access-paper/
-
-GEMINI.md
