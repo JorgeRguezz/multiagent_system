@@ -1,0 +1,42 @@
+[
+  {
+    "question_id": "phase7_01",
+    "case_type": "asr_strategy_build",
+    "question_body": "What rune and item progression does the processed Pyke support source recommend?",
+    "answer_gold": "The guide recommends Hail of Blades. It starts with World Atlas and a potion, then moves into tier-two boots and Umbral Glaive, followed by Youmuu's Ghostblade and Edge of Night as later options.",
+    "source_video": "3_Minute_Pyke_Guide_-_A_Guide_for_League_of_Legends",
+    "time_span": "90-120"
+  },
+  {
+    "question_id": "phase7_02",
+    "case_type": "graph_entity_relation",
+    "question_body": "How does Aatrox's Deathbringer Stance work, and how can he reduce its cooldown?",
+    "answer_gold": "Deathbringer Stance periodically empowers Aatrox's next basic attack to deal bonus damage and heal him. Hitting an enemy champion or large monster with a basic attack or ability reduces its cooldown.",
+    "source_video": "3_Minute_Aatrox_Guide_-_A_Guide_for_League_of_Legends",
+    "time_span": "0-30"
+  },
+  {
+    "question_id": "phase7_03",
+    "case_type": "visual_gameplay_state",
+    "question_body": "What is shown on screen when Rengar uses a bush at the start of the processed jungle guide?",
+    "answer_gold": "Rengar begins crouched near a bush, ready to use his bush-empowered attack. He then leaps from the bush onto a small jungle monster and continues attacking it at level 1.",
+    "source_video": "3_Minute_Rengar_Guide_-_A_Guide_for_League_of_Legends",
+    "time_span": "0-30"
+  },
+  {
+    "question_id": "phase7_04",
+    "case_type": "temporal_strategy",
+    "question_body": "What should Aatrox do in the mid game, and how should he play later in teamfights according to the processed source?",
+    "answer_gold": "In the mid game, Aatrox should create side-lane pressure as a split pusher, taking the tower or rotating to his team. In late-game teamfights, he should act as a frontline bruiser, using his full combo against threats to his backline while relying on his damage and sustain against the enemy frontline.",
+    "source_video": "3_Minute_Aatrox_Guide_-_A_Guide_for_League_of_Legends",
+    "time_span": "150-180"
+  },
+  {
+    "question_id": "phase7_05",
+    "case_type": "justified_refusal",
+    "question_body": "What jungle camp order should Lux use for a full clear?",
+    "answer_gold": "The processed corpus does not provide a Lux jungle camp order or enough evidence to recommend a full-clear route, so the system should refuse to give a specific path.",
+    "source_video": null,
+    "time_span": null
+  }
+]
